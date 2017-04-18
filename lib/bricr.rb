@@ -1,0 +1,1 @@
+require 'bricr/version'

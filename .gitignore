@@ -1,0 +1,8 @@
+run/
+.DS_Store
+.idea
+.bundle/
+config.rb
+Gemfile.lock
+openstudio-measures/
+gitignore/
