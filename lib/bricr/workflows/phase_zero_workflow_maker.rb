@@ -53,8 +53,12 @@ module BRICR
         # configure the workflow based on measures in this scenario
         configureForScenario(osw, scenario)
         
+        # dir for the osw
+        osw_dir = File.join(dir, scenario_name)
+        FileUtils.mkdir_p(osw_dir)
+        
         # write the osw
-        path = File.join(dir, scenario_name + '.osw')
+        path = File.join(osw_dir, 'in.osw')
         File.open(path, 'w') do |file|
           file << JSON.generate(osw)
         end

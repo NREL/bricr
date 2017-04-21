@@ -1,13 +1,13 @@
 module BRICR
 
   # location of openstudio CLI
-  OPENSTUDIO_EXE = 'C:/openstudio-2.1.0/bin/openstudio.exe'
+  OPENSTUDIO_EXE = 'openstudio'
   
   # one or more measure paths
   OPENSTUDIO_MEASURES = ["./../../../measures", "./../../../../OpenStudio-measures/NREL\ working\ measures"]
 
   # one or more file paths
-  OPENSTUDIO_FILES = ["./../../../adapters","./../../../weather","./../../../../OpenStudio-measures/NREL_integration_testing/weather"]
+  OPENSTUDIO_FILES = ["./../../../weather","./../../../../OpenStudio-measures/NREL_integration_testing/weather"]
 
   # max number of datapoints to run
   MAX_DATAPOINTS = Float::INFINITY

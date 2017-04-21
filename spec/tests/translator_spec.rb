@@ -26,7 +26,7 @@ describe 'BRICR' do
     translator.writeOSWs(out_path)
     
     osw_files = []
-    Dir.glob("#{out_path}/*.osw") {|osw| osw_files << osw}
+    Dir.glob("#{out_path}/**/*.osw") {|osw| osw_files << osw}
     
     expect(osw_files.size).to eq 4
     
