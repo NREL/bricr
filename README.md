@@ -2,11 +2,6 @@
 
 ## Installation
 
-The BRICR Gem has the following dependencies:
-
-* Ruby '> 2.0.0'
-* OpenStudio '> 2.1.0'
-
 Install dependencies:
 
 ```
@@ -22,12 +17,18 @@ TBD
 
 Configure locations to OpenStudio by copying `config.rb.in` to `config.rb` and updating.
 
-The preferred way for testing is to run rspec either natively or via docker.
-
 ### Locally
 
+Run all tests:
+
 ```
-bundle exec rspec spec/
+bundle exec rspec
+```
+
+Run a specific test (LINE = line number for the test):
+
+```
+bundle exec rspec spec\tests\translator_spec.rb:LINE
 ```
 
 ## Contributing
