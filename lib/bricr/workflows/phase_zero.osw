@@ -1,0 +1,20 @@
+{
+	"seed_file": null,
+	"weather_file": null,
+	"root_directory": null,
+	"run_directory": null,
+	"file_paths": null,
+	"measure_paths": null,
+	"steps": [{
+			"measure_dir_name": "Geometry",
+			"arguments": {
+				"floor_area": null
+			}
+		}, {
+			"measure_dir_name": "AedgK12InteriorLightingControls",
+			"arguments": {
+				"__SKIP__": true
+			}
+		}
+	]
+}

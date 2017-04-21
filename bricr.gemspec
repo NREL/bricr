@@ -20,4 +20,5 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
 
   s.add_development_dependency 'bundler', '~> 1.6'
+  s.add_development_dependency 'parallel'
 end

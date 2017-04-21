@@ -16,4 +16,6 @@ module BRICR
   # number of parallel jobs
   NUM_PARALLEL = 7
   
+  # do simulations
+  DO_SIMULATIONS = false
 end

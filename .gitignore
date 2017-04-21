@@ -6,3 +6,4 @@ config.rb
 Gemfile.lock
 openstudio-measures/
 gitignore/
+output/

@@ -27,6 +27,9 @@ rescue LoadError
     
     # number of parallel jobs
     NUM_PARALLEL = 7
+    
+    # do simulations
+    DO_SIMULATIONS = false
   end
 end
 
