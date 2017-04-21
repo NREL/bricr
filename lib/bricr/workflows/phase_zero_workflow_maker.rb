@@ -15,6 +15,14 @@ module BRICR
         @workflow = JSON::parse(file.read)
       end      
       
+      if BRICR::OPENSTUDIO_MEASURES
+        @workflow["measure_paths"] = BRICR::OPENSTUDIO_MEASURES
+      end
+      
+      if BRICR::OPENSTUDIO_FILES
+        @workflow["file_paths"] = BRICR::OPENSTUDIO_FILES
+      end
+  
       # configure the workflow based on properties in the xml
       configureForDoc(@workflow)
     end
