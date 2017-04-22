@@ -1,10 +1,10 @@
-require 'simplecov'
-require 'coveralls'
+#require 'simplecov'
+#require 'coveralls'
 
-SimpleCov.formatter = Coveralls::SimpleCov::Formatter
-SimpleCov.start do
-  add_filter 'spec/files'
-end
+#SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+#SimpleCov.start do
+#  add_filter 'spec/files'
+#end
 
 # try to load configuration, use defaults if doesn't exist
 begin
