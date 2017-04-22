@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/NREL/bricr'
   s.license = 'BSD'
 
-  s.required_ruby_version = '>= 2.2'
+  s.required_ruby_version = '~> 2.2'
 
   s.files = Dir.glob('lib/**/*') + %w(README.md COPYRIGHT.md LICENSE.md Rakefile)
   s.require_path = 'lib'
