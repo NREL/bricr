@@ -8,6 +8,7 @@
 	"steps": [{
 			"measure_dir_name": "Geometry",
 			"arguments": {
+        "__SKIP__": false,
 				"floor_area": null
 			}
 		}, {

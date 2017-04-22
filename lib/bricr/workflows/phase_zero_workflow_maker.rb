@@ -43,7 +43,19 @@ module BRICR
     end
         
     def configureForScenario(osw, scenario)
+      measure_ids = []
+      scenario.elements.each("auc:ScenarioType/auc:PackageOfMeasures/auc:MeasureIDs/auc:MeasureID") do |measure_id|
+        measure_ids << measure_id.attributes["IDref"]
+      end
       
+      measure_ids.each do |measure_id|
+        @doc.elements.each("//auc:Measure[@ID='#{measure_id}']") do |measure|
+          measure_category = measure.elements["auc:SystemCategoryAffected"].text
+          if /Lighting/.match(measure_category)
+            set_measure_argument(osw, "AedgK12InteriorLightingControls", "__SKIP__", false)
+          end
+        end
+      end
     end
     
     def writeOSWs(dir)
