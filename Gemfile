@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby "2.2.4"
+ruby "~>2.2"
 
 # Specify your gem's dependencies in bricr.gemspec
 gemspec
