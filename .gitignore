@@ -7,4 +7,5 @@ Gemfile.lock
 openstudio-measures/
 gitignore/
 output/
+bs_output/
 reports/
