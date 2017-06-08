@@ -1,5 +1,12 @@
+# usage: bundle exec ruby geojson_to_buildingsync.rb /path/to/geojson.json
+
 require 'json'
 require 'rexml/document'
+
+if ARGV[0].nil? || !File.exists?(ARGV[0])
+  puts "usage: bundle exec ruby geojson_to_buildingsync.rb /path/to/geojson.json"
+  exit(1)
+end
 
 def create_site(feature)
   site = REXML::Element.new("auc:Site")
@@ -107,6 +114,93 @@ def convert_feature(feature)
 	<auc:Audit>
 		<auc:Sites>
 		</auc:Sites>
+    <auc:Measures>
+      <auc:Measure ID="Measure1">
+        <auc:SystemCategoryAffected>Lighting</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="Building_6416"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:LightingImprovements>
+              <auc:MeasureName>Retrofit with light emitting diode technologies</auc:MeasureName>
+            </auc:LightingImprovements>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost>1000</auc:MVCost>
+        <auc:MeasureTotalFirstCost>10000</auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost>8000</auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost>1000</auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+      <auc:Measure ID="Measure2">
+        <auc:SystemCategoryAffected>Domestic Hot Water</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="Building_6416"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:ChilledWaterHotWaterAndSteamDistributionSystems>
+              <auc:MeasureName>Replace or upgrade water heater</auc:MeasureName>
+            </auc:ChilledWaterHotWaterAndSteamDistributionSystems>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost>1000</auc:MVCost>
+        <auc:MeasureTotalFirstCost>10000</auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost>8000</auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost>1000</auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+    </auc:Measures>
+    <auc:Report>
+      <auc:Scenarios>
+        <auc:Scenario>
+          <auc:ScenarioName>Baseline</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:MeasureIDs>
+                <auc:MeasureID/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+        <auc:Scenario>
+          <auc:ScenarioName>Lighting Only</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure1"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+        <auc:Scenario>
+          <auc:ScenarioName>Hot Water Only</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure2"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+        <auc:Scenario>
+          <auc:ScenarioName>Max Tech</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure1"/>
+                <auc:MeasureID IDref="Measure2"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+      </auc:Scenarios>
+    </auc:Report>
 	</auc:Audit>
 </auc:Audits>
   )
