@@ -10,7 +10,6 @@
       "measure_dir_name": "ChangeBuildingLocation",
       "arguments": {
         "__SKIP__": false,
-        "weather_directory": "../../NREL_integration_testing/weather",
         "weather_file_name": "USA_CA_San.Francisco.Intl.AP.724940_TMY3.epw",
         "climate_zone": "3C"
       }

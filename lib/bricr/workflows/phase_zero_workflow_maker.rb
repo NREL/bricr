@@ -86,5 +86,64 @@ module BRICR
 
     end
     
+    def getMeasureResult(result, measure_dir_name, result_name)
+      result[:steps].each do |step|
+        if step[:measure_dir_name] == measure_dir_name
+          puts "found step"
+          step[:result][:step_values].each do |step_value|
+            if step_value[:name] == result_name
+              puts "found value"
+              return step_value[:value]
+            end
+          end
+        end
+      end
+      
+      return nil
+    end
+    
+    def gatherResults(dir)
+      super
+      
+      results = {}
+
+      # write an osw for each scenario
+      @doc.elements.each("auc:Audits/auc:Audit/auc:Report/auc:Scenarios/auc:Scenario") do |scenario|
+      
+        # get information about the scenario
+        scenario_name = scenario.elements["auc:ScenarioName"].text
+        
+        # dir for the osw
+        osw_dir = File.join(dir, scenario_name)
+        
+        # find the osw
+        path = File.join(osw_dir, 'out.osw')
+        workflow = nil
+        File.open(path, 'r') do |file|
+          results[scenario_name] = JSON::parse(file.read, :symbolize_names=>true)
+        end
+      end
+
+      @doc.elements.each("auc:Audits/auc:Audit/auc:Report/auc:Scenarios/auc:Scenario") do |scenario|
+      
+        # get information about the scenario
+        scenario_name = scenario.elements["auc:ScenarioName"].text
+        package_of_measures = scenario.elements["auc:ScenarioType"].elements["auc:PackageOfMeasures"]
+         
+        result = results[scenario_name]
+        baseline = results["Baseline"]
+         
+        total_site_energy = getMeasureResult(result, 'openstudio_results', 'total_site_energy')
+        baseline_total_site_energy = getMeasureResult(baseline, 'openstudio_results', 'total_site_energy')
+        
+        total_site_energy_savings = baseline_total_site_energy - total_site_energy
+
+        annual_savings_site_energy = REXML::Element.new("auc:AnnualSavingsSiteEnergy")
+        annual_savings_site_energy.text = total_site_energy_savings
+        package_of_measures.add_element(annual_savings_site_energy)
+      end
+    
+    end
+    
   end
 end

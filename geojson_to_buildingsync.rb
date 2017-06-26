@@ -330,10 +330,11 @@ def convert_feature(feature)
     </auc:Measures>
     <auc:Report>
       <auc:Scenarios>
-        <auc:Scenario>
+        <auc:Scenario ID="Baseline">
           <auc:ScenarioName>Baseline</auc:ScenarioName>
           <auc:ScenarioType>
             <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
               <auc:MeasureIDs>
                 <auc:MeasureID/>
               </auc:MeasureIDs>
@@ -344,6 +345,7 @@ def convert_feature(feature)
           <auc:ScenarioName>Lighting Only</auc:ScenarioName>
           <auc:ScenarioType>
             <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
               <auc:MeasureIDs>
                 <auc:MeasureID IDref="Measure1"/>
               </auc:MeasureIDs>
@@ -354,6 +356,7 @@ def convert_feature(feature)
           <auc:ScenarioName>Hot Water Only</auc:ScenarioName>
           <auc:ScenarioType>
             <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
               <auc:MeasureIDs>
                 <auc:MeasureID IDref="Measure2"/>
               </auc:MeasureIDs>
@@ -364,6 +367,7 @@ def convert_feature(feature)
           <auc:ScenarioName>Max Tech</auc:ScenarioName>
           <auc:ScenarioType>
             <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
               <auc:MeasureIDs>
                 <auc:MeasureID IDref="Measure1"/>
                 <auc:MeasureID IDref="Measure2"/>

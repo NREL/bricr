@@ -25,12 +25,19 @@ module BRICR
       chooseWorkflowMaker
     
     end
-   
-    
+
     def writeOSWs(dir)
       @workflow_maker.writeOSWs(dir)
     end
-  
+    
+    def gatherResults(dir)
+      @workflow_maker.gatherResults(dir)
+    end
+    
+    def saveXML(filename)
+      @workflow_maker.saveXML(filename)
+    end
+    
   private
   
     def chooseWorkflowMaker

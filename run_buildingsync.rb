@@ -11,8 +11,10 @@ if xml_path.nil? || !File.exists?(xml_path)
 end
 
 out_dir = File.join(File.dirname(xml_path), File.basename(xml_path, ".*") + "/")
-if File.exists?(out_dir)
-  FileUtils.rm_rf(out_dir)
+if BRICR::DO_SIMULATIONS
+  if File.exists?(out_dir)
+    FileUtils.rm_rf(out_dir)
+  end
 end
 FileUtils.mkdir_p(out_dir)
 
@@ -34,3 +36,7 @@ if BRICR::DO_SIMULATIONS
     num_sims += 1
   end
 end
+
+translator.gatherResults(out_dir)
+
+translator.saveXML(File.join(out_dir, 'results.xml'))
