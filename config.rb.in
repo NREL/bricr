@@ -4,10 +4,10 @@ module BRICR
   OPENSTUDIO_EXE = 'openstudio'
   
   # one or more measure paths
-  OPENSTUDIO_MEASURES = ["./../../../measures", "./../../../../OpenStudio-measures/NREL\ working\ measures"]
+  OPENSTUDIO_MEASURES = [File.realpath("./measures", File.dirname(__FILE__)), File.realpath("./../OpenStudio-measures/NREL\ working\ measures", File.dirname(__FILE__))]
 
   # one or more file paths
-  OPENSTUDIO_FILES = ["./../../../weather","./../../../../OpenStudio-measures/NREL_integration_testing/weather"]
+  OPENSTUDIO_FILES = [File.realpath("./weather", File.dirname(__FILE__)), File.realpath("./../OpenStudio-measures/NREL_integration_testing/weather", File.dirname(__FILE__))]
 
   # max number of datapoints to run
   MAX_DATAPOINTS = Float::INFINITY

@@ -89,11 +89,11 @@ module BRICR
     def getMeasureResult(result, measure_dir_name, result_name)
       result[:steps].each do |step|
         if step[:measure_dir_name] == measure_dir_name
-          puts "found step"
-          step[:result][:step_values].each do |step_value|
-            if step_value[:name] == result_name
-              puts "found value"
-              return step_value[:value]
+          if step[:result] && step[:result][:step_values]
+            step[:result][:step_values].each do |step_value|
+              if step_value[:name] == result_name
+                return step_value[:value]
+              end
             end
           end
         end

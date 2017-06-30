@@ -10,10 +10,10 @@ describe 'BRICR' do
   end
   
   it 'should parse a phase zero xml' do
-    xml_path = File.join(File.dirname(__FILE__), '../files/Building_6416_Phase0.xml')
+    xml_path = File.join(File.dirname(__FILE__), '../files/phase0/building_151.xml')
     expect(File.exists?(xml_path)).to be true
     
-    out_path = File.join(File.dirname(__FILE__), '../output/Building_6416_Phase0/')
+    out_path = File.join(File.dirname(__FILE__), '../output/phase0_building_151/')
     if File.exists?(out_path)
       FileUtils.rm_rf(out_path)
     end
@@ -41,6 +41,9 @@ describe 'BRICR' do
         
         num_sims += 1
       end
+      
+      translator.gatherResults(out_path)
+      translator.saveXML(File.join(out_path, 'results.xml'))
     end
     
   end
