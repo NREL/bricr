@@ -25,16 +25,27 @@ module Seed
 
     # Set the API key for server
     def api_key(username, key)
-      # TODO: will need to base64 this once develop is redeployed
-      @api_header = "#{username}:#{key}"
+      # auth_string = base64.urlsafe_b64encode(
+      #     '{}:{}'.format(username.lower(), api_key)
+      # )
+      # auth_string = 'Basic {}'.format(auth_string)
+      # header = {
+      #     'Authorization': auth_string,
+      #     "Content-Type": "application/json"
+      # }
+
+      @api_header = "Basic #{Base64.strict_encode64("#{username}:#{key}")}"
     end
 
     def get_user_id
-      response = RestClient.get("#{@host}/users/current_user_id", authorization: @api_header)
+      response = RestClient.get("#{@host}/users/current_user_id/", authorization: @api_header)
       if response.code == 200
         return JSON.parse(response, symbolize_names: true)[:pk]
+      elsif response.code == 500
+        return "ERROR getting current_user_id"
       end
     end
+
 
     def awake?
       response = RestClient.get("#{@host}/version/", authorization: @api_header)
@@ -43,7 +54,8 @@ module Seed
       else
         return false
       end
-    rescue RestClient::Forbidden
+    rescue Exception => e
+      puts "Could not authenticate the user with message '#{e}'"
       return false
     end
 
@@ -117,9 +129,9 @@ module Seed
       response = RestClient.post("#{@host}/cycles/?organization_id=#{@organization.id}",
                                  body,
                                  authorization: @api_header)
-      if response.code == 200 # this should be a 201, seed needs fixed
+      if response.code == 201
         response = JSON.parse(response, symbolize_names: true)
-        c = Cycle.from_hash(response[:cycle])
+        c = Cycle.from_hash(response[:cycles])
         return c
       else
         return false

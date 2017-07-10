@@ -130,7 +130,7 @@ Style/EachWithObject:
 
 Style/GuardClause:
   Enabled: false
-  
+
 # Configuration parameters: AllowedVariables.
 Style/GlobalVars:
   Enabled: false
