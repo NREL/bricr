@@ -12,4 +12,6 @@ group :test do
   gem 'ci_reporter_rspec'
   gem 'rubocop'
   gem 'rubocop-checkstyle_formatter'
+
+  gem 'seed-ruby-client', path: 'lib/seed-ruby-client'
 end
