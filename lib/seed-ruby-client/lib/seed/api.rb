@@ -1,5 +1,4 @@
 module Seed
-
   # API class to work with SEED Platform
   class API
     attr_reader :cycle_obj
@@ -10,7 +9,7 @@ module Seed
 
       # read the username and api key from env vars (if set)
       if ENV['BRICR_SEED_USERNAME'] && ENV['BRICR_SEED_API_KEY']
-        self.api_key(ENV['BRICR_SEED_USERNAME'], ENV['BRICR_SEED_API_KEY'])
+        api_key(ENV['BRICR_SEED_USERNAME'], ENV['BRICR_SEED_API_KEY'])
       end
 
       # query the API to get the user id
@@ -31,14 +30,14 @@ module Seed
     end
 
     def get_user_id
-      response = RestClient.get("#{@host}/users/current_user_id", {authorization: @api_header})
+      response = RestClient.get("#{@host}/users/current_user_id", authorization: @api_header)
       if response.code == 200
         return JSON.parse(response, symbolize_names: true)[:pk]
       end
     end
 
     def awake?
-      response = RestClient.get("#{@host}/version/", {authorization: @api_header})
+      response = RestClient.get("#{@host}/version/", authorization: @api_header)
       if response.code == 200
         return true
       else
@@ -50,7 +49,7 @@ module Seed
 
     def get_or_create_organization(name)
       # check if the organization exists
-      response = RestClient.get("#{@host}/organizations/", {authorization: @api_header})
+      response = RestClient.get("#{@host}/organizations/", authorization: @api_header)
       if response.code == 200
         response = JSON.parse(response, symbolize_names: true)
       else
@@ -66,10 +65,10 @@ module Seed
 
       # no organization found, create a new one
       body = {
-          organization_name: name,
-          user_id: @user_id
+        organization_name: name,
+        user_id: @user_id
       }
-      response = RestClient.post("#{@host}/organizations/", body, {authorization: @api_header})
+      response = RestClient.post("#{@host}/organizations/", body, authorization: @api_header)
       if response.code == 200 # this should be a 201, seed needs fixed
         response = JSON.parse(response, symbolize_names: true)
         @organization = Organization.from_hash(response[:organization])
@@ -86,8 +85,8 @@ module Seed
 
       @cache[:cycles] = []
       response = RestClient.get(
-          "#{@host}/cycles/?organization_id=#{@organization.id}",
-          {authorization: @api_header},
+        "#{@host}/cycles/?organization_id=#{@organization.id}",
+        authorization: @api_header
       )
       if response.code == 200
         cycles = []
@@ -105,15 +104,15 @@ module Seed
     # check if the cycle already exists and if so then return the existing cycle (only looks at name!)
     def create_cycle(name, start_time, end_time)
       # return if cycle already exists
-      test_cycle = self.cycle(name)
+      test_cycle = cycle(name)
       if test_cycle
         return test_cycle
       end
 
       body = {
-          name: name,
-          start: start_time.strftime('%Y-%m-%d %H:%MZ'),
-          end: end_time.strftime('%Y-%m-%d %H:%MZ')
+        name: name,
+        start: start_time.strftime('%Y-%m-%d %H:%MZ'),
+        end: end_time.strftime('%Y-%m-%d %H:%MZ')
       }
       response = RestClient.post("#{@host}/cycles/?organization_id=#{@organization.id}",
                                  body,
@@ -125,13 +124,12 @@ module Seed
       else
         return false
       end
-
     end
 
     # set the cycle
     def cycle(name)
       if @cache[:cycles].nil? || @cache[:cycle].empty?
-        self.cycles
+        cycles
       end
 
       @cycle_obj = nil
@@ -149,10 +147,10 @@ module Seed
     def upload_buildingsync(filename)
       if File.exist? filename
         payload = {
-            organization_id: @organization.id,
-            cycle_id: @cycle_obj.id,
-            file_type: 1,
-            multipart: true
+          organization_id: @organization.id,
+          cycle_id: @cycle_obj.id,
+          file_type: 1,
+          multipart: true
         }
         response = RestClient.post("#{@host}/building_file/",
                                    payload.merge(file: File.new(filename, 'rb')),
@@ -167,7 +165,6 @@ module Seed
       else
         return false
       end
-
     end
   end
 end

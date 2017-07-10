@@ -1,6 +1,5 @@
 module Seed
   class Organization
-
     # @param hash, form of
     #   {
     #     "is_parent": true,
@@ -32,7 +31,7 @@ module Seed
     #   }
     #
     def self.from_hash(hash)
-      org = Organization.new()
+      org = Organization.new
       vars_to_parse = [:id, :name, :user_is_owner, :cycles]
 
       hash.each do |name, value|

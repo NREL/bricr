@@ -2,18 +2,17 @@ require 'spec_helper'
 require 'securerandom'
 require 'date'
 
-
 RSpec.describe Seed do
-  describe "version" do
-    it "has a version number" do
+  describe 'version' do
+    it 'has a version number' do
       expect(Seed::VERSION).not_to be nil
     end
   end
 
-  describe "API Status" do
+  describe 'API Status' do
     before :example do
       # @r = Seed::API.new("https://seed-platform.org")
-      @r = Seed::API.new("http://localhost:8000")
+      @r = Seed::API.new('http://localhost:8000')
     end
 
     # it "should get a status response" do
@@ -68,18 +67,18 @@ RSpec.describe Seed do
     it 'should not find buildingsync file' do
       @r.get_or_create_organization('Cycle Test')
       @r.create_cycle('models 01', DateTime.parse('2010-01-01'), DateTime.parse('2010-12-31'))
-      filename = File.expand_path("../files/not_a_real_file.xml", File.dirname(__FILE__))
+      filename = File.expand_path('../files/not_a_real_file.xml', File.dirname(__FILE__))
       file = @r.upload_buildingsync(filename)
       expect(file).to eq false
     end
 
-    it "should upload a buildingsync file" do
+    it 'should upload a buildingsync file' do
       @r.get_or_create_organization('Cycle Test')
       @r.create_cycle('models 01', DateTime.parse('2010-01-01'), DateTime.parse('2010-12-31'))
 
       expect(@r.cycle_obj.name).to eq 'models 01'
 
-      filename = File.expand_path("../files/buildingsync_ex01.xml", File.dirname(__FILE__))
+      filename = File.expand_path('../files/buildingsync_ex01.xml', File.dirname(__FILE__))
       file = @r.upload_buildingsync(filename)
       puts file
     end

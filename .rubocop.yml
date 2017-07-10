@@ -46,7 +46,7 @@ Metrics/AbcSize:
 
 # Configuration parameters: CountComments, ExcludedMethods.
 Metrics/BlockLength:
-  Max: 5
+  Max: 50
 
 Metrics/BlockNesting:
   Max: 4
@@ -128,6 +128,9 @@ Style/Documentation:
 Style/EachWithObject:
   Enabled: false
 
+Style/GuardClause:
+  Enabled: false
+  
 # Configuration parameters: AllowedVariables.
 Style/GlobalVars:
   Enabled: false

@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '~> 2.2'
 
-  s.files = Dir.glob('lib/**/*') + %w(README.md COPYRIGHT.md LICENSE.md Rakefile)
+  s.files = Dir.glob('lib/**/*') + %w[README.md COPYRIGHT.md LICENSE.md Rakefile]
   s.require_path = 'lib'
 
   s.add_development_dependency 'bundler', '~> 1.6'

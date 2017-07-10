@@ -1,6 +1,5 @@
 module Seed
   class Cycle
-
     # @param hash, form of
     # {
     #     "end": "2017-12-31T08:00:00Z",
@@ -21,8 +20,8 @@ module Seed
       end
 
       # convert some attributes to ruby DateTime
-      cycle.start = DateTime.parse(cycle.start) unless (defined?(cycle.start)).nil?
-      cycle.end = DateTime.parse(cycle.end) unless (defined?(cycle.end)).nil?
+      cycle.start = DateTime.parse(cycle.start) unless defined?(cycle.start).nil?
+      cycle.end = DateTime.parse(cycle.end) unless defined?(cycle.end).nil?
 
       cycle
     end

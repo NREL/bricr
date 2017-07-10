@@ -10,7 +10,7 @@ require 'ci/reporter/rake/rspec'
 require 'bundler/gem_tasks'
 
 RSpec::Core::RakeTask.new('spec:unit') do |spec|
-  spec.rspec_opts = %w(--format progress --format CI::Reporter::RSpec)
+  spec.rspec_opts = %w[--format progress --format CI::Reporter::RSpec]
   spec.pattern = FileList['spec/**/*_spec.rb']
 end
 
@@ -26,4 +26,3 @@ RuboCop::RakeTask.new(:rubocop) do |task|
   # don't abort rake on failure
   task.fail_on_error = false
 end
-

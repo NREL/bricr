@@ -3,9 +3,7 @@ require_relative './../spec_helper'
 require 'fileutils'
 require 'parallel'
 
-
 describe 'BRICR' do
-
   it 'should upload and download building sync for one cycle' do
     xml_path = File.expand_path('../files/phase0/building_151.xml', File.dirname(__FILE__))
 
@@ -17,8 +15,7 @@ describe 'BRICR' do
 
     xml_path = File.join(File.dirname(__FILE__), '../files/phase0/building_151.xml')
 
-    # upload results for record, this is not really a new revision of the building, just adding results 
-
+    # upload results for record, this is not really a new revision of the building, just adding results
   end
 
   it 'should upload and download building sync for multiple cycles' do
@@ -32,7 +29,5 @@ describe 'BRICR' do
     xml_path = File.join(File.dirname(__FILE__), '../files/phase0/building_151.xml')
 
     # upload new cycle
-
   end
-
 end

@@ -1,33 +1,32 @@
-#require 'simplecov'
-#require 'coveralls'
+# require 'simplecov'
+# require 'coveralls'
 
-#SimpleCov.formatter = Coveralls::SimpleCov::Formatter
-#SimpleCov.start do
+# SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+# SimpleCov.start do
 #  add_filter 'spec/files'
-#end
+# end
 
 # try to load configuration, use defaults if doesn't exist
 begin
   require_relative '../config'
 rescue LoadError
   module BRICR
-
     # location of openstudio CLI
-    OPENSTUDIO_EXE = 'openstudio'
-    
+    OPENSTUDIO_EXE = 'openstudio'.freeze
+
     # one or more measure paths
-    OPENSTUDIO_MEASURES = []
+    OPENSTUDIO_MEASURES = [].freeze
 
     # one or more file paths
-    OPENSTUDIO_FILES = []
+    OPENSTUDIO_FILES = [].freeze
 
     # max number of datapoints to run
     MAX_DATAPOINTS = Float::INFINITY
-    #MAX_DATAPOINTS = 2
-    
+    # MAX_DATAPOINTS = 2
+
     # number of parallel jobs
     NUM_PARALLEL = 7
-    
+
     # do simulations
     DO_SIMULATIONS = false
   end
