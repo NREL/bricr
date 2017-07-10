@@ -1,0 +1,157 @@
+AllCops:
+  Exclude:
+    - 'weather/**/*'
+
+# Offense count: 2
+# Cop supports --auto-correct.
+# Configuration parameters: Include, TreatCommentsAsGroupSeparators.
+# Include: **/Gemfile, **/gems.rb
+Bundler/OrderedGems:
+  Exclude:
+    - 'Gemfile'
+
+Lint/AmbiguousOperator:
+  Enabled: true
+
+Lint/BlockAlignment:
+  Enabled: true
+
+Lint/ParenthesesAsGroupedExpression:
+  Enabled: true
+
+Lint/RequireParentheses:
+  Enabled: true
+
+Lint/UnreachableCode:
+  Enabled: false
+
+Lint/UnusedBlockArgument:
+  Description: 'Checks for unused block arguments.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#underscore-unused-vars'
+  Enabled: false
+
+Lint/UnusedMethodArgument:
+  Description: 'Checks for unused method arguments.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#underscore-unused-vars'
+  Enabled: false
+
+Lint/UselessAssignment:
+  Description: 'Checks for useless assignment to a local variable.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#underscore-unused-vars'
+  Enabled: false
+
+# Offense count: 6
+Metrics/AbcSize:
+  Max: 150
+
+# Configuration parameters: CountComments, ExcludedMethods.
+Metrics/BlockLength:
+  Max: 5
+
+Metrics/BlockNesting:
+  Max: 4
+
+# Configuration parameters: CountComments.
+Metrics/ClassLength:
+  Max: 500
+
+Metrics/CyclomaticComplexity:
+  Max: 48
+
+Metrics/LineLength:
+  Max: 100
+
+# Configuration parameters: CountComments.
+Metrics/MethodLength:
+  Max: 350
+
+# Configuration parameters: CountKeywordArgs.
+Metrics/ParameterLists:
+  Max: 8
+
+# Configuration parameters: SupportedStyles, IndentationWidth.
+# SupportedStyles: outdent, indent
+Layout/AccessModifierIndentation:
+  EnforcedStyle: outdent
+
+# Configuration parameters: SupportedStyles.
+# SupportedStyles: space, no_space
+Layout/SpaceAroundEqualsInParameterDefault:
+  EnforcedStyle: no_space
+
+# Configuration parameters: IndentWhenRelativeTo, SupportedStyles, IndentOneStep.
+Layout/CaseIndentation:
+  Enabled: false
+
+
+# Configuration parameters: AutoCorrect.
+#Security/JSONLoad:
+#  Exclude:
+#    - 'lib/bricr/workflows/phase_zero_workflow_maker.rb'
+
+#Style/ColonMethodCall:
+#  Exclude:
+#    - 'geojson_checks.rb'
+#    - 'geojson_to_buildingsync.rb'
+#    - 'lib/bricr/workflows/phase_zero_workflow_maker.rb'
+
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+# SupportedStyles: compact, expanded
+#Style/EmptyMethod:
+#  Exclude:
+#    - 'lib/bricr/workflow_maker.rb'
+
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+# SupportedStyles: snake_case, camelCase
+#Style/MethodName:
+#  Exclude:
+#    - 'lib/bricr/translator.rb'
+#    - 'lib/bricr/workflow_maker.rb'
+#    - 'lib/bricr/workflows/phase_zero_workflow_maker.rb'
+
+
+# Configuration parameters: MinSize, SupportedStyles.
+# SupportedStyles: percent, brackets
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/ClassVars:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/EachWithObject:
+  Enabled: false
+
+# Configuration parameters: AllowedVariables.
+Style/GlobalVars:
+  Enabled: false
+
+# Configuration parameters: MaxLineLength.
+Style/IfUnlessModifier:
+  Enabled: false
+
+# Do NOT enable.  For some reason this is catching any next which I feel are okay.
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+Style/Next:
+  Enabled: false
+
+# Do NOT enable this because it appears $? is different than $CHILD_STATUS.
+Style/SpecialGlobalVars:
+  Enabled: false
+
+Style/RedundantReturn:
+  Description: 'Do not use return where it is not required.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-explicit-return'
+  Enabled: false
+
+Style/NumericLiterals:
+  Description: 'Add underscores to large numeric literals to improve readability.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#underscores-in-numerics'
+  Enabled: false
+
