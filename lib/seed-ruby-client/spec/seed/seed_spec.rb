@@ -60,8 +60,8 @@ RSpec.describe Seed do
 
     it "should return existing cycle" do
       @r.get_or_create_organization('Cycle Test')
-      cycle = @r.cycle("Default 2016 Calendar Year")
-      expect(cycle.name).to eq "Default 2016 Calendar Year"
+      cycle = @r.cycle("2016 Calendar Year")
+      expect(cycle.name).to eq "2016 Calendar Year"
     end
 
     it 'should not find buildingsync file' do
@@ -79,8 +79,11 @@ RSpec.describe Seed do
       expect(@r.cycle_obj.name).to eq 'models 01'
 
       filename = File.expand_path('../files/buildingsync_ex01.xml', File.dirname(__FILE__))
-      file = @r.upload_buildingsync(filename)
-      puts file
+      response = @r.upload_buildingsync(filename)
+
+      # puts JSON.pretty_generate(response)
+      expect(response[:status]).to eq 'success'
+      expect(response[:data][:property_state][:gross_floor_area]).to eq 69452.0
     end
   end
 end

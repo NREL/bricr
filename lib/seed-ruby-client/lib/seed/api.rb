@@ -140,7 +140,7 @@ module Seed
 
     # set the cycle
     def cycle(name)
-      if @cache[:cycles].nil? || @cache[:cycle].empty?
+      if @cache[:cycles].nil? || @cache[:cycles].empty?
         cycles
       end
 
