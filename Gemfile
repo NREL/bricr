@@ -4,6 +4,9 @@ ruby '~>2.2'
 # Specify your gem's dependencies in bricr.gemspec
 gemspec
 
+# gem 'seed-ruby-client', path: '../ruby-client'
+gem 'seed-ruby-client', github: 'SEED-platform/ruby-client', branch: 'develop'
+
 group :test do
   gem 'rake'
   # gem 'coveralls', require: false # requires json gem
@@ -12,6 +15,4 @@ group :test do
   gem 'ci_reporter_rspec'
   gem 'rubocop'
   gem 'rubocop-checkstyle_formatter'
-
-  gem 'seed-ruby-client', path: 'lib/seed-ruby-client'
 end
