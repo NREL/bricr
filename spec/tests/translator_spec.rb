@@ -9,10 +9,10 @@ describe 'BRICR' do
   end
 
   it 'should parse a phase zero xml' do
-    xml_path = File.join(File.dirname(__FILE__), '../files/phase0/building_151.xml')
+    xml_path = File.join(File.dirname(__FILE__), '../files/phase0/building_151_CBES_test.xml')
     expect(File.exist?(xml_path)).to be true
 
-    out_path = File.join(File.dirname(__FILE__), '../output/phase0_building_151/')
+    out_path = File.join(File.dirname(__FILE__), '../output/phase0_building_151_CBES_test/')
     if File.exist?(out_path)
       FileUtils.rm_rf(out_path)
     end
@@ -27,7 +27,7 @@ describe 'BRICR' do
     osw_files = []
     Dir.glob("#{out_path}/**/*.osw") { |osw| osw_files << osw }
 
-    expect(osw_files.size).to eq 4
+    expect(osw_files.size).to eq 6
 
     if BRICR::DO_SIMULATIONS
       num_sims = 0

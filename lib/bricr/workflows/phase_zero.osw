@@ -4,14 +4,17 @@
 	"root_directory": null,
 	"run_directory": null,
 	"file_paths": null,
-	"measure_paths": null,
+  "measure_paths": [
+    "../../../NREL working measures/"
+  ],
 	"steps": [
     {
       "measure_dir_name": "ChangeBuildingLocation",
       "arguments": {
         "__SKIP__": false,
-        "weather_file_name": "USA_CA_San.Francisco.Intl.AP.724940_TMY3.epw",
-        "climate_zone": "3C"
+        "weather_directory": "../../NREL_integration_testing/weather",
+		"weather_file_name": "CZ03RV2.epw",
+        "climate_zone": "CEC3"
       }
     },
     {
@@ -29,7 +32,7 @@
         "floor_height": 0,
         "num_stories_above_grade": 1,
         "building_rotation": 0,
-        "template": "90.1-2004",
+        "template": "CEC T24 2005",
         "ns_to_ew_ratio": 0,
         "wwr": 0,
         "party_wall_fraction": 0,
@@ -45,7 +48,7 @@
     {
       "measure_dir_name": "create_typical_building_from_model",
       "arguments": {
-        "template": "90.1-2004",
+        "template": "CEC T24 2005",
         "system_type": "Inferred",
         "htg_src": "NaturalGas",
         "clg_src": "Electricity",
@@ -54,12 +57,32 @@
         "exterior_lighting_zone": "3 - All Other Areas",
         "__SKIP__": false
       }
-    },{
-			"measure_dir_name": "AedgK12InteriorLightingControls",
-			"arguments": {
-				"__SKIP__": true
-			}
-		},{
+    },
+	{
+		"measure_dir_name": "ReduceLightingLoadsByPercentage",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "IncreaseInsulationRValueForExteriorWalls",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "IncreaseInsulationRValueForRoofs",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "AdjustSystemEfficiencies",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
       "measure_dir_name": "openstudio_results",
       "arguments": {
         "__SKIP__": false,

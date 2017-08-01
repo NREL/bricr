@@ -32,14 +32,60 @@ module BRICR
       @doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility/auc:FloorAreas/auc:FloorArea') do |floor_area_element|
         floor_area_type = floor_area_element.elements['auc:FloorAreaType'].text
         if floor_area_type == 'Gross'
-          floor_area = floor_area_element.elements['auc:FloorAreaValue'].text.to_f
+		      # SHL- How about multiple space types?
+		      floor_area = floor_area_element.elements['auc:FloorAreaValue'].text.to_f
+		      # SHL-Check whether we get floor area or not.
+		      if floor_area == nil
+		        raise "Can not find the floor area"
+		      end
         end
       end
-
+      
+      # SHL- get the template (vintage)
+      built_year = nil
+      major_remodel_year = nil
+      template = nil
+      @doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility') do |facility_element|
+        built_year = facility_element.elements['auc:YearOfConstruction'].text.to_f
+        if built_year < 1978
+          template = "CEC Pre-1978"
+        elsif built_year >= 1978 && built_year < 1992
+          template = "CEC T24 1978"
+        elsif built_year >= 1992 && built_year < 2001
+          template = "CEC T24 1992"
+        elsif built_year >= 2001 && built_year < 2005
+          template = "CEC T24 2001"
+        elsif built_year >= 2005 && built_year < 2008
+          template = "CEC T24 2005"
+        else
+          template = "CEC T24 2008"
+        end
+        
+        major_remodel_year = facility_element.elements['auc:YearOfLastMajorRemodel'].text.to_f
+        if major_remodel_year > built_year
+          if major_remodel_year < 1978
+            template = "CEC Pre-1978"
+          elsif major_remodel_year >= 1978 && major_remodel_year < 1992
+            template = "CEC T24 1978"
+          elsif major_remodel_year >= 1992 && major_remodel_year < 2001
+            template = "CEC T24 1992"
+          elsif major_remodel_year >= 2001 && major_remodel_year < 2005
+            template = "CEC T24 2001"
+          elsif major_remodel_year >= 2005 && major_remodel_year < 2008
+            template = "CEC T24 2005"
+          else
+            template = "CEC T24 2008"
+          end
+        end
+      
+      end
+      
       # set this value in the osw
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'total_bldg_floor_area', floor_area)
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'template', template)
+      set_measure_argument(osw, 'create_typical_building_from_model', 'template', template)
     end
-
+	
     def configureForScenario(osw, scenario)
       measure_ids = []
       scenario.elements.each('auc:ScenarioType/auc:PackageOfMeasures/auc:MeasureIDs/auc:MeasureID') do |measure_id|
@@ -49,8 +95,17 @@ module BRICR
       measure_ids.each do |measure_id|
         @doc.elements.each("//auc:Measure[@ID='#{measure_id}']") do |measure|
           measure_category = measure.elements['auc:SystemCategoryAffected'].text
-          if /Lighting/.match(measure_category)
-            set_measure_argument(osw, 'AedgK12InteriorLightingControls', '__SKIP__', false)
+          if /Lighting Fixture/.match(measure_category)
+            set_measure_argument(osw, 'ReduceLightingLoadsByPercentage', '__SKIP__', false)
+          end
+          if /Exterior Wall R-Value/.match(measure_category)
+            set_measure_argument(osw, 'IncreaseInsulationRValueForExteriorWalls', '__SKIP__', false)
+          end
+          if /Roof R-Value/.match(measure_category)
+            set_measure_argument(osw, 'IncreaseInsulationRValueForRoofs', '__SKIP__', false)
+          end
+          if /HVAC Efficiency/.match(measure_category)
+            set_measure_argument(osw, 'AdjustSystemEfficiencies', '__SKIP__', false)
           end
         end
       end
