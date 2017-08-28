@@ -13,13 +13,13 @@ Gem::Specification.new do |s|
   s.description = 'Translate BuildingSync to OpenStudio for BRICR'
   s.homepage = 'https://github.com/NREL/bricr'
   s.license = 'BSD'
-  s.bindir = 'bin'
-
+ 
   s.required_ruby_version = '~> 2.2'
 
   s.files = Dir.glob('lib/**/*') + Dir.glob('bin/**/*') + %w[README.md COPYRIGHT.md LICENSE.md Rakefile]
   s.require_path = 'lib'
-  s.executables << 'run_buildingsync.rb'
+  s.bindir = 'bin'
+  s.executables << 'run_buildingsync'
 
   s.add_development_dependency 'bundler', '~> 1.6'
   s.add_development_dependency 'parallel', '~> 1.12'
