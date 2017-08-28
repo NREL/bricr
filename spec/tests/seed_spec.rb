@@ -16,7 +16,7 @@ describe 'BRICR' do
     org = seed.get_or_create_organization('BRICR Test Organization')
 
     ## Create or get the cycle
-    cycle_name = 'BRICR Test Cycle - 2010'
+    cycle_name = 'BRICR Test Cycle - 2011'
 
     # TODO: look into the time zone of these requests. The times are getting converted and don't look right in the SEED UI
     cycle_start = DateTime.parse('2010-01-01 00:00:00Z')
@@ -31,12 +31,25 @@ describe 'BRICR' do
     expect(file[:data][:property_state][:custom_id_1]).to eq UBID
 
     # pretend to run energy simulation, now we have building_151_results.xml
+    puts 'running simulation'
     sleep(1)
 
     # upload results for record, this is not really a new revision of the building, just adding results
-    xml_path = File.join(File.dirname(__FILE__), '../files/phase0/building_151.xml')
+    xml_path = File.join(File.dirname(__FILE__), '../files/phase0/building_151_results.xml')
+
     # search for the building again using the GUID/UBID
     results = seed.search(UBID)
     puts results.properties
+
+    # get the first building
+    property_id = results.properties.first[:id]
+    puts property_id
+
+
+
+
+    # post the results to the existing property
+    # seed.update_property()
+
   end
 end
