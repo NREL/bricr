@@ -22,5 +22,5 @@ Gem::Specification.new do |s|
   s.executables << 'run_buildingsync'
 
   s.add_development_dependency 'bundler', '~> 1.6'
-  s.add_development_dependency 'parallel', '~> 1.12'
+  s.add_runtime_dependency  'parallel', '~> 1.12'
 end
