@@ -32,7 +32,7 @@ if BRICR::DO_SIMULATIONS
     break if num_sims > BRICR::MAX_DATAPOINTS
 
     cmd = "\"#{BRICR::OPENSTUDIO_EXE}\" run -w \"#{osw}\""
-    puts "Running cmd: #{cmd}"
+    puts "Running cmd: #{cmd}\n"
     system(cmd)
 
     num_sims += 1

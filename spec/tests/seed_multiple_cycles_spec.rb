@@ -12,7 +12,7 @@ describe 'BRICR' do
 
     # now user has edited building sync and added info
 
-    # DLM: we don't have phase 1 files, just reupload phase 0 but pretend user modified it
+    # DLM: we don't have phase 1 files, just re-upload phase 0 but pretend user modified it
     xml_path = File.join(File.dirname(__FILE__), '../files/phase0/building_151.xml')
 
     # upload new cycle

@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.name = 'bricr'
   s.version = BRICR::VERSION
   s.platform = Gem::Platform::RUBY
-  s.authors = ['Dan Macumber']
+  s.authors = ['Dan Macumber','Yixing Chen','Sang Hoon Lee']
   s.email = ['daniel.macumber@nrel.gov']
   s.summary = 'BRICR Tools'
   s.description = 'Translate BuildingSync to OpenStudio for BRICR'
