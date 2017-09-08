@@ -7,13 +7,13 @@ module BRICR
       # load the workflow
       @workflow = nil
 
-      workflow_path = File.join(File.dirname(__FILE__), '/phase_zero.osw')
+      workflow_path = File.join(File.dirname(__FILE__), '/phase_zero_standaloneretail.osw')
       raise "File '#{workflow_path}' does not exist" unless File.exist?(workflow_path)
 
       File.open(workflow_path, 'r') do |file|
         @workflow = JSON.parse(file.read)
       end
-
+      
       if BRICR::OPENSTUDIO_MEASURES
         @workflow['measure_paths'] = BRICR::OPENSTUDIO_MEASURES
       end
@@ -27,6 +27,32 @@ module BRICR
     end
 
     def configureForDoc(osw)
+      # select base osw for standaloneretail, smalloffice, medium office
+      occupancy_type = nil
+      floor_area = nil
+      floor_area_type = nil
+      @doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility') do |facility_element|
+        #floor_area_type = facility_element.elements['/auc:FloorAreas/auc:FloorArea/auc:FloorAreaType'].text
+        #if floor_area_type == 'Gross'
+        #  floor_area = facility_element.elements['/auc:FloorAreas/auc:FloorArea/auc:FloorAreaValue'].text.to_f
+          occupancy_type = facility_element.elements['auc:OccupancyClassification'].text
+          if occupancy_type == 'Retail'
+            workflow_path = File.join(File.dirname(__FILE__), '/phase_zero_standaloneretail.osw')
+          elsif occupancy_type == 'Office'
+         #   if floor_area > 0 && floor_area < 20000
+         #     workflow_path = File.join(File.dirname(__FILE__), '/phase_zero_smalloffice.osw')
+         #   elsif floor_area >= 20000 && floor_area < 75000
+              workflow_path = File.join(File.dirname(__FILE__), '/phase_zero_mediumoffice.osw')
+            else
+              raise "Office floor area is greater than small and medium size"
+            end
+          else
+            raise "Building type is not applicable for the BRICR analysis"
+            raise "File '#{workflow_path}' does not exist" unless File.exist?(workflow_path)
+          end
+        end
+      end
+      
       # get the floor area
       floor_area = nil
       @doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility/auc:FloorAreas/auc:FloorArea') do |floor_area_element|

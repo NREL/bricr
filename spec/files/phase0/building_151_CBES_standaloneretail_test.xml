@@ -41,17 +41,17 @@
 						<auc:FloorAreas>
 							<auc:FloorArea>
 								<auc:FloorAreaType>Gross</auc:FloorAreaType>
-								<auc:FloorAreaValue>69452</auc:FloorAreaValue>
+								<auc:FloorAreaValue>24683</auc:FloorAreaValue>
 							</auc:FloorArea>
 							<auc:FloorArea>
 								<auc:FloorAreaType>Footprint</auc:FloorAreaType>
-								<auc:FloorAreaValue>73872.6457</auc:FloorAreaValue>
+								<auc:FloorAreaValue>24683</auc:FloorAreaValue>
 							</auc:FloorArea>
 						</auc:FloorAreas>
 						<auc:AspectRatio>3.6732677131179763</auc:AspectRatio>
 						<auc:Perimeter>1325</auc:Perimeter>
 						<auc:YearOfConstruction>1954</auc:YearOfConstruction>
-						<auc:YearOfLastMajorRemodel>2003</auc:YearOfLastMajorRemodel>
+						<auc:YearOfLastMajorRemodel>1977</auc:YearOfLastMajorRemodel>
 					</auc:Facility>
 				</auc:Facilities>
 			</auc:Site>
