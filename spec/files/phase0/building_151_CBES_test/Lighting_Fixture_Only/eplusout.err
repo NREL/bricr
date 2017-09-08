@@ -1,0 +1,231 @@
+Program Version,EnergyPlus, Version 8.7.0-df3c0af5a5, YMD=2017.09.06 14:52,IDD_Version 8.7.0
+   ************* Beginning Zone Sizing Calculations
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="RETAILSTANDALONE PSZ_ECON_MAXOAFRAC_SCH DEFAULT", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="RETAILSTANDALONE PSZ_ECON_MAXOAFRAC_SCH SUMMER DESIGN DAY", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="RETAILSTANDALONE PSZ_ECON_MAXOAFRAC_SCH WINTER DESIGN DAY", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="SCHEDULE DAY 1", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="SCHEDULE DAY 10", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="SCHEDULE DAY 11", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="SCHEDULE DAY 12", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="SCHEDULE DAY 13", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="SCHEDULE DAY 14", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="SCHEDULE DAY 15", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="SCHEDULE DAY 16", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="SCHEDULE DAY 17", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="SCHEDULE DAY 18", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="SCHEDULE DAY 19", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="SCHEDULE DAY 2", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="SCHEDULE DAY 3", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="SCHEDULE DAY 4", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="SCHEDULE DAY 6", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="SCHEDULE DAY 7", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="SCHEDULE DAY 8", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval="SCHEDULE DAY 9", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Year="RETAILSTANDALONE PSZ_ECON_MAXOAFRAC_SCH", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Constant="ALWAYS OFF DISCRETE", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** ProcessScheduleInput: Schedule:Constant="ALWAYS ON CONTINUOUS", Blank Schedule Type Limits Name input -- will not be validated.
+   ** Warning ** GetHTSurfaceData: Surfaces with interface to Ground found but no "Ground Temperatures" were input.
+   **   ~~~   ** Found first in surface=SURFACE 73
+   **   ~~~   ** Defaults, constant throughout the year of (18.0) will be used.
+   ** Warning ** CheckUsedConstructions: There are 9 nominally unused constructions in input.
+   **   ~~~   ** For explicit details on each unused construction, use Output:Diagnostics,DisplayExtraWarnings;
+   ************* Beginning System Sizing Calculations
+   ** Warning ** Output:Meter: invalid Name="DISTRICTCOOLING:FACILITY" - not found.
+   ** Warning ** Output:Meter: invalid Name="DISTRICTHEATING:FACILITY" - not found.
+   ** Warning ** Output:Meter:MeterFileOnly requested for "Electricity:Facility" (TimeStep), already on "Output:Meter". Will report to both eplusout.eso and eplusout.mtr
+   ************* Testing Individual Branch Integrity
+   ************* All Branches passed integrity testing
+   ************* Testing Individual Supply Air Path Integrity
+   ************* All Supply Air Paths passed integrity testing
+   ************* Testing Individual Return Air Path Integrity
+   ************* All Return Air Paths passed integrity testing
+   ************* No node connection errors were found.
+   ************* Beginning Simulation
+   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed "ZONE RETAIL POINT_OF_SALE A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 0.89 C.
+   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 01/01 06:03 - 06:04
+   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil
+   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 13.168 C.
+   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.
+   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.
+   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed "ZONE RETAIL POINT_OF_SALE B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = -0.31 C.
+   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 01/01 06:03 - 06:04
+   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil
+   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 12.013 C.
+   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.
+   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.
+   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed "ZONE RETAIL POINT_OF_SALE C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 0.67 C.
+   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 01/01 06:03 - 06:04
+   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil
+   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 13.297 C.
+   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.
+   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.
+   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed "ZONE RETAIL BACK_SPACE B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = -1.65 C.
+   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 01/01 21:10 - 21:11
+   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil
+   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 13.011 C.
+   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.
+   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.
+   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed "ZONE RETAIL BACK_SPACE C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.73 C.
+   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 01/01 21:20 - 21:23
+   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil
+   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 15.602 C.
+   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.
+   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.
+   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed "ZONE RETAIL BACK_SPACE A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.70 C.
+   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 01/01 21:40 - 21:43
+   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil
+   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 14.674 C.
+   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.
+   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.
+   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed "ZONE RETAIL BACK_SPACE B END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.80 C.
+   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 01/01 21:40 - 21:43
+   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil
+   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 14.288 C.
+   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.
+   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.
+   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed "ZONE RETAIL RETAIL A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.88 C.
+   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 12/21 22:00 - 22:03
+   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil
+   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 14.697 C.
+   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.
+   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.
+   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed "ZONE RETAIL RETAIL B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.47 C.
+   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 12/21 22:20 - 22:25
+   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil
+   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 13.948 C.
+   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.
+   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.
+   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed "ZONE RETAIL RETAIL C END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.85 C.
+   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 12/27 20:10 - 20:15
+   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil
+   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 14.862 C.
+   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.
+   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.
+   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed "ZONE RETAIL BACK_SPACE A END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.65 C.
+   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 12/30 21:30 - 21:33
+   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil
+   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 14.233 C.
+   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.
+   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.
+   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed "ZONE RETAIL RETAIL A END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.97 C.
+   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 12/30 21:50 - 21:53
+   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil
+   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 15.304 C.
+   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.
+   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.
+   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed "ZONE RETAIL RETAIL B END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.80 C.
+   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 12/30 22:00 - 22:03
+   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil
+   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 15.173 C.
+   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.
+   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.
+   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed "ZONE RETAIL RETAIL C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.79 C.
+   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 12/30 22:00 - 22:03
+   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil
+   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 14.907 C.
+   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.
+   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.
+   ************* Simulation Error Summary *************
+   ************* There are 6 unused schedules in input.
+   ************* There are 6 unused week schedules in input.
+   ************* There are 27 unused day schedules in input.
+   ************* Use Output:Diagnostics,DisplayUnusedSchedules; to see them.
+   *************
+   ************* ===== Recurring Error Summary =====
+   ************* The following recurring error messages occurred.
+   *************
+   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed="ZONE RETAIL POINT_OF_SALE A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:
+   *************  **   ~~~   **   This error occurred 135 total times;
+   *************  **   ~~~   **   during Warmup 0 times;
+   *************  **   ~~~   **   during Sizing 0 times.
+   *************  **   ~~~   **   Max=1.977257  Min=-2.896397
+   *************
+   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed="ZONE RETAIL POINT_OF_SALE B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:
+   *************  **   ~~~   **   This error occurred 281 total times;
+   *************  **   ~~~   **   during Warmup 0 times;
+   *************  **   ~~~   **   during Sizing 0 times.
+   *************  **   ~~~   **   Max=1.972707  Min=-4.729478
+   *************
+   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed="ZONE RETAIL POINT_OF_SALE C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:
+   *************  **   ~~~   **   This error occurred 157 total times;
+   *************  **   ~~~   **   during Warmup 0 times;
+   *************  **   ~~~   **   during Sizing 0 times.
+   *************  **   ~~~   **   Max=1.988948  Min=-3.40106
+   *************
+   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed="ZONE RETAIL BACK_SPACE B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:
+   *************  **   ~~~   **   This error occurred 125 total times;
+   *************  **   ~~~   **   during Warmup 0 times;
+   *************  **   ~~~   **   during Sizing 0 times.
+   *************  **   ~~~   **   Max=1.991112  Min=-3.252712
+   *************
+   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed="ZONE RETAIL BACK_SPACE C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:
+   *************  **   ~~~   **   This error occurred 33 total times;
+   *************  **   ~~~   **   during Warmup 0 times;
+   *************  **   ~~~   **   during Sizing 0 times.
+   *************  **   ~~~   **   Max=1.99908  Min=0.102014
+   *************
+   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed="ZONE RETAIL BACK_SPACE A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:
+   *************  **   ~~~   **   This error occurred 14 total times;
+   *************  **   ~~~   **   during Warmup 0 times;
+   *************  **   ~~~   **   during Sizing 0 times.
+   *************  **   ~~~   **   Max=1.996391  Min=1.019397
+   *************
+   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed="ZONE RETAIL BACK_SPACE B END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:
+   *************  **   ~~~   **   This error occurred 10 total times;
+   *************  **   ~~~   **   during Warmup 0 times;
+   *************  **   ~~~   **   during Sizing 0 times.
+   *************  **   ~~~   **   Max=1.996822  Min=1.087092
+   *************
+   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed="ZONE RETAIL RETAIL A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:
+   *************  **   ~~~   **   This error occurred 4 total times;
+   *************  **   ~~~   **   during Warmup 0 times;
+   *************  **   ~~~   **   during Sizing 0 times.
+   *************  **   ~~~   **   Max=1.918644  Min=1.426846
+   *************
+   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed="ZONE RETAIL RETAIL B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:
+   *************  **   ~~~   **   This error occurred 4 total times;
+   *************  **   ~~~   **   during Warmup 0 times;
+   *************  **   ~~~   **   during Sizing 0 times.
+   *************  **   ~~~   **   Max=1.913385  Min=1.071974
+   *************
+   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed="ZONE RETAIL RETAIL C END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:
+   *************  **   ~~~   **   This error occurred 2 total times;
+   *************  **   ~~~   **   during Warmup 0 times;
+   *************  **   ~~~   **   during Sizing 0 times.
+   *************  **   ~~~   **   Max=1.851278  Min=1.671959
+   *************
+   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed="ZONE RETAIL BACK_SPACE A END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:
+   *************  **   ~~~   **   This error occurred 1 total times;
+   *************  **   ~~~   **   during Warmup 0 times;
+   *************  **   ~~~   **   during Sizing 0 times.
+   *************  **   ~~~   **   Max=1.648683  Min=1.648683
+   *************
+   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed="ZONE RETAIL RETAIL A END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:
+   *************  **   ~~~   **   This error occurred 2 total times;
+   *************  **   ~~~   **   during Warmup 0 times;
+   *************  **   ~~~   **   during Sizing 0 times.
+   *************  **   ~~~   **   Max=1.966461  Min=1.440377
+   *************
+   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed="ZONE RETAIL RETAIL B END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:
+   *************  **   ~~~   **   This error occurred 2 total times;
+   *************  **   ~~~   **   during Warmup 0 times;
+   *************  **   ~~~   **   during Sizing 0 times.
+   *************  **   ~~~   **   Max=1.797147  Min=1.465305
+   *************
+   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed="ZONE RETAIL RETAIL C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:
+   *************  **   ~~~   **   This error occurred 1 total times;
+   *************  **   ~~~   **   during Warmup 0 times;
+   *************  **   ~~~   **   during Sizing 0 times.
+   *************  **   ~~~   **   Max=1.794767  Min=1.794767
+   *************
+   *************
+   ************* ===== Final Error Summary =====
+   ************* The following error categories occurred.  Consider correcting or noting.
+   ************* Nominally Unused Constructions
+   ************* ..The nominally unused constructions warning is provided to alert you to potential conditions that can cause
+   ************* ..extra time during simulation. Each construction is calculated by the algorithm indicated in the HeatBalanceAlgorithm
+   ************* ..object. You may remove the constructions indicated (when you use the DisplayExtraWarnings option).
+   *************
+   ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 0 Severe Errors.
+   ************* EnergyPlus Sizing Error Summary. During Sizing: 26 Warning; 0 Severe Errors.
+   ************* EnergyPlus Completed Successfully-- 800 Warning; 0 Severe Errors; Elapsed Time=00hr 01min 36.21sec

@@ -1,0 +1,653 @@
+Program Version,EnergyPlus, Version 8.7.0-df3c0af5a5, YMD=2017.09.06 14:52
+! <Version>, Version ID
+ Version, 8.7
+! <Timesteps per Hour>, #TimeSteps, Minutes per TimeStep {minutes}
+ Timesteps per Hour,  6, 10
+! <System Convergence Limits>, Minimum System TimeStep {minutes}, Max HVAC Iterations, Minimum Plant Iterations, Maximum Plant Iterations
+ System Convergence Limits, 1, 20, 2, 8
+! <Simulation Control>, Do Zone Sizing, Do System Sizing, Do Plant Sizing, Do Design Days, Do Weather Simulation, Do HVAC Sizing Simulation
+ Simulation Control, Yes, Yes, No, Yes, Yes, No
+! <Output Reporting Tolerances>, Tolerance for Time Heating Setpoint Not Met, Tolerance for Zone Cooling Setpoint Not Met Time
+ Output Reporting Tolerances, 0.200, 0.200, 
+! <Site:GroundTemperature:BuildingSurface>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:BuildingSurface,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00
+! <Site:GroundTemperature:FCfactorMethod>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:FCfactorMethod,  10.94,  10.63,  11.18,  12.06,  14.33,  16.09,  17.28,  17.64,  17.02,  15.66,  13.83,  12.14
+! <Site:GroundTemperature:Shallow>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:Shallow,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00
+! <Site:GroundTemperature:Deep>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:Deep,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00
+! <Site:GroundReflectance>,Jan{dimensionless},Feb{dimensionless},Mar{dimensionless},Apr{dimensionless},May{dimensionless},Jun{dimensionless},Jul{dimensionless},Aug{dimensionless},Sep{dimensionless},Oct{dimensionless},Nov{dimensionless},Dec{dimensionless}
+ Site:GroundReflectance,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20
+! <Site:GroundReflectance:SnowModifier>, Normal, Daylighting {dimensionless}
+ Site:GroundReflectance:SnowModifier,   1.000,   1.000
+! <Site:GroundReflectance:Snow>,Jan{dimensionless},Feb{dimensionless},Mar{dimensionless},Apr{dimensionless},May{dimensionless},Jun{dimensionless},Jul{dimensionless},Aug{dimensionless},Sep{dimensionless},Oct{dimensionless},Nov{dimensionless},Dec{dimensionless}
+ Site:GroundReflectance:Snow,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20
+! <Site:GroundReflectance:Snow:Daylighting>,Jan{dimensionless},Feb{dimensionless},Mar{dimensionless},Apr{dimensionless},May{dimensionless},Jun{dimensionless},Jul{dimensionless},Aug{dimensionless},Sep{dimensionless},Oct{dimensionless},Nov{dimensionless},Dec{dimensionless}
+ Site:GroundReflectance:Snow:Daylighting,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20
+! <Environment:Weather Station>,Wind Sensor Height Above Ground {m},Wind Speed Profile Exponent {},Wind Speed Profile Boundary Layer Thickness {m},Air Temperature Sensor Height Above Ground {m},Wind Speed Modifier Coefficient-Internal,Temperature Modifier Coefficient-Internal
+Environment:Weather Station,10.000,0.140,270.000,1.500,1.586,9.750E-003
+! <Site:Location>, Location Name, Latitude {N+/S- Deg}, Longitude {E+/W- Deg},  Time Zone Number {GMT+/-}, Elevation {m},  Standard Pressure at Elevation {Pa}, Standard RhoAir at Elevation
+Site:Location,Climate Zone 3 CA USA CTZRV2 WMO#=724930,37.70,-122.20,-8.00,2.00,101301,1.2040
+! <Building Information>, Building Name,North Axis {deg},Terrain,  Loads Convergence Tolerance Value,Temperature Convergence Tolerance Value,  Solar Distribution,Maximum Number of Warmup Days,Minimum Number of Warmup Days
+ Building Information,CEC T24 2001|RetailStandalone,0.000,Suburbs,4.00000E-002,0.40000,FullExterior,25,6
+! <Inside Convection Algorithm>, Algorithm {Simple | TARP | CeilingDiffuser | AdaptiveConvectionAlgorithm}
+Inside Convection Algorithm,TARP
+! <Outside Convection Algorithm>, Algorithm {SimpleCombined | TARP | MoWitt | DOE-2 | AdaptiveConvectionAlgorithm}
+Outside Convection Algorithm,DOE-2
+! <Sky Radiance Distribution>, Value {Anisotropic}
+Sky Radiance Distribution,Anisotropic
+! <Zone Air Solution Algorithm>, Value {ThirdOrderBackwardDifference | AnalyticalSolution | EulerMethod}
+ Zone Air Solution Algorithm, ThirdOrderBackwardDifference
+! <Zone Air Carbon Dioxide Balance Simulation>, Simulation {Yes/No}, Carbon Dioxide Concentration
+ Zone Air Carbon Dioxide Balance Simulation, No,N/A
+! <Zone Air Generic Contaminant Balance Simulation>, Simulation {Yes/No}, Generic Contaminant Concentration
+ Zone Air Generic Contaminant Balance Simulation, No,N/A
+! <Zone Air Mass Flow Balance Simulation>, Enforce Mass Balance, Adjust Zone Mixing, Adjust Zone Infiltration {AddInfiltration | AdjustInfiltration | None}, Infiltration Zones {MixingSourceZonesOnly | AllZones}
+ Zone Air Mass Flow Balance Simulation, No,N/A,N/A,N/A
+! <Environment:Site Atmospheric Variation>,Wind Speed Profile Exponent {},Wind Speed Profile Boundary Layer Thickness {m},Air Temperature Gradient Coefficient {K/m}
+Environment:Site Atmospheric Variation,0.220,370.000,6.500000E-003
+! <Surface Geometry>,Starting Corner,Vertex Input Direction,Coordinate System,Daylight Reference Point Coordinate System,Rectangular (Simple) Surface Coordinate System
+ Surface Geometry,UpperLeftCorner,Counterclockwise,RelativeCoordinateSystem,RelativeCoordinateSystem,RelativeToZoneOrigin
+! <Surface Heat Transfer Algorithm>, Value {CTF - ConductionTransferFunction | EMPD - MoisturePenetrationDepthConductionTransferFunction | CondFD - ConductionFiniteDifference | HAMT - CombinedHeatAndMoistureFiniteElement} - Description,Inside Surface Max Temperature Limit{C}, Surface Convection Coefficient Lower Limit {W/m2-K}, Surface Convection Coefficient Upper Limit {W/m2-K}
+Surface Heat Transfer Algorithm, CTF - ConductionTransferFunction,200,0.10,1000.0
+! <Shading Summary>, Number of Fixed Detached Shades, Number of Building Detached Shades, Number of Attached Shades
+ Shading Summary,0,0,0
+! <Zone Summary>, Number of Zones, Number of Zone Surfaces, Number of SubSurfaces
+ Zone Summary,18,126,18
+! <Zone Information>,Zone Name,North Axis {deg},Origin X-Coordinate {m},Origin Y-Coordinate {m},Origin Z-Coordinate {m},Centroid X-Coordinate {m},Centroid Y-Coordinate {m},Centroid Z-Coordinate {m},Type,Zone Multiplier,Zone List Multiplier,Minimum X {m},Maximum X {m},Minimum Y {m},Maximum Y {m},Minimum Z {m},Maximum Z {m},Ceiling Height {m},Volume {m3},Zone Inside Convection Algorithm {Simple-Detailed-CeilingDiffuser-TrombeWall},Zone Outside Convection Algorithm {Simple-Detailed-Tarp-MoWitt-DOE-2-BLAST}, Floor Area {m2},Exterior Gross Wall Area {m2},Exterior Net Wall Area {m2},Exterior Window Area {m2}, Number of Surfaces, Number of SubSurfaces, Number of Shading SubSurfaces,  Part of Total Building Area
+ Zone Information, ZONE RETAIL BACK_SPACE A  - STORY GROUND,0.0,30.39,-35.50,0.00,35.63,-33.21,3.05,1,1,1,30.39,40.87,-35.50,-30.93,0.00,6.10,6.10,292.02,TARP,DOE-2,47.90,63.87,59.40,4.47,6,1,0,Yes
+ Zone Information, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND,0.0,40.87,-35.50,0.00,43.15,-33.21,3.05,1,1,1,40.87,45.44,-35.50,-30.93,0.00,6.10,6.10,127.43,TARP,DOE-2,20.90,55.74,51.84,3.90,6,2,0,Yes
+ Zone Information, ZONE RETAIL BACK_SPACE B  - STORY GROUND,0.0,30.39,-30.93,0.00,35.63,1.57E-014,3.05,1,1,1,30.39,40.87,-30.93,30.93,0.00,6.10,6.10,3950.74,TARP,DOE-2,648.09,0.00,0.00,0.00,6,0,0,Yes
+ Zone Information, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND,0.0,40.87,-30.93,0.00,43.15,1.57E-014,3.05,1,1,1,40.87,45.44,-30.93,30.93,0.00,6.10,6.10,1723.96,TARP,DOE-2,282.80,377.07,350.67,26.39,6,1,0,Yes
+ Zone Information, ZONE RETAIL BACK_SPACE C  - STORY GROUND,0.0,30.39,30.93,0.00,35.63,33.21,3.05,1,1,1,30.39,40.87,30.93,35.50,0.00,6.10,6.10,292.02,TARP,DOE-2,47.90,63.87,59.40,4.47,6,1,0,Yes
+ Zone Information, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND,0.0,40.87,30.93,0.00,43.15,33.21,3.05,1,1,1,40.87,45.44,30.93,35.50,0.00,6.10,6.10,127.43,TARP,DOE-2,20.90,55.74,51.84,3.90,6,2,0,Yes
+ Zone Information, ZONE RETAIL ENTRY A  - STORY GROUND,0.0,23.95,-35.50,0.00,24.18,-33.21,3.05,1,1,1,23.95,24.42,-35.50,-30.93,0.00,6.10,6.10,13.17,TARP,DOE-2,2.16,2.88,2.68,0.20,6,1,0,Yes
+ Zone Information, ZONE RETAIL ENTRY B  - STORY GROUND,0.0,23.95,-30.93,0.00,24.18,1.60E-014,3.05,1,1,1,23.95,24.42,-30.93,30.93,0.00,6.10,6.10,178.19,TARP,DOE-2,29.23,0.00,0.00,0.00,6,0,0,Yes
+ Zone Information, ZONE RETAIL ENTRY C  - STORY GROUND,0.0,23.95,30.93,0.00,24.18,33.21,3.05,1,1,1,23.95,24.42,30.93,35.50,0.00,6.10,6.10,13.17,TARP,DOE-2,2.16,2.88,2.68,0.20,6,1,0,Yes
+ Zone Information, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND,0.0,24.42,-35.50,0.00,27.40,-33.21,3.05,1,1,1,24.42,30.39,-35.50,-30.93,0.00,6.10,6.10,166.41,TARP,DOE-2,27.30,36.40,33.85,2.55,6,1,0,Yes
+ Zone Information, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND,0.0,24.42,-30.93,0.00,27.40,1.54E-014,3.05,1,1,1,24.42,30.39,-30.93,30.93,0.00,6.10,6.10,2251.37,TARP,DOE-2,369.32,0.00,0.00,0.00,6,0,0,Yes
+ Zone Information, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND,0.0,24.42,30.93,0.00,27.40,33.21,3.05,1,1,1,24.42,30.39,30.93,35.50,0.00,6.10,6.10,166.41,TARP,DOE-2,27.30,36.40,33.85,2.55,6,1,0,Yes
+ Zone Information, ZONE RETAIL RETAIL A  - STORY GROUND,0.0,-40.87,-35.50,0.00,-8.46,-33.21,3.05,1,1,1,-40.87,23.95,-35.50,-30.93,0.00,6.10,6.10,1806.42,TARP,DOE-2,296.33,395.11,367.45,27.66,6,1,0,Yes
+ Zone Information, ZONE RETAIL RETAIL A END_A - STORY GROUND,0.0,-45.44,-35.50,0.00,-43.15,-33.21,3.05,1,1,1,-45.44,-40.87,-35.50,-30.93,0.00,6.10,6.10,127.43,TARP,DOE-2,20.90,55.74,51.84,3.90,6,2,0,Yes
+ Zone Information, ZONE RETAIL RETAIL B  - STORY GROUND,0.0,-40.87,-30.93,0.00,-8.46,1.59E-014,3.05,1,1,1,-40.87,23.95,-30.93,30.93,0.00,6.10,6.10,24439.27,TARP,DOE-2,4009.07,0.00,0.00,0.00,6,0,0,Yes
+ Zone Information, ZONE RETAIL RETAIL B END_A - STORY GROUND,0.0,-45.44,-30.93,0.00,-43.15,1.61E-014,3.05,1,1,1,-45.44,-40.87,-30.93,30.93,0.00,6.10,6.10,1723.96,TARP,DOE-2,282.80,377.07,350.67,26.39,6,1,0,Yes
+ Zone Information, ZONE RETAIL RETAIL C  - STORY GROUND,0.0,-40.87,30.93,0.00,-8.46,33.21,3.05,1,1,1,-40.87,23.95,30.93,35.50,0.00,6.10,6.10,1806.42,TARP,DOE-2,296.33,395.11,367.45,27.66,6,1,0,Yes
+ Zone Information, ZONE RETAIL RETAIL C END_A - STORY GROUND,0.0,-45.44,30.93,0.00,-43.15,33.21,3.05,1,1,1,-45.44,-40.87,30.93,35.50,0.00,6.10,6.10,127.43,TARP,DOE-2,20.90,55.74,51.84,3.90,6,2,0,Yes
+! <Zone Internal Gains Nominal>,Zone Name, Floor Area {m2},# Occupants,Area per Occupant {m2/person},Occupant per Area {person/m2},Interior Lighting {W/m2},Electric Load {W/m2},Gas Load {W/m2},Other Load {W/m2},Hot Water Eq {W/m2},Steam Equipment {W/m2},Sum Loads per Area {W/m2},Outdoor Controlled Baseboard Heat
+ Zone Internal Gains Nominal, ZONE RETAIL BACK_SPACE A  - STORY GROUND,47.90,1.5,30.968,3.229E-002,9.472,2.153,0.000,0.000,0.000,0.000,11.625,No
+ Zone Internal Gains Nominal, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND,20.90,0.7,30.968,3.229E-002,9.472,2.153,0.000,0.000,0.000,0.000,11.625,No
+ Zone Internal Gains Nominal, ZONE RETAIL BACK_SPACE B  - STORY GROUND,648.09,20.9,30.968,3.229E-002,9.472,2.153,0.000,0.000,0.000,0.000,11.625,No
+ Zone Internal Gains Nominal, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND,282.80,9.1,30.968,3.229E-002,9.472,2.153,0.000,0.000,0.000,0.000,11.625,No
+ Zone Internal Gains Nominal, ZONE RETAIL BACK_SPACE C  - STORY GROUND,47.90,1.5,30.968,3.229E-002,9.472,2.153,0.000,0.000,0.000,0.000,11.625,No
+ Zone Internal Gains Nominal, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND,20.90,0.7,30.968,3.229E-002,9.472,2.153,0.000,0.000,0.000,0.000,11.625,No
+ Zone Internal Gains Nominal, ZONE RETAIL ENTRY A  - STORY GROUND,2.16,0.8,2.814,0.355,36.167,10.764,0.000,0.000,0.000,0.000,46.931,No
+ Zone Internal Gains Nominal, ZONE RETAIL ENTRY B  - STORY GROUND,29.23,10.4,2.814,0.355,36.167,10.764,0.000,0.000,0.000,0.000,46.931,No
+ Zone Internal Gains Nominal, ZONE RETAIL ENTRY C  - STORY GROUND,2.16,0.8,2.814,0.355,36.167,10.764,0.000,0.000,0.000,0.000,46.931,No
+ Zone Internal Gains Nominal, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND,27.30,9.7,2.814,0.355,36.167,10.764,0.000,0.000,0.000,0.000,46.931,No
+ Zone Internal Gains Nominal, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND,369.32,131.2,2.814,0.355,36.167,10.764,0.000,0.000,0.000,0.000,46.931,No
+ Zone Internal Gains Nominal, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND,27.30,9.7,2.814,0.355,36.167,10.764,0.000,0.000,0.000,0.000,46.931,No
+ Zone Internal Gains Nominal, ZONE RETAIL RETAIL A  - STORY GROUND,296.33,105.3,2.814,0.355,36.167,10.764,0.000,0.000,0.000,0.000,46.931,No
+ Zone Internal Gains Nominal, ZONE RETAIL RETAIL A END_A - STORY GROUND,20.90,7.4,2.814,0.355,36.167,10.764,0.000,0.000,0.000,0.000,46.931,No
+ Zone Internal Gains Nominal, ZONE RETAIL RETAIL B  - STORY GROUND,4009.07,1424.5,2.814,0.355,36.167,10.764,0.000,0.000,0.000,0.000,46.931,No
+ Zone Internal Gains Nominal, ZONE RETAIL RETAIL B END_A - STORY GROUND,282.80,100.5,2.814,0.355,36.167,10.764,0.000,0.000,0.000,0.000,46.931,No
+ Zone Internal Gains Nominal, ZONE RETAIL RETAIL C  - STORY GROUND,296.33,105.3,2.814,0.355,36.167,10.764,0.000,0.000,0.000,0.000,46.931,No
+ Zone Internal Gains Nominal, ZONE RETAIL RETAIL C END_A - STORY GROUND,20.90,7.4,2.814,0.355,36.167,10.764,0.000,0.000,0.000,0.000,46.931,No
+! <People Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Number of People {},People/Floor Area {person/m2},Floor Area per person {m2/person},Fraction Radiant,Fraction Convected,Sensible Fraction Calculation,Activity level,ASHRAE 55 Warnings,Carbon Dioxide Generation Rate,Nominal Minimum Number of People,Nominal Maximum Number of People
+ People Internal Gains Nominal, ZONE RETAIL BACK_SPACE A  - STORY GROUND RETAIL BACK_SPACE PEOPLE,RETAILOCCUPANCY,ZONE RETAIL BACK_SPACE A  - STORY GROUND,47.90,1.5,1.5,3.229E-002,30.968,0.300,0.700,AutoCalculate,RETAILPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,2
+ People Internal Gains Nominal, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND RETAIL BACK_SPACE PEOPLE,RETAILOCCUPANCY,ZONE RETAIL BACK_SPACE A END_B - STORY GROUND,20.90,0.7,0.7,3.229E-002,30.968,0.300,0.700,AutoCalculate,RETAILPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,1
+ People Internal Gains Nominal, ZONE RETAIL BACK_SPACE B  - STORY GROUND RETAIL BACK_SPACE PEOPLE,RETAILOCCUPANCY,ZONE RETAIL BACK_SPACE B  - STORY GROUND,648.09,20.9,20.9,3.229E-002,30.968,0.300,0.700,AutoCalculate,RETAILPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,21
+ People Internal Gains Nominal, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND RETAIL BACK_SPACE PEOPLE,RETAILOCCUPANCY,ZONE RETAIL BACK_SPACE B END_B - STORY GROUND,282.80,9.1,9.1,3.229E-002,30.968,0.300,0.700,AutoCalculate,RETAILPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,9
+ People Internal Gains Nominal, ZONE RETAIL BACK_SPACE C  - STORY GROUND RETAIL BACK_SPACE PEOPLE,RETAILOCCUPANCY,ZONE RETAIL BACK_SPACE C  - STORY GROUND,47.90,1.5,1.5,3.229E-002,30.968,0.300,0.700,AutoCalculate,RETAILPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,2
+ People Internal Gains Nominal, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND RETAIL BACK_SPACE PEOPLE,RETAILOCCUPANCY,ZONE RETAIL BACK_SPACE C END_B - STORY GROUND,20.90,0.7,0.7,3.229E-002,30.968,0.300,0.700,AutoCalculate,RETAILPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,1
+ People Internal Gains Nominal, ZONE RETAIL ENTRY A  - STORY GROUND RETAIL ENTRY PEOPLE,RETAILOCCUPANCY,ZONE RETAIL ENTRY A  - STORY GROUND,2.16,0.8,0.8,0.355,2.814,0.300,0.700,AutoCalculate,RETAILPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,1
+ People Internal Gains Nominal, ZONE RETAIL ENTRY B  - STORY GROUND RETAIL ENTRY PEOPLE,RETAILOCCUPANCY,ZONE RETAIL ENTRY B  - STORY GROUND,29.23,10.4,10.4,0.355,2.814,0.300,0.700,AutoCalculate,RETAILPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,10
+ People Internal Gains Nominal, ZONE RETAIL ENTRY C  - STORY GROUND RETAIL ENTRY PEOPLE,RETAILOCCUPANCY,ZONE RETAIL ENTRY C  - STORY GROUND,2.16,0.8,0.8,0.355,2.814,0.300,0.700,AutoCalculate,RETAILPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,1
+ People Internal Gains Nominal, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND RETAIL POINT_OF_SALE PEOPLE,RETAILOCCUPANCY,ZONE RETAIL POINT_OF_SALE A  - STORY GROUND,27.30,9.7,9.7,0.355,2.814,0.300,0.700,AutoCalculate,RETAILPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,10
+ People Internal Gains Nominal, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND RETAIL POINT_OF_SALE PEOPLE,RETAILOCCUPANCY,ZONE RETAIL POINT_OF_SALE B  - STORY GROUND,369.32,131.2,131.2,0.355,2.814,0.300,0.700,AutoCalculate,RETAILPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,131
+ People Internal Gains Nominal, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND RETAIL POINT_OF_SALE PEOPLE,RETAILOCCUPANCY,ZONE RETAIL POINT_OF_SALE C  - STORY GROUND,27.30,9.7,9.7,0.355,2.814,0.300,0.700,AutoCalculate,RETAILPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,10
+ People Internal Gains Nominal, ZONE RETAIL RETAIL A  - STORY GROUND RETAIL RETAIL PEOPLE,RETAILOCCUPANCY,ZONE RETAIL RETAIL A  - STORY GROUND,296.33,105.3,105.3,0.355,2.814,0.300,0.700,AutoCalculate,RETAILPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,105
+ People Internal Gains Nominal, ZONE RETAIL RETAIL A END_A - STORY GROUND RETAIL RETAIL PEOPLE,RETAILOCCUPANCY,ZONE RETAIL RETAIL A END_A - STORY GROUND,20.90,7.4,7.4,0.355,2.814,0.300,0.700,AutoCalculate,RETAILPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,7
+ People Internal Gains Nominal, ZONE RETAIL RETAIL B  - STORY GROUND RETAIL RETAIL PEOPLE,RETAILOCCUPANCY,ZONE RETAIL RETAIL B  - STORY GROUND,4009.07,1424.5,1424.5,0.355,2.814,0.300,0.700,AutoCalculate,RETAILPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,1424
+ People Internal Gains Nominal, ZONE RETAIL RETAIL B END_A - STORY GROUND RETAIL RETAIL PEOPLE,RETAILOCCUPANCY,ZONE RETAIL RETAIL B END_A - STORY GROUND,282.80,100.5,100.5,0.355,2.814,0.300,0.700,AutoCalculate,RETAILPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,100
+ People Internal Gains Nominal, ZONE RETAIL RETAIL C  - STORY GROUND RETAIL RETAIL PEOPLE,RETAILOCCUPANCY,ZONE RETAIL RETAIL C  - STORY GROUND,296.33,105.3,105.3,0.355,2.814,0.300,0.700,AutoCalculate,RETAILPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,105
+ People Internal Gains Nominal, ZONE RETAIL RETAIL C END_A - STORY GROUND RETAIL RETAIL PEOPLE,RETAILOCCUPANCY,ZONE RETAIL RETAIL C END_A - STORY GROUND,20.90,7.4,7.4,0.355,2.814,0.300,0.700,AutoCalculate,RETAILPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,7
+! <Lights Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Lighting Level {W},Lights/Floor Area {W/m2},Lights per person {W/person},Fraction Return Air,Fraction Radiant,Fraction Short Wave,Fraction Convected,Fraction Replaceable,End-Use Category,Nominal Minimum Lighting Level {W},Nominal Maximum Lighting Level {W}
+ Lights Internal Gains Nominal, ZONE RETAIL BACK_SPACE A  - STORY GROUND RETAIL BACK_SPACE LIGHTS,RETAILLIGHTS,ZONE RETAIL BACK_SPACE A  - STORY GROUND,47.90,1.5,453.751,9.472,293.333,0.000,0.700,0.200,0.100,1.000,General,0.000,453.751
+ Lights Internal Gains Nominal, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND RETAIL BACK_SPACE LIGHTS,RETAILLIGHTS,ZONE RETAIL BACK_SPACE A END_B - STORY GROUND,20.90,0.7,198.000,9.472,293.333,0.000,0.700,0.200,0.100,1.000,General,0.000,198.000
+ Lights Internal Gains Nominal, ZONE RETAIL BACK_SPACE B  - STORY GROUND RETAIL BACK_SPACE LIGHTS,RETAILLIGHTS,ZONE RETAIL BACK_SPACE B  - STORY GROUND,648.09,20.9,6138.839,9.472,293.333,0.000,0.700,0.200,0.100,1.000,General,0.000,6138.839
+ Lights Internal Gains Nominal, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND RETAIL BACK_SPACE LIGHTS,RETAILLIGHTS,ZONE RETAIL BACK_SPACE B END_B - STORY GROUND,282.80,9.1,2678.761,9.472,293.333,0.000,0.700,0.200,0.100,1.000,General,0.000,2678.761
+ Lights Internal Gains Nominal, ZONE RETAIL BACK_SPACE C  - STORY GROUND RETAIL BACK_SPACE LIGHTS,RETAILLIGHTS,ZONE RETAIL BACK_SPACE C  - STORY GROUND,47.90,1.5,453.751,9.472,293.333,0.000,0.700,0.200,0.100,1.000,General,0.000,453.751
+ Lights Internal Gains Nominal, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND RETAIL BACK_SPACE LIGHTS,RETAILLIGHTS,ZONE RETAIL BACK_SPACE C END_B - STORY GROUND,20.90,0.7,198.000,9.472,293.333,0.000,0.700,0.200,0.100,1.000,General,0.000,198.000
+ Lights Internal Gains Nominal, ZONE RETAIL ENTRY A  - STORY GROUND RETAIL ENTRY LIGHTS,RETAILLIGHTS,ZONE RETAIL ENTRY A  - STORY GROUND,2.16,0.8,78.141,36.167,101.787,0.000,0.700,0.200,0.100,1.000,General,0.000,78.141
+ Lights Internal Gains Nominal, ZONE RETAIL ENTRY B  - STORY GROUND RETAIL ENTRY LIGHTS,RETAILLIGHTS,ZONE RETAIL ENTRY B  - STORY GROUND,29.23,10.4,1057.183,36.167,101.787,0.000,0.700,0.200,0.100,1.000,General,0.000,1057.183
+ Lights Internal Gains Nominal, ZONE RETAIL ENTRY C  - STORY GROUND RETAIL ENTRY LIGHTS,RETAILLIGHTS,ZONE RETAIL ENTRY C  - STORY GROUND,2.16,0.8,78.141,36.167,101.787,0.000,0.700,0.200,0.100,1.000,General,0.000,78.141
+ Lights Internal Gains Nominal, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND RETAIL POINT_OF_SALE LIGHTS,RETAILLIGHTS,ZONE RETAIL POINT_OF_SALE A  - STORY GROUND,27.30,9.7,987.287,36.167,101.787,0.000,0.700,0.200,0.100,1.000,General,0.000,987.287
+ Lights Internal Gains Nominal, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND RETAIL POINT_OF_SALE LIGHTS,RETAILLIGHTS,ZONE RETAIL POINT_OF_SALE B  - STORY GROUND,369.32,131.2,13357.095,36.167,101.787,0.000,0.700,0.200,0.100,1.000,General,0.000,13357.095
+ Lights Internal Gains Nominal, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND RETAIL POINT_OF_SALE LIGHTS,RETAILLIGHTS,ZONE RETAIL POINT_OF_SALE C  - STORY GROUND,27.30,9.7,987.287,36.167,101.787,0.000,0.700,0.200,0.100,1.000,General,0.000,987.287
+ Lights Internal Gains Nominal, ZONE RETAIL RETAIL A  - STORY GROUND RETAIL RETAIL LIGHTS,RETAILLIGHTS,ZONE RETAIL RETAIL A  - STORY GROUND,296.33,105.3,10717.263,36.167,101.787,0.000,0.700,0.200,0.100,1.000,General,0.000,10717.263
+ Lights Internal Gains Nominal, ZONE RETAIL RETAIL A END_A - STORY GROUND RETAIL RETAIL LIGHTS,RETAILLIGHTS,ZONE RETAIL RETAIL A END_A - STORY GROUND,20.90,7.4,756.000,36.167,101.787,0.000,0.700,0.200,0.100,1.000,General,0.000,756.000
+ Lights Internal Gains Nominal, ZONE RETAIL RETAIL B  - STORY GROUND RETAIL RETAIL LIGHTS,RETAILLIGHTS,ZONE RETAIL RETAIL B  - STORY GROUND,4009.07,1424.5,144994.862,36.167,101.787,0.000,0.700,0.200,0.100,1.000,General,0.000,144994.862
+ Lights Internal Gains Nominal, ZONE RETAIL RETAIL B END_A - STORY GROUND RETAIL RETAIL LIGHTS,RETAILLIGHTS,ZONE RETAIL RETAIL B END_A - STORY GROUND,282.80,100.5,10227.995,36.167,101.787,0.000,0.700,0.200,0.100,1.000,General,0.000,10227.995
+ Lights Internal Gains Nominal, ZONE RETAIL RETAIL C  - STORY GROUND RETAIL RETAIL LIGHTS,RETAILLIGHTS,ZONE RETAIL RETAIL C  - STORY GROUND,296.33,105.3,10717.263,36.167,101.787,0.000,0.700,0.200,0.100,1.000,General,0.000,10717.263
+ Lights Internal Gains Nominal, ZONE RETAIL RETAIL C END_A - STORY GROUND RETAIL RETAIL LIGHTS,RETAILLIGHTS,ZONE RETAIL RETAIL C END_A - STORY GROUND,20.90,7.4,756.000,36.167,101.787,0.000,0.700,0.200,0.100,1.000,General,0.000,756.000
+! <ElectricEquipment Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Equipment Level {W},Equipment/Floor Area {W/m2},Equipment per person {W/person},Fraction Latent,Fraction Radiant,Fraction Lost,Fraction Convected,End-Use SubCategory,Nominal Minimum Equipment Level {W},Nominal Maximum Equipment Level {W}
+ ElectricEquipment Internal Gains Nominal, ZONE RETAIL BACK_SPACE A  - STORY GROUND RETAIL BACK_SPACE ELEC EQUIP,RETAILRECEPTACLE,ZONE RETAIL BACK_SPACE A  - STORY GROUND,47.90,1.5,103.125,2.153,66.667,0.000,0.200,0.000,0.800,General,0.000,103.125
+ ElectricEquipment Internal Gains Nominal, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND RETAIL BACK_SPACE ELEC EQUIP,RETAILRECEPTACLE,ZONE RETAIL BACK_SPACE A END_B - STORY GROUND,20.90,0.7,45.000,2.153,66.667,0.000,0.200,0.000,0.800,General,0.000,45.000
+ ElectricEquipment Internal Gains Nominal, ZONE RETAIL BACK_SPACE B  - STORY GROUND RETAIL BACK_SPACE ELEC EQUIP,RETAILRECEPTACLE,ZONE RETAIL BACK_SPACE B  - STORY GROUND,648.09,20.9,1395.191,2.153,66.667,0.000,0.200,0.000,0.800,General,0.000,1395.191
+ ElectricEquipment Internal Gains Nominal, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND RETAIL BACK_SPACE ELEC EQUIP,RETAILRECEPTACLE,ZONE RETAIL BACK_SPACE B END_B - STORY GROUND,282.80,9.1,608.809,2.153,66.667,0.000,0.200,0.000,0.800,General,0.000,608.809
+ ElectricEquipment Internal Gains Nominal, ZONE RETAIL BACK_SPACE C  - STORY GROUND RETAIL BACK_SPACE ELEC EQUIP,RETAILRECEPTACLE,ZONE RETAIL BACK_SPACE C  - STORY GROUND,47.90,1.5,103.125,2.153,66.667,0.000,0.200,0.000,0.800,General,0.000,103.125
+ ElectricEquipment Internal Gains Nominal, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND RETAIL BACK_SPACE ELEC EQUIP,RETAILRECEPTACLE,ZONE RETAIL BACK_SPACE C END_B - STORY GROUND,20.90,0.7,45.000,2.153,66.667,0.000,0.200,0.000,0.800,General,0.000,45.000
+ ElectricEquipment Internal Gains Nominal, ZONE RETAIL ENTRY A  - STORY GROUND RETAIL ENTRY ELEC EQUIP,RETAILRECEPTACLE,ZONE RETAIL ENTRY A  - STORY GROUND,2.16,0.8,23.256,10.764,30.294,0.000,0.200,0.000,0.800,General,0.000,23.256
+ ElectricEquipment Internal Gains Nominal, ZONE RETAIL ENTRY B  - STORY GROUND RETAIL ENTRY ELEC EQUIP,RETAILRECEPTACLE,ZONE RETAIL ENTRY B  - STORY GROUND,29.23,10.4,314.638,10.764,30.294,0.000,0.200,0.000,0.800,General,0.000,314.638
+ ElectricEquipment Internal Gains Nominal, ZONE RETAIL ENTRY C  - STORY GROUND RETAIL ENTRY ELEC EQUIP,RETAILRECEPTACLE,ZONE RETAIL ENTRY C  - STORY GROUND,2.16,0.8,23.256,10.764,30.294,0.000,0.200,0.000,0.800,General,0.000,23.256
+ ElectricEquipment Internal Gains Nominal, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND RETAIL POINT_OF_SALE ELEC EQUIP,RETAILRECEPTACLE,ZONE RETAIL POINT_OF_SALE A  - STORY GROUND,27.30,9.7,293.835,10.764,30.294,0.000,0.200,0.000,0.800,General,0.000,293.835
+ ElectricEquipment Internal Gains Nominal, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND RETAIL POINT_OF_SALE ELEC EQUIP,RETAILRECEPTACLE,ZONE RETAIL POINT_OF_SALE B  - STORY GROUND,369.32,131.2,3975.326,10.764,30.294,0.000,0.200,0.000,0.800,General,0.000,3975.326
+ ElectricEquipment Internal Gains Nominal, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND RETAIL POINT_OF_SALE ELEC EQUIP,RETAILRECEPTACLE,ZONE RETAIL POINT_OF_SALE C  - STORY GROUND,27.30,9.7,293.835,10.764,30.294,0.000,0.200,0.000,0.800,General,0.000,293.835
+ ElectricEquipment Internal Gains Nominal, ZONE RETAIL RETAIL A  - STORY GROUND RETAIL RETAIL ELEC EQUIP,RETAILRECEPTACLE,ZONE RETAIL RETAIL A  - STORY GROUND,296.33,105.3,3189.662,10.764,30.294,0.000,0.200,0.000,0.800,General,0.000,3189.662
+ ElectricEquipment Internal Gains Nominal, ZONE RETAIL RETAIL A END_A - STORY GROUND RETAIL RETAIL ELEC EQUIP,RETAILRECEPTACLE,ZONE RETAIL RETAIL A END_A - STORY GROUND,20.90,7.4,225.000,10.764,30.294,0.000,0.200,0.000,0.800,General,0.000,225.000
+ ElectricEquipment Internal Gains Nominal, ZONE RETAIL RETAIL B  - STORY GROUND RETAIL RETAIL ELEC EQUIP,RETAILRECEPTACLE,ZONE RETAIL RETAIL B  - STORY GROUND,4009.07,1424.5,43153.233,10.764,30.294,0.000,0.200,0.000,0.800,General,0.000,43153.233
+ ElectricEquipment Internal Gains Nominal, ZONE RETAIL RETAIL B END_A - STORY GROUND RETAIL RETAIL ELEC EQUIP,RETAILRECEPTACLE,ZONE RETAIL RETAIL B END_A - STORY GROUND,282.80,100.5,3044.046,10.764,30.294,0.000,0.200,0.000,0.800,General,0.000,3044.046
+ ElectricEquipment Internal Gains Nominal, ZONE RETAIL RETAIL C  - STORY GROUND RETAIL RETAIL ELEC EQUIP,RETAILRECEPTACLE,ZONE RETAIL RETAIL C  - STORY GROUND,296.33,105.3,3189.662,10.764,30.294,0.000,0.200,0.000,0.800,General,0.000,3189.662
+ ElectricEquipment Internal Gains Nominal, ZONE RETAIL RETAIL C END_A - STORY GROUND RETAIL RETAIL ELEC EQUIP,RETAILRECEPTACLE,ZONE RETAIL RETAIL C END_A - STORY GROUND,20.90,7.4,225.000,10.764,30.294,0.000,0.200,0.000,0.800,General,0.000,225.000
+! <Shadowing/Sun Position Calculations Annual Simulations>, Calculation Method, Value {days}, Allowable Number Figures in Shadow Overlap {}, Polygon Clipping Algorithm, Sky Diffuse Modeling Algorithm
+Shadowing/Sun Position Calculations Annual Simulations,AverageOverDaysInFrequency,20,15000,SutherlandHodgman,SimpleSkyDiffuseModeling
+! <ZoneInfiltration Airflow Stats Nominal>,Name,Schedule Name,Zone Name, Zone Floor Area {m2}, # Zone Occupants,Design Volume Flow Rate {m3/s},Volume Flow Rate/Floor Area {m3/s/m2},Volume Flow Rate/Exterior Surface Area {m3/s/m2},ACH - Air Changes per Hour,Equation A - Constant Term Coefficient {},Equation B - Temperature Term Coefficient {1/C},Equation C - Velocity Term Coefficient {s/m}, Equation D - Velocity Squared Term Coefficient {s2/m2}
+ ZoneInfiltration Airflow Stats Nominal, ZONE RETAIL BACK_SPACE A  - STORY GROUND RETAIL BACK_SPACE INFILTRATION,RETAILINFILTRATION,ZONE RETAIL BACK_SPACE A  - STORY GROUND,47.90,1.5,0.125,2.608E-003,1.118E-003,1.540,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND RETAIL BACK_SPACE INFILTRATION,RETAILINFILTRATION,ZONE RETAIL BACK_SPACE A END_B - STORY GROUND,20.90,0.7,8.566E-002,4.098E-003,1.118E-003,2.420,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE RETAIL BACK_SPACE B  - STORY GROUND RETAIL BACK_SPACE INFILTRATION,RETAILINFILTRATION,ZONE RETAIL BACK_SPACE B  - STORY GROUND,648.09,20.9,0.724,1.118E-003,1.118E-003,0.660,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND RETAIL BACK_SPACE INFILTRATION,RETAILINFILTRATION,ZONE RETAIL BACK_SPACE B END_B - STORY GROUND,282.80,9.1,0.737,2.608E-003,1.118E-003,1.540,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE RETAIL BACK_SPACE C  - STORY GROUND RETAIL BACK_SPACE INFILTRATION,RETAILINFILTRATION,ZONE RETAIL BACK_SPACE C  - STORY GROUND,47.90,1.5,0.125,2.608E-003,1.118E-003,1.540,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND RETAIL BACK_SPACE INFILTRATION,RETAILINFILTRATION,ZONE RETAIL BACK_SPACE C END_B - STORY GROUND,20.90,0.7,8.566E-002,4.098E-003,1.118E-003,2.420,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE RETAIL ENTRY A  - STORY GROUND RETAIL ENTRY INFILTRATION,RETAILINFILTRATION,ZONE RETAIL ENTRY A  - STORY GROUND,2.16,0.8,5.634E-003,2.608E-003,1.118E-003,1.540,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE RETAIL ENTRY B  - STORY GROUND RETAIL ENTRY INFILTRATION,RETAILINFILTRATION,ZONE RETAIL ENTRY B  - STORY GROUND,29.23,10.4,3.267E-002,1.118E-003,1.118E-003,0.660,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE RETAIL ENTRY C  - STORY GROUND RETAIL ENTRY INFILTRATION,RETAILINFILTRATION,ZONE RETAIL ENTRY C  - STORY GROUND,2.16,0.8,5.634E-003,2.608E-003,1.118E-003,1.540,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND RETAIL POINT_OF_SALE INFILTRATION,RETAILINFILTRATION,ZONE RETAIL POINT_OF_SALE A  - STORY GROUND,27.30,9.7,7.119E-002,2.608E-003,1.118E-003,1.540,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND RETAIL POINT_OF_SALE INFILTRATION,RETAILINFILTRATION,ZONE RETAIL POINT_OF_SALE B  - STORY GROUND,369.32,131.2,0.413,1.118E-003,1.118E-003,0.660,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND RETAIL POINT_OF_SALE INFILTRATION,RETAILINFILTRATION,ZONE RETAIL POINT_OF_SALE C  - STORY GROUND,27.30,9.7,7.119E-002,2.608E-003,1.118E-003,1.540,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE RETAIL RETAIL A  - STORY GROUND RETAIL RETAIL INFILTRATION,RETAILINFILTRATION,ZONE RETAIL RETAIL A  - STORY GROUND,296.33,105.3,0.773,2.608E-003,1.118E-003,1.540,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE RETAIL RETAIL A END_A - STORY GROUND RETAIL RETAIL INFILTRATION,RETAILINFILTRATION,ZONE RETAIL RETAIL A END_A - STORY GROUND,20.90,7.4,8.566E-002,4.098E-003,1.118E-003,2.420,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE RETAIL RETAIL B  - STORY GROUND RETAIL RETAIL INFILTRATION,RETAILINFILTRATION,ZONE RETAIL RETAIL B  - STORY GROUND,4009.07,1424.5,4.481,1.118E-003,1.118E-003,0.660,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE RETAIL RETAIL B END_A - STORY GROUND RETAIL RETAIL INFILTRATION,RETAILINFILTRATION,ZONE RETAIL RETAIL B END_A - STORY GROUND,282.80,100.5,0.737,2.608E-003,1.118E-003,1.540,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE RETAIL RETAIL C  - STORY GROUND RETAIL RETAIL INFILTRATION,RETAILINFILTRATION,ZONE RETAIL RETAIL C  - STORY GROUND,296.33,105.3,0.773,2.608E-003,1.118E-003,1.540,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE RETAIL RETAIL C END_A - STORY GROUND RETAIL RETAIL INFILTRATION,RETAILINFILTRATION,ZONE RETAIL RETAIL C END_A - STORY GROUND,20.90,7.4,8.566E-002,4.098E-003,1.118E-003,2.420,1.000,0.000,0.000,0.000
+! <AirFlow Model>, Simple
+ AirFlow Model, Simple
+! <RoomAir Model>, Zone Name, Mixing/Mundt/UCSDDV/UCSDCV/UCSDUFI/UCSDUFE/User Defined
+RoomAir Model,ZONE RETAIL BACK_SPACE A  - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE RETAIL BACK_SPACE A END_B - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE RETAIL BACK_SPACE B  - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE RETAIL BACK_SPACE B END_B - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE RETAIL BACK_SPACE C  - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE RETAIL BACK_SPACE C END_B - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE RETAIL ENTRY A  - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE RETAIL ENTRY B  - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE RETAIL ENTRY C  - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE RETAIL POINT_OF_SALE A  - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE RETAIL POINT_OF_SALE B  - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE RETAIL POINT_OF_SALE C  - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE RETAIL RETAIL A  - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE RETAIL RETAIL A END_A - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE RETAIL RETAIL B  - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE RETAIL RETAIL B END_A - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE RETAIL RETAIL C  - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE RETAIL RETAIL C END_A - STORY GROUND,Mixing/Well-Stirred
+! <AirflowNetwork Model:Control>, No Multizone or Distribution/Multizone with Distribution/Multizone without Distribution/Multizone with Distribution only during Fan Operation
+AirflowNetwork Model:Control,NoMultizoneOrDistribution
+! <Zone Volume Capacitance Multiplier>, Sensible Heat Capacity Multiplier, Moisture Capacity Multiplier, Carbon Dioxide Capacity Multiplier, Generic Contaminant Capacity Multiplier
+Zone Volume Capacitance Multiplier,   1.000 ,   1.000,   1.000,   1.000
+! <Load Timesteps in Zone Design Calculation Averaging Window>, Value
+ Load Timesteps in Zone Design Calculation Averaging Window,    6
+! <Heating Sizing Factor Information>, Sizing Factor ID, Value
+ Heating Sizing Factor Information, Global,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE RETAIL BACK_SPACE A  - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE RETAIL BACK_SPACE A END_B - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE RETAIL BACK_SPACE B  - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE RETAIL BACK_SPACE B END_B - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE RETAIL BACK_SPACE C  - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE RETAIL BACK_SPACE C END_B - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE RETAIL ENTRY A  - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE RETAIL ENTRY B  - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE RETAIL ENTRY C  - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE RETAIL POINT_OF_SALE A  - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE RETAIL POINT_OF_SALE B  - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE RETAIL POINT_OF_SALE C  - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE RETAIL RETAIL A  - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE RETAIL RETAIL A END_A - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE RETAIL RETAIL B  - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE RETAIL RETAIL B END_A - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE RETAIL RETAIL C  - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE RETAIL RETAIL C END_A - STORY GROUND,   1.2500    
+! <Cooling Sizing Factor Information>, Sizing Factor ID, Value
+ Cooling Sizing Factor Information, Global,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE RETAIL BACK_SPACE A  - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE RETAIL BACK_SPACE A END_B - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE RETAIL BACK_SPACE B  - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE RETAIL BACK_SPACE B END_B - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE RETAIL BACK_SPACE C  - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE RETAIL BACK_SPACE C END_B - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE RETAIL ENTRY A  - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE RETAIL ENTRY B  - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE RETAIL ENTRY C  - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE RETAIL POINT_OF_SALE A  - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE RETAIL POINT_OF_SALE B  - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE RETAIL POINT_OF_SALE C  - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE RETAIL RETAIL A  - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE RETAIL RETAIL A END_A - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE RETAIL RETAIL B  - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE RETAIL RETAIL B END_A - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE RETAIL RETAIL C  - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE RETAIL RETAIL C END_A - STORY GROUND,   1.1500    
+! <Zone Sizing Information>, Zone Name, Load Type, Calc Des Load {W}, User Des Load {W}, Calc Des Air Flow Rate {m3/s}, User Des Air Flow Rate {m3/s}, Design Day Name, Date/Time of Peak, Temperature at Peak {C}, Humidity Ratio at Peak {kgWater/kgDryAir}, Floor Area {m2}, # Occupants, Calc Outdoor Air Flow Rate {m3/s}, Calc DOAS Heat Addition Rate {W}
+ Zone Sizing Information, ZONE RETAIL BACK_SPACE A  - STORY GROUND, Cooling, 2416.70063, 2779.20573, 0.17560, 0.20194, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 13:30:00, 27.51500, 9.30032E-003, 47.90322, 1.54688, 4.74529E-002, 0.00000
+ Zone Sizing Information, ZONE RETAIL BACK_SPACE A  - STORY GROUND, Heating, 3689.80046, 4612.25058, 0.15813, 0.19766, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 07:50:00, 2.90000, 4.65595E-003, 47.90322, 1.54688, 4.74529E-002, 0.00000
+ Zone Sizing Information, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND, Cooling, 1488.20074, 1711.43085, 0.10814, 0.12436, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 11:00:00, 25.99800, 9.30032E-003, 20.90318, 0.67500, 2.07067E-002, 0.00000
+ Zone Sizing Information, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND, Heating, 2594.83474, 3243.54343, 0.11119, 0.13898, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 16:20:00, 2.90000, 4.65595E-003, 20.90318, 0.67500, 2.07067E-002, 0.00000
+ Zone Sizing Information, ZONE RETAIL BACK_SPACE B  - STORY GROUND, Cooling, 20958.49317, 24102.26715, 1.41991, 1.63290, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 07:00:00, 20.96600, 9.30032E-003, 648.08723, 20.92786, 0.64200, 0.00000
+ Zone Sizing Information, ZONE RETAIL BACK_SPACE B  - STORY GROUND, Heating, 19968.95570, 24961.19462, 0.85591, 1.06989, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 04:20:00, 2.90000, 4.65595E-003, 648.08723, 20.92786, 0.64200, 0.00000
+ Zone Sizing Information, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND, Cooling, 14908.43972, 17144.70567, 1.08327, 1.24576, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 09:40:00, 24.46867, 9.30032E-003, 282.80115, 9.13214, 0.28014, 0.00000
+ Zone Sizing Information, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND, Heating, 21689.99055, 27112.48819, 0.92951, 1.16189, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 21:30:00, 2.90000, 4.65595E-003, 282.80115, 9.13214, 0.28014, 0.00000
+ Zone Sizing Information, ZONE RETAIL BACK_SPACE C  - STORY GROUND, Cooling, 1481.01935, 1703.17225, 0.10761, 0.12375, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 14:10:00, 27.70000, 9.30032E-003, 47.90322, 1.54688, 4.74529E-002, 0.00000
+ Zone Sizing Information, ZONE RETAIL BACK_SPACE C  - STORY GROUND, Heating, 3688.18054, 4610.22567, 0.15806, 0.19757, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 02:50:00, 2.90000, 4.65595E-003, 47.90322, 1.54688, 4.74529E-002, 0.00000
+ Zone Sizing Information, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND, Cooling, 1247.83402, 1435.00912, 9.06697E-002, 0.10427, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 10:10:00, 25.07300, 9.30032E-003, 20.90318, 0.67500, 2.07067E-002, 0.00000
+ Zone Sizing Information, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND, Heating, 2594.10900, 3242.63625, 0.11116, 0.13895, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 09:20:00, 2.90000, 4.65595E-003, 20.90318, 0.67500, 2.07067E-002, 0.00000
+ Zone Sizing Information, ZONE RETAIL ENTRY A  - STORY GROUND, Cooling, 973.66286, 1119.71229, 6.98831E-002, 8.03656E-002, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 07:00:00, 20.96600, 9.30032E-003, 2.16059, 0.76769, 8.72740E-003, 0.00000
+ Zone Sizing Information, ZONE RETAIL ENTRY A  - STORY GROUND, Heating, 135.22977, 169.03721, 5.79663E-003, 8.72740E-003, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 10:10:00, 2.90000, 4.65595E-003, 2.16059, 0.76769, 8.72740E-003, 0.00000
+ Zone Sizing Information, ZONE RETAIL ENTRY B  - STORY GROUND, Cooling, 14895.32101, 17129.61917, 1.06999, 1.23048, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 07:00:00, 20.96600, 9.30032E-003, 29.23079, 10.38619, 0.11807, 0.00000
+ Zone Sizing Information, ZONE RETAIL ENTRY B  - STORY GROUND, Heating, 84.98656, 106.23320, 3.64324E-003, 0.11807, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 20:40:00, 2.90000, 4.65595E-003, 29.23079, 10.38619, 0.11807, 0.00000
+ Zone Sizing Information, ZONE RETAIL ENTRY C  - STORY GROUND, Cooling, 979.97591, 1126.97229, 7.03425E-002, 8.08938E-002, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 07:00:00, 20.96600, 9.30032E-003, 2.16059, 0.76769, 8.72740E-003, 0.00000
+ Zone Sizing Information, ZONE RETAIL ENTRY C  - STORY GROUND, Heating, 135.07191, 168.83989, 5.78987E-003, 8.72740E-003, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 15:40:00, 2.90000, 4.65595E-003, 2.16059, 0.76769, 8.72740E-003, 0.00000
+ Zone Sizing Information, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND, Cooling, 3372.35047, 3878.20304, 0.22942, 0.26383, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 07:00:00, 20.96600, 9.30032E-003, 27.29819, 9.69950, 0.11027, 0.00000
+ Zone Sizing Information, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND, Heating, 1392.81757, 1741.02197, 5.97010E-002, 0.11027, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 18:20:00, 2.90000, 4.65595E-003, 27.29819, 9.69950, 0.11027, 0.00000
+ Zone Sizing Information, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND, Cooling, 39527.12923, 45456.19862, 2.66085, 3.05997, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 07:00:00, 20.96600, 9.30032E-003, 369.31985, 131.22550, 1.49182, 0.00000
+ Zone Sizing Information, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND, Heating, 2520.59696, 3150.74620, 0.10806, 1.49182, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 02:00:00, 2.90000, 4.65595E-003, 369.31985, 131.22550, 1.49182, 0.00000
+ Zone Sizing Information, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND, Cooling, 3405.10725, 3915.87334, 0.23179, 0.26656, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 07:00:00, 20.96600, 9.30032E-003, 27.29819, 9.69950, 0.11027, 0.00000
+ Zone Sizing Information, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND, Heating, 1391.86516, 1739.83145, 5.96602E-002, 0.11027, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 18:50:00, 2.90000, 4.65595E-003, 27.29819, 9.69950, 0.11027, 0.00000
+ Zone Sizing Information, ZONE RETAIL RETAIL A  - STORY GROUND, Cooling, 37409.25585, 43020.64423, 2.54507, 2.92683, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 07:00:00, 20.96600, 9.30032E-003, 296.32925, 105.29073, 0.30107, 0.00000
+ Zone Sizing Information, ZONE RETAIL RETAIL A  - STORY GROUND, Heating, 14422.79745, 18028.49681, 0.61821, 0.77276, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 15:10:00, 2.90000, 4.65595E-003, 296.32925, 105.29073, 0.30107, 0.00000
+ Zone Sizing Information, ZONE RETAIL RETAIL A END_A - STORY GROUND, Cooling, 2980.36727, 3427.42236, 0.21663, 0.24912, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 16:10:00, 27.15733, 9.30031E-003, 20.90318, 7.42725, 2.12376E-002, 0.00000
+ Zone Sizing Information, ZONE RETAIL RETAIL A END_A - STORY GROUND, Heating, 2005.70170, 2507.12712, 8.59587E-002, 0.10745, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 10:30:00, 2.90000, 4.65595E-003, 20.90318, 7.42725, 2.12376E-002, 0.00000
+ Zone Sizing Information, ZONE RETAIL RETAIL B  - STORY GROUND, Cooling, 392409.58668, 451271.02468, 26.22011, 30.15313, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 07:00:00, 20.96600, 9.30032E-003, 4009.06650, 1424.48821, 4.07321, 0.00000
+ Zone Sizing Information, ZONE RETAIL RETAIL B  - STORY GROUND, Heating, 21959.75639, 27449.69549, 0.94139, 4.07321, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 10:00:00, 2.90000, 4.65595E-003, 4009.06650, 1424.48821, 4.07321, 0.00000
+ Zone Sizing Information, ZONE RETAIL RETAIL B END_A - STORY GROUND, Cooling, 35771.21295, 41136.89489, 2.43388, 2.79896, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 07:00:00, 20.96600, 9.30032E-003, 282.80115, 100.48397, 0.28733, 0.00000
+ Zone Sizing Information, ZONE RETAIL RETAIL B END_A - STORY GROUND, Heating, 13798.41453, 17248.01817, 0.59144, 0.73931, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 12:40:00, 2.90000, 4.65595E-003, 282.80115, 100.48397, 0.28733, 0.00000
+ Zone Sizing Information, ZONE RETAIL RETAIL C  - STORY GROUND, Cooling, 37769.52540, 43434.95421, 2.57088, 2.95651, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 07:00:00, 20.96600, 9.30032E-003, 296.32925, 105.29073, 0.30107, 0.00000
+ Zone Sizing Information, ZONE RETAIL RETAIL C  - STORY GROUND, Heating, 14412.72009, 18015.90011, 0.61778, 0.77222, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 14:40:00, 2.90000, 4.65595E-003, 296.32925, 105.29073, 0.30107, 0.00000
+ Zone Sizing Information, ZONE RETAIL RETAIL C END_A - STORY GROUND, Cooling, 2905.28080, 3341.07292, 0.20016, 0.23018, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 07:00:00, 20.96600, 9.30032E-003, 20.90318, 7.42725, 2.12376E-002, 0.00000
+ Zone Sizing Information, ZONE RETAIL RETAIL C END_A - STORY GROUND, Heating, 2004.94073, 2506.17591, 8.59261E-002, 0.10741, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 09:10:00, 2.90000, 4.65595E-003, 20.90318, 7.42725, 2.12376E-002, 0.00000
+! <System Sizing Information>, System Name, Field Description, Value
+ System Sizing Information, ZONE RETAIL BACK_SPACE A  - STORY GROUND PSZ-AC, Calculated Cooling Design Air Flow Rate [m3/s], 0.20194
+ System Sizing Information, ZONE RETAIL BACK_SPACE A  - STORY GROUND PSZ-AC, User Cooling Design Air Flow Rate [m3/s], 0.20194
+ System Sizing Information, ZONE RETAIL BACK_SPACE A  - STORY GROUND PSZ-AC, Calculated Heating Design Air Flow Rate [m3/s], 0.19766
+ System Sizing Information, ZONE RETAIL BACK_SPACE A  - STORY GROUND PSZ-AC, User Heating Design Air Flow Rate [m3/s], 0.19766
+ System Sizing Information, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND PSZ-AC, Calculated Cooling Design Air Flow Rate [m3/s], 0.12436
+ System Sizing Information, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND PSZ-AC, User Cooling Design Air Flow Rate [m3/s], 0.12436
+ System Sizing Information, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND PSZ-AC, Calculated Heating Design Air Flow Rate [m3/s], 0.13898
+ System Sizing Information, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND PSZ-AC, User Heating Design Air Flow Rate [m3/s], 0.13898
+ System Sizing Information, ZONE RETAIL BACK_SPACE B  - STORY GROUND PSZ-AC, Calculated Cooling Design Air Flow Rate [m3/s], 1.63290
+ System Sizing Information, ZONE RETAIL BACK_SPACE B  - STORY GROUND PSZ-AC, User Cooling Design Air Flow Rate [m3/s], 1.63290
+ System Sizing Information, ZONE RETAIL BACK_SPACE B  - STORY GROUND PSZ-AC, Calculated Heating Design Air Flow Rate [m3/s], 1.06989
+ System Sizing Information, ZONE RETAIL BACK_SPACE B  - STORY GROUND PSZ-AC, User Heating Design Air Flow Rate [m3/s], 1.06989
+ System Sizing Information, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND PSZ-AC, Calculated Cooling Design Air Flow Rate [m3/s], 1.24576
+ System Sizing Information, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND PSZ-AC, User Cooling Design Air Flow Rate [m3/s], 1.24576
+ System Sizing Information, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND PSZ-AC, Calculated Heating Design Air Flow Rate [m3/s], 1.16189
+ System Sizing Information, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND PSZ-AC, User Heating Design Air Flow Rate [m3/s], 1.16189
+ System Sizing Information, ZONE RETAIL BACK_SPACE C  - STORY GROUND PSZ-AC, Calculated Cooling Design Air Flow Rate [m3/s], 0.12375
+ System Sizing Information, ZONE RETAIL BACK_SPACE C  - STORY GROUND PSZ-AC, User Cooling Design Air Flow Rate [m3/s], 0.12375
+ System Sizing Information, ZONE RETAIL BACK_SPACE C  - STORY GROUND PSZ-AC, Calculated Heating Design Air Flow Rate [m3/s], 0.19757
+ System Sizing Information, ZONE RETAIL BACK_SPACE C  - STORY GROUND PSZ-AC, User Heating Design Air Flow Rate [m3/s], 0.19757
+ System Sizing Information, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND PSZ-AC, Calculated Cooling Design Air Flow Rate [m3/s], 0.10427
+ System Sizing Information, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND PSZ-AC, User Cooling Design Air Flow Rate [m3/s], 0.10427
+ System Sizing Information, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND PSZ-AC, Calculated Heating Design Air Flow Rate [m3/s], 0.13895
+ System Sizing Information, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND PSZ-AC, User Heating Design Air Flow Rate [m3/s], 0.13895
+ System Sizing Information, ZONE RETAIL ENTRY A  - STORY GROUND PSZ-AC, Calculated Cooling Design Air Flow Rate [m3/s], 8.03656E-002
+ System Sizing Information, ZONE RETAIL ENTRY A  - STORY GROUND PSZ-AC, User Cooling Design Air Flow Rate [m3/s], 8.03656E-002
+ System Sizing Information, ZONE RETAIL ENTRY A  - STORY GROUND PSZ-AC, Calculated Heating Design Air Flow Rate [m3/s], 8.72740E-003
+ System Sizing Information, ZONE RETAIL ENTRY A  - STORY GROUND PSZ-AC, User Heating Design Air Flow Rate [m3/s], 8.72740E-003
+ System Sizing Information, ZONE RETAIL ENTRY B  - STORY GROUND PSZ-AC, Calculated Cooling Design Air Flow Rate [m3/s], 1.23048
+ System Sizing Information, ZONE RETAIL ENTRY B  - STORY GROUND PSZ-AC, User Cooling Design Air Flow Rate [m3/s], 1.23048
+ System Sizing Information, ZONE RETAIL ENTRY B  - STORY GROUND PSZ-AC, Calculated Heating Design Air Flow Rate [m3/s], 0.11807
+ System Sizing Information, ZONE RETAIL ENTRY B  - STORY GROUND PSZ-AC, User Heating Design Air Flow Rate [m3/s], 0.11807
+ System Sizing Information, ZONE RETAIL ENTRY C  - STORY GROUND PSZ-AC, Calculated Cooling Design Air Flow Rate [m3/s], 8.08938E-002
+ System Sizing Information, ZONE RETAIL ENTRY C  - STORY GROUND PSZ-AC, User Cooling Design Air Flow Rate [m3/s], 8.08938E-002
+ System Sizing Information, ZONE RETAIL ENTRY C  - STORY GROUND PSZ-AC, Calculated Heating Design Air Flow Rate [m3/s], 8.72740E-003
+ System Sizing Information, ZONE RETAIL ENTRY C  - STORY GROUND PSZ-AC, User Heating Design Air Flow Rate [m3/s], 8.72740E-003
+ System Sizing Information, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND PSZ-AC, Calculated Cooling Design Air Flow Rate [m3/s], 0.26383
+ System Sizing Information, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND PSZ-AC, User Cooling Design Air Flow Rate [m3/s], 0.26383
+ System Sizing Information, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND PSZ-AC, Calculated Heating Design Air Flow Rate [m3/s], 0.11027
+ System Sizing Information, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND PSZ-AC, User Heating Design Air Flow Rate [m3/s], 0.11027
+ System Sizing Information, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND PSZ-AC, Calculated Cooling Design Air Flow Rate [m3/s], 3.05997
+ System Sizing Information, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND PSZ-AC, User Cooling Design Air Flow Rate [m3/s], 3.05997
+ System Sizing Information, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND PSZ-AC, Calculated Heating Design Air Flow Rate [m3/s], 1.49182
+ System Sizing Information, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND PSZ-AC, User Heating Design Air Flow Rate [m3/s], 1.49182
+ System Sizing Information, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND PSZ-AC, Calculated Cooling Design Air Flow Rate [m3/s], 0.26656
+ System Sizing Information, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND PSZ-AC, User Cooling Design Air Flow Rate [m3/s], 0.26656
+ System Sizing Information, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND PSZ-AC, Calculated Heating Design Air Flow Rate [m3/s], 0.11027
+ System Sizing Information, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND PSZ-AC, User Heating Design Air Flow Rate [m3/s], 0.11027
+ System Sizing Information, ZONE RETAIL RETAIL A  - STORY GROUND PSZ-AC, Calculated Cooling Design Air Flow Rate [m3/s], 2.92683
+ System Sizing Information, ZONE RETAIL RETAIL A  - STORY GROUND PSZ-AC, User Cooling Design Air Flow Rate [m3/s], 2.92683
+ System Sizing Information, ZONE RETAIL RETAIL A  - STORY GROUND PSZ-AC, Calculated Heating Design Air Flow Rate [m3/s], 0.77276
+ System Sizing Information, ZONE RETAIL RETAIL A  - STORY GROUND PSZ-AC, User Heating Design Air Flow Rate [m3/s], 0.77276
+ System Sizing Information, ZONE RETAIL RETAIL A END_A - STORY GROUND PSZ-AC, Calculated Cooling Design Air Flow Rate [m3/s], 0.24912
+ System Sizing Information, ZONE RETAIL RETAIL A END_A - STORY GROUND PSZ-AC, User Cooling Design Air Flow Rate [m3/s], 0.24912
+ System Sizing Information, ZONE RETAIL RETAIL A END_A - STORY GROUND PSZ-AC, Calculated Heating Design Air Flow Rate [m3/s], 0.10745
+ System Sizing Information, ZONE RETAIL RETAIL A END_A - STORY GROUND PSZ-AC, User Heating Design Air Flow Rate [m3/s], 0.10745
+ System Sizing Information, ZONE RETAIL RETAIL B  - STORY GROUND PSZ-AC, Calculated Cooling Design Air Flow Rate [m3/s], 30.15313
+ System Sizing Information, ZONE RETAIL RETAIL B  - STORY GROUND PSZ-AC, User Cooling Design Air Flow Rate [m3/s], 30.15313
+ System Sizing Information, ZONE RETAIL RETAIL B  - STORY GROUND PSZ-AC, Calculated Heating Design Air Flow Rate [m3/s], 4.07321
+ System Sizing Information, ZONE RETAIL RETAIL B  - STORY GROUND PSZ-AC, User Heating Design Air Flow Rate [m3/s], 4.07321
+ System Sizing Information, ZONE RETAIL RETAIL B END_A - STORY GROUND PSZ-AC, Calculated Cooling Design Air Flow Rate [m3/s], 2.89394
+ System Sizing Information, ZONE RETAIL RETAIL B END_A - STORY GROUND PSZ-AC, User Cooling Design Air Flow Rate [m3/s], 2.89394
+ System Sizing Information, ZONE RETAIL RETAIL B END_A - STORY GROUND PSZ-AC, Calculated Heating Design Air Flow Rate [m3/s], 0.73931
+ System Sizing Information, ZONE RETAIL RETAIL B END_A - STORY GROUND PSZ-AC, User Heating Design Air Flow Rate [m3/s], 0.73931
+ System Sizing Information, ZONE RETAIL RETAIL C  - STORY GROUND PSZ-AC, Calculated Cooling Design Air Flow Rate [m3/s], 2.95651
+ System Sizing Information, ZONE RETAIL RETAIL C  - STORY GROUND PSZ-AC, User Cooling Design Air Flow Rate [m3/s], 2.95651
+ System Sizing Information, ZONE RETAIL RETAIL C  - STORY GROUND PSZ-AC, Calculated Heating Design Air Flow Rate [m3/s], 0.77222
+ System Sizing Information, ZONE RETAIL RETAIL C  - STORY GROUND PSZ-AC, User Heating Design Air Flow Rate [m3/s], 0.77222
+ System Sizing Information, ZONE RETAIL RETAIL C END_A - STORY GROUND PSZ-AC, Calculated Cooling Design Air Flow Rate [m3/s], 0.23157
+ System Sizing Information, ZONE RETAIL RETAIL C END_A - STORY GROUND PSZ-AC, User Cooling Design Air Flow Rate [m3/s], 0.23157
+ System Sizing Information, ZONE RETAIL RETAIL C END_A - STORY GROUND PSZ-AC, Calculated Heating Design Air Flow Rate [m3/s], 0.10741
+ System Sizing Information, ZONE RETAIL RETAIL C END_A - STORY GROUND PSZ-AC, User Heating Design Air Flow Rate [m3/s], 0.10741
+! <Component Sizing Information>, Component Type, Component Name, Input Field Description, Value
+ Component Sizing Information, AirTerminal:SingleDuct:Uncontrolled, ZONE RETAIL BACK_SPACE A  - STORY GROUND PSZ-AC DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 0.20194
+ Component Sizing Information, AirTerminal:SingleDuct:Uncontrolled, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND PSZ-AC DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 0.13898
+ Component Sizing Information, AirTerminal:SingleDuct:Uncontrolled, ZONE RETAIL BACK_SPACE B  - STORY GROUND PSZ-AC DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 1.63290
+ Component Sizing Information, AirTerminal:SingleDuct:Uncontrolled, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND PSZ-AC DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 1.24576
+ Component Sizing Information, AirTerminal:SingleDuct:Uncontrolled, ZONE RETAIL BACK_SPACE C  - STORY GROUND PSZ-AC DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 0.19757
+ Component Sizing Information, AirTerminal:SingleDuct:Uncontrolled, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND PSZ-AC DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 0.13895
+ Component Sizing Information, AirTerminal:SingleDuct:Uncontrolled, ZONE RETAIL ENTRY A  - STORY GROUND PSZ-AC DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 8.03656E-002
+ Component Sizing Information, AirTerminal:SingleDuct:Uncontrolled, ZONE RETAIL ENTRY B  - STORY GROUND PSZ-AC DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 1.23048
+ Component Sizing Information, AirTerminal:SingleDuct:Uncontrolled, ZONE RETAIL ENTRY C  - STORY GROUND PSZ-AC DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 8.08938E-002
+ Component Sizing Information, AirTerminal:SingleDuct:Uncontrolled, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND PSZ-AC DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 0.26383
+ Component Sizing Information, AirTerminal:SingleDuct:Uncontrolled, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND PSZ-AC DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 3.05997
+ Component Sizing Information, AirTerminal:SingleDuct:Uncontrolled, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND PSZ-AC DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 0.26656
+ Component Sizing Information, AirTerminal:SingleDuct:Uncontrolled, ZONE RETAIL RETAIL A  - STORY GROUND PSZ-AC DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 2.92683
+ Component Sizing Information, AirTerminal:SingleDuct:Uncontrolled, ZONE RETAIL RETAIL A END_A - STORY GROUND PSZ-AC DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 0.24912
+ Component Sizing Information, AirTerminal:SingleDuct:Uncontrolled, ZONE RETAIL RETAIL B  - STORY GROUND PSZ-AC DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 30.15313
+ Component Sizing Information, AirTerminal:SingleDuct:Uncontrolled, ZONE RETAIL RETAIL B END_A - STORY GROUND PSZ-AC DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 2.79896
+ Component Sizing Information, AirTerminal:SingleDuct:Uncontrolled, ZONE RETAIL RETAIL C  - STORY GROUND PSZ-AC DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 2.95651
+ Component Sizing Information, AirTerminal:SingleDuct:Uncontrolled, ZONE RETAIL RETAIL C END_A - STORY GROUND PSZ-AC DIFFUSER, Design Size Maximum Air Flow Rate [m3/s], 0.23018
+ Component Sizing Information, AirLoopHVAC, ZONE RETAIL BACK_SPACE A  - STORY GROUND PSZ-AC, Design Supply Air Flow Rate [m3/s], 0.20194
+ Component Sizing Information, AirLoopHVAC, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND PSZ-AC, Design Supply Air Flow Rate [m3/s], 0.13898
+ Component Sizing Information, AirLoopHVAC, ZONE RETAIL BACK_SPACE B  - STORY GROUND PSZ-AC, Design Supply Air Flow Rate [m3/s], 1.63290
+ Component Sizing Information, AirLoopHVAC, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND PSZ-AC, Design Supply Air Flow Rate [m3/s], 1.24576
+ Component Sizing Information, AirLoopHVAC, ZONE RETAIL BACK_SPACE C  - STORY GROUND PSZ-AC, Design Supply Air Flow Rate [m3/s], 0.19757
+ Component Sizing Information, AirLoopHVAC, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND PSZ-AC, Design Supply Air Flow Rate [m3/s], 0.13895
+ Component Sizing Information, AirLoopHVAC, ZONE RETAIL ENTRY A  - STORY GROUND PSZ-AC, Design Supply Air Flow Rate [m3/s], 8.03656E-002
+ Component Sizing Information, AirLoopHVAC, ZONE RETAIL ENTRY B  - STORY GROUND PSZ-AC, Design Supply Air Flow Rate [m3/s], 1.23048
+ Component Sizing Information, AirLoopHVAC, ZONE RETAIL ENTRY C  - STORY GROUND PSZ-AC, Design Supply Air Flow Rate [m3/s], 8.08938E-002
+ Component Sizing Information, AirLoopHVAC, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND PSZ-AC, Design Supply Air Flow Rate [m3/s], 0.26383
+ Component Sizing Information, AirLoopHVAC, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND PSZ-AC, Design Supply Air Flow Rate [m3/s], 3.05997
+ Component Sizing Information, AirLoopHVAC, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND PSZ-AC, Design Supply Air Flow Rate [m3/s], 0.26656
+ Component Sizing Information, AirLoopHVAC, ZONE RETAIL RETAIL A  - STORY GROUND PSZ-AC, Design Supply Air Flow Rate [m3/s], 2.92683
+ Component Sizing Information, AirLoopHVAC, ZONE RETAIL RETAIL A END_A - STORY GROUND PSZ-AC, Design Supply Air Flow Rate [m3/s], 0.24912
+ Component Sizing Information, AirLoopHVAC, ZONE RETAIL RETAIL B  - STORY GROUND PSZ-AC, Design Supply Air Flow Rate [m3/s], 30.15313
+ Component Sizing Information, AirLoopHVAC, ZONE RETAIL RETAIL B END_A - STORY GROUND PSZ-AC, Design Supply Air Flow Rate [m3/s], 2.89394
+ Component Sizing Information, AirLoopHVAC, ZONE RETAIL RETAIL C  - STORY GROUND PSZ-AC, Design Supply Air Flow Rate [m3/s], 2.95651
+ Component Sizing Information, AirLoopHVAC, ZONE RETAIL RETAIL C END_A - STORY GROUND PSZ-AC, Design Supply Air Flow Rate [m3/s], 0.23157
+!<Controller:MechanicalVentilation>,Name,Availability Schedule Name,Demand Controlled Ventilation {Yes/No},System Outdoor Air Method,Zone Maximum Outdoor Air Fraction,Number of Zones,Zone Name,DSOA Name,DSZAD Name
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 4,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,ZONE RETAIL BACK_SPACE A  - STORY GROUND,RETAIL BACK_SPACE VENTILATION,ZONE RETAIL BACK_SPACE A  - STORY GROUND DESIGN SPEC ZONE AIR DIST
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 7,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,ZONE RETAIL BACK_SPACE A END_B - STORY GROUND,RETAIL BACK_SPACE VENTILATION,ZONE RETAIL BACK_SPACE A END_B - STORY GROUND DESIGN SPEC ZONE AIR DIST
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 17,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,ZONE RETAIL BACK_SPACE B  - STORY GROUND,RETAIL BACK_SPACE VENTILATION,ZONE RETAIL BACK_SPACE B  - STORY GROUND DESIGN SPEC ZONE AIR DIST
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 10,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,ZONE RETAIL BACK_SPACE B END_B - STORY GROUND,RETAIL BACK_SPACE VENTILATION,ZONE RETAIL BACK_SPACE B END_B - STORY GROUND DESIGN SPEC ZONE AIR DIST
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 5,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,ZONE RETAIL BACK_SPACE C  - STORY GROUND,RETAIL BACK_SPACE VENTILATION,ZONE RETAIL BACK_SPACE C  - STORY GROUND DESIGN SPEC ZONE AIR DIST
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 14,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,ZONE RETAIL BACK_SPACE C END_B - STORY GROUND,RETAIL BACK_SPACE VENTILATION,ZONE RETAIL BACK_SPACE C END_B - STORY GROUND DESIGN SPEC ZONE AIR DIST
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 13,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,ZONE RETAIL ENTRY A  - STORY GROUND,RETAIL ENTRY VENTILATION,ZONE RETAIL ENTRY A  - STORY GROUND DESIGN SPEC ZONE AIR DIST
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 2,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,ZONE RETAIL ENTRY B  - STORY GROUND,RETAIL ENTRY VENTILATION,ZONE RETAIL ENTRY B  - STORY GROUND DESIGN SPEC ZONE AIR DIST
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 18,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,ZONE RETAIL ENTRY C  - STORY GROUND,RETAIL ENTRY VENTILATION,ZONE RETAIL ENTRY C  - STORY GROUND DESIGN SPEC ZONE AIR DIST
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 1,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,ZONE RETAIL POINT_OF_SALE A  - STORY GROUND,RETAIL POINT_OF_SALE VENTILATION,ZONE RETAIL POINT_OF_SALE A  - STORY GROUND DESIGN SPEC ZONE AIR DIST
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 15,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,ZONE RETAIL POINT_OF_SALE B  - STORY GROUND,RETAIL POINT_OF_SALE VENTILATION,ZONE RETAIL POINT_OF_SALE B  - STORY GROUND DESIGN SPEC ZONE AIR DIST
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 8,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,ZONE RETAIL POINT_OF_SALE C  - STORY GROUND,RETAIL POINT_OF_SALE VENTILATION,ZONE RETAIL POINT_OF_SALE C  - STORY GROUND DESIGN SPEC ZONE AIR DIST
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 11,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,ZONE RETAIL RETAIL A  - STORY GROUND,RETAIL RETAIL VENTILATION,ZONE RETAIL RETAIL A  - STORY GROUND DESIGN SPEC ZONE AIR DIST
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 6,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,ZONE RETAIL RETAIL A END_A - STORY GROUND,RETAIL RETAIL VENTILATION,ZONE RETAIL RETAIL A END_A - STORY GROUND DESIGN SPEC ZONE AIR DIST
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 9,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,ZONE RETAIL RETAIL B  - STORY GROUND,RETAIL RETAIL VENTILATION,ZONE RETAIL RETAIL B  - STORY GROUND DESIGN SPEC ZONE AIR DIST
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 12,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,ZONE RETAIL RETAIL B END_A - STORY GROUND,RETAIL RETAIL VENTILATION,ZONE RETAIL RETAIL B END_A - STORY GROUND DESIGN SPEC ZONE AIR DIST
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 16,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,ZONE RETAIL RETAIL C  - STORY GROUND,RETAIL RETAIL VENTILATION,ZONE RETAIL RETAIL C  - STORY GROUND DESIGN SPEC ZONE AIR DIST
+ Controller:MechanicalVentilation,CONTROLLER MECHANICAL VENTILATION 3,ALWAYS ON DISCRETE,No,ZoneSum,1.00,1,ZONE RETAIL RETAIL C END_A - STORY GROUND,RETAIL RETAIL VENTILATION,ZONE RETAIL RETAIL C END_A - STORY GROUND DESIGN SPEC ZONE AIR DIST
+ Component Sizing Information, Controller:OutdoorAir, ZONE RETAIL BACK_SPACE A  - STORY GROUND PSZ-AC OA SYS CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 0.20194
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Rated Air Flow Rate [m3/s], 0.20194
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Total Cooling Capacity [W], 3447.84109
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Sensible Heat Ratio, 0.78746
+! <DX Cooling Coil Standard Rating Information>, Component Type, Component Name, Standard Rating (Net) Cooling Capacity {W}, Standard Rated Net COP {W/W}, EER {Btu/W-h}, SEER {Btu/W-h}, IEER {Btu/W-h}
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, 3291.3, 2.52, 8.60, 9.89, 9.45
+ Component Sizing Information, Coil:Heating:Fuel, ZONE RETAIL BACK_SPACE A  - STORY GROUND PSZ-AC GAS HTG COIL, Design Size Nominal Capacity [W], 5682.36585
+ Component Sizing Information, Coil:Heating:Electric, ZONE RETAIL BACK_SPACE A  - STORY GROUND PSZ-AC ELECTRIC BACKUP HTG COIL, Design Size Nominal Capacity [W], 5682.36585
+ Component Sizing Information, Fan:ConstantVolume, ZONE RETAIL BACK_SPACE A  - STORY GROUND PSZ-AC FAN, Design Size Maximum Flow Rate [m3/s], 0.20194
+ Component Sizing Information, Controller:OutdoorAir, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND PSZ-AC OA SYS CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 0.13898
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Rated Air Flow Rate [m3/s], 0.13898
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Total Cooling Capacity [W], 2300.68598
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Sensible Heat Ratio, 0.79866
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, 2193.0, 2.51, 8.56, 9.83, 9.37
+ Component Sizing Information, Coil:Heating:Fuel, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND PSZ-AC GAS HTG COIL, Design Size Nominal Capacity [W], 3649.54225
+ Component Sizing Information, Coil:Heating:Electric, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND PSZ-AC ELECTRIC BACKUP HTG COIL, Design Size Nominal Capacity [W], 3649.54225
+ Component Sizing Information, Fan:ConstantVolume, ZONE RETAIL BACK_SPACE A END_B - STORY GROUND PSZ-AC FAN, Design Size Maximum Flow Rate [m3/s], 0.13898
+ Component Sizing Information, Controller:OutdoorAir, ZONE RETAIL BACK_SPACE B  - STORY GROUND PSZ-AC OA SYS CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 1.63290
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Rated Air Flow Rate [m3/s], 1.63290
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Total Cooling Capacity [W], 27030.32937
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Sensible Heat Ratio, 0.79866
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, 25764.9, 2.51, 8.56, 9.83, 9.37
+ Component Sizing Information, Coil:Heating:Fuel, ZONE RETAIL BACK_SPACE B  - STORY GROUND PSZ-AC GAS HTG COIL, Design Size Nominal Capacity [W], 51598.60882
+ Component Sizing Information, Coil:Heating:Electric, ZONE RETAIL BACK_SPACE B  - STORY GROUND PSZ-AC ELECTRIC BACKUP HTG COIL, Design Size Nominal Capacity [W], 51598.60882
+ Component Sizing Information, Fan:ConstantVolume, ZONE RETAIL BACK_SPACE B  - STORY GROUND PSZ-AC FAN, Design Size Maximum Flow Rate [m3/s], 1.63290
+ Component Sizing Information, Controller:OutdoorAir, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND PSZ-AC OA SYS CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 1.24576
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Rated Air Flow Rate [m3/s], 1.24576
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Total Cooling Capacity [W], 20621.76878
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Sensible Heat Ratio, 0.79866
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, 19656.3, 2.51, 8.56, 9.83, 9.37
+ Component Sizing Information, Coil:Heating:Fuel, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND PSZ-AC GAS HTG COIL, Design Size Nominal Capacity [W], 34778.82604
+ Component Sizing Information, Coil:Heating:Electric, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND PSZ-AC ELECTRIC BACKUP HTG COIL, Design Size Nominal Capacity [W], 34778.82604
+ Component Sizing Information, Fan:ConstantVolume, ZONE RETAIL BACK_SPACE B END_B - STORY GROUND PSZ-AC FAN, Design Size Maximum Flow Rate [m3/s], 1.24576
+ Component Sizing Information, Controller:OutdoorAir, ZONE RETAIL BACK_SPACE C  - STORY GROUND PSZ-AC OA SYS CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 0.19757
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Rated Air Flow Rate [m3/s], 0.19757
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Total Cooling Capacity [W], 3572.80865
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Sensible Heat Ratio, 0.76755
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, 3419.7, 2.55, 8.68, 9.99, 9.60
+ Component Sizing Information, Coil:Heating:Fuel, ZONE RETAIL BACK_SPACE C  - STORY GROUND PSZ-AC GAS HTG COIL, Design Size Nominal Capacity [W], 5581.89741
+ Component Sizing Information, Coil:Heating:Electric, ZONE RETAIL BACK_SPACE C  - STORY GROUND PSZ-AC ELECTRIC BACKUP HTG COIL, Design Size Nominal Capacity [W], 5581.89741
+ Component Sizing Information, Fan:ConstantVolume, ZONE RETAIL BACK_SPACE C  - STORY GROUND PSZ-AC FAN, Design Size Maximum Flow Rate [m3/s], 0.19757
+ Component Sizing Information, Controller:OutdoorAir, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND PSZ-AC OA SYS CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 0.13895
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Rated Air Flow Rate [m3/s], 0.13895
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Total Cooling Capacity [W], 2300.04258
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Sensible Heat Ratio, 0.79866
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, 2192.4, 2.51, 8.56, 9.83, 9.37
+ Component Sizing Information, Coil:Heating:Fuel, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND PSZ-AC GAS HTG COIL, Design Size Nominal Capacity [W], 3648.64830
+ Component Sizing Information, Coil:Heating:Electric, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND PSZ-AC ELECTRIC BACKUP HTG COIL, Design Size Nominal Capacity [W], 3648.64830
+ Component Sizing Information, Fan:ConstantVolume, ZONE RETAIL BACK_SPACE C END_B - STORY GROUND PSZ-AC FAN, Design Size Maximum Flow Rate [m3/s], 0.13895
+ Component Sizing Information, Controller:OutdoorAir, ZONE RETAIL ENTRY A  - STORY GROUND PSZ-AC OA SYS CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 8.03656E-002
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL ENTRY A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Rated Air Flow Rate [m3/s], 8.03656E-002
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL ENTRY A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Total Cooling Capacity [W], 1330.33557
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL ENTRY A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Sensible Heat Ratio, 0.79866
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL ENTRY A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, 1268.1, 2.51, 8.56, 9.83, 9.37
+ Component Sizing Information, Coil:Heating:Fuel, ZONE RETAIL ENTRY A  - STORY GROUND PSZ-AC GAS HTG COIL, Design Size Nominal Capacity [W], 2038.64518
+ Component Sizing Information, Coil:Heating:Electric, ZONE RETAIL ENTRY A  - STORY GROUND PSZ-AC ELECTRIC BACKUP HTG COIL, Design Size Nominal Capacity [W], 2038.64518
+ Component Sizing Information, Fan:ConstantVolume, ZONE RETAIL ENTRY A  - STORY GROUND PSZ-AC FAN, Design Size Maximum Flow Rate [m3/s], 8.03656E-002
+ Component Sizing Information, Controller:OutdoorAir, ZONE RETAIL ENTRY B  - STORY GROUND PSZ-AC OA SYS CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 1.23048
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL ENTRY B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Rated Air Flow Rate [m3/s], 1.23048
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL ENTRY B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Total Cooling Capacity [W], 20368.89497
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL ENTRY B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Sensible Heat Ratio, 0.79866
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL ENTRY B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, 19415.3, 2.51, 8.56, 9.83, 9.37
+ Component Sizing Information, Coil:Heating:Fuel, ZONE RETAIL ENTRY B  - STORY GROUND PSZ-AC GAS HTG COIL, Design Size Nominal Capacity [W], 30871.35784
+ Component Sizing Information, Coil:Heating:Electric, ZONE RETAIL ENTRY B  - STORY GROUND PSZ-AC ELECTRIC BACKUP HTG COIL, Design Size Nominal Capacity [W], 30871.35784
+ Component Sizing Information, Fan:ConstantVolume, ZONE RETAIL ENTRY B  - STORY GROUND PSZ-AC FAN, Design Size Maximum Flow Rate [m3/s], 1.23048
+ Component Sizing Information, Controller:OutdoorAir, ZONE RETAIL ENTRY C  - STORY GROUND PSZ-AC OA SYS CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 8.08938E-002
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL ENTRY C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Rated Air Flow Rate [m3/s], 8.08938E-002
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL ENTRY C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Total Cooling Capacity [W], 1339.08008
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL ENTRY C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Sensible Heat Ratio, 0.79866
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL ENTRY C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, 1276.4, 2.51, 8.56, 9.83, 9.37
+ Component Sizing Information, Coil:Heating:Fuel, ZONE RETAIL ENTRY C  - STORY GROUND PSZ-AC GAS HTG COIL, Design Size Nominal Capacity [W], 2050.78932
+ Component Sizing Information, Coil:Heating:Electric, ZONE RETAIL ENTRY C  - STORY GROUND PSZ-AC ELECTRIC BACKUP HTG COIL, Design Size Nominal Capacity [W], 2050.78932
+ Component Sizing Information, Fan:ConstantVolume, ZONE RETAIL ENTRY C  - STORY GROUND PSZ-AC FAN, Design Size Maximum Flow Rate [m3/s], 8.08938E-002
+ Component Sizing Information, Controller:OutdoorAir, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND PSZ-AC OA SYS CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 0.26383
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Rated Air Flow Rate [m3/s], 0.26383
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Total Cooling Capacity [W], 5082.85197
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Sensible Heat Ratio, 0.74690
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, 4878.3, 2.57, 8.77, 10.10, 9.75
+ Component Sizing Information, Coil:Heating:Fuel, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND PSZ-AC GAS HTG COIL, Design Size Nominal Capacity [W], 8480.01477
+ Component Sizing Information, Coil:Heating:Electric, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND PSZ-AC ELECTRIC BACKUP HTG COIL, Design Size Nominal Capacity [W], 8480.01477
+ Component Sizing Information, Fan:ConstantVolume, ZONE RETAIL POINT_OF_SALE A  - STORY GROUND PSZ-AC FAN, Design Size Maximum Flow Rate [m3/s], 0.26383
+ Component Sizing Information, Controller:OutdoorAir, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND PSZ-AC OA SYS CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 3.05997
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Rated Air Flow Rate [m3/s], 3.05997
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Total Cooling Capacity [W], 50653.44289
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Sensible Heat Ratio, 0.79866
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, 48282.0, 2.51, 8.56, 9.83, 9.37
+ Component Sizing Information, Coil:Heating:Fuel, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND PSZ-AC GAS HTG COIL, Design Size Nominal Capacity [W], 103009.39323
+ Component Sizing Information, Coil:Heating:Electric, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND PSZ-AC ELECTRIC BACKUP HTG COIL, Design Size Nominal Capacity [W], 103009.39323
+ Component Sizing Information, Fan:ConstantVolume, ZONE RETAIL POINT_OF_SALE B  - STORY GROUND PSZ-AC FAN, Design Size Maximum Flow Rate [m3/s], 3.05997
+ Component Sizing Information, Controller:OutdoorAir, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND PSZ-AC OA SYS CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 0.26656
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Rated Air Flow Rate [m3/s], 0.26656
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Total Cooling Capacity [W], 4412.55943
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Sensible Heat Ratio, 0.79866
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, 4206.0, 2.51, 8.56, 9.83, 9.37
+ Component Sizing Information, Coil:Heating:Fuel, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND PSZ-AC GAS HTG COIL, Design Size Nominal Capacity [W], 8542.73285
+ Component Sizing Information, Coil:Heating:Electric, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND PSZ-AC ELECTRIC BACKUP HTG COIL, Design Size Nominal Capacity [W], 8542.73285
+ Component Sizing Information, Fan:ConstantVolume, ZONE RETAIL POINT_OF_SALE C  - STORY GROUND PSZ-AC FAN, Design Size Maximum Flow Rate [m3/s], 0.26656
+ Component Sizing Information, Controller:OutdoorAir, ZONE RETAIL RETAIL A  - STORY GROUND PSZ-AC OA SYS CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 2.92683
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Rated Air Flow Rate [m3/s], 2.92683
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Total Cooling Capacity [W], 49745.87081
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Sensible Heat Ratio, 0.78907
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, 47477.5, 2.52, 8.60, 9.88, 9.44
+ Component Sizing Information, Coil:Heating:Fuel, ZONE RETAIL RETAIL A  - STORY GROUND PSZ-AC GAS HTG COIL, Design Size Nominal Capacity [W], 73880.57745
+ Component Sizing Information, Coil:Heating:Electric, ZONE RETAIL RETAIL A  - STORY GROUND PSZ-AC ELECTRIC BACKUP HTG COIL, Design Size Nominal Capacity [W], 73880.57745
+ Component Sizing Information, Fan:ConstantVolume, ZONE RETAIL RETAIL A  - STORY GROUND PSZ-AC FAN, Design Size Maximum Flow Rate [m3/s], 2.92683
+ Component Sizing Information, Controller:OutdoorAir, ZONE RETAIL RETAIL A END_A - STORY GROUND PSZ-AC OA SYS CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 0.24912
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL A END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Rated Air Flow Rate [m3/s], 0.24912
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL A END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Total Cooling Capacity [W], 4304.46926
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL A END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Sensible Heat Ratio, 0.78323
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL A END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, 4111.4, 2.53, 8.62, 9.91, 9.48
+ Component Sizing Information, Coil:Heating:Fuel, ZONE RETAIL RETAIL A END_A - STORY GROUND PSZ-AC GAS HTG COIL, Design Size Nominal Capacity [W], 6193.15011
+ Component Sizing Information, Coil:Heating:Electric, ZONE RETAIL RETAIL A END_A - STORY GROUND PSZ-AC ELECTRIC BACKUP HTG COIL, Design Size Nominal Capacity [W], 6193.15011
+ Component Sizing Information, Fan:ConstantVolume, ZONE RETAIL RETAIL A END_A - STORY GROUND PSZ-AC FAN, Design Size Maximum Flow Rate [m3/s], 0.24912
+ Component Sizing Information, Controller:OutdoorAir, ZONE RETAIL RETAIL B  - STORY GROUND PSZ-AC OA SYS CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 30.15313
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Rated Air Flow Rate [m3/s], 30.15313
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Total Cooling Capacity [W], 540643.23674
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Sensible Heat Ratio, 0.77043
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, 517271.0, 2.54, 8.67, 9.98, 9.58
+ Component Sizing Information, Coil:Heating:Fuel, ZONE RETAIL RETAIL B  - STORY GROUND PSZ-AC GAS HTG COIL, Design Size Nominal Capacity [W], 782332.76278
+ Component Sizing Information, Coil:Heating:Electric, ZONE RETAIL RETAIL B  - STORY GROUND PSZ-AC ELECTRIC BACKUP HTG COIL, Design Size Nominal Capacity [W], 782332.76278
+ Component Sizing Information, Fan:ConstantVolume, ZONE RETAIL RETAIL B  - STORY GROUND PSZ-AC FAN, Design Size Maximum Flow Rate [m3/s], 30.15313
+ Component Sizing Information, Controller:OutdoorAir, ZONE RETAIL RETAIL B END_A - STORY GROUND PSZ-AC OA SYS CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 2.89394
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL B END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Rated Air Flow Rate [m3/s], 2.89394
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL B END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Total Cooling Capacity [W], 50555.49977
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL B END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Sensible Heat Ratio, 0.77938
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL B END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, 48312.5, 2.53, 8.64, 9.93, 9.51
+ Component Sizing Information, Coil:Heating:Fuel, ZONE RETAIL RETAIL B END_A - STORY GROUND PSZ-AC GAS HTG COIL, Design Size Nominal Capacity [W], 72823.53079
+ Component Sizing Information, Coil:Heating:Electric, ZONE RETAIL RETAIL B END_A - STORY GROUND PSZ-AC ELECTRIC BACKUP HTG COIL, Design Size Nominal Capacity [W], 72823.53079
+ Component Sizing Information, Fan:ConstantVolume, ZONE RETAIL RETAIL B END_A - STORY GROUND PSZ-AC FAN, Design Size Maximum Flow Rate [m3/s], 2.89394
+ Component Sizing Information, Controller:OutdoorAir, ZONE RETAIL RETAIL C  - STORY GROUND PSZ-AC OA SYS CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 2.95651
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Rated Air Flow Rate [m3/s], 2.95651
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Total Cooling Capacity [W], 50180.73234
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Sensible Heat Ratio, 0.78957
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, 47889.4, 2.52, 8.59, 9.88, 9.43
+ Component Sizing Information, Coil:Heating:Fuel, ZONE RETAIL RETAIL C  - STORY GROUND PSZ-AC GAS HTG COIL, Design Size Nominal Capacity [W], 74563.06176
+ Component Sizing Information, Coil:Heating:Electric, ZONE RETAIL RETAIL C  - STORY GROUND PSZ-AC ELECTRIC BACKUP HTG COIL, Design Size Nominal Capacity [W], 74563.06176
+ Component Sizing Information, Fan:ConstantVolume, ZONE RETAIL RETAIL C  - STORY GROUND PSZ-AC FAN, Design Size Maximum Flow Rate [m3/s], 2.95651
+ Component Sizing Information, Controller:OutdoorAir, ZONE RETAIL RETAIL C END_A - STORY GROUND PSZ-AC OA SYS CONTROLLER, Maximum Outdoor Air Flow Rate [m3/s], 0.23157
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL C END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Rated Air Flow Rate [m3/s], 0.23157
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL C END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Total Cooling Capacity [W], 4010.56165
+ Component Sizing Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL C END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, Design Size Gross Rated Sensible Heat Ratio, 0.78241
+ DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:SingleSpeed, ZONE RETAIL RETAIL C END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL, 3831.1, 2.53, 8.62, 9.92, 9.49
+ Component Sizing Information, Coil:Heating:Fuel, ZONE RETAIL RETAIL C END_A - STORY GROUND PSZ-AC GAS HTG COIL, Design Size Nominal Capacity [W], 5789.63429
+ Component Sizing Information, Coil:Heating:Electric, ZONE RETAIL RETAIL C END_A - STORY GROUND PSZ-AC ELECTRIC BACKUP HTG COIL, Design Size Nominal Capacity [W], 5789.63429
+ Component Sizing Information, Fan:ConstantVolume, ZONE RETAIL RETAIL C END_A - STORY GROUND PSZ-AC FAN, Design Size Maximum Flow Rate [m3/s], 0.23157
+! <Environment>,Environment Name,Environment Type, Start Date, End Date, Start DayOfWeek, Duration {#days}, Source:Start DayOfWeek,  Use Daylight Saving, Use Holidays, Apply Weekend Holiday Rule,  Use Rain Values, Use Snow Values
+! <Environment:Special Days>, Special Day Name, Special Day Type, Source, Start Date, Duration {#days}
+! <Environment:Daylight Saving>, Daylight Saving Indicator, Source, Start Date, End Date
+! <Environment:WarmupDays>, NumberofWarmupDays
+Environment,CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB,SizingPeriod:DesignDay,08/21,08/21,SummerDesignDay,1,N/A,N/A,N/A,N/A,N/A,N/A
+Environment:Daylight Saving,No,SizingPeriod:DesignDay
+! <Environment:Design Day Data>, Max Dry-Bulb Temp {C}, Temp Range {dC}, Temp Range Ind Type, Hum Ind Value at Max Temp, Hum Ind Type,Pressure {Pa}, Wind Direction {deg CW from N}, Wind Speed {m/s}, Clearness, Rain, Snow
+! <Environment:Design Day Misc>,DayOfYear,ASHRAE A Coeff,ASHRAE B Coeff,ASHRAE C Coeff,Solar Constant-Annual Variation,Eq of Time {minutes}, Solar Declination Angle {deg}, Solar Model
+Environment:Design Day Data,27.70,7.40,DefaultMultipliers,101301,290,4.9,0.00,No,No
+Environment:Design Day Misc,233,1106.3,0.2000,0.1216,1.0,-3.33,12.4,ASHRAETau
+Environment:WarmupDays,  6
+! <Tabular Report>,Style,Unit Conversion
+Tabular Report,HTML,None
+! <Warmup Convergence Information>,Zone Name,Environment Type/Name,Average Warmup Temperature Difference {deltaC},Std Dev Warmup Temperature Difference {deltaC},Max Temperature Pass/Fail Convergence,Min Temperature Pass/Fail Convergence,Average Warmup Load Difference {W},Std Dev Warmup Load Difference {W},Heating Load Pass/Fail Convergence,Cooling Load Pass/Fail Convergence
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE A  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB,1.7267356825E-002,7.2299478501E-002,Pass,Pass,0.5607790662,5.3087293258,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE A END_B - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB,1.7733069682E-002,4.9123008711E-002,Pass,Pass,4.0434693203E-002,9.9406941466E-002,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE B  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB,3.0496666569E-002,0.1145887089,Pass,Pass,0.4501122297,4.1692082034,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE B END_B - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB,1.9109833565E-002,6.3054157311E-002,Pass,Pass,7.5710223925E-002,0.2914414087,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE C  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB,1.7522708456E-002,7.3026603391E-002,Pass,Pass,0.1325908608,0.4862104685,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE C END_B - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB,1.7612641409E-002,4.8381335465E-002,Pass,Pass,3.7864408569E-002,9.8055819831E-002,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL ENTRY A  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB,7.7156280549E-002,0.4593536029,Pass,Pass,0.1707920356,0.8503053831,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL ENTRY B  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB,7.7150858397E-002,0.4896642445,Pass,Pass,0.1402920272,1.2285887850,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL ENTRY C  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB,7.7153707745E-002,0.4594213287,Pass,Pass,0.2024028031,1.0319369716,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL POINT_OF_SALE A  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB,5.5415030091E-002,0.2935007580,Pass,Pass,6.3042278795E-002,0.4921150646,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL POINT_OF_SALE B  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB,6.9001228802E-002,0.3258775751,Pass,Pass,3.9012587897E-002,0.2846723196,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL POINT_OF_SALE C  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB,5.5852333191E-002,0.2878368323,Pass,Pass,6.0602020832E-002,0.4970950163,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL A  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB,8.3400867693E-002,0.3756588046,Pass,Pass,0.4279960927,3.7796262727,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL A END_A - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB,8.0740653910E-002,0.3828184238,Pass,Pass,0.1412294619,0.8820991605,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL B  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB,8.3386031846E-002,0.3795108271,Pass,Pass,0.1455886994,1.5068587338,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL B END_A - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB,8.3414943440E-002,0.3888241163,Pass,Pass,0.4143137146,4.1174614606,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL C  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB,8.3391084299E-002,0.3755091092,Pass,Pass,0.5042012885,3.9770566060,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL C END_A - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB,8.0164661355E-002,0.3632420187,Pass,Pass,0.1631544558,1.0153500976,Pass,Pass
+Environment,CLIMATE ZONE 3 ANN CLG .4% CONDNS WB=>MDB,SizingPeriod:DesignDay,08/21,08/21,SummerDesignDay,1,N/A,N/A,N/A,N/A,N/A,N/A
+Environment:Daylight Saving,No,SizingPeriod:DesignDay
+Environment:Design Day Data,25.50,7.40,DefaultMultipliers,101301,290,4.9,0.00,No,No
+Environment:Design Day Misc,233,1106.3,0.2000,0.1216,1.0,-3.33,12.4,ASHRAETau
+Environment:WarmupDays,  6
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE A  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS WB=>MDB,1.8283638658E-002,4.2324826423E-002,Pass,Pass,0.2050734070,1.0790735101,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE A END_B - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS WB=>MDB,3.2865391882E-002,7.5033793853E-002,Pass,Pass,5.6191262541E-002,0.1235020060,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE B  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS WB=>MDB,1.2728183398E-002,2.9471435996E-002,Pass,Pass,6.3338910114E-002,0.5154054330,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE B END_B - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS WB=>MDB,2.3780010615E-002,6.3572242101E-002,Pass,Pass,0.3638994028,1.9552318711,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE C  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS WB=>MDB,1.8131269611E-002,4.3199536838E-002,Pass,Pass,0.4387640784,3.4953175273,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE C END_B - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS WB=>MDB,3.2862390274E-002,7.5668288050E-002,Pass,Pass,5.1284546538E-002,0.1066928380,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL ENTRY A  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS WB=>MDB,7.7107666310E-002,0.4401856771,Pass,Pass,0.2478165204,1.5990796522,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL ENTRY B  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS WB=>MDB,7.7149783860E-002,0.4713143502,Pass,Pass,1.0861363675,12.4903240972,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL ENTRY C  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS WB=>MDB,7.7104921695E-002,0.4402205272,Pass,Pass,0.2268174610,1.5088569923,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL POINT_OF_SALE A  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS WB=>MDB,3.6030667868E-002,0.1789424042,Pass,Pass,3.9542745906E-002,0.2654186615,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL POINT_OF_SALE B  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS WB=>MDB,5.0852440574E-002,0.2213439192,Pass,Pass,2.6163709905E-002,0.1738660075,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL POINT_OF_SALE C  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS WB=>MDB,3.6439536630E-002,0.1763542407,Pass,Pass,3.6553522814E-002,0.2673782258,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL A  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS WB=>MDB,8.3417495585E-002,0.3125871336,Pass,Pass,1.7374486247,20.2535260193,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL A END_A - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS WB=>MDB,6.4118521595E-002,0.2864608666,Pass,Pass,0.1684157411,1.0698460502,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL B  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS WB=>MDB,8.3389750098E-002,0.3151229936,Pass,Pass,0.1022678572,0.9673045346,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL B END_A - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS WB=>MDB,8.3433017056E-002,0.3259970412,Pass,Pass,1.1456857714,13.1636325218,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL C  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS WB=>MDB,8.3405573690E-002,0.3124233200,Pass,Pass,2.4545382166,28.8430582913,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL C END_A - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN CLG .4% CONDNS WB=>MDB,6.3537829560E-002,0.2686591493,Pass,Pass,0.3443979353,1.5977837814,Pass,Pass
+Environment,CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB,SizingPeriod:DesignDay,01/21,01/21,WinterDesignDay,1,N/A,N/A,N/A,N/A,N/A,N/A
+Environment:Daylight Saving,No,SizingPeriod:DesignDay
+Environment:Design Day Data,2.90,0.00,DefaultMultipliers,101301,50,2.2,0.00,No,No
+Environment:Design Day Misc, 21,1229.0,0.1415,5.7310E-002,1.0,-11.15,-20.1,ASHRAEClearSky
+Environment:WarmupDays,  6
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE A  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB,1.4309541206E-015,2.2671060106E-015,Pass,Pass,2.4709015566E-014,4.1972232868E-014,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE A END_B - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB,2.5239070093E-013,1.4804091244E-013,Pass,Pass,2.8504520637E-013,1.4177681721E-013,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE B  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB,2.5905203908E-015,2.0604867304E-015,Pass,Pass,4.8873895754E-015,2.7774526686E-015,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE B END_B - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB,2.3191325403E-015,2.1884160520E-015,Pass,Pass,4.3269014706E-014,5.1182585985E-014,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE C  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB,2.2019423322E-013,7.7888367787E-014,Pass,Pass,3.0018763588E-013,1.1215937423E-013,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE C END_B - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB,1.7077697281E-013,1.1345967253E-013,Pass,Pass,1.7768476485E-013,1.1365260360E-013,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL ENTRY A  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB,2.2377161852E-014,1.9558217906E-014,Pass,Pass,6.9873317704E-013,6.7731303001E-013,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL ENTRY B  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB,1.9243865760E-015,2.0882164116E-015,Pass,Pass,4.4727254309E-012,1.0383153880E-011,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL ENTRY C  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB,1.6036554800E-014,1.4443249256E-014,Pass,Pass,5.8621227144E-013,5.7605178458E-013,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL POINT_OF_SALE A  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB,5.8965178419E-014,4.7700169313E-014,Pass,Pass,2.8671429630E-013,2.3441227050E-013,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL POINT_OF_SALE B  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB,1.6036554800E-015,1.9108964209E-015,Pass,Pass,7.0644070674E-014,3.6707672983E-013,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL POINT_OF_SALE C  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB,6.0815550127E-014,4.3927677115E-014,Pass,Pass,3.2085546971E-013,2.6484421167E-013,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL A  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB,1.9761969838E-014,3.4129683555E-014,Pass,Pass,2.3603149587E-013,2.1815702825E-013,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL A END_A - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB,2.9852663551E-015,2.1619719242E-015,Pass,Pass,1.4630940111E-015,1.1204894755E-015,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL B  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB,3.9721312659E-015,4.3812106399E-015,Pass,Pass,1.7138982688E-012,1.6950863000E-012,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL B END_A - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB,1.1965737043E-014,3.1518159829E-014,Pass,Pass,1.6541904909E-013,2.4586019300E-013,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL C  - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB,2.4671622769E-015,2.7543963627E-015,Pass,Pass,1.3763467725E-013,1.8075948383E-013,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL C END_A - STORY GROUND,SizingPeriod: CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB,8.6523381052E-014,7.6418299515E-014,Pass,Pass,2.1660666075E-013,1.7283254019E-013,Pass,Pass
+Environment,RUN PERIOD 1,WeatherFileRunPeriod,01/01,12/31,Thursday,365,Use RunPeriod Specified Day,No,No,No,Yes,Yes
+Environment:Daylight Saving,No,RunPeriod Object
+Environment:WarmupDays,  6
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE A  - STORY GROUND,RunPeriod: RUN PERIOD 1,0.1166703257,0.4063879090,Pass,Pass,0.1814919430,0.5353084131,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE A END_B - STORY GROUND,RunPeriod: RUN PERIOD 1,0.1166733831,0.4573960385,Pass,Pass,0.2473634587,1.0084775219,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE B  - STORY GROUND,RunPeriod: RUN PERIOD 1,8.7147034375E-002,0.3449184675,Pass,Pass,0.4228171618,1.9864132187,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE B END_B - STORY GROUND,RunPeriod: RUN PERIOD 1,8.0048985954E-002,0.4219746285,Pass,Pass,0.2021879029,0.5614636810,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE C  - STORY GROUND,RunPeriod: RUN PERIOD 1,7.7557748670E-002,0.4069783896,Pass,Pass,0.2466854933,0.9207572653,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL BACK_SPACE C END_B - STORY GROUND,RunPeriod: RUN PERIOD 1,7.6390572106E-002,0.4594252034,Pass,Pass,7.6861344056,85.1576551776,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL ENTRY A  - STORY GROUND,RunPeriod: RUN PERIOD 1,0.1747920130,0.4515014715,Pass,Pass,0.3215780536,1.8714302173,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL ENTRY B  - STORY GROUND,RunPeriod: RUN PERIOD 1,0.1685119827,0.4476817250,Pass,Pass,0.3376511711,1.0876638435,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL ENTRY C  - STORY GROUND,RunPeriod: RUN PERIOD 1,0.1431216639,0.4490625221,Pass,Pass,0.2525232067,0.7926943808,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL POINT_OF_SALE A  - STORY GROUND,RunPeriod: RUN PERIOD 1,0.1167080820,0.4606915687,Pass,Pass,0.4750905785,3.0332469327,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL POINT_OF_SALE B  - STORY GROUND,RunPeriod: RUN PERIOD 1,0.1118960380,0.4458119306,Pass,Pass,0.8462417299,8.1186081375,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL POINT_OF_SALE C  - STORY GROUND,RunPeriod: RUN PERIOD 1,0.1043590273,0.4609852399,Pass,Pass,0.1242533696,0.3419680348,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL A  - STORY GROUND,RunPeriod: RUN PERIOD 1,0.1167630871,0.4590478941,Pass,Pass,0.4004871327,2.4843214377,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL A END_A - STORY GROUND,RunPeriod: RUN PERIOD 1,0.1170429625,0.4624501098,Pass,Pass,0.2304169853,0.7245440506,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL B  - STORY GROUND,RunPeriod: RUN PERIOD 1,0.1177554924,0.4484626950,Pass,Pass,0.1879691699,0.5556151529,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL B END_A - STORY GROUND,RunPeriod: RUN PERIOD 1,0.1171275680,0.4534586810,Pass,Pass,0.1995443065,0.8316065012,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL C  - STORY GROUND,RunPeriod: RUN PERIOD 1,0.1169385973,0.4534626592,Pass,Pass,0.1543765639,0.4661958147,Pass,Pass
+ Warmup Convergence Information,ZONE RETAIL RETAIL C END_A - STORY GROUND,RunPeriod: RUN PERIOD 1,0.1171703808,0.4561121192,Pass,Pass,0.4422134691,2.9320774089,Pass,Pass
+! <Program Control Information:Threads/Parallel Sims>, Threading Supported,Maximum Number of Threads, Env Set Threads (OMP_NUM_THREADS), EP Env Set Threads (EP_OMP_NUM_THREADS), IDF Set Threads, Number of Threads Used (Interior Radiant Exchange), Number Nominal Surfaces, Number Parallel Sims
+Program Control:Threads/Parallel Sims, No,1, N/A, N/A, N/A, N/A, N/A, N/A
+End of Data

@@ -1,0 +1,3 @@
+[14:52:23.222136 WARN] No valid weather file defined in either the osm or osw.
+[14:52:27.170362 WARN] Floor area of Retail Entry results in a bar with smaller than target minimum width.
+[14:52:31.108587 WARN] Measure couldn't find the construction named 'Metal framed wallsW3_R11.36' in the exterior surface hash.
