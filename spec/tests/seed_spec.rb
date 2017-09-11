@@ -9,7 +9,8 @@ describe 'BRICR' do
     # Get the unique building ID. For now this is taken from the Premises Identifier custom id field.
     UBID = 'e6a5de56-8234-4b4f-ba10-6af0ae612fd1'.freeze
 
-    seed = Seed::API.new('http://localhost:8000')
+    host = ENV["BRICR_SEED_HOST"] || 'http://localhost:8000'
+    seed = Seed::API.new(host)
 
     # upload to SEED as record
     ## Create or get the organization
