@@ -1,0 +1,40 @@
+# checkout openstudio standards to some place
+git clone git@github.com:NREL/openstudio-standards.git C:\openstudio-standards\
+
+# cd to openstudio standards
+cd C:\openstudio-standards\
+
+# checkout new branch
+git checkout hvac_additions
+
+# cd to inner openstudio standards
+cd C:\openstudio-standards\openstudio-standards
+
+# excel data to json
+bundle exec rake data:update:manual
+
+# build gem
+bundle install
+bundle exec rake build
+
+# install gem to some place
+gem install pkg/openstudio-standards-0.1.13.gem --install-dir C:/bricr/gems
+# gem install pkg/openstudio-standards-0.1.14.gem --install-dir C:/Sites/bricr-master/gems
+
+# checkout openstudio standards to some place
+git clone git@github.com:NREL/OpenStudio-measures.git C:\openstudio-measures\ 
+
+# cd to openstudio measures
+cd C:\openstudio-measures\
+
+# checkout new branch
+git checkout typical_model_articulation
+
+# cd to test dir
+cd C:\openstudio-measures\NREL_integration_testing\workflows\bricr_retail
+
+# run ashrae file
+C:/openstudio-2.1.0/bin/openstudio.exe --gem_path C:/bricr/gems run -w data_point_ashrae.osw
+
+# run cbes file
+C:/openstudio-2.1.0/bin/openstudio.exe --gem_path C:/bricr/gems run -w data_point_cbes.osw

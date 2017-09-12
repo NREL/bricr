@@ -65,6 +65,24 @@
 		}
 	},
 	{
+		"measure_dir_name": "IncreaseInsulationRValueForExteriorWalls",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "IncreaseInsulationRValueForRoofs",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "AdjustSystemEfficiencies",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
       "measure_dir_name": "openstudio_results",
       "arguments": {
         "__SKIP__": false,
