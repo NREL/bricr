@@ -6,7 +6,7 @@ require 'csv'
 config_path = ARGV[0]
 if config_path.nil? || !File.exist?("#{config_path}")
   puts "error: cannot find the configuration file: #{config_path}"
-  puts 'usage: bundle exec ruby run_buildingsync.rb /path/to/config.rb /path/to/buildingsync.xml /path/to/summary.csv'
+  puts 'usage: bundle exec ruby run_multiple_buildingsync.rb /path/to/config.rb /path/to/buildingsync.xml /path/to/summary.csv'
   exit(1)
 end
 require(config_path)
@@ -14,14 +14,14 @@ require(config_path)
 xml_folder_path = ARGV[1]
 if xml_folder_path.nil? || !File.exist?(xml_folder_path)
   puts "error: cannot find the xml folder path: #{xml_folder_path}"
-  puts 'usage: bundle exec ruby run_buildingsync.rb /path/to/config.rb /path/to/buildingsync.xml /path/to/summary.csv'
+  puts 'usage: bundle exec ruby run_multiple_buildingsync.rb /path/to/config.rb /path/to/buildingsync.xml /path/to/summary.csv'
   exit(1)
 end
 
 building_list_filename = ARGV[2]
 if building_list_filename.nil? || !File.exist?(building_list_filename)
   puts "error: cannot find the building list csv file: #{building_list_filename}"
-  puts 'usage: bundle exec ruby run_buildingsync.rb /path/to/config.rb /path/to/buildingsync.xml /path/to/summary.csv'
+  puts 'usage: bundle exec ruby run_multiple_buildingsync.rb /path/to/config.rb /path/to/buildingsync.xml /path/to/summary.csv'
   exit(1)
 end
 
@@ -63,7 +63,7 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
   num_sims += 1
 end
 
-File.open('summary.csv', 'w') do |file|
+File.open('summary_output.csv', 'w') do |file|
   file.puts csv_header.join(',')
   building_info.values.each do |value|
     file.puts value.join(',')

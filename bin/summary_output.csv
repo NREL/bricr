@@ -1,103 +1,103 @@
-building_id,xml_filename,should_run_simulation,OccupancyClassification
-151,151.xml,1,Retail
-171,171.xml,1,Residential
-196,196.xml,1,Mixed-use commercial
-203,203.xml,1,Mixed-use commercial
-223,223.xml,1,Office
-237,237.xml,1,Retail
-242,242.xml,1,Residential
-330,330.xml,1,Mixed-use commercial
-362,362.xml,1,Residential
-377,377.xml,1,Retail
-427,427.xml,1,Residential
-431,431.xml,1,Mixed-use commercial
-463,463.xml,1,Retail
-471,471.xml,1,Residential
-473,473.xml,1,Retail
-482,482.xml,1,Mixed-use commercial
-484,484.xml,1,Office
-517,517.xml,1,Unknown
-541,541.xml,1,Mixed-use commercial
-557,557.xml,1,Retail
-594,594.xml,1,Mixed-use commercial
-608,608.xml,1,Mixed-use commercial
-615,615.xml,1,Mixed-use commercial
-641,641.xml,1,Residential
-644,644.xml,1,Retail
-683,683.xml,1,Industrial
-712,712.xml,1,Residential
-715,715.xml,1,Mixed-use commercial
-721,721.xml,1,Mixed-use commercial
-741,741.xml,1,Assembly-Cultural entertainment
-754,754.xml,1,Mixed-use commercial
-756,756.xml,1,Assembly-Cultural entertainment
-759,759.xml,1,Office
-798,798.xml,1,Retail
-816,816.xml,1,Retail
-830,830.xml,1,Residential
-832,832.xml,1,Mixed-use commercial
-860,860.xml,1,Residential
-903,903.xml,1,Residential
-904,904.xml,1,Mixed-use commercial
-913,913.xml,1,Residential
-923,923.xml,1,Retail
-953,953.xml,1,Assembly-Cultural entertainment
-959,959.xml,1,Mixed-use commercial
-991,991.xml,1,Industrial
-1015,1015.xml,1,Retail
-1032,1032.xml,1,Office
-1059,1059.xml,1,Residential
-1077,1077.xml,1,Industrial
-1090,1090.xml,1,Office
-1116,1116.xml,1,Mixed-use commercial
-1133,1133.xml,1,Industrial
-1142,1142.xml,1,Office
-1152,1152.xml,1,Retail
-1159,1159.xml,1,Mixed-use commercial
-1163,1163.xml,1,Mixed-use commercial
-1170,1170.xml,1,Health care
-1202,1202.xml,1,Office
-1205,1205.xml,1,Industrial
-1255,1255.xml,1,Lodging
-1257,1257.xml,1,Mixed-use commercial
-1270,1270.xml,1,Office
-1271,1271.xml,1,Mixed-use commercial
-1272,1272.xml,1,Office
-1275,1275.xml,1,Mixed-use commercial
-1288,1288.xml,1,Residential
-1318,1318.xml,1,Mixed-use commercial
-1322,1322.xml,1,Office
-1328,1328.xml,1,Health care
-1337,1337.xml,1,Office
-1345,1345.xml,1,Assembly-Cultural entertainment
-1370,1370.xml,1,Residential
-1375,1375.xml,1,Residential
-1391,1391.xml,1,Office
-1405,1405.xml,1,Retail
-1409,1409.xml,1,Mixed-use commercial
-1412,1412.xml,1,Residential
-1416,1416.xml,1,Mixed-use commercial
-1419,1419.xml,1,Office
-1429,1429.xml,1,Mixed-use commercial
-1440,1440.xml,1,Assembly-Cultural entertainment
-1441,1441.xml,1,Residential
-1443,1443.xml,1,Retail
-1444,1444.xml,1,Retail
-1479,1479.xml,1,Retail
-1481,1481.xml,1,Office
-1494,1494.xml,1,Office
-1497,1497.xml,1,Office
-1502,1502.xml,1,Health care
-1509,1509.xml,1,Health care
-1514,1514.xml,1,Assembly-Cultural entertainment
-1519,1519.xml,1,Residential
-1528,1528.xml,1,Retail
-1529,1529.xml,1,Mixed-use commercial
-1538,1538.xml,1,Retail
-1541,1541.xml,1,Assembly-Cultural entertainment
-1546,1546.xml,1,Mixed-use commercial
-1558,1558.xml,1,Retail
-1574,1574.xml,1,Office
+building_id,xml_filename,should_run_simulation,OccupancyClassification,Simulation Status,do simulations?,do get results?
+151,151.xml,1,Retail,true,false,false
+171,171.xml,1,Residential,false,false,false
+196,196.xml,1,Mixed-use commercial,false,false,false
+203,203.xml,1,Mixed-use commercial,false,false,false
+223,223.xml,1,Office,true,false,false
+237,237.xml,1,Retail,true,false,false
+242,242.xml,1,Residential,false,false,false
+330,330.xml,1,Mixed-use commercial,false,false,false
+362,362.xml,1,Residential,false,false,false
+377,377.xml,1,Retail,true,false,false
+427,427.xml,1,Residential,false,false,false
+431,431.xml,1,Mixed-use commercial,false,false,false
+463,463.xml,1,Retail,true,false,false
+471,471.xml,1,Residential,false,false,false
+473,473.xml,1,Retail,true,false,false
+482,482.xml,1,Mixed-use commercial,false,false,false
+484,484.xml,1,Office,true,false,false
+517,517.xml,1,Unknown,false,false,false
+541,541.xml,1,Mixed-use commercial,false,false,false
+557,557.xml,1,Retail,true,false,false
+594,594.xml,1,Mixed-use commercial,false,false,false
+608,608.xml,1,Mixed-use commercial,false,false,false
+615,615.xml,1,Mixed-use commercial,false,false,false
+641,641.xml,1,Residential,false,false,false
+644,644.xml,1,Retail,true,false,false
+683,683.xml,1,Industrial,false,false,false
+712,712.xml,1,Residential,false,false,false
+715,715.xml,1,Mixed-use commercial,false,false,false
+721,721.xml,1,Mixed-use commercial,false,false,false
+741,741.xml,1,Assembly-Cultural entertainment,false,false,false
+754,754.xml,1,Mixed-use commercial,false,false,false
+756,756.xml,1,Assembly-Cultural entertainment,false,false,false
+759,759.xml,1,Office,false,false,false
+798,798.xml,1,Retail,true,false,false
+816,816.xml,1,Retail,true,false,false
+830,830.xml,1,Residential,false,false,false
+832,832.xml,1,Mixed-use commercial,false,false,false
+860,860.xml,1,Residential,false,false,false
+903,903.xml,1,Residential,false,false,false
+904,904.xml,1,Mixed-use commercial,false,false,false
+913,913.xml,1,Residential,false,false,false
+923,923.xml,1,Retail,true,false,false
+953,953.xml,1,Assembly-Cultural entertainment,false,false,false
+959,959.xml,1,Mixed-use commercial,false,false,false
+991,991.xml,1,Industrial,false,false,false
+1015,1015.xml,1,Retail,true,false,false
+1032,1032.xml,1,Office,true,false,false
+1059,1059.xml,1,Residential,false,false,false
+1077,1077.xml,1,Industrial,false,false,false
+1090,1090.xml,1,Office,true,false,false
+1116,1116.xml,1,Mixed-use commercial,false,false,false
+1133,1133.xml,1,Industrial,false,false,false
+1142,1142.xml,1,Office,false,false,false
+1152,1152.xml,1,Retail,true,false,false
+1159,1159.xml,1,Mixed-use commercial,false,false,false
+1163,1163.xml,1,Mixed-use commercial,false,false,false
+1170,1170.xml,1,Health care,false,false,false
+1202,1202.xml,1,Office,true,false,false
+1205,1205.xml,1,Industrial,false,false,false
+1255,1255.xml,1,Lodging,false,false,false
+1257,1257.xml,1,Mixed-use commercial,false,false,false
+1270,1270.xml,1,Office,true,false,false
+1271,1271.xml,1,Mixed-use commercial,false,false,false
+1272,1272.xml,1,Office,false,false,false
+1275,1275.xml,1,Mixed-use commercial,false,false,false
+1288,1288.xml,1,Residential,false,false,false
+1318,1318.xml,1,Mixed-use commercial,false,false,false
+1322,1322.xml,1,Office,true,false,false
+1328,1328.xml,1,Health care,false,false,false
+1337,1337.xml,1,Office,true,false,false
+1345,1345.xml,1,Assembly-Cultural entertainment,false,false,false
+1370,1370.xml,1,Residential,false,false,false
+1375,1375.xml,1,Residential,false,false,false
+1391,1391.xml,1,Office,true,false,false
+1405,1405.xml,1,Retail,true,false,false
+1409,1409.xml,1,Mixed-use commercial,false,false,false
+1412,1412.xml,1,Residential,false,false,false
+1416,1416.xml,1,Mixed-use commercial,false,false,false
+1419,1419.xml,1,Office,true,false,false
+1429,1429.xml,1,Mixed-use commercial,false,false,false
+1440,1440.xml,1,Assembly-Cultural entertainment,false,false,false
+1441,1441.xml,1,Residential,false,false,false
+1443,1443.xml,1,Retail,true,false,false
+1444,1444.xml,1,Retail,true,false,false
+1479,1479.xml,1,Retail,true,false,false
+1481,1481.xml,1,Office,false,false,false
+1494,1494.xml,1,Office,true,false,false
+1497,1497.xml,1,Office,true,false,false
+1502,1502.xml,1,Health care,false,false,false
+1509,1509.xml,1,Health care,false,false,false
+1514,1514.xml,1,Assembly-Cultural entertainment,false,false,false
+1519,1519.xml,1,Residential,false,false,false
+1528,1528.xml,1,Retail,true,false,false
+1529,1529.xml,1,Mixed-use commercial,false,false,false
+1538,1538.xml,1,Retail,true,false,false
+1541,1541.xml,1,Assembly-Cultural entertainment,false,false,false
+1546,1546.xml,1,Mixed-use commercial,false,false,false
+1558,1558.xml,1,Retail,true,false,false
+1574,1574.xml,1,Office,true,false,false
 1577,1577.xml,0,Office
 1582,1582.xml,0,Residential
 1584,1584.xml,0,Retail
