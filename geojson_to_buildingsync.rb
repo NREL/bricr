@@ -2,6 +2,7 @@
 
 require 'json'
 require 'rexml/document'
+require 'FileUtils'
 
 if ARGV[0].nil? || !File.exist?(ARGV[0])
   puts 'usage: bundle exec ruby geojson_to_buildingsync.rb /path/to/geojson.json'

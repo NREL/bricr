@@ -1,62 +1,55 @@
 {
-   "completed_at" : "20170906T215438Z",
-   "completed_status" : "Success",
-   "current_step" : 8,
-   "eplusout_err" : "Program Version,EnergyPlus, Version 8.7.0-df3c0af5a5, YMD=2017.09.06 14:52,IDD_Version 8.7.0\n   ************* Beginning Zone Sizing Calculations\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"RETAILSTANDALONE PSZ_ECON_MAXOAFRAC_SCH DEFAULT\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"RETAILSTANDALONE PSZ_ECON_MAXOAFRAC_SCH SUMMER DESIGN DAY\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"RETAILSTANDALONE PSZ_ECON_MAXOAFRAC_SCH WINTER DESIGN DAY\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"SCHEDULE DAY 1\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"SCHEDULE DAY 10\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"SCHEDULE DAY 11\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"SCHEDULE DAY 12\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"SCHEDULE DAY 13\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"SCHEDULE DAY 14\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"SCHEDULE DAY 15\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"SCHEDULE DAY 16\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"SCHEDULE DAY 17\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"SCHEDULE DAY 18\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"SCHEDULE DAY 19\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"SCHEDULE DAY 2\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"SCHEDULE DAY 3\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"SCHEDULE DAY 4\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"SCHEDULE DAY 6\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"SCHEDULE DAY 7\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"SCHEDULE DAY 8\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Day:Interval=\"SCHEDULE DAY 9\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Year=\"RETAILSTANDALONE PSZ_ECON_MAXOAFRAC_SCH\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Constant=\"ALWAYS OFF DISCRETE\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Constant=\"ALWAYS ON CONTINUOUS\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** GetHTSurfaceData: Surfaces with interface to Ground found but no \"Ground Temperatures\" were input.\n   **   ~~~   ** Found first in surface=SURFACE 73\n   **   ~~~   ** Defaults, constant throughout the year of (18.0) will be used.\n   ** Warning ** CheckUsedConstructions: There are 9 nominally unused constructions in input.\n   **   ~~~   ** For explicit details on each unused construction, use Output:Diagnostics,DisplayExtraWarnings;\n   ************* Beginning System Sizing Calculations\n   ** Warning ** Output:Meter: invalid Name=\"DISTRICTCOOLING:FACILITY\" - not found.\n   ** Warning ** Output:Meter: invalid Name=\"DISTRICTHEATING:FACILITY\" - not found.\n   ** Warning ** Output:Meter:MeterFileOnly requested for \"Electricity:Facility\" (TimeStep), already on \"Output:Meter\". Will report to both eplusout.eso and eplusout.mtr\n   ************* Testing Individual Branch Integrity\n   ************* All Branches passed integrity testing\n   ************* Testing Individual Supply Air Path Integrity\n   ************* All Supply Air Paths passed integrity testing\n   ************* Testing Individual Return Air Path Integrity\n   ************* All Return Air Paths passed integrity testing\n   ************* No node connection errors were found.\n   ************* Beginning Simulation\n   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed \"ZONE RETAIL POINT_OF_SALE A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 0.89 C.\n   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 01/01 06:03 - 06:04\n   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil\n   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 13.168 C.\n   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.\n   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.\n   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed \"ZONE RETAIL POINT_OF_SALE B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = -0.31 C.\n   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 01/01 06:03 - 06:04\n   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil\n   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 12.013 C.\n   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.\n   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.\n   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed \"ZONE RETAIL POINT_OF_SALE C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 0.67 C.\n   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 01/01 06:03 - 06:04\n   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil\n   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 13.297 C.\n   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.\n   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.\n   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed \"ZONE RETAIL BACK_SPACE B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = -1.65 C.\n   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 01/01 21:10 - 21:11\n   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil\n   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 13.011 C.\n   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.\n   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.\n   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed \"ZONE RETAIL BACK_SPACE C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.73 C.\n   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 01/01 21:20 - 21:23\n   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil\n   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 15.602 C.\n   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.\n   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.\n   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed \"ZONE RETAIL BACK_SPACE A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.70 C.\n   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 01/01 21:40 - 21:43\n   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil\n   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 14.674 C.\n   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.\n   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.\n   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed \"ZONE RETAIL BACK_SPACE B END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.80 C.\n   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 01/01 21:40 - 21:43\n   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil\n   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 14.288 C.\n   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.\n   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.\n   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed \"ZONE RETAIL RETAIL A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.88 C.\n   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 12/21 22:00 - 22:03\n   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil\n   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 14.697 C.\n   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.\n   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.\n   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed \"ZONE RETAIL RETAIL B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.47 C.\n   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 12/21 22:20 - 22:25\n   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil\n   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 13.948 C.\n   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.\n   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.\n   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed \"ZONE RETAIL RETAIL C END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.85 C.\n   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 12/27 20:10 - 20:15\n   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil\n   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 14.862 C.\n   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.\n   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.\n   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed \"ZONE RETAIL BACK_SPACE A END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.65 C.\n   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 12/30 21:30 - 21:33\n   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil\n   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 14.233 C.\n   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.\n   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.\n   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed \"ZONE RETAIL RETAIL A END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.97 C.\n   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 12/30 21:50 - 21:53\n   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil\n   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 15.304 C.\n   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.\n   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.\n   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed \"ZONE RETAIL RETAIL B END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.80 C.\n   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 12/30 22:00 - 22:03\n   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil\n   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 15.173 C.\n   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.\n   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.\n   ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed \"ZONE RETAIL RETAIL C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet air dry-bulb temperature < 2C. This indicates the possibility of coil frost/freeze. Outlet temperature = 1.79 C.\n   **   ~~~   **  ...Occurrence info = RUN PERIOD 1, 12/30 22:00 - 22:03\n   **   ~~~   ** ... Possible reasons for low outlet air dry-bulb temperatures are: This DX coil\n   **   ~~~   **    1) may have a low inlet air dry-bulb temperature. Inlet air temperature = 14.907 C.\n   **   ~~~   **    2) may have a low air flow rate per watt of cooling capacity. Check inputs.\n   **   ~~~   **    3) is used as part of a HX assisted cooling coil which uses a high sensible effectiveness. Check inputs.\n   ************* Simulation Error Summary *************\n   ************* There are 6 unused schedules in input.\n   ************* There are 6 unused week schedules in input.\n   ************* There are 27 unused day schedules in input.\n   ************* Use Output:Diagnostics,DisplayUnusedSchedules; to see them.\n   *************\n   ************* ===== Recurring Error Summary =====\n   ************* The following recurring error messages occurred.\n   *************\n   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed=\"ZONE RETAIL POINT_OF_SALE A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:\n   *************  **   ~~~   **   This error occurred 135 total times;\n   *************  **   ~~~   **   during Warmup 0 times;\n   *************  **   ~~~   **   during Sizing 0 times.\n   *************  **   ~~~   **   Max=1.977257  Min=-2.896397\n   *************\n   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed=\"ZONE RETAIL POINT_OF_SALE B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:\n   *************  **   ~~~   **   This error occurred 281 total times;\n   *************  **   ~~~   **   during Warmup 0 times;\n   *************  **   ~~~   **   during Sizing 0 times.\n   *************  **   ~~~   **   Max=1.972707  Min=-4.729478\n   *************\n   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed=\"ZONE RETAIL POINT_OF_SALE C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:\n   *************  **   ~~~   **   This error occurred 157 total times;\n   *************  **   ~~~   **   during Warmup 0 times;\n   *************  **   ~~~   **   during Sizing 0 times.\n   *************  **   ~~~   **   Max=1.988948  Min=-3.40106\n   *************\n   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed=\"ZONE RETAIL BACK_SPACE B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:\n   *************  **   ~~~   **   This error occurred 125 total times;\n   *************  **   ~~~   **   during Warmup 0 times;\n   *************  **   ~~~   **   during Sizing 0 times.\n   *************  **   ~~~   **   Max=1.991112  Min=-3.252712\n   *************\n   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed=\"ZONE RETAIL BACK_SPACE C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:\n   *************  **   ~~~   **   This error occurred 33 total times;\n   *************  **   ~~~   **   during Warmup 0 times;\n   *************  **   ~~~   **   during Sizing 0 times.\n   *************  **   ~~~   **   Max=1.99908  Min=0.102014\n   *************\n   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed=\"ZONE RETAIL BACK_SPACE A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:\n   *************  **   ~~~   **   This error occurred 14 total times;\n   *************  **   ~~~   **   during Warmup 0 times;\n   *************  **   ~~~   **   during Sizing 0 times.\n   *************  **   ~~~   **   Max=1.996391  Min=1.019397\n   *************\n   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed=\"ZONE RETAIL BACK_SPACE B END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:\n   *************  **   ~~~   **   This error occurred 10 total times;\n   *************  **   ~~~   **   during Warmup 0 times;\n   *************  **   ~~~   **   during Sizing 0 times.\n   *************  **   ~~~   **   Max=1.996822  Min=1.087092\n   *************\n   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed=\"ZONE RETAIL RETAIL A  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:\n   *************  **   ~~~   **   This error occurred 4 total times;\n   *************  **   ~~~   **   during Warmup 0 times;\n   *************  **   ~~~   **   during Sizing 0 times.\n   *************  **   ~~~   **   Max=1.918644  Min=1.426846\n   *************\n   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed=\"ZONE RETAIL RETAIL B  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:\n   *************  **   ~~~   **   This error occurred 4 total times;\n   *************  **   ~~~   **   during Warmup 0 times;\n   *************  **   ~~~   **   during Sizing 0 times.\n   *************  **   ~~~   **   Max=1.913385  Min=1.071974\n   *************\n   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed=\"ZONE RETAIL RETAIL C END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:\n   *************  **   ~~~   **   This error occurred 2 total times;\n   *************  **   ~~~   **   during Warmup 0 times;\n   *************  **   ~~~   **   during Sizing 0 times.\n   *************  **   ~~~   **   Max=1.851278  Min=1.671959\n   *************\n   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed=\"ZONE RETAIL BACK_SPACE A END_B - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:\n   *************  **   ~~~   **   This error occurred 1 total times;\n   *************  **   ~~~   **   during Warmup 0 times;\n   *************  **   ~~~   **   during Sizing 0 times.\n   *************  **   ~~~   **   Max=1.648683  Min=1.648683\n   *************\n   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed=\"ZONE RETAIL RETAIL A END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:\n   *************  **   ~~~   **   This error occurred 2 total times;\n   *************  **   ~~~   **   during Warmup 0 times;\n   *************  **   ~~~   **   during Sizing 0 times.\n   *************  **   ~~~   **   Max=1.966461  Min=1.440377\n   *************\n   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed=\"ZONE RETAIL RETAIL B END_A - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:\n   *************  **   ~~~   **   This error occurred 2 total times;\n   *************  **   ~~~   **   during Warmup 0 times;\n   *************  **   ~~~   **   during Sizing 0 times.\n   *************  **   ~~~   **   Max=1.797147  Min=1.465305\n   *************\n   *************  ** Warning ** CalcDoe2DXCoil: Coil:Cooling:DX:SingleSpeed=\"ZONE RETAIL RETAIL C  - STORY GROUND PSZ-AC 1SPD DX AC CLG COIL\" - Full load outlet temperature indicates a possibility of frost/freeze error continues. Outlet air temperature statistics follow:\n   *************  **   ~~~   **   This error occurred 1 total times;\n   *************  **   ~~~   **   during Warmup 0 times;\n   *************  **   ~~~   **   during Sizing 0 times.\n   *************  **   ~~~   **   Max=1.794767  Min=1.794767\n   *************\n   *************\n   ************* ===== Final Error Summary =====\n   ************* The following error categories occurred.  Consider correcting or noting.\n   ************* Nominally Unused Constructions\n   ************* ..The nominally unused constructions warning is provided to alert you to potential conditions that can cause\n   ************* ..extra time during simulation. Each construction is calculated by the algorithm indicated in the HeatBalanceAlgorithm\n   ************* ..object. You may remove the constructions indicated (when you use the DisplayExtraWarnings option).\n   *************\n   ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 0 Severe Errors.\n   ************* EnergyPlus Sizing Error Summary. During Sizing: 26 Warning; 0 Severe Errors.\n   ************* EnergyPlus Completed Successfully-- 800 Warning; 0 Severe Errors; Elapsed Time=00hr 01min 36.21sec\n",
+   "completed_at" : "20170912T214221Z",
+   "completed_status" : "Fail",
+   "current_step" : 3,
    "file_paths" : [
-      "D:/Sites/bricr/weather",
-      "D:/Sites/OpenStudio-measures/NREL_integration_testing/weather"
+      "C:/sites/bricr/weather",
+      "C:/sites/OpenStudio-measures/NREL_integration_testing/weather"
    ],
-   "hash" : "5F45A014",
+   "hash" : "855D5779",
    "measure_paths" : [
-      "D:/Sites/bricr/measures",
-      "D:/Sites/OpenStudio-measures/NREL working measures"
+      "C:/sites/bricr/measures",
+      "C:/sites/OpenStudio-measures/NREL working measures"
    ],
    "root_directory" : null,
    "run_directory" : null,
    "seed_file" : null,
-   "started_at" : "20170906T215223Z",
+   "started_at" : "20170912T214216Z",
    "steps" : [
       {
          "arguments" : {
             "__SKIP__" : false,
             "climate_zone" : "CEC3",
-            "weather_directory" : "../../NREL_integration_testing/weather",
             "weather_file_name" : "CZ03RV2.epw"
          },
          "measure_dir_name" : "ChangeBuildingLocation",
          "result" : {
-            "completed_at" : "20170906T215225Z",
+            "completed_at" : "20170912T214219Z",
             "measure_class_name" : "ChangeBuildingLocation",
             "measure_display_name" : "ChangeBuildingLocation",
             "measure_name" : "change_building_location",
             "measure_taxonomy" : "Whole Building.Space Types",
             "measure_type" : "ModelMeasure",
             "measure_uid" : "d4db4971-f5ba-11e3-a3ac-0800200c9a66",
-            "measure_version_id" : "95782bc7-ab56-456a-85ed-c7e94b1bbfd4",
-            "measure_version_modified" : "20170316T164855Z",
+            "measure_version_id" : "04d1e937-c0da-4e99-b815-fca47baaeac5",
+            "measure_version_modified" : "20170711T201203Z",
             "measure_xml_checksum" : "057E8D9D",
-            "started_at" : "20170906T215225Z",
+            "started_at" : "20170912T214218Z",
             "stderr" : "",
             "stdout" : "[openstudio.model.YearDescription] <1> 'UseWeatherFile' is not yet a supported option for YearDescription\n[openstudio.model.YearDescription] <1> 'UseWeatherFile' is not yet a supported option for YearDescription\n",
             "step_errors" : [],
             "step_files" : [],
-            "step_final_condition" : "The final weather file is Climate Zone 3 and the model has 3 design day objects",
+            "step_final_condition" : "The final weather file is Climate Zone 3 and the model has 3 design day objects.",
             "step_info" : [
                "city is Climate Zone 3. State is CA",
-               "Setting Climate Zone to CEC3",
                "mean dry bulb is 14.141666666666671",
-               "Adding object Climate Zone 3 Ann Clg .4% Condns DB=>MWB",
                "Adding object Climate Zone 3 Ann Htg 99.6% Condns DB",
+               "Adding object Climate Zone 3 Ann Clg .4% Condns DB=>MWB",
                "Adding object Climate Zone 3 Ann Clg .4% Condns WB=>MDB"
             ],
             "step_initial_condition" : "No weather file is set. The model has 0 design day objects",
             "step_result" : "Success",
             "step_values" : [
-               {
-                  "name" : "weather_directory",
-                  "value" : "../../NREL_integration_testing/weather"
-               },
                {
                   "name" : "weather_file_name",
                   "value" : "CZ03RV2.epw"
@@ -91,23 +84,23 @@
             "num_stories_below_grade" : 0,
             "party_wall_fraction" : 0,
             "story_multiplier" : "Basements Ground Mid Top",
-            "template" : "CEC T24 2001",
-            "total_bldg_floor_area" : 69452,
+            "template" : "CEC Pre-1978",
+            "total_bldg_floor_area" : 24683,
             "wwr" : 0
          },
          "measure_dir_name" : "create_bar_from_building_type_ratios",
          "result" : {
-            "completed_at" : "20170906T215227Z",
+            "completed_at" : "20170912T214221Z",
             "measure_class_name" : "CreateBarFromBuildingTypeRatios",
             "measure_display_name" : "Create Bar From Building Type Ratios",
             "measure_name" : "create_bar_from_building_type_ratios",
             "measure_taxonomy" : "Envelope.Form",
             "measure_type" : "ModelMeasure",
             "measure_uid" : "6e3a14f8-c3c7-4e03-bc51-bef8a52e1a05",
-            "measure_version_id" : "1e4c8ada-e24e-49dc-a7ff-ef5e7eda0a98",
-            "measure_version_modified" : "20170502T212349Z",
+            "measure_version_id" : "b8a78d3b-95ad-4391-a1d0-9a3ecce1003c",
+            "measure_version_modified" : "20170628T205357Z",
             "measure_xml_checksum" : "2AF3A68E",
-            "started_at" : "20170906T215226Z",
+            "started_at" : "20170912T214220Z",
             "stderr" : "",
             "stdout" : "",
             "step_errors" : [],
@@ -119,7 +112,7 @@
                "0.0 value for window to wall ratio will be replaced with smart default for RetailStandalone of 0.07.",
                "Creating Space Types for RetailStandalone.",
                "Intersecting surfaces, this will create additional geometry.",
-               "Created Bar envlope with floor area of 69,452 (ft^2)",
+               "Created Bar envlope with floor area of 24,683 (ft^2)",
                "Target party wall fraction is 0.0. Realized fraction is 0.0"
             ],
             "step_initial_condition" : "The building started with 0 spaces.",
@@ -170,8 +163,12 @@
                   "value" : 0
                },
                {
+                  "name" : "single_floor_area",
+                  "value" : 0
+               },
+               {
                   "name" : "total_bldg_floor_area",
-                  "value" : 69452
+                  "value" : 24683
                },
                {
                   "name" : "floor_height",
@@ -191,7 +188,7 @@
                },
                {
                   "name" : "template",
-                  "value" : "CEC T24 2001"
+                  "value" : "CEC Pre-1978"
                },
                {
                   "name" : "ns_to_ew_ratio",
@@ -247,6 +244,10 @@
                }
             ],
             "step_warnings" : [
+               "Could not find color for CEC Pre-1978 Retail Back_Space",
+               "Could not find color for CEC Pre-1978 Retail Entry",
+               "Could not find color for CEC Pre-1978 Retail Point_of_Sale",
+               "Could not find color for CEC Pre-1978 Retail Retail",
                "Floor area of Retail Entry results in a bar with smaller than target minimum width."
             ]
          }
@@ -260,175 +261,38 @@
             "hvac_delivery_type" : "Forced Air",
             "kitchen_makeup" : "Adjacent",
             "system_type" : "Inferred",
-            "template" : "CEC T24 2001"
+            "template" : "CEC Pre-1978"
          },
          "measure_dir_name" : "create_typical_building_from_model",
          "result" : {
-            "completed_at" : "20170906T215230Z",
+            "completed_at" : "20170912T214221Z",
             "measure_class_name" : "CreateTypicalBuildingFromModel",
             "measure_display_name" : "Create Typical Building from Model",
             "measure_name" : "create_typical_building_from_model",
             "measure_taxonomy" : "Whole Building.Space Types",
             "measure_type" : "ModelMeasure",
             "measure_uid" : "339a2e3a-273c-4494-bb50-bfe586a0647c",
-            "measure_version_id" : "0a006116-ac9b-4e4b-86a9-3741eebce0d1",
-            "measure_version_modified" : "20170502T212350Z",
+            "measure_version_id" : "c0534c2b-5b26-48e8-8bae-4b7d38dfc52e",
+            "measure_version_modified" : "20170711T215916Z",
             "measure_xml_checksum" : "EE13F09F",
-            "started_at" : "20170906T215227Z",
+            "started_at" : "20170912T214221Z",
             "stderr" : "",
-            "stdout" : "",
-            "step_errors" : [],
+            "stdout" : "[openstudio.standards.Model] <1> Cannot find a climate zone set containing ASHRAE 169-2006-\n[openstudio.standards.Model] <1> Cannot find a climate zone set when CEC Pre-1978\n",
+            "step_errors" : [ "Could not create default construction set for the building." ],
             "step_files" : [],
-            "step_final_condition" : "The building finished with 1478 objects.",
             "step_info" : [
-               "Replacing argument named 'template' from current measure with a value of CEC T24 2001 from create_bar_from_building_type_ratios.",
-               "Adding loads to space type named Retail Point_of_Sale - CEC T24 2001",
-               "Adding loads to space type named Retail Retail - CEC T24 2001",
-               "Adding loads to space type named Retail Entry - CEC T24 2001",
-               "Adding loads to space type named Retail Back_Space - CEC T24 2001",
-               "Adding default construction set named Res CEC T24 2001 - Retail - CEC T24-CEC3",
-               "No elevators added to the building.",
-               "Adding Exterior Lights named Parking Areas and Drives Def (W/ft^2) with design level of 0.18 * 98,453.",
-               "Adding Exterior Lights named Building Facades Def (W/ft^2) with design level of 0.25 * 21,244.",
-               "Adding Exterior Lights named Main Entries Def (W/ft) with design level of 30.0 * 56.",
-               "Adding Exterior Lights named Other Doors Def (W/ft) with design level of 25.0 * 81.",
-               "Assigning Retail Point_of_Sale - CEC T24 2001 Thermostat to thermal zones with Retail Point_of_Sale - CEC T24 2001 assigned.",
-               "Assigning Retail Retail - CEC T24 2001 Thermostat to thermal zones with Retail Retail - CEC T24 2001 assigned.",
-               "Assigning Retail Entry - CEC T24 2001 Thermostat to thermal zones with Retail Entry - CEC T24 2001 assigned.",
-               "Assigning Retail Back_Space - CEC T24 2001 Thermostat to thermal zones with Retail Back_Space - CEC T24 2001 assigned.",
-               "Retail Point_of_Sale had no people, one has been created.",
-               "Retail Point_of_Sale set occupancy to 33.01 people/1000 ft^2.",
-               "Retail Point_of_Sale had no lights, one has been created.",
-               "Retail Point_of_Sale set LPD to 3.36 W/ft^2.",
-               "Retail Point_of_Sale had no electric equipment, one has been created.",
-               "Retail Point_of_Sale set electric EPD to 1.0 W/ft^2.",
-               "Retail Point_of_Sale had no ventilation specification, one has been created.",
-               "Retail Point_of_Sale set ventilation per area to 0.3 cfm/ft^2.",
-               "Retail Point_of_Sale set ventilation per person to 15.0 cfm/person.",
-               "Retail Point_of_Sale had no infiltration objects, one has been created.",
-               "Retail Point_of_Sale set infiltration to 0.0 per ft^2 exterior surface area.",
-               "Retail Point_of_Sale set occupancy schedule to RetailOccupancy.",
-               "Retail Point_of_Sale set occupant activity schedule to RetailPeopleActivityLevel.",
-               "Retail Point_of_Sale set lighting schedule to RetailLights.",
-               "Retail Point_of_Sale set electric equipment schedule to RetailReceptacle.",
-               "Retail Point_of_Sale set infiltration schedule to RetailInfiltration.",
-               "Retail Retail had no people, one has been created.",
-               "Retail Retail set occupancy to 33.01 people/1000 ft^2.",
-               "Retail Retail had no lights, one has been created.",
-               "Retail Retail set LPD to 3.36 W/ft^2.",
-               "Retail Retail had no electric equipment, one has been created.",
-               "Retail Retail set electric EPD to 1.0 W/ft^2.",
-               "Retail Retail had no ventilation specification, one has been created.",
-               "Retail Retail set ventilation per area to 0.2 cfm/ft^2.",
-               "Retail Retail had no infiltration objects, one has been created.",
-               "Retail Retail set infiltration to 0.0 per ft^2 exterior surface area.",
-               "Retail Retail set occupancy schedule to RetailOccupancy.",
-               "Retail Retail set occupant activity schedule to RetailPeopleActivityLevel.",
-               "Retail Retail set lighting schedule to RetailLights.",
-               "Retail Retail set electric equipment schedule to RetailReceptacle.",
-               "Retail Retail set infiltration schedule to RetailInfiltration.",
-               "Retail Entry had no people, one has been created.",
-               "Retail Entry set occupancy to 33.01 people/1000 ft^2.",
-               "Retail Entry had no lights, one has been created.",
-               "Retail Entry set LPD to 3.36 W/ft^2.",
-               "Retail Entry had no electric equipment, one has been created.",
-               "Retail Entry set electric EPD to 1.0 W/ft^2.",
-               "Retail Entry had no ventilation specification, one has been created.",
-               "Retail Entry set ventilation per area to 0.3 cfm/ft^2.",
-               "Retail Entry set ventilation per person to 15.0 cfm/person.",
-               "Retail Entry had no infiltration objects, one has been created.",
-               "Retail Entry set infiltration to 0.0 per ft^2 exterior surface area.",
-               "Retail Entry set occupancy schedule to RetailOccupancy.",
-               "Retail Entry set occupant activity schedule to RetailPeopleActivityLevel.",
-               "Retail Entry set lighting schedule to RetailLights.",
-               "Retail Entry set electric equipment schedule to RetailReceptacle.",
-               "Retail Entry set infiltration schedule to RetailInfiltration.",
-               "Retail Back_Space had no people, one has been created.",
-               "Retail Back_Space set occupancy to 3.0 people/1000 ft^2.",
-               "Retail Back_Space had no lights, one has been created.",
-               "Retail Back_Space set LPD to 0.88 W/ft^2.",
-               "Retail Back_Space had no electric equipment, one has been created.",
-               "Retail Back_Space set electric EPD to 0.2 W/ft^2.",
-               "Retail Back_Space had no ventilation specification, one has been created.",
-               "Retail Back_Space set ventilation per area to 0.15 cfm/ft^2.",
-               "Retail Back_Space set ventilation per person to 15.0 cfm/person.",
-               "Retail Back_Space had no infiltration objects, one has been created.",
-               "Retail Back_Space set infiltration to 0.0 per ft^2 exterior surface area.",
-               "Retail Back_Space set occupancy schedule to RetailOccupancy.",
-               "Retail Back_Space set occupant activity schedule to RetailPeopleActivityLevel.",
-               "Retail Back_Space set lighting schedule to RetailLights.",
-               "Retail Back_Space set electric equipment schedule to RetailReceptacle.",
-               "Retail Back_Space set infiltration schedule to RetailInfiltration.",
-               "Adding construction set: CEC T24 2001-CEC T24-CEC3-Retail--is_residentialNo",
-               "Adding construction Typical Insulated Exterior Mass Floor.",
-               "Adding construction Metal framed wallsW3_R11.36.",
-               "Adding construction Metal roofR4_R20.28.",
-               "Adding construction Typical Interior Floor.",
-               "Adding construction Typical Interior Wall.",
-               "Adding construction Typical Interior Ceiling.",
-               "Adding construction Ground FloorGround_Floor_R11_T2013.",
-               "Adding construction Typical Insulated Basement Mass Wall.",
-               "Adding construction Window8.",
-               "Adding construction Typical Insulated Metal Door.",
-               "Adding construction Typical Overhead Door.",
-               "Adding construction Typical Interior Window.",
-               "Adding construction Typical Interior Door.",
-               "Adding construction Typical Interior Partition.",
-               "Retail Point_of_Sale - CEC T24 2001 set heating setpoint schedule to Retail HtgSetp.",
-               "Retail Point_of_Sale - CEC T24 2001 set cooling setpoint schedule to Retail ClgSetp.",
-               "Retail Retail - CEC T24 2001 set heating setpoint schedule to Retail HtgSetp.",
-               "Retail Retail - CEC T24 2001 set cooling setpoint schedule to Retail ClgSetp.",
-               "Retail Entry - CEC T24 2001 set heating setpoint schedule to Retail HtgSetp.",
-               "Retail Entry - CEC T24 2001 set cooling setpoint schedule to Retail FRONT ENTRY COOLING_CBES.",
-               "Retail Back_Space - CEC T24 2001 set heating setpoint schedule to Retail HtgSetp.",
-               "Retail Back_Space - CEC T24 2001 set cooling setpoint schedule to Retail ClgSetp.",
-               "System type is PSZ-AC for CEC T24 2001, nonresidential, NaturalGas heating, Electricity cooling, air delivery, 69452 ft^2, 1 stories.",
-               "--- NaturalGas for main heating",
-               "--- Electricity for cooling",
-               "Adding PSZ-AC for Zone Retail Retail C  - Story Ground.",
-               "No maximum fraction outdoor air schedule in PSZ for building types except RetailStandalone",
-               "Adding PSZ-AC for Zone Retail Retail C end_a - Story Ground.",
-               "No maximum fraction outdoor air schedule in PSZ for building types except RetailStandalone",
-               "Adding PSZ-AC for Zone Retail Back_Space B end_b - Story Ground.",
-               "No maximum fraction outdoor air schedule in PSZ for building types except RetailStandalone",
-               "Adding PSZ-AC for Zone Retail Back_Space C end_b - Story Ground.",
-               "No maximum fraction outdoor air schedule in PSZ for building types except RetailStandalone",
-               "Adding PSZ-AC for Zone Retail Back_Space C  - Story Ground.",
-               "No maximum fraction outdoor air schedule in PSZ for building types except RetailStandalone",
-               "Adding PSZ-AC for Zone Retail Point_of_Sale C  - Story Ground.",
-               "No maximum fraction outdoor air schedule in PSZ for building types except RetailStandalone",
-               "Adding PSZ-AC for Zone Retail Entry C  - Story Ground.",
-               "No maximum fraction outdoor air schedule in PSZ for building types except RetailStandalone",
-               "Adding PSZ-AC for Zone Retail Back_Space A end_b - Story Ground.",
-               "No maximum fraction outdoor air schedule in PSZ for building types except RetailStandalone",
-               "Adding PSZ-AC for Zone Retail Entry A  - Story Ground.",
-               "No maximum fraction outdoor air schedule in PSZ for building types except RetailStandalone",
-               "Adding PSZ-AC for Zone Retail Back_Space B  - Story Ground.",
-               "No maximum fraction outdoor air schedule in PSZ for building types except RetailStandalone",
-               "Adding PSZ-AC for Zone Retail Entry B  - Story Ground.",
-               "No maximum fraction outdoor air schedule in PSZ for building types except RetailStandalone",
-               "Adding PSZ-AC for Zone Retail Point_of_Sale A  - Story Ground.",
-               "No maximum fraction outdoor air schedule in PSZ for building types except RetailStandalone",
-               "Adding PSZ-AC for Zone Retail Retail B  - Story Ground.",
-               "No maximum fraction outdoor air schedule in PSZ for building types except RetailStandalone",
-               "Adding PSZ-AC for Zone Retail Retail B end_a - Story Ground.",
-               "No maximum fraction outdoor air schedule in PSZ for building types except RetailStandalone",
-               "Adding PSZ-AC for Zone Retail Point_of_Sale B  - Story Ground.",
-               "No maximum fraction outdoor air schedule in PSZ for building types except RetailStandalone",
-               "Adding PSZ-AC for Zone Retail Retail A end_a - Story Ground.",
-               "No maximum fraction outdoor air schedule in PSZ for building types except RetailStandalone",
-               "Adding PSZ-AC for Zone Retail Back_Space A  - Story Ground.",
-               "No maximum fraction outdoor air schedule in PSZ for building types except RetailStandalone",
-               "Adding PSZ-AC for Zone Retail Retail A  - Story Ground.",
-               "No maximum fraction outdoor air schedule in PSZ for building types except RetailStandalone",
-               "Total Time = 3sec."
+               "Replacing argument named 'template' from current measure with a value of CEC Pre-1978 from create_bar_from_building_type_ratios.",
+               "Adding loads to space type named Retail Retail - CEC Pre-1978",
+               "Adding loads to space type named Retail Back_Space - CEC Pre-1978",
+               "Adding loads to space type named Retail Point_of_Sale - CEC Pre-1978",
+               "Adding loads to space type named Retail Entry - CEC Pre-1978"
             ],
-            "step_initial_condition" : "The building started with 295 objects.",
-            "step_result" : "Success",
+            "step_initial_condition" : "The building started with 291 objects.",
+            "step_result" : "Fail",
             "step_values" : [
                {
                   "name" : "template",
-                  "value" : "CEC T24 2001"
+                  "value" : "CEC Pre-1978"
                },
                {
                   "name" : "system_type",
@@ -471,6 +335,10 @@
                   "value" : true
                },
                {
+                  "name" : "onsite_parking_fraction",
+                  "value" : 1
+               },
+               {
                   "name" : "add_exhaust",
                   "value" : true
                },
@@ -498,148 +366,25 @@
          "arguments" : {
             "__SKIP__" : false
          },
-         "measure_dir_name" : "ReduceLightingLoadsByPercentage",
-         "result" : {
-            "completed_at" : "20170906T215230Z",
-            "measure_class_name" : "ReduceLightingLoadsByPercentage",
-            "measure_display_name" : "Reduce Lighting Loads by Percentage",
-            "measure_name" : "reduce_lighting_loads_by_percentage",
-            "measure_taxonomy" : "Electric Lighting.Lighting Equipment",
-            "measure_type" : "ModelMeasure",
-            "measure_uid" : "791f3404-a28b-4a80-ba3f-e15b339e39ea",
-            "measure_version_id" : "61e58d6a-8e52-4a1e-9a5b-17fed2ccc4a5",
-            "measure_version_modified" : "20170316T164922Z",
-            "measure_xml_checksum" : "293730A7",
-            "started_at" : "20170906T215230Z",
-            "stderr" : "",
-            "stdout" : "",
-            "step_errors" : [],
-            "step_files" : [],
-            "step_final_condition" : "The model's final final lighting power was  143,385 watts, a lighting power density of 2.06 w/ft^2. Initial capital costs associated with the improvements are $0.",
-            "step_info" : [],
-            "step_initial_condition" : "The model's initial building lighting power was  204,836 watts, a lighting power density of 2.95 w/ft^2.",
-            "step_result" : "Success",
-            "step_values" : [
-               {
-                  "name" : "space_type",
-                  "value" : "{1754502a-b253-4c8e-b994-2cc5ec3dc0ad}"
-               },
-               {
-                  "name" : "lighting_power_reduction_percent",
-                  "value" : 30
-               },
-               {
-                  "name" : "material_and_installation_cost",
-                  "value" : 0
-               },
-               {
-                  "name" : "demolition_cost",
-                  "value" : 0
-               },
-               {
-                  "name" : "years_until_costs_start",
-                  "value" : 0
-               },
-               {
-                  "name" : "demo_cost_initial_const",
-                  "value" : false
-               },
-               {
-                  "name" : "expected_life",
-                  "value" : 15
-               },
-               {
-                  "name" : "om_cost",
-                  "value" : 0
-               },
-               {
-                  "name" : "om_frequency",
-                  "value" : 1
-               }
-            ],
-            "step_warnings" : []
-         }
+         "measure_dir_name" : "ReduceLightingLoadsByPercentage"
       },
       {
          "arguments" : {
             "__SKIP__" : true
          },
-         "measure_dir_name" : "IncreaseInsulationRValueForExteriorWalls",
-         "result" : {
-            "completed_at" : "20170906T215230Z",
-            "measure_class_name" : "IncreaseInsulationRValueForExteriorWalls",
-            "measure_display_name" : "Increase R-value of Insulation for Exterior Walls to a Specific Value",
-            "measure_name" : "increase_insulation_r_value_for_exterior_walls",
-            "measure_taxonomy" : "Envelope.Opaque",
-            "measure_type" : "ModelMeasure",
-            "measure_uid" : "3fdf9c39-d305-449b-a4b5-077166af5a67",
-            "measure_version_id" : "ee74b3bf-bb9d-4a5f-af5d-aff1afee6224",
-            "measure_version_modified" : "20170316T164915Z",
-            "measure_xml_checksum" : "0F858D9E",
-            "started_at" : "20170906T215230Z",
-            "stderr" : "",
-            "stdout" : "",
-            "step_errors" : [],
-            "step_files" : [],
-            "step_info" : [],
-            "step_result" : "Skip",
-            "step_values" : [],
-            "step_warnings" : []
-         }
+         "measure_dir_name" : "IncreaseInsulationRValueForExteriorWalls"
       },
       {
          "arguments" : {
             "__SKIP__" : true
          },
-         "measure_dir_name" : "IncreaseInsulationRValueForRoofs",
-         "result" : {
-            "completed_at" : "20170906T215230Z",
-            "measure_class_name" : "IncreaseInsulationRValueForRoofs",
-            "measure_display_name" : "Increase R-value of Insulation for Roofs to a Specific Value",
-            "measure_name" : "increase_insulation_r_value_for_roofs",
-            "measure_taxonomy" : "Envelope.Opaque",
-            "measure_type" : "ModelMeasure",
-            "measure_uid" : "65b798f4-207f-4aed-987a-386c865d0ccd",
-            "measure_version_id" : "3345fd6c-d2e5-45ee-aae8-c6f01fa175f3",
-            "measure_version_modified" : "20170316T164915Z",
-            "measure_xml_checksum" : "0F858D9E",
-            "started_at" : "20170906T215230Z",
-            "stderr" : "",
-            "stdout" : "",
-            "step_errors" : [],
-            "step_files" : [],
-            "step_info" : [],
-            "step_result" : "Skip",
-            "step_values" : [],
-            "step_warnings" : []
-         }
+         "measure_dir_name" : "IncreaseInsulationRValueForRoofs"
       },
       {
          "arguments" : {
             "__SKIP__" : true
          },
-         "measure_dir_name" : "AdjustSystemEfficiencies",
-         "result" : {
-            "completed_at" : "20170906T215230Z",
-            "measure_class_name" : "AdjustSystemEfficiencies",
-            "measure_display_name" : "AdjustSystemEfficiencies",
-            "measure_name" : "adjust_system_efficiencies",
-            "measure_taxonomy" : "HVAC.Whole System",
-            "measure_type" : "ModelMeasure",
-            "measure_uid" : "edeaff3d-3ae4-4487-b4a4-5cf08ea14510",
-            "measure_version_id" : "6830bb02-57c8-4b9b-9bd1-7170167214ff",
-            "measure_version_modified" : "20170316T164848Z",
-            "measure_xml_checksum" : "4435983D",
-            "started_at" : "20170906T215230Z",
-            "stderr" : "",
-            "stdout" : "",
-            "step_errors" : [],
-            "step_files" : [],
-            "step_info" : [],
-            "step_result" : "Skip",
-            "step_values" : [],
-            "step_warnings" : []
-         }
+         "measure_dir_name" : "AdjustSystemEfficiencies"
       },
       {
          "arguments" : {
@@ -666,943 +411,9 @@
             "zone_equipment_detail_section" : true,
             "zone_summary_section" : true
          },
-         "measure_dir_name" : "openstudio_results",
-         "result" : {
-            "completed_at" : "20170906T215435Z",
-            "measure_class_name" : "OpenStudioResults",
-            "measure_display_name" : "OpenStudio Results",
-            "measure_name" : "openstudio_results",
-            "measure_taxonomy" : "Reporting.QAQC",
-            "measure_type" : "ReportingMeasure",
-            "measure_uid" : "a25386cd-60e4-46bc-8b11-c755f379d916",
-            "measure_version_id" : "0ec719ea-0548-402c-a941-09766b6986db",
-            "measure_version_modified" : "20170417T161427Z",
-            "measure_xml_checksum" : "557BF06F",
-            "started_at" : "20170906T215421Z",
-            "stderr" : "",
-            "stdout" : "",
-            "step_errors" : [],
-            "step_files" : [
-               "D:/Sites/bricr/spec/files/phase0/building_151_CBES_test/Lighting_Fixture_Only/007_openstudio_results/report.html"
-            ],
-            "step_final_condition" : "Generated report with 21 sections to ./report.html.",
-            "step_info" : [],
-            "step_initial_condition" : "Gathering data from EnergyPlus SQL file and OSM model.",
-            "step_result" : "Success",
-            "step_values" : [
-               {
-                  "name" : "building_summary_section",
-                  "value" : true
-               },
-               {
-                  "name" : "annual_overview_section",
-                  "value" : true
-               },
-               {
-                  "name" : "monthly_overview_section",
-                  "value" : true
-               },
-               {
-                  "name" : "utility_bills_rates_section",
-                  "value" : true
-               },
-               {
-                  "name" : "envelope_section_section",
-                  "value" : true
-               },
-               {
-                  "name" : "space_type_breakdown_section",
-                  "value" : true
-               },
-               {
-                  "name" : "space_type_details_section",
-                  "value" : true
-               },
-               {
-                  "name" : "interior_lighting_section",
-                  "value" : true
-               },
-               {
-                  "name" : "plug_loads_section",
-                  "value" : true
-               },
-               {
-                  "name" : "exterior_light_section",
-                  "value" : true
-               },
-               {
-                  "name" : "water_use_section",
-                  "value" : true
-               },
-               {
-                  "name" : "hvac_load_profile",
-                  "value" : true
-               },
-               {
-                  "name" : "zone_condition_section",
-                  "value" : true
-               },
-               {
-                  "name" : "zone_summary_section",
-                  "value" : true
-               },
-               {
-                  "name" : "zone_equipment_detail_section",
-                  "value" : true
-               },
-               {
-                  "name" : "air_loops_detail_section",
-                  "value" : true
-               },
-               {
-                  "name" : "plant_loops_detail_section",
-                  "value" : true
-               },
-               {
-                  "name" : "outdoor_air_section",
-                  "value" : true
-               },
-               {
-                  "name" : "cost_summary_section",
-                  "value" : true
-               },
-               {
-                  "name" : "source_energy_section",
-                  "value" : true
-               },
-               {
-                  "name" : "schedules_overview_section",
-                  "value" : true
-               },
-               {
-                  "display_name" : "CEC T24 2001|RetailStandalone",
-                  "name" : "building_name",
-                  "value" : "building_name"
-               },
-               {
-                  "name" : "net_site_energy",
-                  "units" : "kBtu",
-                  "value" : 6166374.9685328016
-               },
-               {
-                  "name" : "total_building_area",
-                  "units" : "ft^2",
-                  "value" : 69451.97918173614
-               },
-               {
-                  "name" : "eui",
-                  "units" : "kBtu/ft^2",
-                  "value" : 88.786166228569897
-               },
-               {
-                  "name" : "unmet_hours_during_heating",
-                  "units" : "hr",
-                  "value" : 88.829999999999998
-               },
-               {
-                  "name" : "unmet_hours_during_cooling",
-                  "units" : "hr",
-                  "value" : 8
-               },
-               {
-                  "name" : "unmet_hours_during_occupied_heating",
-                  "units" : "hr",
-                  "value" : 0
-               },
-               {
-                  "name" : "unmet_hours_during_occupied_cooling",
-                  "units" : "hr",
-                  "value" : 8
-               },
-               {
-                  "name" : "unmet_hours_tolerance_heating",
-                  "units" : "F",
-                  "value" : 0.35999999999999999
-               },
-               {
-                  "name" : "unmet_hours_tolerance_cooling",
-                  "units" : "F",
-                  "value" : 0.35999999999999999
-               },
-               {
-                  "name" : "end_use_heating",
-                  "units" : "kBtu",
-                  "value" : 1201718.3705028486
-               },
-               {
-                  "name" : "end_use_cooling",
-                  "units" : "kBtu",
-                  "value" : 675717.78141377005
-               },
-               {
-                  "name" : "end_use_interior_lighting",
-                  "units" : "kBtu",
-                  "value" : 1719908.9465205455
-               },
-               {
-                  "name" : "end_use_exterior_lighting",
-                  "units" : "kBtu",
-                  "value" : 398291.71029806213
-               },
-               {
-                  "name" : "end_use_interior_equipment",
-                  "units" : "kBtu",
-                  "value" : 759703.8564447331
-               },
-               {
-                  "name" : "end_use_exterior_equipment",
-                  "units" : "kBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_fans",
-                  "units" : "kBtu",
-                  "value" : 1411034.3033528416
-               },
-               {
-                  "name" : "end_use_pumps",
-                  "units" : "kBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_heat_rejection",
-                  "units" : "kBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_humidification",
-                  "units" : "kBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_heat_recovery",
-                  "units" : "kBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_water_systems",
-                  "units" : "kBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_refrigeration",
-                  "units" : "kBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_generators",
-                  "units" : "kBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "fuel_electricity",
-                  "units" : "kBtu",
-                  "value" : 4996218.9081363864
-               },
-               {
-                  "name" : "fuel_natural_gas",
-                  "units" : "kBtu",
-                  "value" : 1170165.5385676185
-               },
-               {
-                  "name" : "fuel_additional_fuel",
-                  "units" : "kBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "fuel_district_cooling",
-                  "units" : "kBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "fuel_district_heating",
-                  "units" : "kBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_electricity_heating",
-                  "units" : "kWh",
-                  "value" : 9247.2222222222226
-               },
-               {
-                  "name" : "end_use_electricity_cooling",
-                  "units" : "kWh",
-                  "value" : 198033.33333333334
-               },
-               {
-                  "name" : "end_use_electricity_interior_lighting",
-                  "units" : "kWh",
-                  "value" : 504055.55555555562
-               },
-               {
-                  "name" : "end_use_electricity_exterior_lighting",
-                  "units" : "kWh",
-                  "value" : 116727.77777777778
-               },
-               {
-                  "name" : "end_use_electricity_interior_equipment",
-                  "units" : "kWh",
-                  "value" : 222647.22222222222
-               },
-               {
-                  "name" : "end_use_electricity_exterior_equipment",
-                  "units" : "kWh",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_electricity_fans",
-                  "units" : "kWh",
-                  "value" : 413533.33333333331
-               },
-               {
-                  "name" : "end_use_electricity_pumps",
-                  "units" : "kWh",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_electricity_heat_rejection",
-                  "units" : "kWh",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_electricity_humidification",
-                  "units" : "kWh",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_electricity_heat_recovery",
-                  "units" : "kWh",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_electricity_water_systems",
-                  "units" : "kWh",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_electricity_refrigeration",
-                  "units" : "kWh",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_electricity_generators",
-                  "units" : "kWh",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_natural_gas_heating",
-                  "units" : "therms",
-                  "value" : 11703.913199999999
-               },
-               {
-                  "name" : "end_use_natural_gas_cooling",
-                  "units" : "therms",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_natural_gas_interior_lighting",
-                  "units" : "therms",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_natural_gas_exterior_lighting",
-                  "units" : "therms",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_natural_gas_interior_equipment",
-                  "units" : "therms",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_natural_gas_exterior_equipment",
-                  "units" : "therms",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_natural_gas_fans",
-                  "units" : "therms",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_natural_gas_pumps",
-                  "units" : "therms",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_natural_gas_heat_rejection",
-                  "units" : "therms",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_natural_gas_humidification",
-                  "units" : "therms",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_natural_gas_heat_recovery",
-                  "units" : "therms",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_natural_gas_water_systems",
-                  "units" : "therms",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_natural_gas_refrigeration",
-                  "units" : "therms",
-                  "value" : 0
-               },
-               {
-                  "name" : "end_use_natural_gas_generators",
-                  "units" : "therms",
-                  "value" : 0
-               },
-               {
-                  "name" : "electricity_heating_ip",
-                  "units" : "kWh",
-                  "value" : 9247.9583333333339
-               },
-               {
-                  "name" : "electricity_cooling_ip",
-                  "units" : "kWh",
-                  "value" : 198034.69444444444
-               },
-               {
-                  "name" : "electricity_interior_lighting_ip",
-                  "units" : "kWh",
-                  "value" : 504055.27777777781
-               },
-               {
-                  "name" : "electricity_exterior_lighting_ip",
-                  "units" : "kWh",
-                  "value" : 116726.44444444445
-               },
-               {
-                  "name" : "electricity_interior_equipment_ip",
-                  "units" : "kWh",
-                  "value" : 222648.5
-               },
-               {
-                  "name" : "electricity_exterior_equipment_ip",
-                  "units" : "kWh",
-                  "value" : 0
-               },
-               {
-                  "name" : "electricity_fans_ip",
-                  "units" : "kWh",
-                  "value" : 413532.22222222219
-               },
-               {
-                  "name" : "electricity_pumps_ip",
-                  "units" : "kWh",
-                  "value" : 0
-               },
-               {
-                  "name" : "electricity_heat_rejection_ip",
-                  "units" : "kWh",
-                  "value" : 0
-               },
-               {
-                  "name" : "electricity_humidification_ip",
-                  "units" : "kWh",
-                  "value" : 0
-               },
-               {
-                  "name" : "electricity_heat_recovery_ip",
-                  "units" : "kWh",
-                  "value" : 0
-               },
-               {
-                  "name" : "electricity_water_systems_ip",
-                  "units" : "kWh",
-                  "value" : 0
-               },
-               {
-                  "name" : "electricity_refrigeration_ip",
-                  "units" : "kWh",
-                  "value" : 0
-               },
-               {
-                  "name" : "electricity_generators_ip",
-                  "units" : "kWh",
-                  "value" : 0
-               },
-               {
-                  "name" : "electricity_ip",
-                  "units" : "kWh",
-                  "value" : 1464245.0972222222
-               },
-               {
-                  "name" : "natural_gas_heating_ip",
-                  "units" : "MBtu",
-                  "value" : 1170.1599464466085
-               },
-               {
-                  "name" : "natural_gas_cooling_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "natural_gas_interior_lighting_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "natural_gas_exterior_lighting_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "natural_gas_interior_equipment_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "natural_gas_exterior_equipment_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "natural_gas_fans_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "natural_gas_pumps_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "natural_gas_heat_rejection_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "natural_gas_humidification_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "natural_gas_heat_recovery_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "natural_gas_water_systems_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "natural_gas_refrigeration_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "natural_gas_generators_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "natural_gas_ip",
-                  "units" : "MBtu",
-                  "value" : 1170.1599464466085
-               },
-               {
-                  "name" : "additional_fuel_heating_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "additional_fuel_cooling_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "additional_fuel_interior_lighting_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "additional_fuel_exterior_lighting_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "additional_fuel_interior_equipment_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "additional_fuel_exterior_equipment_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "additional_fuel_fans_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "additional_fuel_pumps_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "additional_fuel_heat_rejection_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "additional_fuel_humidification_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "additional_fuel_heat_recovery_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "additional_fuel_water_systems_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "additional_fuel_refrigeration_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "additional_fuel_generators_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "additional_fuel_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_cooling_heating_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_cooling_cooling_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_cooling_interior_lighting_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_cooling_exterior_lighting_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_cooling_interior_equipment_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_cooling_exterior_equipment_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_cooling_fans_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_cooling_pumps_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_cooling_heat_rejection_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_cooling_humidification_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_cooling_heat_recovery_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_cooling_water_systems_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_cooling_refrigeration_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_cooling_generators_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_cooling_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_heating_heating_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_heating_cooling_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_heating_interior_lighting_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_heating_exterior_lighting_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_heating_interior_equipment_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_heating_exterior_equipment_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_heating_fans_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_heating_pumps_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_heating_heat_rejection_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_heating_humidification_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_heating_heat_recovery_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_heating_water_systems_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_heating_refrigeration_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_heating_generators_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "district_heating_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "water_heating_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "water_cooling_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "water_interior_lighting_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "water_exterior_lighting_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "water_interior_equipment_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "water_exterior_equipment_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "water_fans_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "water_pumps_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "water_heat_rejection_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "water_humidification_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "water_heat_recovery_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "water_water_systems_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "water_refrigeration_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "water_generators_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "water_ip",
-                  "units" : "MBtu",
-                  "value" : 0
-               },
-               {
-                  "name" : "metal_framed_walls_w_3_r_11_36",
-                  "units" : "ft^2",
-                  "value" : 19756.735259915797
-               },
-               {
-                  "name" : "metal_roof_r_4_r_20_28",
-                  "units" : "ft^2",
-                  "value" : 69451.999999999898
-               },
-               {
-                  "name" : "window_8",
-                  "units" : "ft^2",
-                  "value" : 1487.0660948323641
-               },
-               {
-                  "name" : "gross_window_wall_ratio",
-                  "units" : "%",
-                  "value" : 7
-               },
-               {
-                  "name" : "gross_window_wall_ratio_conditioned",
-                  "units" : "%",
-                  "value" : 7
-               },
-               {
-                  "name" : "skylight_roof_ratio",
-                  "units" : "%",
-                  "value" : 0
-               },
-               {
-                  "name" : "space_type_retail_back_space_cec_t_24_2001",
-                  "units" : "ft^2",
-                  "value" : 11501.251199999972
-               },
-               {
-                  "name" : "space_type_retail_entry_cec_t_24_2001",
-                  "units" : "ft^2",
-                  "value" : 361.15040000001409
-               },
-               {
-                  "name" : "space_type_retail_point_of_sale_cec_t_24_2001",
-                  "units" : "ft^2",
-                  "value" : 4562.9964000000255
-               },
-               {
-                  "name" : "space_type_retail_retail_cec_t_24_2001",
-                  "units" : "ft^2",
-                  "value" : 53026.601999999926
-               },
-               {
-                  "name" : "exterior_lighting_total_power",
-                  "units" : "W",
-                  "value" : 26734.310000000001
-               },
-               {
-                  "name" : "exterior_lighting_total_consumption",
-                  "units" : "kWh",
-                  "value" : 1807186.1111111112
-               },
-               {
-                  "name" : "inflation_approach",
-                  "value" : "Constant Dollar"
-               },
-               {
-                  "name" : "analysis_length",
-                  "units" : "yrs",
-                  "value" : 25
-               },
-               {
-                  "name" : "annual_peak_electric_demand",
-                  "units" : "kW",
-                  "value" : 410.08527000000004
-               },
-               {
-                  "name" : "first_year_capital_cost",
-                  "units" : "$",
-                  "value" : 0
-               },
-               {
-                  "name" : "annual_utility_cost",
-                  "units" : "$",
-                  "value" : 0
-               },
-               {
-                  "name" : "total_lifecycle_cost",
-                  "units" : "$",
-                  "value" : 0
-               }
-            ],
-            "step_warnings" : []
-         }
+         "measure_dir_name" : "openstudio_results"
       }
    ],
-   "updated_at" : "20170906T215438Z",
+   "updated_at" : "20170912T214221Z",
    "weather_file" : null
 }

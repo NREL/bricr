@@ -9,10 +9,10 @@ describe 'BRICR' do
   end
 
   it 'should parse a phase zero xml' do
-    xml_path = File.join(File.dirname(__FILE__), '../files/phase0/building_151_CBES_smalloffice_test.xml')
+    xml_path = File.join(File.dirname(__FILE__), '../files/phase0/building_151_CBES_standaloneretail_test.xml')
     expect(File.exist?(xml_path)).to be true
 
-    out_path = File.join(File.dirname(__FILE__), '../output/building_151_CBES_smalloffice_test/')
+    out_path = File.join(File.dirname(__FILE__), '../output/phase0_building_151_CBES_test/')
     if File.exist?(out_path)
       FileUtils.rm_rf(out_path)
     end

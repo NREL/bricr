@@ -41,11 +41,11 @@
 						<auc:FloorAreas>
 							<auc:FloorArea>
 								<auc:FloorAreaType>Gross</auc:FloorAreaType>
-								<auc:FloorAreaValue>24683</auc:FloorAreaValue>
+								<auc:FloorAreaValue>5000</auc:FloorAreaValue>
 							</auc:FloorArea>
 							<auc:FloorArea>
 								<auc:FloorAreaType>Footprint</auc:FloorAreaType>
-								<auc:FloorAreaValue>24683</auc:FloorAreaValue>
+								<auc:FloorAreaValue>5000</auc:FloorAreaValue>
 							</auc:FloorArea>
 						</auc:FloorAreas>
 						<auc:AspectRatio>3.6732677131179763</auc:AspectRatio>
