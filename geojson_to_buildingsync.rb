@@ -400,7 +400,7 @@ outdir = './bs_output'
 FileUtils.mkdir_p(outdir) unless File.exist?(outdir)
 
 summary_file = File.open(outdir + "/summary.csv", 'w')
-summary_file.puts "building_id,OccupancyClassification"
+summary_file.puts "building_id,xml_filename,should_run_simulation,OccupancyClassification"
 
 geojson[:features].each do |feature|
   id = feature[:properties][:"Building Identifier"]
@@ -410,7 +410,7 @@ geojson[:features].each do |feature|
   doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility/auc:OccupancyClassification') do |occupancy_classification|
     building_type = occupancy_classification.text
   end
-  summary_file.puts "#{id},#{building_type}"
+  summary_file.puts "#{id},#{id}.xml,1,#{building_type}"
 
   filename = File.join(outdir, "#{id}.xml")
   File.open(filename, 'w') do |file|

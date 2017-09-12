@@ -1,5 +1,4 @@
 # usage: bundle exec ruby run_buildingsync.rb /path/to/config.rb /path/to/buildingsync.xml
-
 require 'bricr'
 require 'parallel'
 
@@ -39,6 +38,10 @@ if BRICR::DO_SIMULATIONS
   end
 end
 
-translator.gatherResults(out_dir)
+if BRICR::DO_GET_RESULTS
+  # Read the results from the out.osw file
+  translator.gatherResults(out_dir)
 
-translator.saveXML(File.join(out_dir, 'results.xml'))
+  # Save the results back to the BuildingSync file
+  translator.saveXML(File.join(out_dir, 'results.xml'))
+end
