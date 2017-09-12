@@ -1,8 +1,8 @@
 module BRICR
 
   # location of openstudio CLI
-  OPENSTUDIO_EXE = 'openstudio'
-  
+  OPENSTUDIO_EXE = 'C:/openstudio-2.1.0/bin/openstudio.exe'
+
   # one or more measure paths
   OPENSTUDIO_MEASURES = [File.realpath("./measures", File.dirname(__FILE__)), File.realpath("./../OpenStudio-measures/NREL\ working\ measures", File.dirname(__FILE__))]
 
@@ -12,12 +12,18 @@ module BRICR
   # max number of datapoints to run
   MAX_DATAPOINTS = Float::INFINITY
   #MAX_DATAPOINTS = 2
-  
-  # number of parallel jobs
-  NUM_PARALLEL = 7
-  
+
+  # number of parallel jobs per BuildingSync file
+  NUM_PARALLEL = 2
+
+  # number of parallel buildings per simulation
+  NUM_BUILDINGS_PARALLEL = 4
+
   # do simulations
   DO_SIMULATIONS = false
+
+  # collect results
+  DO_GET_RESULTS = false
   
   # url for seed instance
   SEED_URL = nil
