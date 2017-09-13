@@ -12,7 +12,6 @@
       "measure_dir_name": "ChangeBuildingLocation",
       "arguments": {
         "__SKIP__": false,
-        "weather_directory": "../../NREL_integration_testing/weather",
 		"weather_file_name": "CZ03RV2.epw",
         "climate_zone": "CEC3"
       }
