@@ -116,8 +116,8 @@ module BRICR
       
       # set this value in the osw
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'total_bldg_floor_area', floor_area)
-      #set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'template', template)
-      #set_measure_argument(osw, 'create_typical_building_from_model', 'template', template)
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'template', template)
+      set_measure_argument(osw, 'create_typical_building_from_model', 'template', template)
     end
 	
     def configureForScenario(osw, scenario)
