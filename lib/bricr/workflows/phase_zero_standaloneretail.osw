@@ -31,7 +31,7 @@
         "floor_height": 0,
         "num_stories_above_grade": 1,
         "building_rotation": 0,
-        "template": "CEC T24 2008",
+        "template": "90.1-2010",
         "ns_to_ew_ratio": 0,
         "wwr": 0,
         "party_wall_fraction": 0,
@@ -47,7 +47,7 @@
     {
       "measure_dir_name": "create_typical_building_from_model",
       "arguments": {
-        "template": "CEC T24 2008",
+        "template": "90.1-2010",
         "system_type": "Inferred",
         "htg_src": "NaturalGas",
         "clg_src": "Electricity",
