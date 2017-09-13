@@ -10,3 +10,4 @@ output/
 bs_output/
 reports/
 rubocop-results.xml
+seed.json
