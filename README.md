@@ -1,5 +1,7 @@
 # BRICR Gem
 
+[![CircleCI](https://circleci.com/gh/NREL/bricr.svg?style=svg)](https://circleci.com/gh/NREL/bricr)
+
 ## Installation
 
 Install dependencies:
