@@ -202,17 +202,28 @@ def create_site(feature)
   facility.add_element(premises_name)
 
   premises_identifiers = REXML::Element.new('auc:PremisesIdentifiers')
+  
   premises_identifier = REXML::Element.new('auc:PremisesIdentifier')
-
   identifier_label = REXML::Element.new('auc:IdentifierLabel')
   identifier_label.text = 'Assessor parcel number'
   premises_identifier.add_element(identifier_label)
-
   identifier_value = REXML::Element.new('auc:IdentifierValue')
   identifier_value.text = feature[:properties][:"Assessor parcel number"]
   premises_identifier.add_element(identifier_value)
-
   premises_identifiers.add_element(premises_identifier)
+  
+  premises_identifier = REXML::Element.new('auc:PremisesIdentifier')
+  identifier_label = REXML::Element.new('auc:IdentifierLabel')
+  identifier_label.text = 'Custom'
+  premises_identifier.add_element(identifier_label)
+  identifier_name = REXML::Element.new('auc:IdentifierCustomName')
+  identifier_name.text = 'Custom ID'
+  premises_identifier.add_element(identifier_name)
+  identifier_value = REXML::Element.new('auc:IdentifierValue')
+  identifier_value.text = feature[:properties][:"Building Identifier"]
+  premises_identifier.add_element(identifier_value)
+  premises_identifiers.add_element(premises_identifier)
+  
   facility.add_element(premises_identifiers)
 
   facility_classification = REXML::Element.new('auc:FacilityClassification')

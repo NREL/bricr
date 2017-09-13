@@ -1,0 +1,66 @@
+# Docker Compose for deployment. This removes the hard coded usernames and
+# passwords and pulls Docker Hub seedplatform/seed for the latest version.
+# Must set the following environment variables
+#   POSTGRES_USER
+#   POSTGRES_PASSWORD
+#   SEED_ADMIN_USER
+#   SEED_ADMIN_PASSWORD
+#   SEED_ADMIN_ORG
+#   SECRET_KEY
+
+version: '3'
+services:
+  db-postgres:
+    image: postgres
+    environment:
+      - POSTGRES_DB=seed
+      - POSTGRES_USER=seed
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - seed_pgdata:/var/lib/postgresql/data
+  db-redis:
+    image: redis
+  web:
+    image: seedplatform/seed:bricr
+    environment:
+      - POSTGRES_DB=seed
+      - POSTGRES_USER=seed
+      - POSTGRES_PASSWORD=password
+      - SEED_ADMIN_USER=user@seed-platform.org
+      - SEED_ADMIN_PASSWORD=password
+      - SEED_ADMIN_ORG=testorg
+      - SECRET_KEY=abcdefghijklmnopqrstuvwxyz
+      - DJANGO_SETTINGS_MODULE=config.settings.docker
+    depends_on:
+      - db-redis
+      - db-postgres
+    volumes:
+      - seed_media:/seed/media
+    ports:
+      - "80:80"
+  web-celery:
+    command: /seed/docker/start_celery_docker.sh
+    image: seedplatform/seed:bricr
+    environment:
+      - POSTGRES_DB=seed
+      - POSTGRES_USER=seed
+      - POSTGRES_PASSWORD=password
+      - SECRET_KEY=abcdefghijklmnopqrstuvwxyz
+      - DJANGO_SETTINGS_MODULE=config.settings.docker
+    depends_on:
+      - db-redis
+      - db-postgres
+      - web
+    volumes:
+      - seed_media:/seed/media
+  test_container:
+    build:
+      context: ../..
+      dockerfile: spec/docker/Dockerfile
+    links:
+      - web
+volumes:
+  seed_pgdata:
+    external: true
+  seed_media:
+    external: true
