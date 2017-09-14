@@ -21,9 +21,9 @@ cycle_end = DateTime.parse('2010-12-31 23:00:00Z')
 cycle = seed.create_cycle(cycle_name, cycle_start, cycle_end)
 
 xml_path = File.expand_path(ARGV[1], File.dirname(__FILE__))
-success = seed.upload_buildingsync(xml_path)
+success, messages = seed.upload_buildingsync(xml_path)
 
 if !success
-  puts "Error uploading file '#{xml_path}'"
+  puts "Error uploading file '#{xml_path}' with messages #{messages}"
   exit 1
 end
