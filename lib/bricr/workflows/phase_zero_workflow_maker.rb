@@ -10,35 +10,10 @@ module BRICR
       # load the workflow
       @workflow = nil
       
-      # select base osw for standalone, smalloffice, mediumoffice 
-      occupancy_type = nil
-      baseosw = nil
-      floor_area_type = nil
-      floor_area = nil
-      @doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility') do |facility_element|
-        occupancy_type = facility_element.elements['auc:OccupancyClassification'].text
-        if occupancy_type == 'Retail'
-          baseosw = "phase_zero_standaloneretail.osw"
-        elsif occupancy_type == 'Office'
-          floor_area_type = facility_element.elements['auc:FloorAreas/auc:FloorArea/auc:FloorAreaType'].text
-          if floor_area_type == 'Gross'
-            floor_area = facility_element.elements['auc:FloorAreas/auc:FloorArea/auc:FloorAreaValue'].text.to_f
-            print floor_area
-            if floor_area > 0 && floor_area < 20000
-              baseosw = "phase_zero_smalloffice.osw"
-            elsif floor_area >= 20000 && floor_area < 75000
-              baseosw = "phase_zero_mediumoffice.osw"
-            else
-              raise "Office building size is beyond BRICR scope"
-            end
-          end
-        else
-          raise "Building type is beyond BRICR scope"
-        end
-      end
-      
-      
-      workflow_path = File.join(File.dirname(__FILE__), baseosw)
+      # select base osw for standalone, small office, medium office
+      base_osw = 'phase_zero_base.osw'
+
+      workflow_path = File.join(File.dirname(__FILE__), base_osw)
       raise "File '#{workflow_path}' does not exist" unless File.exist?(workflow_path)
 
       File.open(workflow_path, 'r') do |file|
@@ -111,13 +86,39 @@ module BRICR
             template = "CEC T24 2008"
           end
         end
-      
+      end
+
+      bldg_type = nil
+      bar_division_method = nil
+
+      @doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility') do |facility_element|
+        occupancy_type = facility_element.elements['auc:OccupancyClassification'].text
+        if occupancy_type == 'Retail'
+          bldg_type = 'RetailStandalone'
+          bar_division_method = 'Multiple Space Types - Individual Stories Sliced'
+        elsif occupancy_type == 'Office'
+          bar_division_method = 'Single Space Type - Core and Perimeter'
+          if floor_area > 0 && floor_area < 20000
+            bldg_type = 'SmallOffice'
+          elsif floor_area >= 20000 && floor_area < 75000
+            bldg_type = 'MediumOffice'
+          else
+            raise "Office building size is beyond BRICR scope"
+          end
+        else
+          raise "Building type is beyond BRICR scope"
+        end
       end
       
       # set this value in the osw
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'total_bldg_floor_area', floor_area)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'template', template)
       set_measure_argument(osw, 'create_typical_building_from_model', 'template', template)
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_a', bldg_type)
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_b', bldg_type)
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_c', bldg_type)
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_d', bldg_type)
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bar_division_method', bar_division_method)
     end
 	
     def configureForScenario(osw, scenario)
