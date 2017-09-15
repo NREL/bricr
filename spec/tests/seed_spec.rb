@@ -29,7 +29,8 @@ describe 'BRICR' do
 
     # get building sync that we just uploaded, download and compare to uploaded one
     expect(file[:status]).to eq 'success'
-    expect(file[:data][:property_state][:custom_id_1]).to eq UBID
+    # Note that the upload_buildingsync file now returns the property_view, not the property_state
+    expect(file[:data][:property_view][:state][:custom_id_1]).to eq UBID
 
     # pretend to run energy simulation, now we have building_151_results.xml
     puts 'running simulation'
