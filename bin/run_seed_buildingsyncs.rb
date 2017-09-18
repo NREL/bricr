@@ -34,6 +34,8 @@ end
 ruby_exe = File.join( RbConfig::CONFIG['bindir'], RbConfig::CONFIG['RUBY_INSTALL_NAME'] + RbConfig::CONFIG['EXEEXT'] )
 run_buildingsync_rb = File.join(File.dirname(__FILE__), "run_buildingsync.rb")
   
+failure = []
+success = []
 Parallel.each(properties, in_threads: 8) do |property|
 #properties.each do |property|
 
@@ -81,10 +83,14 @@ Parallel.each(properties, in_threads: 8) do |property|
   
   if status.success?
     puts "'#{xml_file}' completed successfully"
+    
+    success << xml_file
   else
     puts "'#{xml_file}' failed"
     puts stdout_str
     puts stderr_str  
+    
+    failure << xml_file
   end
 
 end
