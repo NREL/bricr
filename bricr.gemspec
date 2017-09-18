@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.files = Dir.glob('lib/**/*') + Dir.glob('bin/**/*') + %w[README.md COPYRIGHT.md LICENSE.md Rakefile]
   s.require_path = 'lib'
   s.bindir = 'bin'
-  s.executables << 'run_buildingsync'
+  s.executables << 'run_buildingsync.rb'
 
   s.add_development_dependency 'bundler', '~> 1.6'
   s.add_runtime_dependency  'parallel', '~> 1.12'
