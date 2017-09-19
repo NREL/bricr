@@ -52,7 +52,7 @@ def get_facility_classification(feature)
   when 'MISSING DATA'
     result = 'Other'
   else
-    throw "Unknown classification #{classification}"
+    raise "Unknown classification #{classification}"
   end
 
   return result
@@ -66,28 +66,37 @@ def get_occupancy_classification(feature)
   case classification
   when 'CIE'
     result = 'Assembly-Cultural entertainment'
+    raise "#{result} is not a supported Occupancy Classification"
   when 'MED'
     result = 'Health care'
+    raise "#{result} is not a supported Occupancy Classification"
   when 'MIPS'
     result = 'Office'
   when 'MIXED'
     result = 'Mixed-use commercial'
+    raise "#{result} is not a supported Occupancy Classification"
   when 'MIXRES'
     result = 'Residential'
+    raise "#{result} is not a supported Occupancy Classification"
   when 'OPENSPACE', 'OpenSpace'
     result = 'Other'
+    raise "#{result} is not a supported Occupancy Classification"
   when 'PDR'
     result = 'Industrial'
+    raise "#{result} is not a supported Occupancy Classification"
   when "RETAIL\/ENT"
     result = 'Retail'
   when 'RESIDENT'
     result = 'Residential'
+    raise "#{result} is not a supported Occupancy Classification"
   when 'VISITOR'
     result = 'Lodging'
+    raise "#{result} is not a supported Occupancy Classification"
   when 'MISSING DATA'
     result = 'Unknown'
+    raise "#{result} is not a supported Occupancy Classification"
   else
-    throw "Unknown classification #{classification}"
+    raise "Unknown classification #{classification}"
   end
 
   return result
@@ -417,16 +426,22 @@ summary_file.puts "building_id,xml_filename,should_run_simulation,OccupancyClass
 geojson[:features].each do |feature|
   id = feature[:properties][:"Building Identifier"]
   puts "id = #{id}"
-  doc = convert_feature(feature)
-  building_type = nil
-  doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility/auc:OccupancyClassification') do |occupancy_classification|
-    building_type = occupancy_classification.text
-  end
-  summary_file.puts "#{id},#{id}.xml,1,#{building_type}"
+  
+  begin
+    doc = convert_feature(feature)
+    building_type = nil
+    doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility/auc:OccupancyClassification') do |occupancy_classification|
+      building_type = occupancy_classification.text
+    end
+    summary_file.puts "#{id},#{id}.xml,1,#{building_type}"
 
-  filename = File.join(outdir, "#{id}.xml")
-  File.open(filename, 'w') do |file|
-    doc.write(file)
+    filename = File.join(outdir, "#{id}.xml")
+    File.open(filename, 'w') do |file|
+      doc.write(file)
+    end
+    
+  rescue
+    puts "Building #{id} not converted"
   end
 end
 
