@@ -4,8 +4,9 @@ require 'seed'
 require 'rbconfig'
 require 'parallel'
 require 'open3'
+require 'json'
 require 'fileutils'
-require 'net/http'
+require 'rest-client'
 
 config_path = ARGV[0]
 require(config_path)
@@ -39,6 +40,8 @@ success = []
 Parallel.each(properties, in_threads: 8) do |property|
 #properties.each do |property|
 
+  # DLM: TODO, filter out states that don't require analysis
+
   custom_id = property[:state][:custom_id_1]
   files = property[:state][:files].select {|file| file[:file_type] == 'BuildingSync'}.sort {|x,y| x[:modified] <=> y[:modified]}
   
@@ -51,46 +54,50 @@ Parallel.each(properties, in_threads: 8) do |property|
   file = files[-1][:file]
   url = File.join(host, file)
   
-  # TODO: send this URL to the BRICR job queue
+  # if url is specified, send this URL to the BRICR job queue
+  if BRICR::BRICR_SIM_URL
   
-  # DLM: for now download and run
-  xml_file = File.join('./run', "#{custom_id}.xml")
-  Net::HTTP.start(host.gsub('http://','').gsub('https://','')) do |http|
-    resp = http.get(file)
+    RestClient.post( BRICR::BRICR_SIM_URL, JSON::fast_generate({:building_sync_url => url, :custom_id => custom_id}), {:buildingsyncurl => url, :customid => custom_id, :content_type => 'json', :accept => 'json'})
+  
+  else
+    # download and run locally
+    xml_file = File.join('./run', "#{custom_id}.xml")
+    
+    data = RestClient::Request.execute(:method => :get, :url => url, :timeout => 3600)
     File.open(xml_file, "wb") do |f|
-      f.write(resp.body)
+      file.write(data)
+    end
+    
+    command = "bundle exec '#{ruby_exe}' '#{run_buildingsync_rb}' #{ARGV[0]} '#{xml_file}'"
+      
+    puts "Running '#{command}'"
+        
+    new_env = {}
+
+    # blank out bundler and gem path modifications, will be re-setup by new call
+    new_env["BUNDLER_ORIG_MANPATH"] = nil
+    new_env["GEM_PATH"] = nil
+    new_env["GEM_HOME"] = nil
+    new_env["BUNDLER_ORIG_PATH"] = nil
+    new_env["BUNDLER_VERSION"] = nil
+    new_env["BUNDLE_BIN_PATH"] = nil
+    new_env["BUNDLE_GEMFILE"] = nil
+    new_env["RUBYLIB"] = nil
+    new_env["RUBYOPT"] = nil
+        
+    stdout_str, stderr_str, status = Open3.capture3(new_env, command)
+    
+    if status.success?
+      puts "'#{xml_file}' completed successfully"
+      
+      success << xml_file
+    else
+      puts "'#{xml_file}' failed"
+      puts stdout_str
+      puts stderr_str  
+      
+      failure << xml_file
     end
   end
   
-  command = "bundle exec '#{ruby_exe}' '#{run_buildingsync_rb}' #{ARGV[0]} '#{xml_file}'"
-    
-  puts "Running '#{command}'"
-      
-  new_env = {}
-
-  # blank out bundler and gem path modifications, will be re-setup by new call
-  new_env["BUNDLER_ORIG_MANPATH"] = nil
-  new_env["GEM_PATH"] = nil
-  new_env["GEM_HOME"] = nil
-  new_env["BUNDLER_ORIG_PATH"] = nil
-  new_env["BUNDLER_VERSION"] = nil
-  new_env["BUNDLE_BIN_PATH"] = nil
-  new_env["BUNDLE_GEMFILE"] = nil
-  new_env["RUBYLIB"] = nil
-  new_env["RUBYOPT"] = nil
-      
-  stdout_str, stderr_str, status = Open3.capture3(new_env, command)
-  
-  if status.success?
-    puts "'#{xml_file}' completed successfully"
-    
-    success << xml_file
-  else
-    puts "'#{xml_file}' failed"
-    puts stdout_str
-    puts stderr_str  
-    
-    failure << xml_file
-  end
-
 end

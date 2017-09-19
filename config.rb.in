@@ -1,5 +1,8 @@
 module BRICR
 
+  #ENV['GEM_HOME'] = 'C:/bricr/gems'
+  #ENV['GEM_PATH'] = 'C:/bricr/gems'
+  
   # location of openstudio CLI
   OPENSTUDIO_EXE = 'C:/openstudio-2.1.0/bin/openstudio.exe'
 
@@ -33,4 +36,6 @@ module BRICR
   ENV['BRICR_SEED_USERNAME'] = 'user@seed-platform.org'
   
   ENV['BRICR_SEED_API_KEY'] = ''
+  # url for bricr-sim
+  BRICR_SIM_URL = nil
 end

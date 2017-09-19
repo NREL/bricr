@@ -52,8 +52,11 @@ module BRICR
       template = nil
       @doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility') do |facility_element|
         built_year = facility_element.elements['auc:YearOfConstruction'].text.to_f
-        major_remodel_year = facility_element.elements['auc:YearOfLastMajorRemodel'].text.to_f
-        built_year = major_remodel_year if major_remodel_year > built_year
+        
+        if facility_element.elements['auc:YearOfLastMajorRemodel']
+          major_remodel_year = facility_element.elements['auc:YearOfLastMajorRemodel'].text.to_f
+          built_year = major_remodel_year if major_remodel_year > built_year
+        end
 
         if built_year < 1978
           # template = "90.1-2004"
