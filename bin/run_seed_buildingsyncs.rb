@@ -35,11 +35,13 @@ end
 ruby_exe = File.join( RbConfig::CONFIG['bindir'], RbConfig::CONFIG['RUBY_INSTALL_NAME'] + RbConfig::CONFIG['EXEEXT'] )
 run_buildingsync_rb = File.join(File.dirname(__FILE__), "run_buildingsync.rb")
   
+num_sims = 0
 failure = []
 success = []
-Parallel.each(properties, in_threads: 8) do |property|
-#properties.each do |property|
+Parallel.each(properties, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_DATAPOINTS].min) do |property|
 
+  break if num_sims > BRICR::MAX_DATAPOINTS
+  
   # DLM: TODO, filter out states that don't require analysis
 
   custom_id = property[:state][:custom_id_1]
@@ -99,5 +101,7 @@ Parallel.each(properties, in_threads: 8) do |property|
       failure << xml_file
     end
   end
+  
+  num_sims += 1
   
 end
