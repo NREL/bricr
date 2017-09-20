@@ -1,29 +1,52 @@
-# usage: bundle exec ruby upload_seed_buildingsync.rb /path/to/config.rb /path/to/buildingsync.xml
+# usage: bundle exec ruby upload_seed_buildingsync.rb /path/to/config.rb /path/to/buildingsync_dir/
 
 require 'seed'
+require 'rbconfig'
+require 'parallel'
+require 'open3'
 
 config_path = ARGV[0]
 require(config_path)
 
-host = ENV["BRICR_SEED_HOST"] || 'http://localhost:8000' 
-seed = Seed::API.new(host)
+xml_files = Dir.glob(File.join(ARGV[1], '*.xml'))
 
-# upload to SEED as record
-## Create or get the organization
-org = seed.get_or_create_organization('BRICR Test Organization')
+ruby_exe = File.join( RbConfig::CONFIG['bindir'], RbConfig::CONFIG['RUBY_INSTALL_NAME'] + RbConfig::CONFIG['EXEEXT'] )
+upload_seed_buildingsync_rb = File.join(File.dirname(__FILE__), "upload_seed_buildingsync.rb")
 
-## Create or get the cycle
-cycle_name = 'BRICR Test Cycle - 2011'
+max_points = 4
+uploaded = 0
+Parallel.each(xml_files, in_threads: 8) do |xml_file|
+#xml_files.each do |xml_file|
 
-# TODO: look into the time zone of these requests. The times are getting converted and don't look right in the SEED UI
-cycle_start = DateTime.parse('2010-01-01 00:00:00Z')
-cycle_end = DateTime.parse('2010-12-31 23:00:00Z')
-cycle = seed.create_cycle(cycle_name, cycle_start, cycle_end)
+  if uploaded <= max_points
+    uploaded += 1
+      
+    command = "bundle exec '#{ruby_exe}' '#{upload_seed_buildingsync_rb}' #{ARGV[0]} '#{xml_file}'"
+    
+    puts "Running '#{command}'"
+        
+    new_env = {}
 
-xml_path = File.expand_path(ARGV[1], File.dirname(__FILE__))
-success, messages = seed.upload_buildingsync(xml_path)
-
-if !success
-  puts "Error uploading file '#{xml_path}' with messages #{messages}"
-  exit 1
+    # blank out bundler and gem path modifications, will be re-setup by new call
+    new_env["BUNDLER_ORIG_MANPATH"] = nil
+    new_env["GEM_PATH"] = nil
+    new_env["GEM_HOME"] = nil
+    new_env["BUNDLER_ORIG_PATH"] = nil
+    new_env["BUNDLER_VERSION"] = nil
+    new_env["BUNDLE_BIN_PATH"] = nil
+    new_env["BUNDLE_GEMFILE"] = nil
+    new_env["RUBYLIB"] = nil
+    new_env["RUBYOPT"] = nil
+        
+    stdout_str, stderr_str, status = Open3.capture3(new_env, command)
+    
+    if status.success?
+      puts "'#{xml_file}' completed successfully"
+    else
+      puts "'#{xml_file}' failed"
+      puts stdout_str
+      puts stderr_str  
+    end
+  end
+  
 end

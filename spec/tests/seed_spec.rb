@@ -25,11 +25,13 @@ describe 'BRICR' do
     cycle = seed.create_cycle(cycle_name, cycle_start, cycle_end)
 
     xml_path = File.expand_path('../files/phase0/building_151.xml', File.dirname(__FILE__))
-    file = seed.upload_buildingsync(xml_path)
+    status, response = seed.upload_buildingsync(xml_path)
 
     # get building sync that we just uploaded, download and compare to uploaded one
-    expect(file[:status]).to eq 'success'
-    expect(file[:data][:property_state][:custom_id_1]).to eq UBID
+    expect(status).to eq true
+    expect(response[:status]).to eq 'success'
+    # Note that the upload_buildingsync file now returns the property_view, not the property_state
+    expect(response[:data][:property_view][:state][:custom_id_1]).to eq UBID
 
     # pretend to run energy simulation, now we have building_151_results.xml
     puts 'running simulation'
@@ -39,7 +41,7 @@ describe 'BRICR' do
     xml_path = File.join(File.dirname(__FILE__), '../files/phase0/building_151_results.xml')
 
     # search for the building again using the GUID/UBID
-    results = seed.search(UBID)
+    results = seed.search(UBID, nil)
     puts results.properties
 
     # get the first building

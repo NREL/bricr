@@ -4,6 +4,8 @@ ruby '~>2.2'
 # Specify your gem's dependencies in bricr.gemspec
 gemspec
 
+gem 'parallel'
+
 #gem 'seed_ruby_client', path: '../ruby-client'
 gem 'seed_ruby_client', github: 'SEED-platform/ruby-client', branch: 'develop'
 
