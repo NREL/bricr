@@ -1,15 +1,12 @@
 module BRICR
   # base class for objects that will configure workflows based on building sync files
   class PhaseZeroWorkflowMaker < WorkflowMaker
-    
-
-    
     def initialize(doc)
       super
 
       # load the workflow
       @workflow = nil
-      
+
       # select base osw for standalone, small office, medium office
       base_osw = 'phase_zero_base.osw'
 
@@ -19,7 +16,7 @@ module BRICR
       File.open(workflow_path, 'r') do |file|
         @workflow = JSON.parse(file.read)
       end
-      
+
       if BRICR::OPENSTUDIO_MEASURES
         @workflow['measure_paths'] = BRICR::OPENSTUDIO_MEASURES
       end
@@ -39,15 +36,15 @@ module BRICR
       @doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility/auc:FloorAreas/auc:FloorArea') do |floor_area_element|
         floor_area_type = floor_area_element.elements['auc:FloorAreaType'].text
         if floor_area_type == 'Gross'
-		      # SHL- How about multiple space types?
-		      floor_area = floor_area_element.elements['auc:FloorAreaValue'].text.to_f
-		      # SHL-Check whether we get floor area or not.
-		      if floor_area == nil
-		        raise "Can not find the floor area"
-		      end
+          # SHL- How about multiple space types?
+          floor_area = floor_area_element.elements['auc:FloorAreaValue'].text.to_f
+          # SHL-Check whether we get floor area or not.
+          if floor_area == nil
+            raise "Can not find the floor area"
+          end
         end
       end
-      
+
       # SHL- get the template (vintage)
       built_year = nil
       major_remodel_year = nil
@@ -68,7 +65,7 @@ module BRICR
         else
           template = "CEC T24 2008"
         end
-        
+
         major_remodel_year = facility_element.elements['auc:YearOfLastMajorRemodel'].text.to_f
         if major_remodel_year > built_year
           if built_year < 1978
@@ -90,14 +87,17 @@ module BRICR
 
       bldg_type = nil
       bar_division_method = nil
+      hot_water_per_occ_per_day_gal = nil
 
       @doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility') do |facility_element|
         occupancy_type = facility_element.elements['auc:OccupancyClassification'].text
         if occupancy_type == 'Retail'
           bldg_type = 'RetailStandalone'
           bar_division_method = 'Multiple Space Types - Individual Stories Sliced'
+          hot_water_per_occ_per_day_gal = 0.3 # hot water usage gallon per occupant per day
         elsif occupancy_type == 'Office'
           bar_division_method = 'Single Space Type - Core and Perimeter'
+          hot_water_per_occ_per_day_gal = 1.0 # hot water usage gallon per occupant per day
           if floor_area > 0 && floor_area < 20000
             bldg_type = 'SmallOffice'
           elsif floor_area >= 20000 && floor_area < 75000
@@ -109,7 +109,7 @@ module BRICR
           raise "Building type is beyond BRICR scope"
         end
       end
-      
+
       # set this value in the osw
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'total_bldg_floor_area', floor_area)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'template', template)
@@ -119,8 +119,9 @@ module BRICR
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_c', bldg_type)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_d', bldg_type)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bar_division_method', bar_division_method)
+      set_measure_argument(osw, 'AddServiceWaterHeating', 'hot_water_per_occ_per_day_gal', hot_water_per_occ_per_day_gal)
     end
-	
+
     def configureForScenario(osw, scenario)
       measure_ids = []
       scenario.elements.each('auc:ScenarioType/auc:PackageOfMeasures/auc:MeasureIDs/auc:MeasureID') do |measure_id|
@@ -131,16 +132,24 @@ module BRICR
         @doc.elements.each("//auc:Measure[@ID='#{measure_id}']") do |measure|
           measure_category = measure.elements['auc:SystemCategoryAffected'].text
           if /Lighting Fixture/.match(measure_category)
-            set_measure_argument(osw, 'ReduceLightingLoadsByPercentage', '__SKIP__', false)
+            set_measure_argument(osw, 'SetLightingLoadsByLPD', '__SKIP__', false)
+            set_measure_argument(osw, 'SetLightingLoadsByLPD', 'lpd', 0.6)
           end
-          if /Exterior Wall R-Value/.match(measure_category)
-            set_measure_argument(osw, 'IncreaseInsulationRValueForExteriorWalls', '__SKIP__', false)
+          if /Electric Appliance/.match(measure_category)
+            set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', '__SKIP__', false)
+            set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', 'elecequip_power_reduction_percent', 30.0)
           end
-          if /Roof R-Value/.match(measure_category)
-            set_measure_argument(osw, 'IncreaseInsulationRValueForRoofs', '__SKIP__', false)
+          if /Infiltration/.match(measure_category)
+            set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', '__SKIP__', false)
+            set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', 'space_infiltration_reduction_percent', 30.0)
           end
-          if /HVAC Efficiency/.match(measure_category)
-            set_measure_argument(osw, 'AdjustSystemEfficiencies', '__SKIP__', false)
+          if /Heating System Efficiency/.match(measure_category)
+            set_measure_argument(osw, 'SetGasBurnerEfficiency', '__SKIP__', false)
+            set_measure_argument(osw, 'SetGasBurnerEfficiency', 'eff', 0.93)
+          end
+          if /Cooling System Efficiency/.match(measure_category)
+            set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', '__SKIP__', false)
+            set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', 'cop', 4.1)
           end
         end
       end
@@ -151,7 +160,7 @@ module BRICR
 
       # write an osw for each scenario
       @doc.elements.each('auc:Audits/auc:Audit/auc:Report/auc:Scenarios/auc:Scenario') do |scenario|
-        # get information about the scenario
+      # get information about the scenario
         scenario_name = scenario.elements['auc:ScenarioName'].text
 
         # deep clone
@@ -195,7 +204,7 @@ module BRICR
 
       # write an osw for each scenario
       @doc.elements.each('auc:Audits/auc:Audit/auc:Report/auc:Scenarios/auc:Scenario') do |scenario|
-        # get information about the scenario
+      # get information about the scenario
         scenario_name = scenario.elements['auc:ScenarioName'].text
 
         # dir for the osw
@@ -210,7 +219,7 @@ module BRICR
       end
 
       @doc.elements.each('auc:Audits/auc:Audit/auc:Report/auc:Scenarios/auc:Scenario') do |scenario|
-        # get information about the scenario
+      # get information about the scenario
         scenario_name = scenario.elements['auc:ScenarioName'].text
         package_of_measures = scenario.elements['auc:ScenarioType'].elements['auc:PackageOfMeasures']
 

@@ -1,4 +1,4 @@
-<!-- edited with XMLSpy v2016 rel. 2 sp1 (x64) (http://www.altova.com) by Dan Macumber (NREL) -->
+﻿<!-- edited with XMLSpy v2016 rel. 2 sp1 (x64) (http://www.altova.com) by Dan Macumber (NREL) -->
 <auc:Audits xmlns:auc="http://nrel.gov/schemas/bedes-auc/2014" xsi:schemaLocation="http://nrel.gov/schemas/bedes-auc/2014 file:///E:/buildingsync/BuildingSync.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<auc:Audit>
 		<auc:Sites>
@@ -65,7 +65,7 @@
 				<auc:TechnologyCategories>
 					<auc:TechnologyCategory>
 						<auc:LightingImprovements>
-							<auc:MeasureName>Retrofit with light emitting diode technologies</auc:MeasureName>
+							<auc:MeasureName>Retrofit with LED</auc:MeasureName>
 						</auc:LightingImprovements>
 					</auc:TechnologyCategory>
 				</auc:TechnologyCategories>
@@ -78,14 +78,14 @@
 				<auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
 			</auc:Measure>
 			<auc:Measure ID="Measure2">
-				<auc:SystemCategoryAffected>Exterior Wall R-Value</auc:SystemCategoryAffected>
+				<auc:SystemCategoryAffected>Electric Appliance</auc:SystemCategoryAffected>
 				<auc:PremisesAffected>
 					<auc:PremiseAffected IDref="Building151"/>
 				</auc:PremisesAffected>
 				<auc:TechnologyCategories>
 					<auc:TechnologyCategory>
 						<auc:ExteriorWallRValue>
-							<auc:MeasureName>Increase insulation R-value for exterior wall</auc:MeasureName>
+							<auc:MeasureName>Retrofit with more efficient electic appliances(30% load reduction)</auc:MeasureName>
 						</auc:ExteriorWallRValue>
 					</auc:TechnologyCategory>
 				</auc:TechnologyCategories>
@@ -98,14 +98,14 @@
 				<auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
 			</auc:Measure>
 			<auc:Measure ID="Measure3">
-				<auc:SystemCategoryAffected>Roof R-Value</auc:SystemCategoryAffected>
+				<auc:SystemCategoryAffected>Infiltration</auc:SystemCategoryAffected>
 				<auc:PremisesAffected>
 					<auc:PremiseAffected IDref="Building151"/>
 				</auc:PremisesAffected>
 				<auc:TechnologyCategories>
 					<auc:TechnologyCategory>
 						<auc:RoofRValue>
-							<auc:MeasureName>Increase insulation R-value for exterior wall</auc:MeasureName>
+							<auc:MeasureName>Retrfoit with adding air sealing to seal leaks (30% more airtight)</auc:MeasureName>
 						</auc:RoofRValue>
 					</auc:TechnologyCategory>
 				</auc:TechnologyCategories>
@@ -118,14 +118,34 @@
 				<auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
 			</auc:Measure>
 			<auc:Measure ID="Measure4">
-				<auc:SystemCategoryAffected>HVAC Efficiency</auc:SystemCategoryAffected>
+				<auc:SystemCategoryAffected>Cooling System Efficiency</auc:SystemCategoryAffected>
 				<auc:PremisesAffected>
 					<auc:PremiseAffected IDref="Building151"/>
 				</auc:PremisesAffected>
 				<auc:TechnologyCategories>
 					<auc:TechnologyCategory>
 						<auc:HVACEfficiency>
-							<auc:MeasureName>Improve HVAC system efficiency</auc:MeasureName>
+							<auc:MeasureName>Retrfoit with cooling system efficiency SEER 14</auc:MeasureName>
+						</auc:HVACEfficiency>
+					</auc:TechnologyCategory>
+				</auc:TechnologyCategories>
+				<auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+				<auc:MVCost>1000</auc:MVCost>
+				<auc:MeasureTotalFirstCost>10000</auc:MeasureTotalFirstCost>
+				<auc:MeasureInstallationCost>8000</auc:MeasureInstallationCost>
+				<auc:MeasureMaterialCost>1000</auc:MeasureMaterialCost>
+				<auc:Recommended>true</auc:Recommended>
+				<auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+			</auc:Measure>
+			<auc:Measure ID="Measure5">
+				<auc:SystemCategoryAffected>Heating System Efficiency</auc:SystemCategoryAffected>
+				<auc:PremisesAffected>
+					<auc:PremiseAffected IDref="Building151"/>
+				</auc:PremisesAffected>
+				<auc:TechnologyCategories>
+					<auc:TechnologyCategory>
+						<auc:HVACEfficiency>
+							<auc:MeasureName>Retrfoit with heating system efficiency 0.93</auc:MeasureName>
 						</auc:HVACEfficiency>
 					</auc:TechnologyCategory>
 				</auc:TechnologyCategories>
@@ -152,7 +172,7 @@
 					</auc:ScenarioType>
 				</auc:Scenario>
 				<auc:Scenario>
-					<auc:ScenarioName>Lighting_Fixture_Only</auc:ScenarioName>
+					<auc:ScenarioName>LED</auc:ScenarioName>
 					<auc:ScenarioType>
 						<auc:PackageOfMeasures>
 							<auc:ReferenceCase IDref="Baseline"/>
@@ -163,7 +183,7 @@
 					</auc:ScenarioType>
 				</auc:Scenario>
 				<auc:Scenario>
-					<auc:ScenarioName>Exterior_R-Value_Only</auc:ScenarioName>
+					<auc:ScenarioName>Electric_Appliance_30%_Reduction</auc:ScenarioName>
 					<auc:ScenarioType>
 						<auc:PackageOfMeasures>
 							<auc:ReferenceCase IDref="Baseline"/>
@@ -174,7 +194,7 @@
 					</auc:ScenarioType>
 				</auc:Scenario>
 				<auc:Scenario>
-					<auc:ScenarioName>Roof_R-Value_Only</auc:ScenarioName>
+					<auc:ScenarioName>Air_Seal_Infiltration_30%_More_Airtight</auc:ScenarioName>
 					<auc:ScenarioType>
 						<auc:PackageOfMeasures>
 							<auc:ReferenceCase IDref="Baseline"/>
@@ -185,12 +205,23 @@
 					</auc:ScenarioType>
 				</auc:Scenario>
 				<auc:Scenario>
-					<auc:ScenarioName>HVAC-Efficiency_Only</auc:ScenarioName>
+					<auc:ScenarioName>Cooling_System_SEER 14</auc:ScenarioName>
 					<auc:ScenarioType>
 						<auc:PackageOfMeasures>
 							<auc:ReferenceCase IDref="Baseline"/>
 							<auc:MeasureIDs>
 								<auc:MeasureID IDref="Measure4"/>
+							</auc:MeasureIDs>
+						</auc:PackageOfMeasures>
+					</auc:ScenarioType>
+				</auc:Scenario>
+				<auc:Scenario>
+					<auc:ScenarioName>Heating_System_Efficiency_0.93</auc:ScenarioName>
+					<auc:ScenarioType>
+						<auc:PackageOfMeasures>
+							<auc:ReferenceCase IDref="Baseline"/>
+							<auc:MeasureIDs>
+								<auc:MeasureID IDref="Measure5"/>
 							</auc:MeasureIDs>
 						</auc:PackageOfMeasures>
 					</auc:ScenarioType>
@@ -205,6 +236,7 @@
 								<auc:MeasureID IDref="Measure2"/>
 								<auc:MeasureID IDref="Measure3"/>
 								<auc:MeasureID IDref="Measure4"/>
+								<auc:MeasureID IDref="Measure5"/>
 							</auc:MeasureIDs>
 						</auc:PackageOfMeasures>
 					</auc:ScenarioType>
