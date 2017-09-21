@@ -47,7 +47,7 @@
     {
       "measure_dir_name": "create_typical_building_from_model",
       "arguments": {
-        "template": "CEC Pre-1978",
+        "template": "CEC T24 2008",
         "system_type": "Inferred",
         "htg_src": "NaturalGas",
         "clg_src": "Electricity",
@@ -58,25 +58,38 @@
       }
     },
 	{
-		"measure_dir_name": "ReduceLightingLoadsByPercentage",
+      "measure_dir_name": "AddServiceWaterHeating",
+      "arguments": {
+        "water_heater_fuel_type": "NaturalGas",
+        "hot_water_per_occ_per_day_gal": 1.0
+      }
+    },
+	{
+		"measure_dir_name": "SetLightingLoadsByLPD",
 		"arguments": {
 		"__SKIP__": true
 		}
 	},
 	{
-		"measure_dir_name": "IncreaseInsulationRValueForExteriorWalls",
+		"measure_dir_name": "ReduceElectricEquipmentLoadsByPercentage",
 		"arguments": {
 		"__SKIP__": true
 		}
 	},
 	{
-		"measure_dir_name": "IncreaseInsulationRValueForRoofs",
+		"measure_dir_name": "ReduceSpaceInfiltrationByPercentage",
 		"arguments": {
 		"__SKIP__": true
 		}
 	},
 	{
-		"measure_dir_name": "AdjustSystemEfficiencies",
+		"measure_dir_name": "SetCOPforSingleSpeedDXCoolingUnits",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "SetGasBurnerEfficiency",
 		"arguments": {
 		"__SKIP__": true
 		}
