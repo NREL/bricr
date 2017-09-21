@@ -421,7 +421,7 @@ outdir = './bs_output'
 FileUtils.mkdir_p(outdir) unless File.exist?(outdir)
 
 summary_file = File.open(outdir + "/summary.csv", 'w')
-summary_file.puts "building_id,xml_filename,should_run_simulation,OccupancyClassification"
+summary_file.puts "building_id,xml_filename,should_run_simulation,OccupancyClassification,FloorArea,YearOfConstruction,YearOfLastMajorRemodel"
 
 geojson[:features].each do |feature|
   id = feature[:properties][:"Building Identifier"]
@@ -429,17 +429,19 @@ geojson[:features].each do |feature|
   
   begin
     doc = convert_feature(feature)
-    building_type = nil
-    doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility/auc:OccupancyClassification') do |occupancy_classification|
-      building_type = occupancy_classification.text
+    floor_area = convert(feature[:properties][:"Gross Floor Area"], 'ft2', 'ft2')
+    building_type = get_occupancy_classification(feature)
+    year_of_construction = feature[:properties][:"Completed Construction Status Date"]
+    if md = /^(\d\d\d\d).*/.match(feature[:properties][:"Last Modified Date"].to_s)
+      year_of_last_major_remodel = md[1]
     end
-    summary_file.puts "#{id},#{id}.xml,1,#{building_type}"
+
+    summary_file.puts "#{id},#{id}.xml,1,#{building_type},#{floor_area},#{year_of_construction},#{year_of_last_major_remodel}"
 
     filename = File.join(outdir, "#{id}.xml")
     File.open(filename, 'w') do |file|
       doc.write(file)
     end
-    
   rescue
     puts "Building #{id} not converted"
   end
