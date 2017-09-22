@@ -11,7 +11,15 @@ if xml_path.nil? || !File.exist?(xml_path)
   exit(1)
 end
 
-out_dir = File.join(File.dirname(xml_path), File.basename(xml_path, '.*') + '/')
+if BRICR::SIMULATION_OUTPUT_FOLDER != nil
+  unless BRICR::SIMULATION_OUTPUT_FOLDER
+    FileUtils.mkdir_p(BRICR::SIMULATION_OUTPUT_FOLDER)
+  end
+  out_dir = File.join(BRICR::SIMULATION_OUTPUT_FOLDER, File.basename(xml_path, '.*') + '/')
+else
+  out_dir = File.join(File.dirname(xml_path), File.basename(xml_path, '.*') + '/')
+end
+
 if BRICR::DO_SIMULATIONS
   if File.exist?(out_dir)
     FileUtils.rm_rf(out_dir)

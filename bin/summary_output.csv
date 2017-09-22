@@ -1,6 +1,6 @@
-building_id,xml_filename,should_run_simulation,OccupancyClassification,FloorArea,YearOfConstruction,YearOfLastMajorRemodel
+building_id,xml_filename,should_run_simulation,OccupancyClassification,FloorArea,YearOfConstruction,YearOfLastMajorRemodel,Simulation Status,do simulations?,do get results?
 151,151.xml,0,Retail,69452,1954,2003
-223,223.xml,1,Office,16775,1967,2009
+223,223.xml,1,Office,16775,1967,2009,false,true,true
 237,237.xml,0,Retail,16302,1967,2009
 377,377.xml,0,Retail,46743,2002,2012
 463,463.xml,0,Retail,67690,2010,2016

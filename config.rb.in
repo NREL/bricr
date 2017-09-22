@@ -38,4 +38,7 @@ module BRICR
   ENV['BRICR_SEED_API_KEY'] = ''
   # url for bricr-sim
   BRICR_SIM_URL = nil
+
+  # specify the output folder for the simulation runs
+  SIMULATION_OUTPUT_FOLDER = "D:/BRICR_OUTPUT/"
 end
