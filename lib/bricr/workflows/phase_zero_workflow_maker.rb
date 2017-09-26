@@ -70,23 +70,6 @@ module BRICR
           template = "CEC T24 2008"
         end
 
-        major_remodel_year = facility_element.elements['auc:YearOfLastMajorRemodel'].text.to_f
-        if major_remodel_year > built_year
-          if built_year < 1978
-            # template = "90.1-2004"
-            template = "CEC Pre-1978"
-          elsif major_remodel_year >= 1978 && major_remodel_year < 1992
-            template = "CEC T24 1978"
-          elsif major_remodel_year >= 1992 && major_remodel_year < 2001
-            template = "CEC T24 1992"
-          elsif major_remodel_year >= 2001 && major_remodel_year < 2005
-            template = "CEC T24 2001"
-          elsif major_remodel_year >= 2005 && major_remodel_year < 2008
-            template = "CEC T24 2005"
-          else
-            template = "CEC T24 2008"
-          end
-        end
       end
 
       bldg_type = nil

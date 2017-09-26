@@ -71,30 +71,6 @@
 		}
 	},
 	{
-		"measure_dir_name": "ReduceElectricEquipmentLoadsByPercentage",
-		"arguments": {
-		"__SKIP__": true
-		}
-	},
-	{
-		"measure_dir_name": "ReduceSpaceInfiltrationByPercentage",
-		"arguments": {
-		"__SKIP__": true
-		}
-	},
-	{
-		"measure_dir_name": "SetCOPforSingleSpeedDXCoolingUnits",
-		"arguments": {
-		"__SKIP__": true
-		}
-	},
-	{
-		"measure_dir_name": "SetGasBurnerEfficiency",
-		"arguments": {
-		"__SKIP__": true
-		}
-	},
-	{
       "measure_dir_name": "openstudio_results",
       "arguments": {
         "__SKIP__": false,
