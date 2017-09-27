@@ -31,8 +31,9 @@ module BRICR
 
     def configureForDoc(osw)
 
+      # phase 0 parameters
       # get the floor area
-      floor_area = nil
+      floor_area = nil # square feet
       @doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility/auc:FloorAreas/auc:FloorArea') do |floor_area_element|
         floor_area_type = floor_area_element.elements['auc:FloorAreaType'].text
         if floor_area_type == 'Gross'
@@ -50,13 +51,13 @@ module BRICR
       @doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility') do |facility_element|
         built_year = facility_element.elements['auc:YearOfConstruction'].text.to_f
         
+        # SHL- select the template based on the major remodel year 
         if facility_element.elements['auc:YearOfLastMajorRemodel']
           major_remodel_year = facility_element.elements['auc:YearOfLastMajorRemodel'].text.to_f
           built_year = major_remodel_year if major_remodel_year > built_year
         end
 
         if built_year < 1978
-          # template = "90.1-2004"
           template = "CEC Pre-1978"
         elsif built_year >= 1978 && built_year < 1992
           template = "CEC T24 1978"
@@ -68,13 +69,21 @@ module BRICR
           template = "CEC T24 2005"
         else
           template = "CEC T24 2008"
-        end
-
+        end          
+          
       end
 
       bldg_type = nil
       bar_division_method = nil
       hot_water_per_occ_per_day_gal = nil
+      
+      num_stories_above_grade = nil
+      num_stories_below_grade = nil
+      ns_to_ew_ratio = nil
+      
+      building_rotation = nil # TBD
+      floor_height = nil # TBD
+      wwr = nil # TBD
 
       @doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility') do |facility_element|
         occupancy_type = facility_element.elements['auc:OccupancyClassification'].text
@@ -95,6 +104,28 @@ module BRICR
         else
           raise "Building type is beyond BRICR scope"
         end
+        
+        if facility_element.elements['auc:FloorsAboveGrade']
+          num_stories_above_grade = facility_element.elements['auc:FloorsAboveGrade'].text.to_f
+        else
+          num_stories_above_grade = 1.0 # setDefaultValue
+        end
+        
+        if facility_element.elements['auc:FloorsBelowGrade']
+          num_stories_below_grade = facility_element.elements['auc:FloorsBelowGrade'].text.to_f
+        else 
+          num_stories_below_grade = 0.0 # setDefaultValue
+        end
+        
+        if facility_element.elements['auc:AspectRatio']
+          ns_to_ew_ratio = facility_element.elements['auc:AspectRatio'].text.to_f
+        else
+          ns_to_ew_ratio = 0.0 # setDefaultValue
+        end
+        
+        building_rotation = 0.0 # setDefaultValue
+        floor_height = 0.0 # setDefaultValue in ft
+        wwr = 0.0 # setDefaultValue in fraction
       end
 
       # set this value in the osw
@@ -105,6 +136,12 @@ module BRICR
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_b', bldg_type)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_c', bldg_type)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_d', bldg_type)
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'floor_height', floor_height)
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'num_stories_above_grade', num_stories_above_grade)
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'num_stories_below_grade', num_stories_below_grade)
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'building_rotation', building_rotation)
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'ns_to_ew_ratio', ns_to_ew_ratio)
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'wwr', wwr)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bar_division_method', bar_division_method)
       set_measure_argument(osw, 'AddServiceWaterHeating', 'hot_water_per_occ_per_day_gal', hot_water_per_occ_per_day_gal)
     end
@@ -118,26 +155,31 @@ module BRICR
       measure_ids.each do |measure_id|
         @doc.elements.each("//auc:Measure[@ID='#{measure_id}']") do |measure|
           measure_category = measure.elements['auc:SystemCategoryAffected'].text
-          if /Lighting Fixture/.match(measure_category)
+          if /Lighting/.match(measure_category)
             set_measure_argument(osw, 'SetLightingLoadsByLPD', '__SKIP__', false)
             set_measure_argument(osw, 'SetLightingLoadsByLPD', 'lpd', 0.6)
           end
-          if /Electric Appliance/.match(measure_category)
-            set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', '__SKIP__', false)
-            set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', 'elecequip_power_reduction_percent', 30.0)
-          end
-          if /Infiltration/.match(measure_category)
-            set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', '__SKIP__', false)
-            set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', 'space_infiltration_reduction_percent', 30.0)
-          end
-          if /Heating System Efficiency/.match(measure_category)
-            set_measure_argument(osw, 'SetGasBurnerEfficiency', '__SKIP__', false)
-            set_measure_argument(osw, 'SetGasBurnerEfficiency', 'eff', 0.93)
-          end
-          if /Cooling System Efficiency/.match(measure_category)
-            set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', '__SKIP__', false)
-            set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', 'cop', 4.1)
-          end
+          #if /Domestic Hot Water/.match(measure_category)
+          #  set_measure_argument(osw, 'AddServiceWaterHeating', 'hot_water_per_occ_per_day_gal', 1)
+          #  set_measure_argument(osw, 'SetWaterHeaterEfficiencyHeatLossandPeakWaterFlowRate', '__SKIP__', false)
+          #  set_measure_argument(osw, 'SetWaterHeaterEfficiencyHeatLossandPeakWaterFlowRate', 'heater_thermal_efficiency', 0.9)
+          #end
+          #if /Electric Appliance/.match(measure_category)
+          #  set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', '__SKIP__', false)
+          #  set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', 'elecequip_power_reduction_percent', 30.0)
+          #end
+          #if /Infiltration/.match(measure_category)
+          #  set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', '__SKIP__', false)
+          #  set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', 'space_infiltration_reduction_percent', 30.0)
+          #end
+          #if /Heating System Efficiency/.match(measure_category)
+          #  set_measure_argument(osw, 'SetGasBurnerEfficiency', '__SKIP__', false)
+          #  set_measure_argument(osw, 'SetGasBurnerEfficiency', 'eff', 0.93)
+          #end
+          #if /Cooling System Efficiency/.match(measure_category)
+          #  set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', '__SKIP__', false)
+          #  set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', 'cop', 4.1)
+          #end
         end
       end
     end
