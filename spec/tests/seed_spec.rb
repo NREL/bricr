@@ -14,7 +14,7 @@ describe 'BRICR' do
 
     # upload to SEED as record
     ## Create or get the organization
-    org = seed.get_or_create_organization('BRICR Test Organization')
+    org = seed.get_or_create_organization('BRICR Test Organization nlong')
 
     ## Create or get the cycle
     cycle_name = 'BRICR Test Cycle - 2011'
@@ -27,6 +27,9 @@ describe 'BRICR' do
     xml_path = File.expand_path('../files/phase0/building_151.xml', File.dirname(__FILE__))
     status, response = seed.upload_buildingsync(xml_path)
 
+    if !status
+      puts response
+    end
     # get building sync that we just uploaded, download and compare to uploaded one
     expect(status).to eq true
     expect(response[:status]).to eq 'success'
