@@ -258,8 +258,11 @@ module BRICR
         total_site_energy = getMeasureResult(result, 'openstudio_results', 'total_site_energy')
         baseline_total_site_energy = getMeasureResult(baseline, 'openstudio_results', 'total_site_energy')
 
-        total_site_energy_savings = baseline_total_site_energy - total_site_energy
-
+        total_site_energy_savings = 0
+        if baseline_total_site_energy && total_site_energy
+          total_site_energy_savings = baseline_total_site_energy - total_site_energy
+        end
+        
         annual_savings_site_energy = REXML::Element.new('auc:AnnualSavingsSiteEnergy')
         annual_savings_site_energy.text = total_site_energy_savings
         package_of_measures.add_element(annual_savings_site_energy)
