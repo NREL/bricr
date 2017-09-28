@@ -60,7 +60,7 @@
 	{
       "measure_dir_name": "AddServiceWaterHeating",
       "arguments": {
-        "water_heater_fuel_type": "NaturalGas",
+        "water_heater_fuel_type": "NaturalGas"
       }
     },
 	{
