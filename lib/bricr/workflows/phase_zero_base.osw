@@ -48,23 +48,42 @@
       "measure_dir_name": "create_typical_building_from_model",
       "arguments": {
         "template": "CEC T24 2008",
-        "system_type": "PTAC with hot water heat",
+        "system_type": "Inferred",
         "htg_src": "NaturalGas",
         "clg_src": "Electricity",
         "hvac_delivery_type": "Forced Air",
         "kitchen_makeup": "Adjacent",
         "exterior_lighting_zone": "3 - All Other Areas",
+		"remove_objects": false,
         "__SKIP__": false
       }
     },
 	{
-      "measure_dir_name": "AddServiceWaterHeating",
-      "arguments": {
-        "water_heater_fuel_type": "NaturalGas",
-      }
-    },
-	{
 		"measure_dir_name": "SetLightingLoadsByLPD",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "ReduceElectricEquipmentLoadsByPercentage",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "ReduceSpaceInfiltrationByPercentage",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "SetGasBurnerEfficiency",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "SetCOPforSingleSpeedDXCoolingUnits",
 		"arguments": {
 		"__SKIP__": true
 		}

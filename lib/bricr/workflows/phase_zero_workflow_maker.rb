@@ -31,9 +31,8 @@ module BRICR
 
     def configureForDoc(osw)
 
-      # phase 0 parameters
       # get the floor area
-      floor_area = nil # square feet
+      floor_area = nil
       @doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility/auc:FloorAreas/auc:FloorArea') do |floor_area_element|
         floor_area_type = floor_area_element.elements['auc:FloorAreaType'].text
         if floor_area_type == 'Gross'
@@ -51,7 +50,6 @@ module BRICR
       @doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility') do |facility_element|
         built_year = facility_element.elements['auc:YearOfConstruction'].text.to_f
         
-        # SHL- select the template based on the major remodel year 
         if facility_element.elements['auc:YearOfLastMajorRemodel']
           major_remodel_year = facility_element.elements['auc:YearOfLastMajorRemodel'].text.to_f
           built_year = major_remodel_year if major_remodel_year > built_year
@@ -69,15 +67,14 @@ module BRICR
           template = "CEC T24 2005"
         else
           template = "CEC T24 2008"
-        end          
-          
+        end
+
       end
 
       bldg_type = nil
       bar_division_method = nil
-      hot_water_per_occ_per_day_gal = nil
-      
-      num_stories_above_grade = nil
+	  
+	  num_stories_above_grade = nil
       num_stories_below_grade = nil
       ns_to_ew_ratio = nil
       
@@ -90,10 +87,8 @@ module BRICR
         if occupancy_type == 'Retail'
           bldg_type = 'RetailStandalone'
           bar_division_method = 'Multiple Space Types - Individual Stories Sliced'
-          hot_water_per_occ_per_day_gal = 0.3 # hot water usage gallon per occupant per day
         elsif occupancy_type == 'Office'
           bar_division_method = 'Single Space Type - Core and Perimeter'
-          hot_water_per_occ_per_day_gal = 1.0 # hot water usage gallon per occupant per day
           if floor_area > 0 && floor_area < 20000
             bldg_type = 'SmallOffice'
           elsif floor_area >= 20000 && floor_area < 75000
@@ -104,11 +99,12 @@ module BRICR
         else
           raise "Building type is beyond BRICR scope"
         end
-        
-        if facility_element.elements['auc:FloorsAboveGrade']
+		
+		if facility_element.elements['auc:FloorsAboveGrade']
           num_stories_above_grade = facility_element.elements['auc:FloorsAboveGrade'].text.to_f
-        else
-          num_stories_above_grade = 1.0 # setDefaultValue
+        end
+        if num_stories_above_grade == 0.0
+			num_stories_above_grade = 1.0 # setDefaultValue
         end
         
         if facility_element.elements['auc:FloorsBelowGrade']
@@ -126,8 +122,11 @@ module BRICR
         building_rotation = 0.0 # setDefaultValue
         floor_height = 0.0 # setDefaultValue in ft
         wwr = 0.0 # setDefaultValue in fraction
+		
       end
 
+      # template = "DOE Ref Pre-1980"
+	  
       # set this value in the osw
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'total_bldg_floor_area', floor_area)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'template', template)
@@ -143,7 +142,6 @@ module BRICR
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'ns_to_ew_ratio', ns_to_ew_ratio)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'wwr', wwr)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bar_division_method', bar_division_method)
-      set_measure_argument(osw, 'AddServiceWaterHeating', 'hot_water_per_occ_per_day_gal', hot_water_per_occ_per_day_gal)
     end
 
     def configureForScenario(osw, scenario)
@@ -155,31 +153,26 @@ module BRICR
       measure_ids.each do |measure_id|
         @doc.elements.each("//auc:Measure[@ID='#{measure_id}']") do |measure|
           measure_category = measure.elements['auc:SystemCategoryAffected'].text
-          if /Lighting/.match(measure_category)
+          if /Lighting Fixture/.match(measure_category)
             set_measure_argument(osw, 'SetLightingLoadsByLPD', '__SKIP__', false)
             set_measure_argument(osw, 'SetLightingLoadsByLPD', 'lpd', 0.6)
           end
-          #if /Domestic Hot Water/.match(measure_category)
-          #  set_measure_argument(osw, 'AddServiceWaterHeating', 'hot_water_per_occ_per_day_gal', 1)
-          #  set_measure_argument(osw, 'SetWaterHeaterEfficiencyHeatLossandPeakWaterFlowRate', '__SKIP__', false)
-          #  set_measure_argument(osw, 'SetWaterHeaterEfficiencyHeatLossandPeakWaterFlowRate', 'heater_thermal_efficiency', 0.9)
-          #end
-          #if /Electric Appliance/.match(measure_category)
-          #  set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', '__SKIP__', false)
-          #  set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', 'elecequip_power_reduction_percent', 30.0)
-          #end
-          #if /Infiltration/.match(measure_category)
-          #  set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', '__SKIP__', false)
-          #  set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', 'space_infiltration_reduction_percent', 30.0)
-          #end
-          #if /Heating System Efficiency/.match(measure_category)
-          #  set_measure_argument(osw, 'SetGasBurnerEfficiency', '__SKIP__', false)
-          #  set_measure_argument(osw, 'SetGasBurnerEfficiency', 'eff', 0.93)
-          #end
-          #if /Cooling System Efficiency/.match(measure_category)
-          #  set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', '__SKIP__', false)
-          #  set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', 'cop', 4.1)
-          #end
+          if /Electric Appliance/.match(measure_category)
+            set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', '__SKIP__', false)
+            set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', 'elecequip_power_reduction_percent', 30.0)
+          end
+          if /Infiltration/.match(measure_category)
+            set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', '__SKIP__', false)
+            set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', 'space_infiltration_reduction_percent', 30.0)
+          end
+          if /Heating System Efficiency/.match(measure_category)
+            set_measure_argument(osw, 'SetGasBurnerEfficiency', '__SKIP__', false)
+            set_measure_argument(osw, 'SetGasBurnerEfficiency', 'eff', 0.93)
+          end
+          if /Cooling System Efficiency/.match(measure_category)
+            set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', '__SKIP__', false)
+            set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', 'cop', 4.1)
+          end
         end
       end
     end
@@ -257,12 +250,25 @@ module BRICR
 
         total_site_energy = getMeasureResult(result, 'openstudio_results', 'total_site_energy')
         baseline_total_site_energy = getMeasureResult(baseline, 'openstudio_results', 'total_site_energy')
+		fuel_electricity = getMeasureResult(result, 'openstudio_results', 'fuel_electricity')
+		fuel_natural_gas = getMeasureResult(result, 'openstudio_results', 'fuel_natural_gas')
 
         total_site_energy_savings = baseline_total_site_energy - total_site_energy
 
         annual_savings_site_energy = REXML::Element.new('auc:AnnualSavingsSiteEnergy')
-        annual_savings_site_energy.text = total_site_energy_savings
-        package_of_measures.add_element(annual_savings_site_energy)
+		annual_site_energy = REXML::Element.new('auc:AnnualSiteEnergy')
+		annual_electricity = REXML::Element.new('auc:AnnualElectricity')
+		annual_natual_gas = REXML::Element.new('auc:AnnualNaturalGas')
+        
+		annual_savings_site_energy.text = total_site_energy_savings
+		annual_site_energy.text = total_site_energy
+		annual_electricity.text = fuel_electricity
+		annual_natual_gas.text = fuel_natural_gas
+        
+		package_of_measures.add_element(annual_savings_site_energy)
+		package_of_measures.add_element(annual_site_energy)
+		package_of_measures.add_element(annual_electricity)
+		package_of_measures.add_element(annual_natual_gas)
       end
     end
   end

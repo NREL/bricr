@@ -309,41 +309,101 @@ def convert_feature(feature)
 		</auc:Sites>
     <auc:Measures>
       <auc:Measure ID="Measure1">
-        <auc:SystemCategoryAffected>Lighting</auc:SystemCategoryAffected>
+        <auc:SystemCategoryAffected>Lighting Fixture</auc:SystemCategoryAffected>
         <auc:PremisesAffected>
           <auc:PremiseAffected IDref="FACILITY_ID"/>
         </auc:PremisesAffected>
         <auc:TechnologyCategories>
           <auc:TechnologyCategory>
             <auc:LightingImprovements>
-              <auc:MeasureName>Retrofit with light emitting diode technologies</auc:MeasureName>
+              <auc:MeasureName>Retrofit with LED</auc:MeasureName>
             </auc:LightingImprovements>
           </auc:TechnologyCategory>
         </auc:TechnologyCategories>
         <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
-        <auc:MVCost>1000</auc:MVCost>
-        <auc:MeasureTotalFirstCost>10000</auc:MeasureTotalFirstCost>
-        <auc:MeasureInstallationCost>8000</auc:MeasureInstallationCost>
-        <auc:MeasureMaterialCost>1000</auc:MeasureMaterialCost>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
         <auc:Recommended>true</auc:Recommended>
         <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
       </auc:Measure>
       <auc:Measure ID="Measure2">
-        <auc:SystemCategoryAffected>Domestic Hot Water</auc:SystemCategoryAffected>
+        <auc:SystemCategoryAffected>Electric Appliance</auc:SystemCategoryAffected>
         <auc:PremisesAffected>
           <auc:PremiseAffected IDref="FACILITY_ID"/>
         </auc:PremisesAffected>
         <auc:TechnologyCategories>
           <auc:TechnologyCategory>
-            <auc:ChilledWaterHotWaterAndSteamDistributionSystems>
-              <auc:MeasureName>Replace or upgrade water heater</auc:MeasureName>
-            </auc:ChilledWaterHotWaterAndSteamDistributionSystems>
+            <auc:ExteriorWallRValue>
+              <auc:MeasureName>Retrofit with more efficient electic appliances(30% load reduction)</auc:MeasureName>
+            </auc:ExteriorWallRValue>
           </auc:TechnologyCategory>
         </auc:TechnologyCategories>
         <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
-        <auc:MVCost>1000</auc:MVCost>
-        <auc:MeasureTotalFirstCost>10000</auc:MeasureTotalFirstCost>
-        <auc:MeasureInstallationCost>8000</auc:MeasureInstallationCost>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+      <auc:Measure ID="Measure3">
+        <auc:SystemCategoryAffected>Infiltration</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:RoofRValue>
+              <auc:MeasureName>Retrfoit with adding air sealing to seal leaks (30% more airtight)</auc:MeasureName>
+            </auc:RoofRValue>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+      <auc:Measure ID="Measure4">
+        <auc:SystemCategoryAffected>Cooling System Efficiency</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:HVACEfficiency>
+              <auc:MeasureName>Retrfoit with cooling system efficiency SEER 14</auc:MeasureName>
+            </auc:HVACEfficiency>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+      <auc:Measure ID="Measure5">
+        <auc:SystemCategoryAffected>Heating System Efficiency</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:HVACEfficiency>
+              <auc:MeasureName>Retrfoit with heating system efficiency 0.93</auc:MeasureName>
+            </auc:HVACEfficiency>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
         <auc:MeasureMaterialCost>1000</auc:MeasureMaterialCost>
         <auc:Recommended>true</auc:Recommended>
         <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
@@ -363,7 +423,7 @@ def convert_feature(feature)
           </auc:ScenarioType>
         </auc:Scenario>
         <auc:Scenario>
-          <auc:ScenarioName>Lighting Only</auc:ScenarioName>
+          <auc:ScenarioName>LED</auc:ScenarioName>
           <auc:ScenarioType>
             <auc:PackageOfMeasures>
               <auc:ReferenceCase IDref="Baseline"/>
@@ -374,7 +434,7 @@ def convert_feature(feature)
           </auc:ScenarioType>
         </auc:Scenario>
         <auc:Scenario>
-          <auc:ScenarioName>Hot Water Only</auc:ScenarioName>
+          <auc:ScenarioName>Electric_Appliance_30%_Reduction</auc:ScenarioName>
           <auc:ScenarioType>
             <auc:PackageOfMeasures>
               <auc:ReferenceCase IDref="Baseline"/>
@@ -385,20 +445,56 @@ def convert_feature(feature)
           </auc:ScenarioType>
         </auc:Scenario>
         <auc:Scenario>
-          <auc:ScenarioName>Max Tech</auc:ScenarioName>
+          <auc:ScenarioName>Air_Seal_Infiltration_30%_More_Airtight</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure3"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+        <auc:Scenario>
+          <auc:ScenarioName>Cooling_System_SEER 14</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure4"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+        <auc:Scenario>
+          <auc:ScenarioName>Heating_System_Efficiency_0.93</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure5"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+        <auc:Scenario>
+          <auc:ScenarioName>Max_Tech</auc:ScenarioName>
           <auc:ScenarioType>
             <auc:PackageOfMeasures>
               <auc:ReferenceCase IDref="Baseline"/>
               <auc:MeasureIDs>
                 <auc:MeasureID IDref="Measure1"/>
                 <auc:MeasureID IDref="Measure2"/>
+                <auc:MeasureID IDref="Measure3"/>
+                <auc:MeasureID IDref="Measure4"/>
+                <auc:MeasureID IDref="Measure5"/>
               </auc:MeasureIDs>
             </auc:PackageOfMeasures>
           </auc:ScenarioType>
         </auc:Scenario>
       </auc:Scenarios>
     </auc:Report>
-	</auc:Audit>
+  </auc:Audit>
 </auc:Audits>
   '
   id = feature[:properties][:"Building Identifier"]
