@@ -253,8 +253,11 @@ module BRICR
 		fuel_electricity = getMeasureResult(result, 'openstudio_results', 'fuel_electricity')
 		fuel_natural_gas = getMeasureResult(result, 'openstudio_results', 'fuel_natural_gas')
 
-        total_site_energy_savings = baseline_total_site_energy - total_site_energy
-
+        total_site_energy_savings = 0
+        if baseline_total_site_energy && total_site_energy
+          total_site_energy_savings = baseline_total_site_energy - total_site_energy
+        end
+        
         annual_savings_site_energy = REXML::Element.new('auc:AnnualSavingsSiteEnergy')
 		annual_site_energy = REXML::Element.new('auc:AnnualSiteEnergy')
 		annual_electricity = REXML::Element.new('auc:AnnualElectricity')

@@ -57,7 +57,7 @@ Parallel.each(properties, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX
   url = File.join(host, file)
   
   # if url is specified, send this URL to the BRICR job queue
-  if BRICR::BRICR_SIM_URL
+  if defined?(BRICR::BRICR_SIM_URL) && BRICR::BRICR_SIM_URL
   
     RestClient.post( BRICR::BRICR_SIM_URL, JSON::fast_generate({:building_sync_url => url, :custom_id => custom_id}), {:buildingsyncurl => url, :customid => custom_id, :content_type => 'json', :accept => 'json'})
   
@@ -67,7 +67,7 @@ Parallel.each(properties, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX
     
     data = RestClient::Request.execute(:method => :get, :url => url, :timeout => 3600)
     File.open(xml_file, "wb") do |f|
-      file.write(data)
+      f.write(data)
     end
     
     command = "bundle exec '#{ruby_exe}' '#{run_buildingsync_rb}' #{ARGV[0]} '#{xml_file}'"

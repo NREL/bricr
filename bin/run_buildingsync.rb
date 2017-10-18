@@ -11,7 +11,7 @@ if xml_path.nil? || !File.exist?(xml_path)
   exit(1)
 end
 
-if BRICR::SIMULATION_OUTPUT_FOLDER != nil
+if defined?(BRICR::SIMULATION_OUTPUT_FOLDER) && BRICR::SIMULATION_OUTPUT_FOLDER
   unless BRICR::SIMULATION_OUTPUT_FOLDER
     FileUtils.mkdir_p(BRICR::SIMULATION_OUTPUT_FOLDER)
   end
