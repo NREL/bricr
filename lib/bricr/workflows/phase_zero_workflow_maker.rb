@@ -153,23 +153,23 @@ module BRICR
       measure_ids.each do |measure_id|
         @doc.elements.each("//auc:Measure[@ID='#{measure_id}']") do |measure|
           measure_category = measure.elements['auc:SystemCategoryAffected'].text
-          if /Lighting Fixture/.match(measure_category)
+          if /Lighting/.match(measure_category)
             set_measure_argument(osw, 'SetLightingLoadsByLPD', '__SKIP__', false)
             set_measure_argument(osw, 'SetLightingLoadsByLPD', 'lpd', 0.6)
           end
-          if /Electric Appliance/.match(measure_category)
+          if /Plug Load/.match(measure_category)
             set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', '__SKIP__', false)
             set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', 'elecequip_power_reduction_percent', 30.0)
           end
-          if /Infiltration/.match(measure_category)
+          if /Wall/.match(measure_category)
             set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', '__SKIP__', false)
             set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', 'space_infiltration_reduction_percent', 30.0)
           end
-          if /Heating System Efficiency/.match(measure_category)
+          if /Heating System/.match(measure_category)
             set_measure_argument(osw, 'SetGasBurnerEfficiency', '__SKIP__', false)
             set_measure_argument(osw, 'SetGasBurnerEfficiency', 'eff', 0.93)
           end
-          if /Cooling System Efficiency/.match(measure_category)
+          if /Cooling System/.match(measure_category)
             set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', '__SKIP__', false)
             set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', 'cop', 4.1)
           end

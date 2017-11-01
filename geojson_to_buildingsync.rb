@@ -309,14 +309,14 @@ def convert_feature(feature)
 		</auc:Sites>
     <auc:Measures>
       <auc:Measure ID="Measure1">
-        <auc:SystemCategoryAffected>Lighting Fixture</auc:SystemCategoryAffected>
+        <auc:SystemCategoryAffected>Lighting</auc:SystemCategoryAffected>
         <auc:PremisesAffected>
           <auc:PremiseAffected IDref="FACILITY_ID"/>
         </auc:PremisesAffected>
         <auc:TechnologyCategories>
           <auc:TechnologyCategory>
             <auc:LightingImprovements>
-              <auc:MeasureName>Retrofit with LED</auc:MeasureName>
+              <auc:MeasureName>Retrofit with light emitting diode technologies</auc:MeasureName>
             </auc:LightingImprovements>
           </auc:TechnologyCategory>
         </auc:TechnologyCategories>
@@ -329,15 +329,15 @@ def convert_feature(feature)
         <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
       </auc:Measure>
       <auc:Measure ID="Measure2">
-        <auc:SystemCategoryAffected>Electric Appliance</auc:SystemCategoryAffected>
+        <auc:SystemCategoryAffected>Plug Load</auc:SystemCategoryAffected>
         <auc:PremisesAffected>
           <auc:PremiseAffected IDref="FACILITY_ID"/>
         </auc:PremisesAffected>
         <auc:TechnologyCategories>
           <auc:TechnologyCategory>
-            <auc:ExteriorWallRValue>
-              <auc:MeasureName>Retrofit with more efficient electic appliances(30% load reduction)</auc:MeasureName>
-            </auc:ExteriorWallRValue>
+            <auc:PlugLoadReductions>
+              <auc:MeasureName>Replace with ENERGY STAR rated</auc:MeasureName>
+            </auc:PlugLoadReductions>
           </auc:TechnologyCategory>
         </auc:TechnologyCategories>
         <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
@@ -349,15 +349,15 @@ def convert_feature(feature)
         <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
       </auc:Measure>
       <auc:Measure ID="Measure3">
-        <auc:SystemCategoryAffected>Infiltration</auc:SystemCategoryAffected>
+        <auc:SystemCategoryAffected>Wall</auc:SystemCategoryAffected>
         <auc:PremisesAffected>
           <auc:PremiseAffected IDref="FACILITY_ID"/>
         </auc:PremisesAffected>
         <auc:TechnologyCategories>
           <auc:TechnologyCategory>
-            <auc:RoofRValue>
-              <auc:MeasureName>Retrfoit with adding air sealing to seal leaks (30% more airtight)</auc:MeasureName>
-            </auc:RoofRValue>
+            <auc:BuildingEnvelopeModifications>
+              <auc:MeasureName>Air seal envelope</auc:MeasureName>
+            </auc:BuildingEnvelopeModifications>
           </auc:TechnologyCategory>
         </auc:TechnologyCategories>
         <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
@@ -369,15 +369,15 @@ def convert_feature(feature)
         <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
       </auc:Measure>
       <auc:Measure ID="Measure4">
-        <auc:SystemCategoryAffected>Cooling System Efficiency</auc:SystemCategoryAffected>
+        <auc:SystemCategoryAffected>Cooling System</auc:SystemCategoryAffected>
         <auc:PremisesAffected>
           <auc:PremiseAffected IDref="FACILITY_ID"/>
         </auc:PremisesAffected>
         <auc:TechnologyCategories>
           <auc:TechnologyCategory>
-            <auc:HVACEfficiency>
-              <auc:MeasureName>Retrfoit with cooling system efficiency SEER 14</auc:MeasureName>
-            </auc:HVACEfficiency>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Replace package units</auc:MeasureName>
+            </auc:OtherHVAC>
           </auc:TechnologyCategory>
         </auc:TechnologyCategories>
         <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
@@ -389,15 +389,15 @@ def convert_feature(feature)
         <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
       </auc:Measure>
       <auc:Measure ID="Measure5">
-        <auc:SystemCategoryAffected>Heating System Efficiency</auc:SystemCategoryAffected>
+        <auc:SystemCategoryAffected>Heating System</auc:SystemCategoryAffected>
         <auc:PremisesAffected>
           <auc:PremiseAffected IDref="FACILITY_ID"/>
         </auc:PremisesAffected>
         <auc:TechnologyCategories>
           <auc:TechnologyCategory>
-            <auc:HVACEfficiency>
-              <auc:MeasureName>Retrfoit with heating system efficiency 0.93</auc:MeasureName>
-            </auc:HVACEfficiency>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Replace burner</auc:MeasureName>
+            </auc:OtherHVAC>
           </auc:TechnologyCategory>
         </auc:TechnologyCategories>
         <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
