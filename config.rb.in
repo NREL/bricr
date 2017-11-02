@@ -41,4 +41,7 @@ module BRICR
 
   # specify the output folder for the simulation runs
   SIMULATION_OUTPUT_FOLDER = "D:/BRICR_OUTPUT/"
+
+  # specify to run the baseline simulation only or not
+  SIMULATE_BASELINE_ONLY = true
 end
