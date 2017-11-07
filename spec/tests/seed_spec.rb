@@ -14,7 +14,7 @@ describe 'BRICR' do
 
     # upload to SEED as record
     ## Create or get the organization
-    org = seed.get_or_create_organization('BRICR Test Organization nlong')
+    org = seed.get_or_create_organization('BRICR Test Organization')
 
     ## Create or get the cycle
     cycle_name = 'BRICR Test Cycle - 2011'
@@ -33,7 +33,7 @@ describe 'BRICR' do
     # get building sync that we just uploaded, download and compare to uploaded one
     expect(status).to eq true
     expect(response[:status]).to eq 'success'
-    puts JSON.pretty_generate(response)
+    
     # Note that the upload_buildingsync file now returns the property_view, not the property_state
     expect(response[:data][:property_state][:custom_id_1]).to eq UBID
 
