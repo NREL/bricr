@@ -89,6 +89,12 @@
 		}
 	},
 	{
+		"measure_dir_name": "tariff_selection_generic",
+		"arguments": {
+		"__SKIP__": false
+		}
+	},
+	{
       "measure_dir_name": "openstudio_results",
       "arguments": {
         "__SKIP__": false,
