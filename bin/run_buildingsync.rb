@@ -30,11 +30,7 @@ FileUtils.mkdir_p(out_dir)
 translator = BRICR::Translator.new(xml_path)
 translator.writeOSWs(out_dir)
 osw_files = []
-if BRICR::SIMULATE_BASELINE_ONLY
-  osw_files.push "#{out_dir}/Baseline/in.osw"
-else
-  Dir.glob("#{out_dir}/**/*.osw") { |osw| osw_files << osw }
-end
+Dir.glob("#{out_dir}/**/*.osw") { |osw| osw_files << osw }
 
 if BRICR::DO_SIMULATIONS
   num_sims = 0

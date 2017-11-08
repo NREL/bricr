@@ -182,8 +182,9 @@ module BRICR
 
       # write an osw for each scenario
       @doc.elements.each('auc:Audits/auc:Audit/auc:Report/auc:Scenarios/auc:Scenario') do |scenario|
-      # get information about the scenario
+        # get information about the scenario
         scenario_name = scenario.elements['auc:ScenarioName'].text
+        next if BRICR::SIMULATE_BASELINE_ONLY and  scenario_name != 'Baseline'
 
         # deep clone
         osw = JSON.load(JSON.generate(@workflow))

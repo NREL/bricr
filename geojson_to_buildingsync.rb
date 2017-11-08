@@ -517,7 +517,7 @@ outdir = './bs_output'
 FileUtils.mkdir_p(outdir) unless File.exist?(outdir)
 
 summary_file = File.open(outdir + "/summary.csv", 'w')
-summary_file.puts "building_id,xml_filename,should_run_simulation,OccupancyClassification,FloorArea,YearOfConstruction,YearOfLastMajorRemodel"
+summary_file.puts "building_id,xml_filename,should_run_simulation,OccupancyClassification,FloorArea,YearOfConstruction,YearOfLastMajorRemodel,SiteEUI,SourceEUI,YearEUI"
 
 geojson[:features].each do |feature|
   id = feature[:properties][:"Building Identifier"]
@@ -532,7 +532,22 @@ geojson[:features].each do |feature|
       year_of_last_major_remodel = md[1]
     end
 
-    summary_file.puts "#{id},#{id}.xml,1,#{building_type},#{floor_area},#{year_of_construction},#{year_of_last_major_remodel}"
+    site_eui = nil
+    source_eui =nil
+    year_eui = nil
+    for year in 2011..2015
+      if feature[:properties][:"#{year} Annual Site Energy Resource Intensity"] != nil
+        site_eui = feature[:properties][:"#{year} Annual Site Energy Resource Intensity"]
+        year_eui = year
+      end
+
+      if feature[:properties][:"#{year} Annual Source Energy Resource Intensity"] != nil
+        source_eui = feature[:properties][:"#{year} Annual Source Energy Resource Intensity"]
+        year_eui = year
+      end
+    end
+
+    summary_file.puts "#{id},#{id}.xml,1,#{building_type},#{floor_area},#{year_of_construction},#{year_of_last_major_remodel},#{site_eui},#{source_eui},#{year_eui}"
 
     filename = File.join(outdir, "#{id}.xml")
     File.open(filename, 'w') do |file|
