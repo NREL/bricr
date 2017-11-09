@@ -51,13 +51,11 @@ end
 ruby_exe = File.join( RbConfig::CONFIG['bindir'], RbConfig::CONFIG['RUBY_INSTALL_NAME'] + RbConfig::CONFIG['EXEEXT'] )
 run_buildingsync_rb = File.join(File.dirname(__FILE__), "run_buildingsync.rb")
 
-csv_header.push 'Simulation Status,do simulations?,do get results?'
+csv_header.push 'Simulation Status,do simulations?,do get results?,annual electricity,annual natural gas'
 num_sims = 0
 total_xml_files = xml_paths.size.to_f
 Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_DATAPOINTS].min) do |xml_path, index|
-  
   break if num_sims > BRICR::MAX_DATAPOINTS
-  
   command = "bundle exec '#{ruby_exe}' '#{run_buildingsync_rb}' #{ARGV[0]} '#{xml_path}'"
       
   new_env = {}
@@ -76,19 +74,32 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
   new_env["RUBYOPT"] = nil
       
   stdout_str, stderr_str, status = Open3.capture3(new_env, command)
-  
+
   result = nil
   if status.success?
     result = true
   else
     result = false
-    #puts stdout_str
-    #puts stderr_str
+    puts stdout_str
+    puts stderr_str
   end
   
   building_info[xml_path_ids[index]].push result
   building_info[xml_path_ids[index]].push BRICR::DO_SIMULATIONS
   building_info[xml_path_ids[index]].push BRICR::DO_GET_RESULTS
+
+  if result
+    if defined?(BRICR::SIMULATION_OUTPUT_FOLDER) && BRICR::SIMULATION_OUTPUT_FOLDER
+      out_dir = File.join(BRICR::SIMULATION_OUTPUT_FOLDER, File.basename(xml_path, '.*') + '/')
+    else
+      out_dir = File.join(File.dirname(xml_path), File.basename(xml_path, '.*') + '/')
+    end
+    result_path = File.join(out_dir, 'results.xml')
+    translator = BRICR::Translator.new(result_path)
+
+
+
+  end
 
   num_sims += 1
 end
