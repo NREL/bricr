@@ -57,11 +57,11 @@ total_xml_files = xml_paths.size.to_f
 Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_DATAPOINTS].min) do |xml_path, index|
   break if num_sims > BRICR::MAX_DATAPOINTS
   command = "bundle exec '#{ruby_exe}' '#{run_buildingsync_rb}' #{ARGV[0]} '#{xml_path}'"
-      
+
   new_env = {}
-    
+
   puts "Running cmd (#{index}/#{total_xml_files.to_i} #{(100*index/total_xml_files).to_i}%): #{command}\n"
-  
+
   # blank out bundler and gem path modifications, will be re-setup by new call
   new_env["BUNDLER_ORIG_MANPATH"] = nil
   new_env["GEM_PATH"] = nil
@@ -72,7 +72,7 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
   new_env["BUNDLE_GEMFILE"] = nil
   new_env["RUBYLIB"] = nil
   new_env["RUBYOPT"] = nil
-      
+
   stdout_str, stderr_str, status = Open3.capture3(new_env, command)
 
   result = nil
@@ -83,7 +83,7 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
     puts stdout_str
     puts stderr_str
   end
-  
+
   building_info[xml_path_ids[index]].push result
   building_info[xml_path_ids[index]].push BRICR::DO_SIMULATIONS
   building_info[xml_path_ids[index]].push BRICR::DO_GET_RESULTS
@@ -97,14 +97,18 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
     result_path = File.join(out_dir, 'results.xml')
     translator = BRICR::Translator.new(result_path)
 
-
-
   end
 
   num_sims += 1
 end
 
-File.open('summary_output.csv', 'w') do |file|
+if defined?(BRICR::SIMULATION_OUTPUT_FOLDER) && BRICR::SIMULATION_OUTPUT_FOLDER
+  summary_output_path = File.join(BRICR::SIMULATION_OUTPUT_FOLDER,'summary_output.csv')
+else
+  summary_output_path = 'summary_output.csv'
+end
+
+File.open(summary_output_path, 'w') do |file|
   file.puts csv_header.join(',')
   building_info.values.each do |value|
     file.puts value.join(',')
