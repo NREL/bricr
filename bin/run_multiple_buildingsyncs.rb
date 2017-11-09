@@ -62,7 +62,7 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
       
   new_env = {}
     
-  puts "Running cmd (#{(index/total_xml_files*100).to_i}%): #{command}\n"
+  puts "Running cmd (#{index}/#{total_xml_files.to_i} #{(100*index/total_xml_files).to_i}%): #{command}\n"
   
   # blank out bundler and gem path modifications, will be re-setup by new call
   new_env["BUNDLER_ORIG_MANPATH"] = nil
