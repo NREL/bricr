@@ -32,12 +32,40 @@ xml_path_ids = []
 building_info = {}
 csv_header = ""
 
+# This function is used to get the annual electricity and natural gas results from the result.xml file
+def get_results(result_xml_path)
+  results = {}
+  # parse the xml
+  raise "File '#{result_xml_path}' does not exist" unless File.exist?(result_xml_path)
+  File.open(result_xml_path, 'r') do |file|
+    doc = REXML::Document.new(file)
+    doc.elements.each('auc:Audits/auc:Audit/auc:Report/auc:Scenarios/auc:Scenario') do |scenario|
+      # get information about the scenario
+      scenario_name = scenario.elements['auc:ScenarioName'].text
+      next if BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
+
+      package_of_measures = scenario.elements['auc:ScenarioType'].elements['auc:PackageOfMeasures']
+      results['annual_electricity'] = package_of_measures.elements['auc:AnnualElectricity'].text.to_f
+      results['annual_natural_gas'] = package_of_measures.elements['auc:AnnualNaturalGas'].text.to_f
+    end
+  end
+  return results
+end
+
+floor_area_index = nil
+
 building_list = CSV.readlines(building_list_filename)
 building_list.each_with_index do |building_record, index|
   if index == 0
     csv_header = building_record
     raise "error: the header of the csv file is wrong #{building_record.join(',')}" if building_record.size < 3 or
         building_record[0] != 'building_id' or building_record[1] != 'xml_filename' or building_record[2] != 'should_run_simulation'
+    building_record.each_with_index do |header_item, header_index|
+      if header_item == 'FloorArea(ft2)'
+        floor_area_index = header_index
+      end
+    end
+    raise "Can't find the column with FloorArea(ft2)" if floor_area_index.nil?
     next
   end
   building_info[building_record[0].to_i] = building_record
@@ -51,7 +79,10 @@ end
 ruby_exe = File.join( RbConfig::CONFIG['bindir'], RbConfig::CONFIG['RUBY_INSTALL_NAME'] + RbConfig::CONFIG['EXEEXT'] )
 run_buildingsync_rb = File.join(File.dirname(__FILE__), "run_buildingsync.rb")
 
-csv_header.push 'Simulation Status,do simulations?,do get results?,annual electricity,annual natural gas'
+csv_header.push 'Simulation Status,do simulations?,do get results?'
+csv_header.push 'electricity_eui(kBtu/sf),natural gas_eui(kBtu/sf)'
+csv_header.push 'site_eui(kBtu/sf),source_eui(kBtu/sf)'
+
 num_sims = 0
 total_xml_files = xml_paths.size.to_f
 Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_DATAPOINTS].min) do |xml_path, index|
@@ -95,8 +126,15 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
       out_dir = File.join(File.dirname(xml_path), File.basename(xml_path, '.*') + '/')
     end
     result_path = File.join(out_dir, 'results.xml')
-    translator = BRICR::Translator.new(result_path)
+    results = get_results(result_path)
+    floor_area_sf = building_info[xml_path_ids[index]][floor_area_index].to_f
+    electricity_eui = results['annual_electricity'] / floor_area_sf
+    gas_eui = results['annual_natural_gas'] / floor_area_sf
 
+    building_info[xml_path_ids[index]].push(electricity_eui)
+    building_info[xml_path_ids[index]].push(gas_eui)
+    building_info[xml_path_ids[index]].push(electricity_eui + gas_eui)
+    building_info[xml_path_ids[index]].push(electricity_eui * 3.14 + gas_eui * 1.05)
   end
 
   num_sims += 1

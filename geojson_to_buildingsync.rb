@@ -517,7 +517,7 @@ outdir = './bs_output'
 FileUtils.mkdir_p(outdir) unless File.exist?(outdir)
 
 summary_file = File.open(outdir + "/summary.csv", 'w')
-summary_file.puts "building_id,xml_filename,should_run_simulation,OccupancyClassification,FloorArea,YearOfConstruction,YearOfLastMajorRemodel,SiteEUI,SourceEUI,YearEUI"
+summary_file.puts "building_id,xml_filename,should_run_simulation,OccupancyClassification,FloorArea(ft2),YearOfConstruction,YearOfLastMajorRemodel,SiteEUI(kBtu/ft2),SourceEUI(kBtu/ft2),YearEUI"
 
 geojson[:features].each do |feature|
   id = feature[:properties][:"Building Identifier"]
