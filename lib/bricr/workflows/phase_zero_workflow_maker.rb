@@ -184,7 +184,7 @@ module BRICR
       @doc.elements.each('auc:Audits/auc:Audit/auc:Report/auc:Scenarios/auc:Scenario') do |scenario|
         # get information about the scenario
         scenario_name = scenario.elements['auc:ScenarioName'].text
-        next if BRICR::SIMULATE_BASELINE_ONLY and  scenario_name != 'Baseline'
+        next if BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
         # deep clone
         osw = JSON.load(JSON.generate(@workflow))
@@ -227,8 +227,9 @@ module BRICR
 
       # write an osw for each scenario
       @doc.elements.each('auc:Audits/auc:Audit/auc:Report/auc:Scenarios/auc:Scenario') do |scenario|
-      # get information about the scenario
+        # get information about the scenario
         scenario_name = scenario.elements['auc:ScenarioName'].text
+        next if BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
         # dir for the osw
         osw_dir = File.join(dir, scenario_name)
@@ -242,46 +243,48 @@ module BRICR
       end
 
       @doc.elements.each('auc:Audits/auc:Audit/auc:Report/auc:Scenarios/auc:Scenario') do |scenario|
-      # get information about the scenario
+        # get information about the scenario
         scenario_name = scenario.elements['auc:ScenarioName'].text
+        next if BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
+
         package_of_measures = scenario.elements['auc:ScenarioType'].elements['auc:PackageOfMeasures']
 
         result = results[scenario_name]
         baseline = results['Baseline']
 
         # Check out.osw "openstudio_results" for output variables
-		total_site_energy = getMeasureResult(result, 'openstudio_results', 'total_site_energy') # in kBtu
+		    total_site_energy = getMeasureResult(result, 'openstudio_results', 'total_site_energy') # in kBtu
         baseline_total_site_energy = getMeasureResult(baseline, 'openstudio_results', 'total_site_energy') # in kBtu
-		fuel_electricity = getMeasureResult(result, 'openstudio_results', 'fuel_electricity') # in kBtu
-		fuel_natural_gas = getMeasureResult(result, 'openstudio_results', 'fuel_natural_gas') # in kBtu
-		annual_utility_cost = getMeasureResult(result, 'openstudio_results', 'annual_utility_cost') # in $
-		baseline_annual_utility_cost = getMeasureResult(baseline, 'openstudio_results', 'annual_utility_cost') # in $
+        fuel_electricity = getMeasureResult(result, 'openstudio_results', 'fuel_electricity') # in kBtu
+        fuel_natural_gas = getMeasureResult(result, 'openstudio_results', 'fuel_natural_gas') # in kBtu
+        annual_utility_cost = getMeasureResult(result, 'openstudio_results', 'annual_utility_cost') # in $
+        baseline_annual_utility_cost = getMeasureResult(baseline, 'openstudio_results', 'annual_utility_cost') # in $
 		
 
         total_site_energy_savings = 0
-		total_energy_cost_savings = 0
+		    total_energy_cost_savings = 0
         if baseline_total_site_energy && total_site_energy
           total_site_energy_savings = baseline_total_site_energy - total_site_energy
-		  total_energy_cost_savings = baseline_annual_utility_cost - annual_utility_cost
+		      total_energy_cost_savings = baseline_annual_utility_cost - annual_utility_cost
         end
         
         annual_savings_site_energy = REXML::Element.new('auc:AnnualSavingsSiteEnergy')
-		annual_site_energy = REXML::Element.new('auc:AnnualSiteEnergy')
-		annual_electricity = REXML::Element.new('auc:AnnualElectricity')
-		annual_natual_gas = REXML::Element.new('auc:AnnualNaturalGas')
-		annual_savings_energy_cost = REXML::Element.new('auc:AnnualSavingsEnergyCost')
-        
-		annual_savings_site_energy.text = total_site_energy_savings
-		annual_site_energy.text = total_site_energy
-		annual_electricity.text = fuel_electricity
-		annual_natual_gas.text = fuel_natural_gas
-		annual_savings_energy_cost.text = total_energy_cost_savings
-        
-		package_of_measures.add_element(annual_savings_site_energy)
-		package_of_measures.add_element(annual_site_energy)
-		package_of_measures.add_element(annual_electricity)
-		package_of_measures.add_element(annual_natual_gas)
-		package_of_measures.add_element(annual_savings_energy_cost)
+		    annual_site_energy = REXML::Element.new('auc:AnnualSiteEnergy')
+        annual_electricity = REXML::Element.new('auc:AnnualElectricity')
+        annual_natual_gas = REXML::Element.new('auc:AnnualNaturalGas')
+        annual_savings_energy_cost = REXML::Element.new('auc:AnnualSavingsEnergyCost')
+
+        annual_savings_site_energy.text = total_site_energy_savings
+        annual_site_energy.text = total_site_energy
+        annual_electricity.text = fuel_electricity
+        annual_natual_gas.text = fuel_natural_gas
+        annual_savings_energy_cost.text = total_energy_cost_savings
+
+        package_of_measures.add_element(annual_savings_site_energy)
+        package_of_measures.add_element(annual_site_energy)
+        package_of_measures.add_element(annual_electricity)
+        package_of_measures.add_element(annual_natual_gas)
+        package_of_measures.add_element(annual_savings_energy_cost)
       end
     end
   end
