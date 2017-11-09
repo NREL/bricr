@@ -4,7 +4,7 @@
 	"root_directory": null,
 	"run_directory": null,
 	"file_paths": null,
-  "measure_paths": [
+    "measure_paths": [
     "../../../NREL working measures/"
   ],
 	"steps": [
@@ -58,6 +58,14 @@
         "__SKIP__": false
       }
     },
+	{
+		"measure_dir_name": "calibrate_baseline_model",
+		"arguments": {
+            "bldg_type": "MediumOffice",
+            "template": "CEC T24 2008",
+            "__SKIP__": false
+		}
+	},
 	{
 		"measure_dir_name": "SetLightingLoadsByLPD",
 		"arguments": {

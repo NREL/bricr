@@ -141,7 +141,7 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
 end
 
 if defined?(BRICR::SIMULATION_OUTPUT_FOLDER) && BRICR::SIMULATION_OUTPUT_FOLDER
-  summary_output_path = File.join(BRICR::SIMULATION_OUTPUT_FOLDER,'summary_output.csv')
+  summary_output_path = File.join(BRICR::SIMULATION_OUTPUT_FOLDER, 'summary_output.csv')
 else
   summary_output_path = 'summary_output.csv'
 end
