@@ -39,7 +39,11 @@ if BRICR::DO_SIMULATIONS
 
     cmd = "\"#{BRICR::OPENSTUDIO_EXE}\" run -w \"#{osw}\""
     puts "Running cmd: #{cmd}\n"
-    system(cmd)
+    result = system(cmd)
+
+    unless result
+      raise "Failed to run the simulation with cmd: #{cmd}"
+    end
 
     num_sims += 1
   end

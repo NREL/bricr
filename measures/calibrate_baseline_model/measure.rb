@@ -66,6 +66,8 @@ class CalibrateBaselineModel < OpenStudio::Ruleset::ModelUserScript
     lpd_change_rate = @@calibrate_factors[template][bldg_type]['lpd_change_rate']
     epd_change_rate = @@calibrate_factors[template][bldg_type]['epd_change_rate']
     occupant_density_change_rate = @@calibrate_factors[template][bldg_type]['occupant_density_change_rate']
+    cop_change_rate = @@calibrate_factors[template][bldg_type]['cop_change_rate']
+    heating_efficiency_change_rate = @@calibrate_factors[template][bldg_type]['heating_efficiency_change_rate']
 
     #setup OpenStudio units that we will need
     unit_lpd_si = OpenStudio::createUnit("W/m^2").get
@@ -80,6 +82,8 @@ class CalibrateBaselineModel < OpenStudio::Ruleset::ModelUserScript
     initial_condition += "lpd_change_rate: #{lpd_change_rate},"
     initial_condition += "epd_change_rate: #{epd_change_rate},"
     initial_condition += "occupant_density_change_rate: #{occupant_density_change_rate},"
+    initial_condition += "cop_change_rate: #{cop_change_rate},"
+    initial_condition += "heating_efficiency_change_rate: #{heating_efficiency_change_rate},"
     initial_condition += "initial LPD: #{building_start_lpd_si} #{unit_lpd_si},"
     initial_condition += "initial EPD: #{building_start_epd_si} #{unit_lpd_si}."
     initial_condition += "initial Occupancy: #{building_start_occupancy_si} people/m^2."
@@ -87,7 +91,7 @@ class CalibrateBaselineModel < OpenStudio::Ruleset::ModelUserScript
     runner.registerInitialCondition(initial_condition)
 
     space_types = model.getSpaceTypes
-    #loop through space types
+    # loop through space types
     space_types.each do |space_type|
       # Update lighting power density
       space_type.lights.each do |light|
@@ -138,7 +142,60 @@ class CalibrateBaselineModel < OpenStudio::Ruleset::ModelUserScript
       end
     end
 
-    #report final condition
+    # Update HVAC systems
+    air_loops = model.getAirLoopHVACs
+
+
+    # loop through air loops
+    air_loops.each do |air_loop|
+      supply_components = air_loop.supplyComponents
+
+      find_cooling = false
+      find_heating = false
+
+      # find single speed dx units on loop
+      supply_components.each do |supply_component|
+        hvac_component = supply_component.to_CoilCoolingDXSingleSpeed
+        unless hvac_component.empty?
+          hvac_component = hvac_component.get
+
+          # change and report high speed cop
+          initial_cop = hvac_component.ratedCOP
+          if initial_cop.empty?
+            raise "Fail to find the Rated COP for single speed dx unit '#{hvac_component.name}' on air loop '#{air_loop.name}'"
+          else
+            after_cop = initial_cop.get * (1 + cop_change_rate)
+            runner.registerInfo("Changing the Rated COP from #{initial_cop.get} to #{after_cop} for single speed dx unit '#{hvac_component.name}' on air loop '#{air_loop.name}'")
+            double_after_cop = OpenStudio::OptionalDouble.new(after_cop)
+            hvac_component.setRatedCOP(double_after_cop)
+            find_cooling = true
+          end
+        end
+
+        hvac_component = supply_component.to_CoilHeatingGas
+        unless hvac_component.empty?
+          hvac_component = hvac_component.get
+
+          # change and report high speed eff
+          initial_eff = hvac_component.gasBurnerEfficiency
+          eff = initial_eff * (1 + heating_efficiency_change_rate)
+          # check the user_name for reasonableness
+          if eff <= 0 or eff > 0.99
+            runner.registerError("Wromg burner efficiency of #{eff}.")
+            return false
+          end
+
+          runner.registerInfo("Changing the burner efficiency from #{initial_eff} to #{eff} for gas heating units '#{hvac_component.name}' on air loop '#{air_loop.name}'")
+          hvac_component.setGasBurnerEfficiency(eff)
+          find_heating = true
+        end
+      end
+
+      raise "Fail to find the cooling system for air lop '#{air_loop.name}'" unless find_cooling
+      raise "Fail to find the heating system for air lop '#{air_loop.name}'" unless find_heating
+    end
+
+    # report final condition
     building_final_lpd_si = OpenStudio::Quantity.new(building.lightingPowerPerFloorArea, unit_lpd_si)
     building_final_epd_si = OpenStudio::Quantity.new(building.electricEquipmentPowerPerFloorArea, unit_lpd_si)
     building_finish_occupancy_si = building.peoplePerFloorArea # people/m^2
