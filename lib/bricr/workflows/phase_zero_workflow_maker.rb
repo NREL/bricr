@@ -142,6 +142,8 @@ module BRICR
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'ns_to_ew_ratio', ns_to_ew_ratio)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'wwr', wwr)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bar_division_method', bar_division_method)
+      set_measure_argument(osw, 'calibrate_baseline_model', 'template', template)
+      set_measure_argument(osw, 'calibrate_baseline_model', 'bldg_type', bldg_type)
     end
 
     def configureForScenario(osw, scenario)
