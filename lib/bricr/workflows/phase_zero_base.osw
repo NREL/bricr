@@ -48,7 +48,7 @@
       "measure_dir_name": "create_typical_building_from_model",
       "arguments": {
         "template": "CEC T24 2008",
-        "system_type": "Inferred",
+        "system_type": "PSZ-AC with gas coil heat",
         "htg_src": "NaturalGas",
         "clg_src": "Electricity",
         "hvac_delivery_type": "Forced Air",
