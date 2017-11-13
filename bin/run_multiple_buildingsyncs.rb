@@ -42,7 +42,7 @@ def get_results(result_xml_path)
     doc.elements.each('auc:Audits/auc:Audit/auc:Report/auc:Scenarios/auc:Scenario') do |scenario|
       # get information about the scenario
       scenario_name = scenario.elements['auc:ScenarioName'].text
-      next if BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
+      next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
       package_of_measures = scenario.elements['auc:ScenarioType'].elements['auc:PackageOfMeasures']
       results['annual_electricity'] = package_of_measures.elements['auc:AnnualElectricity'].text.to_f

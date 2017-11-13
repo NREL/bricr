@@ -63,7 +63,7 @@
 		"arguments": {
             "bldg_type": "MediumOffice",
             "template": "CEC T24 2008",
-            "__SKIP__": false
+            "__SKIP__": true
 		}
 	},
 	{
