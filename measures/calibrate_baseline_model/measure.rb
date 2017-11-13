@@ -172,6 +172,35 @@ class CalibrateBaselineModel < OpenStudio::Ruleset::ModelUserScript
           end
         end
 
+        hvac_component = supply_component.to_CoilCoolingDXTwoSpeed
+        unless hvac_component.empty?
+          hvac_component = hvac_component.get
+
+          # change and report high speed cop
+          initial_cop = hvac_component.ratedHighSpeedCOP
+          if initial_cop.empty?
+            raise "Fail to find the Rated High Speed COP for two speed dx unit '#{hvac_component.name}' on air loop '#{air_loop.name}'"
+          else
+            after_cop = initial_cop.get * (1 + cop_change_rate)
+            runner.registerInfo("Changing the Rated High Speed COP from #{initial_cop.get} to #{after_cop} for two speed dx unit '#{hvac_component.name}' on air loop '#{air_loop.name}'")
+            double_after_cop = OpenStudio::OptionalDouble.new(after_cop)
+            hvac_component.setRatedHighSpeedCOP(double_after_cop)
+          end
+
+          # change and report low speed cop
+          initial_cop = hvac_component.ratedLowSpeedCOP
+          if initial_cop.empty?
+            raise "Fail to find the Rated Low Speed COP for two speed dx unit '#{hvac_component.name}' on air loop '#{air_loop.name}'"
+          else
+            after_cop = initial_cop.get * (1 + cop_change_rate)
+            runner.registerInfo("Changing the Rated Low Speed COP from #{initial_cop.get} to #{after_cop} for two speed dx unit '#{hvac_component.name}' on air loop '#{air_loop.name}'")
+            double_after_cop = OpenStudio::OptionalDouble.new(after_cop)
+            hvac_component.setRatedLowSpeedCOP(double_after_cop)
+          end
+
+          find_cooling = true
+        end
+
         hvac_component = supply_component.to_CoilHeatingGas
         unless hvac_component.empty?
           hvac_component = hvac_component.get
