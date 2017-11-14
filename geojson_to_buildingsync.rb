@@ -517,7 +517,7 @@ outdir = './bs_output'
 FileUtils.mkdir_p(outdir) unless File.exist?(outdir)
 
 summary_file = File.open(outdir + "/summary.csv", 'w')
-summary_file.puts "building_id,xml_filename,should_run_simulation,OccupancyClassification,FloorArea(ft2),YearOfConstruction,YearOfLastMajorRemodel,SiteEUI(kBtu/ft2),SourceEUI(kBtu/ft2),YearEUI"
+summary_file.puts "building_id,xml_filename,should_run_simulation,OccupancyClassification,FloorArea(ft2),YearBuilt,template,SiteEUI(kBtu/ft2),SourceEUI(kBtu/ft2),YearEUI"
 
 geojson[:features].each do |feature|
   id = feature[:properties][:"Building Identifier"]
@@ -525,37 +525,59 @@ geojson[:features].each do |feature|
   
   begin
     doc = convert_feature(feature)
-    floor_area = convert(feature[:properties][:"Gross Floor Area"], 'ft2', 'ft2')
-    building_type = get_occupancy_classification(feature)
-    year_of_construction = feature[:properties][:"Completed Construction Status Date"]
-    if md = /^(\d\d\d\d).*/.match(feature[:properties][:"Last Modified Date"].to_s)
-      year_of_last_major_remodel = md[1]
-    end
-
-    site_eui = nil
-    source_eui =nil
-    year_eui = nil
-    for year in 2011..2015
-      if feature[:properties][:"#{year} Annual Site Energy Resource Intensity"] != nil
-        site_eui = feature[:properties][:"#{year} Annual Site Energy Resource Intensity"]
-        year_eui = year
-      end
-
-      if feature[:properties][:"#{year} Annual Source Energy Resource Intensity"] != nil
-        source_eui = feature[:properties][:"#{year} Annual Source Energy Resource Intensity"]
-        year_eui = year
-      end
-    end
-
-    summary_file.puts "#{id},#{id}.xml,1,#{building_type},#{floor_area},#{year_of_construction},#{year_of_last_major_remodel},#{site_eui},#{source_eui},#{year_eui}"
-
     filename = File.join(outdir, "#{id}.xml")
     File.open(filename, 'w') do |file|
       doc.write(file)
     end
   rescue
     puts "Building #{id} not converted"
+    next
   end
+
+  floor_area = convert(feature[:properties][:"Gross Floor Area"], 'ft2', 'ft2')
+  building_type = get_occupancy_classification(feature)
+  year_of_construction = feature[:properties][:"Completed Construction Status Date"]
+  year_of_last_major_remodel = nil
+  if md = /^(\d\d\d\d).*/.match(feature[:properties][:"Last Modified Date"].to_s)
+    year_of_last_major_remodel = md[1]
+  end
+
+  site_eui = nil
+  source_eui =nil
+  year_eui = nil
+  for year in 2011..2015
+    if feature[:properties][:"#{year} Annual Site Energy Resource Intensity"] != nil
+      site_eui = feature[:properties][:"#{year} Annual Site Energy Resource Intensity"]
+      year_eui = year
+    end
+
+    if feature[:properties][:"#{year} Annual Source Energy Resource Intensity"] != nil
+      source_eui = feature[:properties][:"#{year} Annual Source Energy Resource Intensity"]
+      year_eui = year
+    end
+  end
+
+  if year_of_last_major_remodel != nil and year_of_last_major_remodel.to_i > 1000
+    year_built = year_of_last_major_remodel.to_i
+  else
+    year_built = year_of_construction.to_i
+  end
+
+  if year_built < 1978
+    template = "CEC Pre-1978"
+  elsif year_built >= 1978 && year_built < 1992
+    template = "CEC T24 1978"
+  elsif year_built >= 1992 && year_built < 2001
+    template = "CEC T24 1992"
+  elsif year_built >= 2001 && year_built < 2005
+    template = "CEC T24 2001"
+  elsif year_built >= 2005 && year_built < 2008
+    template = "CEC T24 2005"
+  else
+    template = "CEC T24 2008"
+  end
+
+  summary_file.puts "#{id},#{id}.xml,1,#{building_type},#{floor_area},#{year_built},#{template},#{site_eui},#{source_eui},#{year_eui}"
 end
 
 summary_file.close

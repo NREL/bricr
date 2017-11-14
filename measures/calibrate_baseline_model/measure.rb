@@ -65,30 +65,24 @@ class CalibrateBaselineModel < OpenStudio::Ruleset::ModelUserScript
 
     lpd_change_rate = @@calibrate_factors[template][bldg_type]['lpd_change_rate']
     epd_change_rate = @@calibrate_factors[template][bldg_type]['epd_change_rate']
-    occupant_density_change_rate = @@calibrate_factors[template][bldg_type]['occupant_density_change_rate']
+    occupancy_change_rate = @@calibrate_factors[template][bldg_type]['occupancy_change_rate']
     cop_change_rate = @@calibrate_factors[template][bldg_type]['cop_change_rate']
     heating_efficiency_change_rate = @@calibrate_factors[template][bldg_type]['heating_efficiency_change_rate']
 
-    #setup OpenStudio units that we will need
-    unit_lpd_si = OpenStudio::createUnit("W/m^2").get
-
     #report initial condition
     building = model.getBuilding
-    building_start_lpd_si = OpenStudio::Quantity.new(building.lightingPowerPerFloorArea, unit_lpd_si)
-    building_start_epd_si = OpenStudio::Quantity.new(building.electricEquipmentPowerPerFloorArea, unit_lpd_si)
-    building_start_occupancy_si = building.peoplePerFloorArea # people/m^2
+    initial_lpd = building.lightingPowerPerFloorArea # W/m^2
+    initial_epd = building.electricEquipmentPowerPerFloorArea # W/m^2
+    initial_occupancy = building.peoplePerFloorArea # people/m^2
 
-    initial_condition = "The model's template: #{template}, building type: #{bldg_type},"
-    initial_condition += "lpd_change_rate: #{lpd_change_rate},"
-    initial_condition += "epd_change_rate: #{epd_change_rate},"
-    initial_condition += "occupant_density_change_rate: #{occupant_density_change_rate},"
-    initial_condition += "cop_change_rate: #{cop_change_rate},"
-    initial_condition += "heating_efficiency_change_rate: #{heating_efficiency_change_rate},"
-    initial_condition += "initial LPD: #{building_start_lpd_si} #{unit_lpd_si},"
-    initial_condition += "initial EPD: #{building_start_epd_si} #{unit_lpd_si}."
-    initial_condition += "initial Occupancy: #{building_start_occupancy_si} people/m^2."
-
-    runner.registerInitialCondition(initial_condition)
+    runner.registerValue('lpd_change_rate', lpd_change_rate.to_s)
+    runner.registerValue('epd_change_rate', epd_change_rate.to_s)
+    runner.registerValue('occupancy_change_rate', occupancy_change_rate.to_s)
+    runner.registerValue('cop_change_rate', cop_change_rate.to_s)
+    runner.registerValue('heating_efficiency_change_rate', heating_efficiency_change_rate.to_s)
+    runner.registerValue('initial_lpd', initial_lpd.round(3).to_s)
+    runner.registerValue('initial_epd', initial_epd.round(3).to_s)
+    runner.registerValue('initial_occupancy', initial_occupancy.round(3).to_s)
 
     space_types = model.getSpaceTypes
     # loop through space types
@@ -129,15 +123,15 @@ class CalibrateBaselineModel < OpenStudio::Ruleset::ModelUserScript
       space_type.people.each do |people|
         people_def = people.peopleDefinition
         unless people_def.numberofPeople.empty?
-          people_def.setNumberofPeople((1 + occupant_density_change_rate) * people_def.numberofPeople.get)
+          people_def.setNumberofPeople((1 + occupancy_change_rate) * people_def.numberofPeople.get)
         end
 
         unless people_def.peopleperSpaceFloorArea.empty?
-          people_def.setPeopleperSpaceFloorArea((1 + occupant_density_change_rate) * people_def.peopleperSpaceFloorArea.get)
+          people_def.setPeopleperSpaceFloorArea((1 + occupancy_change_rate) * people_def.peopleperSpaceFloorArea.get)
         end
 
         unless people_def.spaceFloorAreaperPerson.empty?
-          people_def.setSpaceFloorAreaperPerson(people_def.spaceFloorAreaperPerson.get/(1 + occupant_density_change_rate))
+          people_def.setSpaceFloorAreaperPerson(people_def.spaceFloorAreaperPerson.get/(1 + occupancy_change_rate))
         end
       end
     end
@@ -145,16 +139,20 @@ class CalibrateBaselineModel < OpenStudio::Ruleset::ModelUserScript
     # Update HVAC systems
     air_loops = model.getAirLoopHVACs
 
+    initial_cop_value = nil
+    after_cop_value = nil
+    double_after_cop = nil
+
+    initial_eff_value = nil
+    after_eff_value = nil
 
     # loop through air loops
     air_loops.each do |air_loop|
-      supply_components = air_loop.supplyComponents
-
       find_cooling = false
       find_heating = false
 
       # find single speed dx units on loop
-      supply_components.each do |supply_component|
+      air_loop.supplyComponents.each do |supply_component|
         hvac_component = supply_component.to_CoilCoolingDXSingleSpeed
         unless hvac_component.empty?
           hvac_component = hvac_component.get
@@ -164,9 +162,14 @@ class CalibrateBaselineModel < OpenStudio::Ruleset::ModelUserScript
           if initial_cop.empty?
             raise "Fail to find the Rated COP for single speed dx unit '#{hvac_component.name}' on air loop '#{air_loop.name}'"
           else
-            after_cop = initial_cop.get * (1 + cop_change_rate)
-            runner.registerInfo("Changing the Rated COP from #{initial_cop.get} to #{after_cop} for single speed dx unit '#{hvac_component.name}' on air loop '#{air_loop.name}'")
-            double_after_cop = OpenStudio::OptionalDouble.new(after_cop)
+            if initial_cop_value.nil?
+              initial_cop_value = initial_cop.get
+              after_cop_value = initial_cop_value * (1 + cop_change_rate)
+              double_after_cop = OpenStudio::OptionalDouble.new(after_cop_value)
+            elsif initial_cop_value != initial_cop.get
+              raise "Multiple cop values are found: #{initial_cop_value} and #{initial_cop.get}"
+            end
+
             hvac_component.setRatedCOP(double_after_cop)
             find_cooling = true
           end
@@ -181,9 +184,13 @@ class CalibrateBaselineModel < OpenStudio::Ruleset::ModelUserScript
           if initial_cop.empty?
             raise "Fail to find the Rated High Speed COP for two speed dx unit '#{hvac_component.name}' on air loop '#{air_loop.name}'"
           else
-            after_cop = initial_cop.get * (1 + cop_change_rate)
-            runner.registerInfo("Changing the Rated High Speed COP from #{initial_cop.get} to #{after_cop} for two speed dx unit '#{hvac_component.name}' on air loop '#{air_loop.name}'")
-            double_after_cop = OpenStudio::OptionalDouble.new(after_cop)
+            if initial_cop_value.nil?
+              initial_cop_value = initial_cop.get
+              after_cop_value = initial_cop_value * (1 + cop_change_rate)
+              double_after_cop = OpenStudio::OptionalDouble.new(after_cop_value)
+            elsif initial_cop_value != initial_cop.get
+              raise "Multiple cop values are found: #{initial_cop_value} and #{initial_cop.get}"
+            end
             hvac_component.setRatedHighSpeedCOP(double_after_cop)
           end
 
@@ -192,9 +199,13 @@ class CalibrateBaselineModel < OpenStudio::Ruleset::ModelUserScript
           if initial_cop.empty?
             raise "Fail to find the Rated Low Speed COP for two speed dx unit '#{hvac_component.name}' on air loop '#{air_loop.name}'"
           else
-            after_cop = initial_cop.get * (1 + cop_change_rate)
-            runner.registerInfo("Changing the Rated Low Speed COP from #{initial_cop.get} to #{after_cop} for two speed dx unit '#{hvac_component.name}' on air loop '#{air_loop.name}'")
-            double_after_cop = OpenStudio::OptionalDouble.new(after_cop)
+            if initial_cop_value.nil?
+              initial_cop_value = initial_cop.get
+              after_cop_value = initial_cop_value * (1 + cop_change_rate)
+              double_after_cop = OpenStudio::OptionalDouble.new(after_cop_value)
+            elsif initial_cop_value != initial_cop.get
+              raise "Multiple cop values are found: #{initial_cop_value} and #{initial_cop.get}"
+            end
             hvac_component.setRatedLowSpeedCOP(double_after_cop)
           end
 
@@ -205,17 +216,18 @@ class CalibrateBaselineModel < OpenStudio::Ruleset::ModelUserScript
         unless hvac_component.empty?
           hvac_component = hvac_component.get
 
-          # change and report high speed eff
-          initial_eff = hvac_component.gasBurnerEfficiency
-          eff = initial_eff * (1 + heating_efficiency_change_rate)
-          # check the user_name for reasonableness
-          if eff <= 0 or eff > 0.99
-            runner.registerError("Wromg burner efficiency of #{eff}.")
-            return false
+          if initial_eff_value.nil?
+            initial_eff_value = hvac_component.gasBurnerEfficiency
+            after_eff_value = initial_eff_value *  (1 + heating_efficiency_change_rate)
+            # check the user_name for reasonableness
+            if after_eff_value <= 0 or after_eff_value > 0.99
+              raise "Wrong after heating efficiency found: initial (#{initial_eff_value}), change rate (#{heating_efficiency_change_rate}), after (#{after_eff_value})."
+            end
+          elsif initial_eff_value != hvac_component.gasBurnerEfficiency
+            raise "Multiple heating efficiency values are found: #{initial_eff_value} and #{hvac_component.gasBurnerEfficiency}"
           end
 
-          runner.registerInfo("Changing the burner efficiency from #{initial_eff} to #{eff} for gas heating units '#{hvac_component.name}' on air loop '#{air_loop.name}'")
-          hvac_component.setGasBurnerEfficiency(eff)
+          hvac_component.setGasBurnerEfficiency(after_eff_value)
           find_heating = true
         end
       end
@@ -224,16 +236,19 @@ class CalibrateBaselineModel < OpenStudio::Ruleset::ModelUserScript
       raise "Fail to find the heating system for air lop '#{air_loop.name}'" unless find_heating
     end
 
+    runner.registerValue('initial_cop', initial_cop_value.round(3).to_s)
+    runner.registerValue('after_cop', after_cop_value.round(3).to_s)
+    runner.registerValue('initial_eff', initial_eff_value.round(3).to_s)
+    runner.registerValue('after_eff', after_eff_value.round(3).to_s)
+
     # report final condition
-    building_final_lpd_si = OpenStudio::Quantity.new(building.lightingPowerPerFloorArea, unit_lpd_si)
-    building_final_epd_si = OpenStudio::Quantity.new(building.electricEquipmentPowerPerFloorArea, unit_lpd_si)
-    building_finish_occupancy_si = building.peoplePerFloorArea # people/m^2
+    after_lpd = building.lightingPowerPerFloorArea
+    after_epd = building.electricEquipmentPowerPerFloorArea
+    after_occupancy = building.peoplePerFloorArea # people/m^2
 
-    finish_condition = "Your model's final LPD: #{building_final_lpd_si} #{unit_lpd_si}, "
-    finish_condition += "EPD: #{building_final_epd_si} #{unit_lpd_si}, "
-    finish_condition += "Occupancy: #{building_finish_occupancy_si} people/m^2."
-
-    runner.registerFinalCondition(finish_condition)
+    runner.registerValue('after_lpd', after_lpd.round(3).to_s)
+    runner.registerValue('after_epd', after_epd.round(3).to_s)
+    runner.registerValue('after_occupancy', after_occupancy.round(3).to_s)
 
     return true
   end

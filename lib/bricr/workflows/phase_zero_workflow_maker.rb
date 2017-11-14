@@ -276,19 +276,19 @@ module BRICR
         annual_savings_site_energy = REXML::Element.new('auc:AnnualSavingsSiteEnergy')
 		    annual_site_energy = REXML::Element.new('auc:AnnualSiteEnergy')
         annual_electricity = REXML::Element.new('auc:AnnualElectricity')
-        annual_natual_gas = REXML::Element.new('auc:AnnualNaturalGas')
+        annual_natural_gas = REXML::Element.new('auc:AnnualNaturalGas')
         annual_savings_energy_cost = REXML::Element.new('auc:AnnualSavingsEnergyCost')
 
         annual_savings_site_energy.text = total_site_energy_savings
         annual_site_energy.text = total_site_energy
         annual_electricity.text = fuel_electricity
-        annual_natual_gas.text = fuel_natural_gas
+        annual_natural_gas.text = fuel_natural_gas
         annual_savings_energy_cost.text = total_energy_cost_savings
 
         package_of_measures.add_element(annual_savings_site_energy)
         package_of_measures.add_element(annual_site_energy)
         package_of_measures.add_element(annual_electricity)
-        package_of_measures.add_element(annual_natual_gas)
+        package_of_measures.add_element(annual_natural_gas)
         package_of_measures.add_element(annual_savings_energy_cost)
       end
     end

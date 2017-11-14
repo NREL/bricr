@@ -52,6 +52,26 @@ def get_results(result_xml_path)
   return results
 end
 
+# This function is used to obtain the simulation settings
+def get_calibration_parameters(out_osw_path)
+  cal_results = {}
+  raise "File '#{out_osw_path}' does not exist" unless File.exist?(out_osw_path)
+
+  find_cal_measure = false
+  out_json = JSON.parse(File.read(out_osw_path))
+  raise 'Fail to find steps in the out.osw' if out_json['steps'].nil?
+  out_json['steps'].each do |step|
+    next unless step['measure_dir_name'] == 'calibrate_baseline_model'
+    find_cal_measure = true
+    step['result']['step_values'].each do |step_value|
+      cal_results[step_value['name']] = step_value['value']
+    end
+  end
+
+  raise 'Fail to find the calibrate_baseline_model measure output.' unless find_cal_measure
+  return cal_results
+end
+
 floor_area_index = nil
 
 building_list = CSV.readlines(building_list_filename)
@@ -82,6 +102,13 @@ run_buildingsync_rb = File.join(File.dirname(__FILE__), "run_buildingsync.rb")
 csv_header.push 'Simulation Status,do simulations?,do get results?'
 csv_header.push 'electricity_eui(kBtu/sf),natural gas_eui(kBtu/sf)'
 csv_header.push 'site_eui(kBtu/sf),source_eui(kBtu/sf)'
+calibration_parameter_names = ['lpd_change_rate', 'epd_change_rate', 'occupancy_change_rate','cop_change_rate', 'heating_efficiency_change_rate',
+                               'initial_lpd','initial_epd','initial_occupancy','initial_cop','initial_eff',
+                               'after_lpd','after_epd','after_occupancy','after_cop','after_eff']
+
+if defined?(BRICR::DO_MODEL_CALIBRATION) and BRICR::DO_MODEL_CALIBRATION
+  csv_header.push calibration_parameter_names.join(',')
+end
 
 num_sims = 0
 total_xml_files = xml_paths.size.to_f
@@ -135,6 +162,14 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
     building_info[xml_path_ids[index]].push(gas_eui)
     building_info[xml_path_ids[index]].push(electricity_eui + gas_eui)
     building_info[xml_path_ids[index]].push(electricity_eui * 3.14 + gas_eui * 1.05)
+
+    if defined?(BRICR::DO_MODEL_CALIBRATION) and BRICR::DO_MODEL_CALIBRATION
+      out_osw_path = File.join(out_dir, 'baseline', 'out.osw')
+      cal_results  = get_calibration_parameters(out_osw_path)
+      calibration_parameter_names.each do |parameter_name|
+        building_info[xml_path_ids[index]].push(cal_results[parameter_name])
+      end
+    end
   end
 
   num_sims += 1
