@@ -44,4 +44,7 @@ module BRICR
 
   # specify to run the baseline simulation only or not
   SIMULATE_BASELINE_ONLY = true
+
+  # specify to include the model calibration or not
+  DO_MODEL_CALIBRATION = false
 end

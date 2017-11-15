@@ -142,6 +142,11 @@ module BRICR
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'ns_to_ew_ratio', ns_to_ew_ratio)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'wwr', wwr)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bar_division_method', bar_division_method)
+      set_measure_argument(osw, 'calibrate_baseline_model', 'template', template)
+      set_measure_argument(osw, 'calibrate_baseline_model', 'bldg_type', bldg_type)
+      if defined?(BRICR::DO_MODEL_CALIBRATION) and BRICR::DO_MODEL_CALIBRATION
+        set_measure_argument(osw, 'calibrate_baseline_model', '__SKIP__', false)
+      end
     end
 
     def configureForScenario(osw, scenario)
@@ -184,7 +189,7 @@ module BRICR
       @doc.elements.each('auc:Audits/auc:Audit/auc:Report/auc:Scenarios/auc:Scenario') do |scenario|
         # get information about the scenario
         scenario_name = scenario.elements['auc:ScenarioName'].text
-        next if BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
+        next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
         # deep clone
         osw = JSON.load(JSON.generate(@workflow))
@@ -229,7 +234,7 @@ module BRICR
       @doc.elements.each('auc:Audits/auc:Audit/auc:Report/auc:Scenarios/auc:Scenario') do |scenario|
         # get information about the scenario
         scenario_name = scenario.elements['auc:ScenarioName'].text
-        next if BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
+        next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
         # dir for the osw
         osw_dir = File.join(dir, scenario_name)
@@ -245,7 +250,7 @@ module BRICR
       @doc.elements.each('auc:Audits/auc:Audit/auc:Report/auc:Scenarios/auc:Scenario') do |scenario|
         # get information about the scenario
         scenario_name = scenario.elements['auc:ScenarioName'].text
-        next if BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
+        next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
         package_of_measures = scenario.elements['auc:ScenarioType'].elements['auc:PackageOfMeasures']
 

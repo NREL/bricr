@@ -1,0 +1,79 @@
+<measure>
+  <schema_version>3.0</schema_version>
+  <name>calibrate_baseline_model</name>
+  <uid>2753b04c-ec8c-49d1-ba3a-120bfc9737ef</uid>
+  <version_id>d9add229-6c9e-434a-87a2-c506416200f3</version_id>
+  <version_modified>20171109T221351Z</version_modified>
+  <xml_checksum>FD815A15</xml_checksum>
+  <class_name>CalibrateBaselineModel</class_name>
+  <display_name>Calibrate Baseline Model</display_name>
+  <description>This measure is used to calibrate the BRICR baseline model.</description>
+  <modeler_description>This measure is used to calibrate the BRICR baseline model.</modeler_description>
+  <arguments>
+    <argument>
+      <name>space_name</name>
+      <display_name>New space name</display_name>
+      <description>This name will be used as the name of the new space.</description>
+      <type>String</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+    </argument>
+  </arguments>
+  <outputs/>
+  <provenances/>
+  <tags>
+    <tag>Whole Building.Space Types</tag>
+  </tags>
+  <attributes>
+    <attribute>
+      <name>Measure Type</name>
+      <value>ModelMeasure</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Software Tool</name>
+      <value>Apply Measure Now</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Software Tool</name>
+      <value>OpenStudio Application</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Software Tool</name>
+      <value>Parametric Analysis Tool</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Use Case</name>
+      <value>Calibration</value>
+      <datatype>string</datatype>
+    </attribute>
+  </attributes>
+  <files>
+    <file>
+      <version>
+        <software_program>OpenStudio</software_program>
+        <identifier>2.2.0</identifier>
+        <min_compatible>2.2.0</min_compatible>
+      </version>
+      <filename>measure.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>script</usage_type>
+      <checksum>33099536</checksum>
+    </file>
+    <file>
+      <filename>calibrate_baseline_model_test.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>test</usage_type>
+      <checksum>B7B3A7AD</checksum>
+    </file>
+    <file>
+      <filename>example_model.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>53D14E69</checksum>
+    </file>
+  </files>
+</measure>

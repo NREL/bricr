@@ -1,0 +1,140 @@
+{
+  "CEC Pre-1978": {
+    "SmallOffice":{
+      "lpd_change_rate": -0.5,
+      "epd_change_rate": -0.4,
+      "occupant_density_change_rate":-0.3,
+      "cop_change_rate":0.2,
+      "heating_efficiency_change_rate":0.1
+    },
+    "MediumOffice":{
+      "lpd_change_rate": -0.5,
+      "epd_change_rate": -0.4,
+      "occupant_density_change_rate":-0.3,
+      "cop_change_rate":0.2,
+      "heating_efficiency_change_rate":0.1
+    },
+    "RetailStandalone":{
+      "lpd_change_rate": -0.5,
+      "epd_change_rate": -0.4,
+      "occupant_density_change_rate":-0.3,
+      "cop_change_rate":0.2,
+      "heating_efficiency_change_rate":0.1
+    }
+  },
+  "CEC T24 1978": {
+    "SmallOffice":{
+      "lpd_change_rate": -0.5,
+      "epd_change_rate": -0.4,
+      "occupant_density_change_rate":-0.3,
+      "cop_change_rate":0.2,
+      "heating_efficiency_change_rate":0.1
+    },
+    "MediumOffice":{
+      "lpd_change_rate": -0.5,
+      "epd_change_rate": -0.4,
+      "occupant_density_change_rate":-0.3,
+      "cop_change_rate":0.2,
+      "heating_efficiency_change_rate":0.1
+    },
+    "RetailStandalone":{
+      "lpd_change_rate": -0.5,
+      "epd_change_rate": -0.4,
+      "occupant_density_change_rate":-0.3,
+      "cop_change_rate":0.2,
+      "heating_efficiency_change_rate":0.1
+    }
+  },
+  "CEC T24 1992": {
+    "SmallOffice":{
+      "lpd_change_rate": -0.5,
+      "epd_change_rate": -0.4,
+      "occupant_density_change_rate":-0.3,
+      "cop_change_rate":0.2,
+      "heating_efficiency_change_rate":0.1
+    },
+    "MediumOffice":{
+      "lpd_change_rate": -0.5,
+      "epd_change_rate": -0.4,
+      "occupant_density_change_rate":-0.3,
+      "cop_change_rate":0.2,
+      "heating_efficiency_change_rate":0.1
+    },
+    "RetailStandalone":{
+      "lpd_change_rate": -0.5,
+      "epd_change_rate": -0.4,
+      "occupant_density_change_rate":-0.3,
+      "cop_change_rate":0.2,
+      "heating_efficiency_change_rate":0.1
+    }
+  },
+  "CEC T24 2001": {
+    "SmallOffice":{
+      "lpd_change_rate": -0.5,
+      "epd_change_rate": -0.4,
+      "occupant_density_change_rate":-0.3,
+      "cop_change_rate":0.2,
+      "heating_efficiency_change_rate":0.1
+    },
+    "MediumOffice":{
+      "lpd_change_rate": -0.5,
+      "epd_change_rate": -0.4,
+      "occupant_density_change_rate":-0.3,
+      "cop_change_rate":0.2,
+      "heating_efficiency_change_rate":0.1
+    },
+    "RetailStandalone":{
+      "lpd_change_rate": -0.5,
+      "epd_change_rate": -0.4,
+      "occupant_density_change_rate":-0.3,
+      "cop_change_rate":0.2,
+      "heating_efficiency_change_rate":0.1
+    }
+  },
+  "CEC T24 2005": {
+    "SmallOffice":{
+      "lpd_change_rate": -0.5,
+      "epd_change_rate": -0.4,
+      "occupant_density_change_rate":-0.3,
+      "cop_change_rate":0.2,
+      "heating_efficiency_change_rate":0.1
+    },
+    "MediumOffice":{
+      "lpd_change_rate": -0.5,
+      "epd_change_rate": -0.4,
+      "occupant_density_change_rate":-0.3,
+      "cop_change_rate":0.2,
+      "heating_efficiency_change_rate":0.1
+    },
+    "RetailStandalone":{
+      "lpd_change_rate": -0.5,
+      "epd_change_rate": -0.4,
+      "occupant_density_change_rate":-0.3,
+      "cop_change_rate":0.2,
+      "heating_efficiency_change_rate":0.1
+    }
+  },
+  "CEC T24 2008": {
+    "SmallOffice":{
+      "lpd_change_rate": -0.5,
+      "epd_change_rate": -0.4,
+      "occupant_density_change_rate":-0.3,
+      "cop_change_rate":0.2,
+      "heating_efficiency_change_rate":0.1
+    },
+    "MediumOffice":{
+      "lpd_change_rate": -0.5,
+      "epd_change_rate": -0.4,
+      "occupant_density_change_rate":-0.3,
+      "cop_change_rate":0.2,
+      "heating_efficiency_change_rate":0.1
+    },
+    "RetailStandalone":{
+      "lpd_change_rate": -0.5,
+      "epd_change_rate": -0.4,
+      "occupant_density_change_rate":-0.3,
+      "cop_change_rate":0.2,
+      "heating_efficiency_change_rate":0.1
+    }
+  }
+}

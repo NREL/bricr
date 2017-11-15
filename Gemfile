@@ -5,6 +5,7 @@ ruby '~>2.2'
 gemspec
 
 gem 'parallel'
+gem 'json'
 
 #gem 'seed_ruby_client', path: '../seed_ruby-client'
 gem 'seed_ruby_client', github: 'SEED-platform/ruby-client', branch: 'develop'
