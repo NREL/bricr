@@ -49,13 +49,21 @@
       "arguments": {
         "template": "CEC T24 2008",
         "system_type": "PSZ-AC with gas coil heat",
+		"hvac_delivery_type": "Forced Air",
         "htg_src": "NaturalGas",
         "clg_src": "Electricity",
         "hvac_delivery_type": "Forced Air",
         "kitchen_makeup": "Adjacent",
         "exterior_lighting_zone": "3 - All Other Areas",
-		"remove_objects": false,
-        "__SKIP__": false
+		"add_constructions": true,
+		"add_space_type_loads": true,
+		"add_elevators": false,
+		"add_exterior_lights": false,
+		"onsite_parking_fraction": 1.0,
+		"add_exhaust": true,
+		"add_swh": true,
+		"add_hvac": true,
+		"remove_objects": false
       }
     },
 	{
