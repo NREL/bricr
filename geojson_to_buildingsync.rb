@@ -517,7 +517,7 @@ outdir = './bs_output'
 FileUtils.mkdir_p(outdir) unless File.exist?(outdir)
 
 summary_file = File.open(outdir + "/summary.csv", 'w')
-summary_file.puts "building_id,xml_filename,should_run_simulation,OccupancyClassification,FloorArea(ft2),YearBuilt,template,SiteEUI(kBtu/ft2),SourceEUI(kBtu/ft2),YearEUI"
+summary_file.puts "building_id,xml_filename,should_run_simulation,OccupancyClassification,FloorArea(ft2),YearBuilt,template,SiteEUI(kBtu/ft2),SourceEUI(kBtu/ft2),ElectricityEUI(kBtu/ft2),GasEUI(kBtu/ft2),YearEUI"
 
 geojson[:features].each do |feature|
   id = feature[:properties][:"Building Identifier"]
@@ -544,15 +544,17 @@ geojson[:features].each do |feature|
 
   site_eui = nil
   source_eui =nil
+  ele_eui = nil
+  gas_eui = nil
   year_eui = nil
   for year in 2011..2015
     if feature[:properties][:"#{year} Annual Site Energy Resource Intensity"] != nil
-      site_eui = feature[:properties][:"#{year} Annual Site Energy Resource Intensity"]
+      site_eui = feature[:properties][:"#{year} Annual Site Energy Resource Intensity"].to_f
       year_eui = year
     end
 
     if feature[:properties][:"#{year} Annual Source Energy Resource Intensity"] != nil
-      source_eui = feature[:properties][:"#{year} Annual Source Energy Resource Intensity"]
+      source_eui = feature[:properties][:"#{year} Annual Source Energy Resource Intensity"].to_f
       year_eui = year
     end
   end
@@ -577,7 +579,13 @@ geojson[:features].each do |feature|
     template = "CEC T24 2008"
   end
 
-  summary_file.puts "#{id},#{id}.xml,1,#{building_type},#{floor_area},#{year_built},#{template},#{site_eui},#{source_eui},#{year_eui}"
+  # source factor: 1.05 for gas, 3.14 for electricity
+  if site_eui != nil and source_eui != nil
+    ele_eui = (source_eui - site_eui * 1.05)/(3.14-1.05)
+    gas_eui = site_eui - ele_eui
+  end
+
+  summary_file.puts "#{id},#{id}.xml,1,#{building_type},#{floor_area},#{year_built},#{template},#{site_eui},#{source_eui},#{ele_eui},#{gas_eui},#{year_eui}"
 end
 
 summary_file.close
