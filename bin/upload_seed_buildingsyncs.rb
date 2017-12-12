@@ -13,18 +13,20 @@ xml_files = Dir.glob(File.join(ARGV[1], '*.xml'))
 ruby_exe = File.join( RbConfig::CONFIG['bindir'], RbConfig::CONFIG['RUBY_INSTALL_NAME'] + RbConfig::CONFIG['EXEEXT'] )
 upload_seed_buildingsync_rb = File.join(File.dirname(__FILE__), "upload_seed_buildingsync.rb")
 
-max_points = 4
+#max_points = Float::INFINITY
+max_points = 1
+
 uploaded = 0
 Parallel.each(xml_files, in_threads: 8) do |xml_file|
 #xml_files.each do |xml_file|
 
-  if uploaded <= max_points
+  if uploaded < max_points
     uploaded += 1
-      
+
     command = "bundle exec '#{ruby_exe}' '#{upload_seed_buildingsync_rb}' #{ARGV[0]} '#{xml_file}'"
-    
+
     puts "Running '#{command}'"
-        
+
     new_env = {}
 
     # blank out bundler and gem path modifications, will be re-setup by new call
@@ -37,16 +39,18 @@ Parallel.each(xml_files, in_threads: 8) do |xml_file|
     new_env["BUNDLE_GEMFILE"] = nil
     new_env["RUBYLIB"] = nil
     new_env["RUBYOPT"] = nil
-        
+
     stdout_str, stderr_str, status = Open3.capture3(new_env, command)
-    
+
     if status.success?
       puts "'#{xml_file}' completed successfully"
+      puts stdout_str
     else
       puts "'#{xml_file}' failed"
       puts stdout_str
-      puts stderr_str  
+      puts stderr_str
     end
   end
-  
 end
+
+puts "uploaded #{uploaded} files"
