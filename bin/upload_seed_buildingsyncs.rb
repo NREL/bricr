@@ -14,7 +14,7 @@ ruby_exe = File.join( RbConfig::CONFIG['bindir'], RbConfig::CONFIG['RUBY_INSTALL
 upload_seed_buildingsync_rb = File.join(File.dirname(__FILE__), "upload_seed_buildingsync.rb")
 
 #max_points = Float::INFINITY
-max_points = 1
+max_points = 10
 
 uploaded = 0
 Parallel.each(xml_files, in_threads: 8) do |xml_file|
@@ -44,13 +44,15 @@ Parallel.each(xml_files, in_threads: 8) do |xml_file|
 
     if status.success?
       puts "'#{xml_file}' completed successfully"
-      puts stdout_str
+      #puts stdout_str
+      #puts stderr_str        
     else
       puts "'#{xml_file}' failed"
       puts stdout_str
       puts stderr_str
     end
   end
+  
 end
 
 puts "uploaded #{uploaded} files"

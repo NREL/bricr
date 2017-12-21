@@ -1,4 +1,4 @@
-# usage: bundle exec ruby upload_seed_buildingsync.rb /path/to/config.rb /path/to/buildingsync_dir/
+# usage: bundle exec ruby run_seed_buildingsyncs.rb /path/to/config.rb 
 
 require 'seed'
 require 'rbconfig'
@@ -25,8 +25,11 @@ cycle_start = DateTime.parse('2010-01-01 00:00:00Z')
 cycle_end = DateTime.parse('2010-12-31 23:00:00Z')
 cycle = seed.create_cycle(cycle_name, cycle_start, cycle_end)
 
-search_results = seed.search('', 'Not Started')
-properties = search_results.properties
+max_results = 2000
+search_results = seed.search('', 'Not Started', max_results)
+
+# DLM: properties changed to results
+results = search_results.results
 
 if !File.exists?('./run')
   FileUtils.mkdir_p('./run/')
@@ -38,14 +41,15 @@ run_buildingsync_rb = File.join(File.dirname(__FILE__), "run_buildingsync.rb")
 num_sims = 0
 failure = []
 success = []
-Parallel.each(properties, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_DATAPOINTS].min) do |property|
+Parallel.each(results, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_DATAPOINTS].min) do |result|
 
   break if num_sims > BRICR::MAX_DATAPOINTS
-  
-  # DLM: TODO, filter out states that don't require analysis
 
-  custom_id = property[:state][:custom_id_1]
-  files = property[:state][:files].select {|file| file[:file_type] == 'BuildingSync'}.sort {|x,y| x[:modified] <=> y[:modified]}
+  # find most recent building sync file for this property
+  custom_id = result[:custom_id_1]
+  
+  # DLM: how can I get these files?
+  #files = result[:state][:files].select {|file| file[:file_type] == 'BuildingSync'}.sort {|x,y| x[:modified] <=> y[:modified]}
   
   if files.empty?
     puts "No BuildingSync file available"
@@ -55,6 +59,9 @@ Parallel.each(properties, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX
   # last file is most recent
   file = files[-1][:file]
   url = File.join(host, file)
+  
+  # DLM: post back analysis state queued
+  # update_analysis_state(property_id, analysis_state)
   
   # if url is specified, send this URL to the BRICR job queue
   if defined?(BRICR::BRICR_SIM_URL) && BRICR::BRICR_SIM_URL
@@ -69,7 +76,10 @@ Parallel.each(properties, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX
     File.open(xml_file, "wb") do |f|
       f.write(data)
     end
-    
+      
+    # DLM: post back analysis state queued
+    # update_analysis_state(property_id, analysis_state)
+      
     command = "bundle exec '#{ruby_exe}' '#{run_buildingsync_rb}' #{ARGV[0]} '#{xml_file}'"
       
     puts "Running '#{command}'"
@@ -92,11 +102,18 @@ Parallel.each(properties, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX
     if status.success?
       puts "'#{xml_file}' completed successfully"
       
+      # DLM: post back analysis state queued
+      # update_analysis_state(property_id, analysis_state)
+      # update_property_by_buildingfile(property_id, filename, analysis_state = nil)
+      
       success << xml_file
     else
       puts "'#{xml_file}' failed"
       puts stdout_str
       puts stderr_str  
+      
+      # DLM: post back analysis state queued
+      # update_analysis_state(property_id, analysis_state)
       
       failure << xml_file
     end
@@ -105,3 +122,5 @@ Parallel.each(properties, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX
   num_sims += 1
   
 end
+
+puts "ran #{num_sims} files"

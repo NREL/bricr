@@ -31,15 +31,48 @@ if !custom_id
   exit 1
 end
 
-search_results = seed.search(custom_id, nil)
-# DLM: this will now append buildingsync to the property if it already exists
-#if search_results.properties.size >= 1
-#  puts "SEED instance already has Property with Custom Id '#{custom_id}'"
+puts custom_id
+
+# DLM: search doesn't seem to be working with custom_id
+#search_results = seed.search(custom_id, nil)
+search_results = seed.search(nil, nil)
+
+# DLM: search_results.properties doesn't exist, now it is results?
+
+# DLM: manually search for now
+property_id = nil
+search_results.results.each do |result|
+  if result[:custom_id_1] == custom_id
+    property_id = result[:id]
+    break
+  end
+end
+
+if !property_id
+
+  # do the upload
+  success, messages = seed.upload_buildingsync(xml_path)
+  if !success
+    puts "Error uploading file '#{xml_path}' with messages #{messages}"
+    exit 1
+  end
+  
+  property_id =  messages[:data][:property_view][:id]
+  
+end
+
+# initialize analysis state 
+# {'Not Started', 'Started', 'Completed', 'Failed'}
+
+# DLM: this is returning Error updating analysis state with messages {"status": "error", "message": "Internal server error"}
+
+#success, messages = seed.update_analysis_state(property_id, 'Not Started')
+#if !success
+#  puts "Error updating analysis state with messages #{messages}"
 #  exit 1
 #end
 
-# do the upload
-success, messages = seed.upload_buildingsync(xml_path)
+success, messages = seed.update_property_by_buildingfile(property_id, xml_path, 'Not Started')
 if !success
   puts "Error uploading file '#{xml_path}' with messages #{messages}"
   exit 1
