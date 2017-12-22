@@ -57,7 +57,6 @@ if BRICR::DO_SIMULATIONS
   end
 end
 
-out_file = nil
 if BRICR::DO_GET_RESULTS
   # Read the results from the out.osw file
   translator.gatherResults(out_dir)
@@ -66,17 +65,4 @@ if BRICR::DO_GET_RESULTS
 
   # Save the results back to the BuildingSync file
   translator.saveXML(out_file)
-  
-end
-
-if BRICR::DO_POST_RESULTS
-  
-  if File.exists?(out_file)
-  
-  
-  else
-  
-  
-  end
-  
 end
