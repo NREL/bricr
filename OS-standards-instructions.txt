@@ -5,7 +5,7 @@ git clone git@github.com:NREL/openstudio-standards.git C:\openstudio-standards\
 cd C:\openstudio-standards\
 
 # checkout new branch
-git checkout hvac_additions
+git checkout BRICR_LBNL
 
 # cd to inner openstudio standards
 cd C:\openstudio-standards\openstudio-standards
@@ -18,8 +18,8 @@ bundle install
 bundle exec rake build
 
 # install gem to some place
-gem install pkg/openstudio-standards-0.1.13.gem --install-dir C:/bricr/gems
-# gem install pkg/openstudio-standards-0.1.14.gem --install-dir C:/Sites/bricr-master/gems
+gem install pkg/openstudio-standards-0.1.15.gem --install-dir C:/bricr-test/
+# gem install pkg/openstudio-standards-0.1.15.gem --install-dir C:/Sites/bricr-master/gems
 
 # checkout openstudio standards to some place
 git clone git@github.com:NREL/OpenStudio-measures.git C:\openstudio-measures\ 
