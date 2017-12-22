@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.executables << 'run_buildingsync.rb'
   s.executables << 'run_multiple_buildingsyncs.rb'
   s.executables << 'run_seed_buildingsyncs.rb'
+  s.executables << 'update_seed_analysis_state.rb'
   s.executables << 'upload_seed_buildingsync.rb'
   s.executables << 'upload_seed_buildingsyncs.rb'
 

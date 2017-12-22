@@ -26,8 +26,6 @@ if !custom_id
   raise "BuildingSync file at '#{xml_path}' does not have a Custom ID defined"
 end
 
-puts "custom_id = #{custom_id}"
-
 property_id = BRICR.get_property_id(seed, custom_id)
 
 if property_id
