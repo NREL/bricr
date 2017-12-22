@@ -1,13 +1,13 @@
 lib = File.expand_path('../lib/', __FILE__)
 $LOAD_PATH.unshift lib unless $LOAD_PATH.include?(lib)
 
-require 'bricr'
+require 'bricr/version'
 
 Gem::Specification.new do |s|
   s.name = 'bricr'
   s.version = BRICR::VERSION
   s.platform = Gem::Platform::RUBY
-  s.authors = ['Dan Macumber','Yixing Chen','Sang Hoon Lee']
+  s.authors = ['Daniel Macumber','Yixing Chen','Sang Hoon Lee']
   s.email = ['daniel.macumber@nrel.gov']
   s.summary = 'BRICR Tools'
   s.description = 'Translate BuildingSync to OpenStudio for BRICR'
@@ -27,4 +27,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'bundler', '~> 1.6'
   s.add_runtime_dependency  'parallel', '~> 1.12'
+  s.add_runtime_dependency  'seed_ruby_client'
+  s.add_runtime_dependency  'openstudio-standards', '~> 0.1.15'
 end

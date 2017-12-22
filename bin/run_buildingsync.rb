@@ -1,4 +1,5 @@
 # usage: bundle exec ruby run_buildingsync.rb /path/to/config.rb /path/to/buildingsync.xml
+
 require 'bricr'
 require 'parallel'
 
@@ -27,6 +28,13 @@ if BRICR::DO_SIMULATIONS
 end
 FileUtils.mkdir_p(out_dir)
 
+bs = BRICR::BuildingSync.new(xml_path)
+custom_id = bs.customId
+
+if !custom_id
+  raise "BuildingSync file at '#{xml_path}' does not have a Custom ID defined"
+end
+
 translator = BRICR::Translator.new(xml_path)
 translator.writeOSWs(out_dir)
 osw_files = []
@@ -49,10 +57,26 @@ if BRICR::DO_SIMULATIONS
   end
 end
 
+out_file = nil
 if BRICR::DO_GET_RESULTS
   # Read the results from the out.osw file
   translator.gatherResults(out_dir)
+  
+  out_file = File.join(out_dir, 'results.xml')
 
   # Save the results back to the BuildingSync file
-  translator.saveXML(File.join(out_dir, 'results.xml'))
+  translator.saveXML(out_file)
+  
+end
+
+if BRICR::DO_POST_RESULTS
+  
+  if File.exists?(out_file)
+  
+  
+  else
+  
+  
+  end
+  
 end

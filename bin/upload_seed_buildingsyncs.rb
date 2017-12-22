@@ -1,9 +1,8 @@
 # usage: bundle exec ruby upload_seed_buildingsync.rb /path/to/config.rb /path/to/buildingsync_dir/
 
-require 'seed'
+require 'bricr'
 require 'rbconfig'
 require 'parallel'
-require 'open3'
 
 config_path = ARGV[0]
 require(config_path)
@@ -17,42 +16,28 @@ upload_seed_buildingsync_rb = File.join(File.dirname(__FILE__), "upload_seed_bui
 max_points = 10
 
 uploaded = 0
+failures = 0
 Parallel.each(xml_files, in_threads: 8) do |xml_file|
 #xml_files.each do |xml_file|
 
   if uploaded < max_points
     uploaded += 1
 
-    command = "bundle exec '#{ruby_exe}' '#{upload_seed_buildingsync_rb}' #{ARGV[0]} '#{xml_file}'"
+    command = ['bundle', 'exec', ruby_exe, upload_seed_buildingsync_rb, ARGV[0], xml_file, 'Not Started']
 
-    puts "Running '#{command}'"
+    puts "Running '#{command.join(' ')}'"
+    
+    result = BRICR.bricr_run_command(command)
 
-    new_env = {}
-
-    # blank out bundler and gem path modifications, will be re-setup by new call
-    new_env["BUNDLER_ORIG_MANPATH"] = nil
-    new_env["GEM_PATH"] = nil
-    new_env["GEM_HOME"] = nil
-    new_env["BUNDLER_ORIG_PATH"] = nil
-    new_env["BUNDLER_VERSION"] = nil
-    new_env["BUNDLE_BIN_PATH"] = nil
-    new_env["BUNDLE_GEMFILE"] = nil
-    new_env["RUBYLIB"] = nil
-    new_env["RUBYOPT"] = nil
-
-    stdout_str, stderr_str, status = Open3.capture3(new_env, command)
-
-    if status.success?
-      puts "'#{xml_file}' completed successfully"
-      #puts stdout_str
-      #puts stderr_str        
+    if result
+      puts "'#{xml_file}' completed successfully"     
     else
       puts "'#{xml_file}' failed"
-      puts stdout_str
-      puts stderr_str
+      failures += 1
     end
   end
   
 end
 
-puts "uploaded #{uploaded} files"
+puts "Attempted to uploaded #{uploaded} files"
+puts "#{failures} failures"

@@ -1,9 +1,8 @@
 # usage: bundle exec ruby run_seed_buildingsyncs.rb /path/to/config.rb 
 
-require 'seed'
+require 'bricr'
 require 'rbconfig'
 require 'parallel'
-require 'open3'
 require 'json'
 require 'fileutils'
 require 'rest-client'
@@ -11,19 +10,10 @@ require 'rest-client'
 config_path = ARGV[0]
 require(config_path)
 
-host = ENV["BRICR_SEED_HOST"] || 'http://localhost:8000' 
-seed = Seed::API.new(host)
-
-## Create or get the organization
-org = seed.get_or_create_organization('BRICR Test Organization')
-
-## Create or get the cycle
-cycle_name = 'BRICR Test Cycle - 2011'
-
-# TODO: look into the time zone of these requests. The times are getting converted and don't look right in the SEED UI
-cycle_start = DateTime.parse('2010-01-01 00:00:00Z')
-cycle_end = DateTime.parse('2010-12-31 23:00:00Z')
-cycle = seed.create_cycle(cycle_name, cycle_start, cycle_end)
+# get seed host, org, and cycle
+seed = BRICR.get_seed()
+org = BRICR.get_seed_org(seed)
+cycle = BRICR.get_seed_cycle(seed)
 
 max_results = 2000
 search_results = seed.search('', 'Not Started', max_results)
@@ -80,26 +70,13 @@ Parallel.each(results, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_DA
     # DLM: post back analysis state queued
     # update_analysis_state(property_id, analysis_state)
       
-    command = "bundle exec '#{ruby_exe}' '#{run_buildingsync_rb}' #{ARGV[0]} '#{xml_file}'"
+    command = ['bundle', 'exec', ruby_exe, run_buildingsync_rb, ARGV[0], xml_file]
       
-    puts "Running '#{command}'"
-        
-    new_env = {}
-
-    # blank out bundler and gem path modifications, will be re-setup by new call
-    new_env["BUNDLER_ORIG_MANPATH"] = nil
-    new_env["GEM_PATH"] = nil
-    new_env["GEM_HOME"] = nil
-    new_env["BUNDLER_ORIG_PATH"] = nil
-    new_env["BUNDLER_VERSION"] = nil
-    new_env["BUNDLE_BIN_PATH"] = nil
-    new_env["BUNDLE_GEMFILE"] = nil
-    new_env["RUBYLIB"] = nil
-    new_env["RUBYOPT"] = nil
-        
-    stdout_str, stderr_str, status = Open3.capture3(new_env, command)
+    puts "Running '#{command.join(' ')}'"
     
-    if status.success?
+    result = BRICR.bricr_run_command(command)
+
+    if result
       puts "'#{xml_file}' completed successfully"
       
       # DLM: post back analysis state queued
@@ -123,4 +100,5 @@ Parallel.each(results, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_DA
   
 end
 
-puts "ran #{num_sims} files"
+puts "Attempted to run #{num_sims} files"
+puts "#{failure.size} failures"

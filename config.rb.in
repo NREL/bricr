@@ -28,6 +28,9 @@ module BRICR
   # collect results
   DO_GET_RESULTS = false
   
+  # post results to SEED
+  DO_POST_RESULTS = false
+  
   # url for seed instance
   SEED_URL = nil
   

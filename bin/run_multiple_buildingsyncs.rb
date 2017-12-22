@@ -2,7 +2,6 @@
 require 'bricr'
 require 'parallel'
 require 'csv'
-require 'open3'
 
 config_path = ARGV[0]
 if config_path.nil? || !File.exist?("#{config_path}")
@@ -114,33 +113,12 @@ num_sims = 0
 total_xml_files = xml_paths.size.to_f
 Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_DATAPOINTS].min) do |xml_path, index|
   break if num_sims > BRICR::MAX_DATAPOINTS
-  command = "bundle exec '#{ruby_exe}' '#{run_buildingsync_rb}' #{ARGV[0]} '#{xml_path}'"
+  
+  command = ['bundle', 'exec', ruby_exe, run_buildingsync_rb, ARGV[0], xml_path]
 
-  new_env = {}
+  puts "Running cmd (#{index}/#{total_xml_files.to_i} #{(100*index/total_xml_files).to_i}%): #{command.join(' ')}\n"
 
-  puts "Running cmd (#{index}/#{total_xml_files.to_i} #{(100*index/total_xml_files).to_i}%): #{command}\n"
-
-  # blank out bundler and gem path modifications, will be re-setup by new call
-  new_env["BUNDLER_ORIG_MANPATH"] = nil
-  new_env["GEM_PATH"] = nil
-  new_env["GEM_HOME"] = nil
-  new_env["BUNDLER_ORIG_PATH"] = nil
-  new_env["BUNDLER_VERSION"] = nil
-  new_env["BUNDLE_BIN_PATH"] = nil
-  new_env["BUNDLE_GEMFILE"] = nil
-  new_env["RUBYLIB"] = nil
-  new_env["RUBYOPT"] = nil
-
-  stdout_str, stderr_str, status = Open3.capture3(new_env, command)
-
-  result = nil
-  if status.success?
-    result = true
-  else
-    result = false
-    puts stdout_str
-    puts stderr_str
-  end
+  result = bricr_run_command(command)
 
   building_info[xml_path_ids[index]].push result
   building_info[xml_path_ids[index]].push BRICR::DO_SIMULATIONS
