@@ -32,12 +32,18 @@ num_sims = 0
 failure = []
 success = []
 Parallel.each(results, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_DATAPOINTS].min) do |result|
+#results.each do |result|
 
   break if num_sims > BRICR::MAX_DATAPOINTS
 
-  # find most recent building sync file for this property
+  # get ids
+  property_id = result[:id]
+  property_view_id = result[:property_view_id]
   custom_id = result[:custom_id_1]
   
+  # find most recent building sync file for this property
+  files = seed.list_buildingsync_files(property_id)
+
   # DLM: how can I get these files?
   #files = result[:state][:files].select {|file| file[:file_type] == 'BuildingSync'}.sort {|x,y| x[:modified] <=> y[:modified]}
   
@@ -48,10 +54,10 @@ Parallel.each(results, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_DA
   
   # last file is most recent
   file = files[-1][:file]
-  url = File.join(host, file)
+  url = File.join(BRICR.get_seed_host, file)
   
-  # DLM: post back analysis state queued
-  # update_analysis_state(property_id, analysis_state)
+  # DLM: post back analysis state Queued // DLM: does this exist?
+  #seed.update_analysis_state(property_id, analysis_state)
   
   # if url is specified, send this URL to the BRICR job queue
   if defined?(BRICR::BRICR_SIM_URL) && BRICR::BRICR_SIM_URL
@@ -67,33 +73,26 @@ Parallel.each(results, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_DA
       f.write(data)
     end
       
-    # DLM: post back analysis state queued
-    # update_analysis_state(property_id, analysis_state)
-      
-    command = ['bundle', 'exec', ruby_exe, run_buildingsync_rb, ARGV[0], xml_file]
-      
-    puts "Running '#{command.join(' ')}'"
+    # post back analysis state Started
+    seed.update_analysis_state(property_id, 'Started')
     
-    result = BRICR.bricr_run_command(command)
-
-    if result
-      puts "'#{xml_file}' completed successfully"
-      
-      # DLM: post back analysis state queued
-      # update_analysis_state(property_id, analysis_state)
-      # update_property_by_buildingfile(property_id, filename, analysis_state = nil)
-      
-      success << xml_file
-    else
+    result_xml = nil
+    begin
+      result_xml = BRICR.run_buildingsync(xml_file)
+      puts "'#{xml_file}' completed successfully, output at '#{result_xml}'"
+    rescue
       puts "'#{xml_file}' failed"
-      puts stdout_str
-      puts stderr_str  
-      
-      # DLM: post back analysis state queued
-      # update_analysis_state(property_id, analysis_state)
-      
       failure << xml_file
     end
+    
+    if result_xml
+      # post back analysis state Completed
+      seed.update_property_by_buildingfile(property_id, result_xml, 'Completed')
+    else
+      # post back analysis state Failed
+      seed.update_analysis_state(property_id, 'Failed')    
+    end
+
   end
   
   num_sims += 1

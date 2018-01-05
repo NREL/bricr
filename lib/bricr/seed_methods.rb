@@ -2,9 +2,13 @@ require 'seed'
 
 module BRICR
 
-  def self.get_seed
+  def self.get_seed_host
     host = ENV["BRICR_SEED_HOST"] || 'http://localhost:8000'
-    seed = Seed::API.new(host)
+    return host
+  end
+  
+  def self.get_seed
+    seed = Seed::API.new(self.get_seed_host)
     return seed
   end
     
