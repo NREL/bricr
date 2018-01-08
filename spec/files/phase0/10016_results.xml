@@ -1,8 +1,66 @@
-
-  <auc:Audits xmlns:auc='http://nrel.gov/schemas/bedes-auc/2014' xsi:schemaLocation='http://nrel.gov/schemas/bedes-auc/2014 file:///E:/buildingsync/BuildingSync.xsd' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
-	<auc:Audit>
-		<auc:Sites>
-		<auc:Site><auc:Address><auc:StreetAddressDetail><auc:Simplified><auc:StreetAddress>1330 - 1338 POLK ST</auc:StreetAddress></auc:Simplified></auc:StreetAddressDetail><auc:City>San Francisco</auc:City><auc:State>CA</auc:State><auc:PostalCode/></auc:Address><auc:ClimateZoneType><auc:ASHRAE><auc:ClimateZone>3C</auc:ClimateZone></auc:ASHRAE><auc:CaliforniaTitle24><auc:ClimateZone>Climate Zone 3</auc:ClimateZone></auc:CaliforniaTitle24></auc:ClimateZoneType><auc:WeatherDataStationID>724940</auc:WeatherDataStationID><auc:WeatherStationName>USA_CA_San.Francisco.Intl.AP</auc:WeatherStationName><auc:Longitude>-122.42009914393351</auc:Longitude><auc:Latitude>37.789376160890264</auc:Latitude><auc:Facilities><auc:Facility ID='Building10016'><auc:PremisesName/><auc:PremisesIdentifiers><auc:PremisesIdentifier><auc:IdentifierLabel>Assessor parcel number</auc:IdentifierLabel><auc:IdentifierValue>SF0668006</auc:IdentifierValue></auc:PremisesIdentifier><auc:PremisesIdentifier><auc:IdentifierLabel>Custom</auc:IdentifierLabel><auc:IdentifierCustomName>Custom ID</auc:IdentifierCustomName><auc:IdentifierValue>10016</auc:IdentifierValue></auc:PremisesIdentifier></auc:PremisesIdentifiers><auc:FacilityClassification>Commercial</auc:FacilityClassification><auc:OccupancyClassification>Retail</auc:OccupancyClassification><auc:FloorsAboveGrade>2</auc:FloorsAboveGrade><auc:FloorsBelowGrade>0</auc:FloorsBelowGrade><auc:FloorAreas><auc:FloorArea><auc:FloorAreaType>Gross</auc:FloorAreaType><auc:FloorAreaValue>7500</auc:FloorAreaValue></auc:FloorArea><auc:FloorArea><auc:FloorAreaType>Footprint</auc:FloorAreaType><auc:FloorAreaValue>4057.9903</auc:FloorAreaValue></auc:FloorArea></auc:FloorAreas><auc:Perimeter>252</auc:Perimeter><auc:YearOfConstruction>1913</auc:YearOfConstruction><auc:YearOfLastMajorRemodel>2015</auc:YearOfLastMajorRemodel></auc:Facility></auc:Facilities></auc:Site></auc:Sites>
+<auc:Audits xmlns:auc='http://nrel.gov/schemas/bedes-auc/2014'
+            xsi:schemaLocation='http://nrel.gov/schemas/bedes-auc/2014 file:///E:/buildingsync/BuildingSync.xsd'
+            xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
+  <auc:Audit>
+    <auc:Sites>
+      <auc:Site>
+        <auc:Address>
+          <auc:StreetAddressDetail>
+            <auc:Simplified>
+              <auc:StreetAddress>1330 - 1338 POLK ST</auc:StreetAddress>
+            </auc:Simplified>
+          </auc:StreetAddressDetail>
+          <auc:City>San Francisco</auc:City>
+          <auc:State>CA</auc:State>
+          <auc:PostalCode/>
+        </auc:Address>
+        <auc:ClimateZoneType>
+          <auc:ASHRAE>
+            <auc:ClimateZone>3C</auc:ClimateZone>
+          </auc:ASHRAE>
+          <auc:CaliforniaTitle24>
+            <auc:ClimateZone>Climate Zone 3</auc:ClimateZone>
+          </auc:CaliforniaTitle24>
+        </auc:ClimateZoneType>
+        <auc:WeatherDataStationID>724940</auc:WeatherDataStationID>
+        <auc:WeatherStationName>USA_CA_San.Francisco.Intl.AP</auc:WeatherStationName>
+        <auc:Longitude>-122.42009914393351</auc:Longitude>
+        <auc:Latitude>37.789376160890264</auc:Latitude>
+        <auc:Facilities>
+          <auc:Facility ID='Building10016'>
+            <auc:PremisesName/>
+            <auc:PremisesIdentifiers>
+              <auc:PremisesIdentifier>
+                <auc:IdentifierLabel>Assessor parcel number</auc:IdentifierLabel>
+                <auc:IdentifierValue>SF0668006</auc:IdentifierValue>
+              </auc:PremisesIdentifier>
+              <auc:PremisesIdentifier>
+                <auc:IdentifierLabel>Custom</auc:IdentifierLabel>
+                <auc:IdentifierCustomName>Custom ID</auc:IdentifierCustomName>
+                <auc:IdentifierValue>10016</auc:IdentifierValue>
+              </auc:PremisesIdentifier>
+            </auc:PremisesIdentifiers>
+            <auc:FacilityClassification>Commercial</auc:FacilityClassification>
+            <auc:OccupancyClassification>Retail</auc:OccupancyClassification>
+            <auc:FloorsAboveGrade>2</auc:FloorsAboveGrade>
+            <auc:FloorsBelowGrade>0</auc:FloorsBelowGrade>
+            <auc:FloorAreas>
+              <auc:FloorArea>
+                <auc:FloorAreaType>Gross</auc:FloorAreaType>
+                <auc:FloorAreaValue>7500</auc:FloorAreaValue>
+              </auc:FloorArea>
+              <auc:FloorArea>
+                <auc:FloorAreaType>Footprint</auc:FloorAreaType>
+                <auc:FloorAreaValue>4057.9903</auc:FloorAreaValue>
+              </auc:FloorArea>
+            </auc:FloorAreas>
+            <auc:Perimeter>252</auc:Perimeter>
+            <auc:YearOfConstruction>1913</auc:YearOfConstruction>
+            <auc:YearOfLastMajorRemodel>2015</auc:YearOfLastMajorRemodel>
+          </auc:Facility>
+        </auc:Facilities>
+      </auc:Site>
+    </auc:Sites>
     <auc:Measures>
       <auc:Measure ID='Measure1'>
         <auc:SystemCategoryAffected>Lighting</auc:SystemCategoryAffected>
@@ -55,7 +113,12 @@
               <auc:MeasureIDs>
                 <auc:MeasureID/>
               </auc:MeasureIDs>
-            <auc:AnnualSavingsSiteEnergy>0.0</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>555506.1360444322</auc:AnnualSiteEnergy><auc:AnnualElectricity>411693.8443792925</auc:AnnualElectricity><auc:AnnualNaturalGas>143812.2916651396</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>0.0</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+              <auc:AnnualSavingsSiteEnergy>0.0</auc:AnnualSavingsSiteEnergy>
+              <auc:AnnualSiteEnergy>555506.1360444322</auc:AnnualSiteEnergy>
+              <auc:AnnualElectricity>411693.8443792925</auc:AnnualElectricity>
+              <auc:AnnualNaturalGas>143812.2916651396</auc:AnnualNaturalGas>
+              <auc:AnnualSavingsEnergyCost>0.0</auc:AnnualSavingsEnergyCost>
+            </auc:PackageOfMeasures>
           </auc:ScenarioType>
         </auc:Scenario>
         <auc:Scenario>
@@ -66,7 +129,12 @@
               <auc:MeasureIDs>
                 <auc:MeasureID IDref='Measure1'/>
               </auc:MeasureIDs>
-            <auc:AnnualSavingsSiteEnergy>82877.12900019652</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>472629.00704423565</auc:AnnualSiteEnergy><auc:AnnualElectricity>303680.6053483868</auc:AnnualElectricity><auc:AnnualNaturalGas>168948.4016958488</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>8673.48</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+              <auc:AnnualSavingsSiteEnergy>82877.12900019652</auc:AnnualSavingsSiteEnergy>
+              <auc:AnnualSiteEnergy>472629.00704423565</auc:AnnualSiteEnergy>
+              <auc:AnnualElectricity>303680.6053483868</auc:AnnualElectricity>
+              <auc:AnnualNaturalGas>168948.4016958488</auc:AnnualNaturalGas>
+              <auc:AnnualSavingsEnergyCost>8673.48</auc:AnnualSavingsEnergyCost>
+            </auc:PackageOfMeasures>
           </auc:ScenarioType>
         </auc:Scenario>
         <auc:Scenario>
@@ -77,7 +145,12 @@
               <auc:MeasureIDs>
                 <auc:MeasureID IDref='Measure2'/>
               </auc:MeasureIDs>
-            <auc:AnnualSavingsSiteEnergy>0.0</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>555506.1360444322</auc:AnnualSiteEnergy><auc:AnnualElectricity>411693.8443792925</auc:AnnualElectricity><auc:AnnualNaturalGas>143812.2916651396</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>0.0</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+              <auc:AnnualSavingsSiteEnergy>0.0</auc:AnnualSavingsSiteEnergy>
+              <auc:AnnualSiteEnergy>555506.1360444322</auc:AnnualSiteEnergy>
+              <auc:AnnualElectricity>411693.8443792925</auc:AnnualElectricity>
+              <auc:AnnualNaturalGas>143812.2916651396</auc:AnnualNaturalGas>
+              <auc:AnnualSavingsEnergyCost>0.0</auc:AnnualSavingsEnergyCost>
+            </auc:PackageOfMeasures>
           </auc:ScenarioType>
         </auc:Scenario>
         <auc:Scenario>
@@ -89,11 +162,16 @@
                 <auc:MeasureID IDref='Measure1'/>
                 <auc:MeasureID IDref='Measure2'/>
               </auc:MeasureIDs>
-            <auc:AnnualSavingsSiteEnergy>82877.12900019652</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>472629.00704423565</auc:AnnualSiteEnergy><auc:AnnualElectricity>303680.6053483868</auc:AnnualElectricity><auc:AnnualNaturalGas>168948.4016958488</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>8673.48</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+              <auc:AnnualSavingsSiteEnergy>82877.12900019652</auc:AnnualSavingsSiteEnergy>
+              <auc:AnnualSiteEnergy>472629.00704423565</auc:AnnualSiteEnergy>
+              <auc:AnnualElectricity>303680.6053483868</auc:AnnualElectricity>
+              <auc:AnnualNaturalGas>168948.4016958488</auc:AnnualNaturalGas>
+              <auc:AnnualSavingsEnergyCost>8673.48</auc:AnnualSavingsEnergyCost>
+            </auc:PackageOfMeasures>
           </auc:ScenarioType>
         </auc:Scenario>
       </auc:Scenarios>
     </auc:Report>
-	</auc:Audit>
+  </auc:Audit>
 </auc:Audits>
   

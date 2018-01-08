@@ -3,6 +3,7 @@ require_relative './../spec_helper'
 require 'fileutils'
 require 'parallel'
 require 'seed'
+require 'pp'
 
 describe 'BRICR' do
   it 'should upload and download building sync for one cycle' do
@@ -27,15 +28,15 @@ describe 'BRICR' do
     xml_path = File.expand_path('../files/phase0/151.xml', File.dirname(__FILE__))
     status, response = seed.upload_buildingsync(xml_path)
 
-    if !status
-      puts response
-    end
+    puts response unless status
+
     # get building sync that we just uploaded, download and compare to uploaded one
     expect(status).to eq true
     expect(response[:status]).to eq 'success'
-    
+
     # Note that the upload_buildingsync file now returns the property_view, not the property_state
-    expect(response[:data][:property_state][:custom_id_1]).to eq UBID
+    expect(response[:data][:property_view][:state][:custom_id_1]).to eq UBID
+    seed.update_analysis_state(response[:data][:property_view][:id], 'Queued')
 
     # pretend to run energy simulation, now we have building_151_results.xml
     puts 'running simulation'
@@ -46,14 +47,10 @@ describe 'BRICR' do
 
     # search for the building again using the GUID/UBID
     results = seed.search(UBID, nil)
-    puts results.properties
-
-    # get the first building
     property_id = results.properties.first[:id]
-    puts property_id
 
-    # post the results to the existing property
-    # seed.update_property()
-
+    puts "updating results with BuildingSync results"
+    seed.update_property_by_buildingfile(property_id, xml_path)
+    seed.update_analysis_state(property_id, 'Completed')
   end
 end
