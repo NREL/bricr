@@ -36,6 +36,13 @@ if property_id
     raise "Error updating file '#{xml_path}' with messages '#{messages}'"
   end
 
+  # have to manually update the analysis state now with a separate requets
+  success, messages = seed.update_analysis_state(property_id, analysis_state)
+  if !success
+    raise "Error updating analysis state to '#{analysis_state}' for property id '#{property_id}' with messages '#{messages}'"
+  end
+
+
 else
 
   # property does not exist in seed, do the upload
