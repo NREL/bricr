@@ -31,7 +31,7 @@ property_id = BRICR.get_property_id(seed, custom_id)
 if property_id
 
   # property already exists in seed, do an update
-  success, messages = seed.update_property_by_buildingfile(property_id, xml_path, analysis_state)
+  success, messages = seed.update_property_by_buildingfile(property_id, xml_path)
   if !success
     raise "Error updating file '#{xml_path}' with messages '#{messages}'"
   end
@@ -44,16 +44,18 @@ else
     raise "Error uploading file '#{xml_path}' with messages '#{messages}'"
   end
   
+  # DLM: Nick is this right
   property_id =  messages[:data][:property_view][:id]
   
   if !property_id
     raise "Did not receive property_id for custom_id #{custom_id}"
   end
-  
-  # initialize analysis state 
-  success, messages = seed.update_analysis_state(property_id, analysis_state)
-  if !success
-    raise "Error updating analysis state to '#{analysis_state}' for property id '#{property_id}' with messages '#{messages}'"
-  end
 
+end
+
+# initialize analysis state 
+# DLM: Nick this seems to fail if property 
+success, messages = seed.update_analysis_state(property_id, analysis_state)
+if !success
+  raise "Error updating analysis state to '#{analysis_state}' for property id '#{property_id}' with messages '#{messages}'"
 end

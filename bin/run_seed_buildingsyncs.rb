@@ -16,10 +16,16 @@ org = BRICR.get_seed_org(seed)
 cycle = BRICR.get_seed_cycle(seed)
 
 max_results = 2000
-search_results = seed.search('', 'Not Started', max_results)
+#search_results = seed.search('', 'Not Started', max_results) # DLM: Nick I don't think this is working
+search_results = seed.search('', '', max_results)
 
-# DLM: properties changed to results
-results = search_results.results
+properties = search_results.properties
+
+properties = properties.select{|property| property[:analysis_state] == 0} # DLM: temp work around 
+
+if properties.size > BRICR::MAX_DATAPOINTS
+  properties = properties.slice(0, BRICR::MAX_DATAPOINTS)
+end
 
 if !File.exists?('./run')
   FileUtils.mkdir_p('./run/')
@@ -31,24 +37,19 @@ run_buildingsync_rb = File.join(File.dirname(__FILE__), "run_buildingsync.rb")
 num_sims = 0
 failure = []
 success = []
-Parallel.each(results, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_DATAPOINTS].min) do |result|
-#results.each do |result|
-
-  break if num_sims > BRICR::MAX_DATAPOINTS
+Parallel.each(properties, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_DATAPOINTS].min) do |property|
+#properties.each do |property|
 
   # get ids
-  property_id = result[:id]
-  property_view_id = result[:property_view_id]
-  custom_id = result[:custom_id_1]
+  puts property
+  property_id = property[:property_view_id]
+  custom_id = property[:custom_id_1]
   
   # find most recent building sync file for this property
   files = seed.list_buildingsync_files(property_id)
 
-  # DLM: how can I get these files?
-  #files = result[:state][:files].select {|file| file[:file_type] == 'BuildingSync'}.sort {|x,y| x[:modified] <=> y[:modified]}
-  
   if files.empty?
-    puts "No BuildingSync file available"
+    puts "No BuildingSync file available for property_id '#{property_id}', custom_id '#{custom_id}'"
     next
   end
   
@@ -56,8 +57,8 @@ Parallel.each(results, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_DA
   file = files[-1][:file]
   url = File.join(BRICR.get_seed_host, file)
   
-  # DLM: post back analysis state Queued // DLM: does this exist?
-  #seed.update_analysis_state(property_id, analysis_state)
+  # post back analysis state Queued 
+  seed.update_analysis_state(property_id, 'Queued')
   
   # if url is specified, send this URL to the BRICR job queue
   if defined?(BRICR::BRICR_SIM_URL) && BRICR::BRICR_SIM_URL
@@ -87,7 +88,8 @@ Parallel.each(results, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_DA
     
     if result_xml
       # post back analysis state Completed
-      seed.update_property_by_buildingfile(property_id, result_xml, 'Completed')
+      seed.update_property_by_buildingfile(property_id, result_xml)
+      seed.update_analysis_state(property_id, 'Completed')  
     else
       # post back analysis state Failed
       seed.update_analysis_state(property_id, 'Failed')    

@@ -12,12 +12,14 @@ xml_files = Dir.glob(File.join(ARGV[1], '*.xml'))
 ruby_exe = File.join( RbConfig::CONFIG['bindir'], RbConfig::CONFIG['RUBY_INSTALL_NAME'] + RbConfig::CONFIG['EXEEXT'] )
 upload_seed_buildingsync_rb = File.join(File.dirname(__FILE__), "upload_seed_buildingsync.rb")
 
+if xml_files.size > BRICR::MAX_DATAPOINTS
+  xml_files = xml_files.slice(0, BRICR::MAX_DATAPOINTS)
+end
+
 uploaded = 0
 failures = 0
 Parallel.each(xml_files, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_DATAPOINTS].min) do |xml_file|
 #xml_files.each do |xml_file|
-
-  break if uploaded > BRICR::MAX_DATAPOINTS
 
   uploaded += 1
 
@@ -36,5 +38,5 @@ Parallel.each(xml_files, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_
   
 end
 
-puts "Attempted to uploaded #{uploaded} files"
+puts "Attempted to upload #{uploaded} files"
 puts "#{failures} failures"

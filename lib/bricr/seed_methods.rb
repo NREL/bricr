@@ -28,21 +28,35 @@ module BRICR
   end
 
   def self.get_property_id(seed, custom_id)
-    property_id = nil
-    
-    # DLM: search doesn't seem to be working with custom_id
-    #search_results = seed.search(custom_id, nil)
+  
     search_results = seed.search(nil, nil)
     
-    # DLM: search_results.properties doesn't exist, now it is results?
-
-    # DLM: manually search for now
-    property_id = nil
-    search_results.results.each do |result|
-      if result[:custom_id_1] == custom_id
-        property_id = result[:id]
-        break
+    property_ids = []
+    search_results.properties.each do |property|
+      if property[:custom_id_1] == custom_id
+        property_ids << property[:property_view_id]
       end
+    end
+    property_ids.uniq!
+    
+    # DLM: Nick search doesn't seem to be working with custom_id
+    #search_results = seed.search(custom_id, nil)
+    
+    #property_ids = []
+    #search_results.properties.each do |property|
+    #  if property[:custom_id_1] != custom_id
+    #    raise "property incorrectly associated with custom_id '#{custom_id}', #{property}"
+    #  end
+    #  property_ids << property[:property_view_id]
+    #end
+    #property_ids.uniq!
+
+    property_id = nil
+    if property_ids.size == 1
+      property_id = property_ids[0]
+    elsif property_ids.size > 1
+      puts "Multiple property_id's '#{property_ids.join(',')}' associated with custom_id '#{custom_id}', returning first"
+      property_id = property_ids[0]
     end
     
     return property_id
