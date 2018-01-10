@@ -41,7 +41,6 @@ Parallel.each(properties, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX
 #properties.each do |property|
 
   # get ids
-  puts property
   property_id = property[:property_view_id]
   custom_id = property[:custom_id_1]
 

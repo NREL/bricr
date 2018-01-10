@@ -30,18 +30,22 @@ property_id = BRICR.get_property_id(seed, custom_id)
 
 if property_id
 
-  # property already exists in seed, do an update
-  success, messages = seed.update_property_by_buildingfile(property_id, xml_path)
-  if !success
-    raise "Error updating file '#{xml_path}' with messages '#{messages}'"
-  end
+  # force upload of BSXML's already in SEED
+  if true
+    
+    # property already exists in seed, do an update
+    success, messages = seed.update_property_by_buildingfile(property_id, xml_path)
+    if !success
+      raise "Error updating file '#{xml_path}' with messages '#{messages}'"
+    end
 
-  # have to manually update the analysis state now with a separate requets
-  success, messages = seed.update_analysis_state(property_id, analysis_state)
-  if !success
-    raise "Error updating analysis state to '#{analysis_state}' for property id '#{property_id}' with messages '#{messages}'"
+    # have to manually update the analysis state now with a separate requets
+    success, messages = seed.update_analysis_state(property_id, analysis_state)
+    if !success
+      raise "Error updating analysis state to '#{analysis_state}' for property id '#{property_id}' with messages '#{messages}'"
+    end
+    
   end
-
 
 else
 
