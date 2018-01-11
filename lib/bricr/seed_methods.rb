@@ -29,10 +29,12 @@ module BRICR
 
   def self.get_property_id(seed, custom_id)
   
-    search_results = seed.search(nil, nil)
+    max_results = 10000 # DLM: temporary workaround to search all results
+    search_results = seed.search(nil, nil, max_results)
     
     property_ids = []
     search_results.properties.each do |property|
+      puts property[:custom_id_1]
       if property[:custom_id_1] == custom_id
         property_ids << property[:property_view_id]
       end

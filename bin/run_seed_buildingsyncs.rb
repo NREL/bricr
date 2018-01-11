@@ -15,7 +15,7 @@ seed = BRICR.get_seed()
 org = BRICR.get_seed_org(seed)
 cycle = BRICR.get_seed_cycle(seed)
 
-max_results = 2000
+max_results = 10000 # DLM: temporary workaround to search all results
 #search_results = seed.search('', 'Not Started', max_results) # DLM: Nick I don't think this is working
 search_results = seed.search('', '', max_results)
 
