@@ -34,7 +34,7 @@ module BRICR
     
     property_ids = []
     search_results.properties.each do |property|
-      puts property[:custom_id_1]
+      #puts property[:custom_id_1]
       if property[:custom_id_1] == custom_id
         property_ids << property[:property_view_id]
       end
