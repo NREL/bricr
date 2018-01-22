@@ -48,11 +48,10 @@
       "measure_dir_name": "create_typical_building_from_model",
       "arguments": {
         "template": "CEC T24 2008",
-        "system_type": "PSZ-AC with gas coil heat",
+        "system_type": "Inferred",
 		"hvac_delivery_type": "Forced Air",
         "htg_src": "NaturalGas",
         "clg_src": "Electricity",
-        "hvac_delivery_type": "Forced Air",
         "kitchen_makeup": "Adjacent",
         "exterior_lighting_zone": "3 - All Other Areas",
 		"add_constructions": true,
@@ -99,7 +98,21 @@
 		}
 	},
 	{
+		"measure_dir_name": "Set Boiler Thermal Efficiency",
+		"arguments": {
+		"__SKIP__": true,
+		"boiler_thermal_efficiency": 0.78
+		}
+	},
+
+	{
 		"measure_dir_name": "SetCOPforSingleSpeedDXCoolingUnits",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "SetCOPforTwoSpeedDXCoolingUnits",
 		"arguments": {
 		"__SKIP__": true
 		}

@@ -1,139 +1,139 @@
 {
   "CEC Pre-1978": {
     "SmallOffice":{
-      "lpd_change_rate": -0.6,
-      "epd_change_rate": -0.5,
-      "occupancy_change_rate":-0.4,
-      "cop_change_rate":0.3,
-      "heating_efficiency_change_rate":0.1
+      "lpd_change_rate": -0.4,
+      "epd_change_rate": -0.2,
+      "occupancy_change_rate":0,
+      "cop_change_rate":0.02,
+      "heating_efficiency_change_rate":-0.1
     },
     "MediumOffice":{
-      "lpd_change_rate": -0.6,
-      "epd_change_rate": -0.5,
-      "occupancy_change_rate":-0.4,
-      "cop_change_rate":0.3,
-      "heating_efficiency_change_rate":0.1
+      "lpd_change_rate": -0.4,
+      "epd_change_rate": -0.2,
+      "occupancy_change_rate":0,
+      "cop_change_rate":0.02,
+      "heating_efficiency_change_rate":-0.1
     },
     "RetailStandalone":{
-      "lpd_change_rate": -0.69,
-      "epd_change_rate": -0.59,
-      "occupancy_change_rate":-0.39,
-      "cop_change_rate":0.3,
-      "heating_efficiency_change_rate":0.1
+      "lpd_change_rate": -0.4,
+      "epd_change_rate": -0.2,
+      "occupancy_change_rate":0,
+      "cop_change_rate":0.02,
+      "heating_efficiency_change_rate":-0.1
     }
   },
   "CEC T24 1978": {
     "SmallOffice":{
-      "lpd_change_rate": -0.6,
-      "epd_change_rate": -0.5,
-      "occupancy_change_rate":-0.4,
-      "cop_change_rate":0.3,
-      "heating_efficiency_change_rate":0.1
+      "lpd_change_rate": -0.4,
+      "epd_change_rate": -0.2,
+      "occupancy_change_rate":0,
+      "cop_change_rate":0.13,
+      "heating_efficiency_change_rate":0
     },
     "MediumOffice":{
-      "lpd_change_rate": -0.6,
-      "epd_change_rate": -0.5,
-      "occupancy_change_rate":-0.4,
-      "cop_change_rate":0.3,
-      "heating_efficiency_change_rate":0.1
+      "lpd_change_rate": -0.4,
+      "epd_change_rate": -0.2,
+      "occupancy_change_rate":0,
+      "cop_change_rate":0.13,
+      "heating_efficiency_change_rate":0
     },
     "RetailStandalone":{
-      "lpd_change_rate": -0.69,
-      "epd_change_rate": -0.59,
-      "occupancy_change_rate":-0.39,
-      "cop_change_rate":0.3,
-      "heating_efficiency_change_rate":0.1
+      "lpd_change_rate": -0.4,
+      "epd_change_rate": -0.2,
+      "occupancy_change_rate":0,
+      "cop_change_rate":0.13,
+      "heating_efficiency_change_rate":0
     }
   },
   "CEC T24 1992": {
     "SmallOffice":{
-      "lpd_change_rate": -0.6,
-      "epd_change_rate": -0.5,
-      "occupancy_change_rate":-0.4,
-      "cop_change_rate":0.3,
-      "heating_efficiency_change_rate":0.1
+      "lpd_change_rate": -0.3,
+      "epd_change_rate": -0.2,
+      "occupancy_change_rate":0,
+      "cop_change_rate":0.13,
+      "heating_efficiency_change_rate":0
     },
     "MediumOffice":{
-      "lpd_change_rate": -0.6,
-      "epd_change_rate": -0.5,
-      "occupancy_change_rate":-0.4,
-      "cop_change_rate":0.3,
-      "heating_efficiency_change_rate":0.1
+      "lpd_change_rate": -0.3,
+      "epd_change_rate": -0.2,
+      "occupancy_change_rate":0,
+      "cop_change_rate":0.13,
+      "heating_efficiency_change_rate":0
     },
     "RetailStandalone":{
-      "lpd_change_rate": -0.69,
-      "epd_change_rate": -0.59,
-      "occupancy_change_rate":-0.39,
-      "cop_change_rate":0.3,
-      "heating_efficiency_change_rate":0.1
+      "lpd_change_rate": -0.3,
+      "epd_change_rate": -0.2,
+      "occupancy_change_rate":0,
+      "cop_change_rate":0.13,
+      "heating_efficiency_change_rate":0
     }
   },
   "CEC T24 2001": {
     "SmallOffice":{
-      "lpd_change_rate": -0.55,
-      "epd_change_rate": -0.45,
-      "occupancy_change_rate":-0.35,
-      "cop_change_rate":0.2,
-      "heating_efficiency_change_rate":0.1
+      "lpd_change_rate": -0.4,
+      "epd_change_rate": -0.2,
+      "occupancy_change_rate":0,
+      "cop_change_rate":0.22,
+      "heating_efficiency_change_rate":0.05
     },
     "MediumOffice":{
-      "lpd_change_rate": -0.55,
-      "epd_change_rate": -0.45,
-      "occupancy_change_rate":-0.35,
-      "cop_change_rate":0.2,
-      "heating_efficiency_change_rate":0.1
+      "lpd_change_rate": -0.4,
+      "epd_change_rate": -0.2,
+      "occupancy_change_rate":0,
+      "cop_change_rate":0.22,
+      "heating_efficiency_change_rate":0.05
     },
     "RetailStandalone":{
-      "lpd_change_rate": -0.55,
-      "epd_change_rate": -0.45,
-      "occupancy_change_rate":-0.35,
-      "cop_change_rate":0.2,
-      "heating_efficiency_change_rate":0.1
+      "lpd_change_rate": -0.4,
+      "epd_change_rate": -0.2,
+      "occupancy_change_rate":0,
+      "cop_change_rate":0.22,
+      "heating_efficiency_change_rate":0.05
     }
   },
   "CEC T24 2005": {
-        "SmallOffice":{
-      "lpd_change_rate": -0.55,
-      "epd_change_rate": -0.45,
-      "occupancy_change_rate":-0.35,
-      "cop_change_rate":0.2,
-      "heating_efficiency_change_rate":0.1
+    "SmallOffice":{
+      "lpd_change_rate": -0.4,
+      "epd_change_rate": -0.2,
+      "occupancy_change_rate":0,
+      "cop_change_rate":0.22,
+      "heating_efficiency_change_rate":0.05
     },
     "MediumOffice":{
-      "lpd_change_rate": -0.55,
-      "epd_change_rate": -0.45,
-      "occupancy_change_rate":-0.35,
-      "cop_change_rate":0.2,
-      "heating_efficiency_change_rate":0.1
+      "lpd_change_rate": -0.4,
+      "epd_change_rate": -0.2,
+      "occupancy_change_rate":0,
+      "cop_change_rate":0.22,
+      "heating_efficiency_change_rate":0.05
     },
     "RetailStandalone":{
-      "lpd_change_rate": -0.55,
-      "epd_change_rate": -0.45,
-      "occupancy_change_rate":-0.35,
-      "cop_change_rate":0.2,
-      "heating_efficiency_change_rate":0.1
+      "lpd_change_rate": -0.4,
+      "epd_change_rate": -0.2,
+      "occupancy_change_rate":0,
+      "cop_change_rate":0.22,
+      "heating_efficiency_change_rate":0.05
     }
   },
   "CEC T24 2008": {
-        "SmallOffice":{
-      "lpd_change_rate": -0.55,
-      "epd_change_rate": -0.45,
-      "occupancy_change_rate":-0.35,
-      "cop_change_rate":0.2,
+    "SmallOffice":{
+      "lpd_change_rate": -0.4,
+      "epd_change_rate": -0.2,
+      "occupancy_change_rate":0,
+      "cop_change_rate":0.22,
       "heating_efficiency_change_rate":0.1
     },
     "MediumOffice":{
-      "lpd_change_rate": -0.55,
-      "epd_change_rate": -0.45,
-      "occupancy_change_rate":-0.35,
-      "cop_change_rate":0.2,
+      "lpd_change_rate": -0.4,
+      "epd_change_rate": -0.2,
+      "occupancy_change_rate":0,
+      "cop_change_rate":0.22,
       "heating_efficiency_change_rate":0.1
     },
     "RetailStandalone":{
-      "lpd_change_rate": -0.55,
-      "epd_change_rate": -0.45,
-      "occupancy_change_rate":-0.35,
-      "cop_change_rate":0.2,
+      "lpd_change_rate": -0.4,
+      "epd_change_rate": -0.2,
+      "occupancy_change_rate":0,
+      "cop_change_rate":0.22,
       "heating_efficiency_change_rate":0.1
     }
   }

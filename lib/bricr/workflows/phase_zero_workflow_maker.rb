@@ -68,31 +68,37 @@ module BRICR
         else
           template = "CEC T24 2008"
         end
+		
+		#template = "90.1-2004"
 
       end
 
-      bldg_type = nil
-      bar_division_method = nil
-	  
+      # For measure: create_bar_from_building_type_ratios 
+	  bldg_type = nil
+	  bar_division_method = nil
 	  num_stories_above_grade = nil
       num_stories_below_grade = nil
       ns_to_ew_ratio = nil
-      
       building_rotation = nil # TBD
       floor_height = nil # TBD
       wwr = nil # TBD
+	  # For measure: create_typical_building_from_model
+	  system_type = nil
 
       @doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility') do |facility_element|
         occupancy_type = facility_element.elements['auc:OccupancyClassification'].text
         if occupancy_type == 'Retail'
           bldg_type = 'RetailStandalone'
           bar_division_method = 'Multiple Space Types - Individual Stories Sliced'
+		  system_type = 'PSZ-AC with gas coil heat'
         elsif occupancy_type == 'Office'
           bar_division_method = 'Single Space Type - Core and Perimeter'
           if floor_area > 0 && floor_area < 20000
             bldg_type = 'SmallOffice'
+			system_type = 'PSZ-AC with gas coil heat'
           elsif floor_area >= 20000 && floor_area < 75000
             bldg_type = 'MediumOffice'
+			system_type = 'PVAV with reheat'
           else
             raise "Office building size is beyond BRICR scope"
           end
@@ -124,13 +130,11 @@ module BRICR
         wwr = 0.0 # setDefaultValue in fraction
 		
       end
-
-      # template = "DOE Ref Pre-1980"
 	  
       # set this value in the osw
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'total_bldg_floor_area', floor_area)
+      # For measure: create_bar_from_building_type_ratios 
+	  set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'total_bldg_floor_area', floor_area)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'template', template)
-      set_measure_argument(osw, 'create_typical_building_from_model', 'template', template)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_a', bldg_type)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_b', bldg_type)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_c', bldg_type)
@@ -142,7 +146,11 @@ module BRICR
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'ns_to_ew_ratio', ns_to_ew_ratio)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'wwr', wwr)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bar_division_method', bar_division_method)
-      set_measure_argument(osw, 'calibrate_baseline_model', 'template', template)
+      # For measure: create_typical_building_from_model
+	  set_measure_argument(osw, 'create_typical_building_from_model', 'template', template)
+	  set_measure_argument(osw, 'create_typical_building_from_model', 'system_type', system_type)
+	  # Calibration
+	  set_measure_argument(osw, 'calibrate_baseline_model', 'template', template)
       set_measure_argument(osw, 'calibrate_baseline_model', 'bldg_type', bldg_type)
       if defined?(BRICR::DO_MODEL_CALIBRATION) and BRICR::DO_MODEL_CALIBRATION
         set_measure_argument(osw, 'calibrate_baseline_model', '__SKIP__', false)
@@ -171,12 +179,28 @@ module BRICR
             set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', 'space_infiltration_reduction_percent', 30.0)
           end
           if /Heating System/.match(measure_category)
-            set_measure_argument(osw, 'SetGasBurnerEfficiency', '__SKIP__', false)
-            set_measure_argument(osw, 'SetGasBurnerEfficiency', 'eff', 0.93)
+            # furnace system
+			#if system_type == 'PSZ-AC with gas coil heat'
+				set_measure_argument(osw, 'SetGasBurnerEfficiency', '__SKIP__', false)
+				set_measure_argument(osw, 'SetGasBurnerEfficiency', 'eff', 0.93)
+			# Boiler system for medium office
+			#elsif system_type == 'PVAV with reheat'
+				set_measure_argument(osw, 'Set Boiler Thermal Efficiency', '__SKIP__', false)
+				set_measure_argument(osw, 'Set Boiler Thermal Efficiency', 'boiler_thermal_efficiency', 0.93)
+				put "Hello"
+		#	end
           end
           if /Cooling System/.match(measure_category)
-            set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', '__SKIP__', false)
-            set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', 'cop', 4.1)
+            # PSZ-AC system
+		#	if system_type == 'PSZ-AC with gas coil heat'
+				set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', '__SKIP__', false)
+				set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', 'cop', 4.1)
+			# PVAV system
+		#	elsif system_type == 'PVAV with reheat'
+				set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', '__SKIP__', false)
+				set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', 'cop_high', 4.1)
+				set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', 'cop_low', 4.1)
+		#	end
           end
         end
       end
