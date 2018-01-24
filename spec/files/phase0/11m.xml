@@ -102,7 +102,7 @@
             <auc:PackageOfMeasures>
               <auc:ReferenceCase IDref="Baseline"/>
               <auc:MeasureIDs>
-                <auc:MeasureID IDref="Measure5"/>
+                <auc:MeasureID IDref="Measure1"/>
               </auc:MeasureIDs>
             </auc:PackageOfMeasures>
           </auc:ScenarioType>

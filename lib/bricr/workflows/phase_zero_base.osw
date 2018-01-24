@@ -98,10 +98,9 @@
 		}
 	},
 	{
-		"measure_dir_name": "Set Boiler Thermal Efficiency",
+		"measure_dir_name": "set_boiler_thermal_efficiency",
 		"arguments": {
-		"__SKIP__": true,
-		"boiler_thermal_efficiency": 0.78
+		"__SKIP__": true
 		}
 	},
 

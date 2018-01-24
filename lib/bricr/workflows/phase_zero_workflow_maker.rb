@@ -163,7 +163,7 @@ module BRICR
         measure_ids << measure_id.attributes['IDref']
       end
 
-      measure_ids.each do |measure_id|
+	  measure_ids.each do |measure_id|
         @doc.elements.each("//auc:Measure[@ID='#{measure_id}']") do |measure|
           measure_category = measure.elements['auc:SystemCategoryAffected'].text
           if /Lighting/.match(measure_category)
@@ -180,27 +180,21 @@ module BRICR
           end
           if /Heating System/.match(measure_category)
             # furnace system
-			#if system_type == 'PSZ-AC with gas coil heat'
-				set_measure_argument(osw, 'SetGasBurnerEfficiency', '__SKIP__', false)
-				set_measure_argument(osw, 'SetGasBurnerEfficiency', 'eff', 0.93)
+			set_measure_argument(osw, 'SetGasBurnerEfficiency', '__SKIP__', false)
+			set_measure_argument(osw, 'SetGasBurnerEfficiency', 'eff', 0.93)
 			# Boiler system for medium office
-			#elsif system_type == 'PVAV with reheat'
-				set_measure_argument(osw, 'Set Boiler Thermal Efficiency', '__SKIP__', false)
-				set_measure_argument(osw, 'Set Boiler Thermal Efficiency', 'boiler_thermal_efficiency', 0.93)
-				put "Hello"
-		#	end
+			set_measure_argument(osw, 'set_boiler_thermal_efficiency', '__SKIP__', false)
+			set_measure_argument(osw, 'set_boiler_thermal_efficiency', 'input_option_manual', true)
+			set_measure_argument(osw, 'set_boiler_thermal_efficiency', 'boiler_thermal_efficiency', 0.93)
           end
           if /Cooling System/.match(measure_category)
             # PSZ-AC system
-		#	if system_type == 'PSZ-AC with gas coil heat'
-				set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', '__SKIP__', false)
-				set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', 'cop', 4.1)
+			set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', '__SKIP__', false)
+			set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', 'cop', 4.1)
 			# PVAV system
-		#	elsif system_type == 'PVAV with reheat'
-				set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', '__SKIP__', false)
-				set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', 'cop_high', 4.1)
-				set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', 'cop_low', 4.1)
-		#	end
+			set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', '__SKIP__', false)
+			set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', 'cop_high', 4.1)
+			set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', 'cop_low', 4.1)
           end
         end
       end

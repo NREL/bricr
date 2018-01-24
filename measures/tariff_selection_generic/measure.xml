@@ -2,8 +2,8 @@
   <schema_version>3.0</schema_version>
   <name>tariff_selection_generic</name>
   <uid>d65ae535-f0ea-4745-9f5b-8d42c7070741</uid>
-  <version_id>f51def40-c03d-44d9-b7c7-fff868ebb41f</version_id>
-  <version_modified>20170531T170029Z</version_modified>
+  <version_id>1846ef16-3894-48cd-b02d-5bbbb01a71b4</version_id>
+  <version_modified>20180123T051147Z</version_modified>
   <xml_checksum>43564105</xml_checksum>
   <class_name>TariffSelectionGeneric</class_name>
   <display_name> Tariff Selection-Generic</display_name>
@@ -16,39 +16,11 @@
       <type>Choice</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
-      <default_value>Example_A</default_value>
+      <default_value>BRICR_SF_Commercial_Electricity</default_value>
       <choices>
         <choice>
-          <value>Example_A</value>
-          <display_name>Example A FlatEnergyCharge</display_name>
-        </choice>
-        <choice>
-          <value>Example_B</value>
-          <display_name>Example B BlockEnergyCharge</display_name>
-        </choice>
-        <choice>
-          <value>Example_C</value>
-          <display_name>Example C BlockEnergyAndDemandCharges</display_name>
-        </choice>
-        <choice>
-          <value>Example_D</value>
-          <display_name>Example D SeasonalEnergyCharngesWithMinimumCharge</display_name>
-        </choice>
-        <choice>
-          <value>Example_E</value>
-          <display_name>Example E KWh per kW Energy Charges</display_name>
-        </choice>
-        <choice>
-          <value>Example_F</value>
-          <display_name>Example F SeasonalTimeOfUseEnergy</display_name>
-        </choice>
-        <choice>
-          <value>Example_G</value>
-          <display_name>Example G BlocksWithinBlocks</display_name>
-        </choice>
-        <choice>
-          <value>Example_H</value>
-          <display_name>Example H RealTimePricing</display_name>
+          <value>BRICR_SF_Commercial_Electricity</value>
+          <display_name>PGE_Commercial_A1</display_name>
         </choice>
       </choices>
     </argument>
@@ -58,15 +30,11 @@
       <type>Choice</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
-      <default_value>FlatEnergyCharge-Gas</default_value>
+      <default_value>BRICR_SF_Commercial_Gas</default_value>
       <choices>
         <choice>
-          <value>FlatEnergyCharge-Gas</value>
-          <display_name>FlatEnergyCharge-Gas</display_name>
-        </choice>
-        <choice>
-          <value>IN-EIAMonthlyRateGas</value>
-          <display_name>IN EIAMonthlyRateGas</display_name>
+          <value>BRICR_SF_Commercial_Gas</value>
+          <display_name>PGE_G-NR1</display_name>
         </choice>
       </choices>
     </argument>
@@ -137,66 +105,6 @@
       <checksum>3977F8EB</checksum>
     </file>
     <file>
-      <filename>Example_E.idf</filename>
-      <filetype>idf</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>98AC420A</checksum>
-    </file>
-    <file>
-      <filename>FlatEnergyCharge-Gas.idf</filename>
-      <filetype>idf</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>300CF076</checksum>
-    </file>
-    <file>
-      <filename>IN-EIAMonthlyRateGas.idf</filename>
-      <filetype>idf</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>6AA3EBFF</checksum>
-    </file>
-    <file>
-      <filename>Example_A.idf</filename>
-      <filetype>idf</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>5DABBCE9</checksum>
-    </file>
-    <file>
-      <filename>Example_B.idf</filename>
-      <filetype>idf</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>88F3D8D5</checksum>
-    </file>
-    <file>
-      <filename>Example_C.idf</filename>
-      <filetype>idf</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>B53143E2</checksum>
-    </file>
-    <file>
-      <filename>Example_D.idf</filename>
-      <filetype>idf</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>DA5EBB8B</checksum>
-    </file>
-    <file>
-      <filename>Example_F.idf</filename>
-      <filetype>idf</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>006078CC</checksum>
-    </file>
-    <file>
-      <filename>Example_G.idf</filename>
-      <filetype>idf</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>9899FD33</checksum>
-    </file>
-    <file>
-      <filename>Example_H.idf</filename>
-      <filetype>idf</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>1F984D08</checksum>
-    </file>
-    <file>
       <filename>os_lib_helper_methods.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
@@ -212,6 +120,18 @@
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
       <checksum>E36278C2</checksum>
+    </file>
+    <file>
+      <filename>BRICR_SF_Commercial_Electricity.idf</filename>
+      <filetype>idf</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>7F2DFCBA</checksum>
+    </file>
+    <file>
+      <filename>BRICR_SF_Commercial_Gas.idf</filename>
+      <filetype>idf</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>7D11A76A</checksum>
     </file>
   </files>
 </measure>
