@@ -46,7 +46,7 @@ module BRICR
       end
 
       # SHL- get the template (vintage)
-      template = nil
+      $bricr_template = nil
       @doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility') do |facility_element|
         built_year = facility_element.elements['auc:YearOfConstruction'].text.to_f
         
@@ -56,25 +56,25 @@ module BRICR
         end
 
         if built_year < 1978
-          template = "CEC Pre-1978"
+          $bricr_template = "CEC Pre-1978"
         elsif built_year >= 1978 && built_year < 1992
-          template = "CEC T24 1978"
+          $bricr_template = "CEC T24 1978"
         elsif built_year >= 1992 && built_year < 2001
-          template = "CEC T24 1992"
+          $bricr_template = "CEC T24 1992"
         elsif built_year >= 2001 && built_year < 2005
-          template = "CEC T24 2001"
+          $bricr_template = "CEC T24 2001"
         elsif built_year >= 2005 && built_year < 2008
-          template = "CEC T24 2005"
+          $bricr_template = "CEC T24 2005"
         else
-          template = "CEC T24 2008"
+          $bricr_template = "CEC T24 2008"
         end
 		
-		#template = "90.1-2004"
+		#$bricr_template = "90.1-2004"
 
       end
 
       # For measure: create_bar_from_building_type_ratios 
-	  bldg_type = nil
+	  $bricr_bldg_type = nil
 	  bar_division_method = nil
 	  num_stories_above_grade = nil
       num_stories_below_grade = nil
@@ -83,22 +83,22 @@ module BRICR
       floor_height = nil # TBD
       wwr = nil # TBD
 	  # For measure: create_typical_building_from_model
-	  system_type = nil
+	  $bricr_system_type = nil
 
       @doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility') do |facility_element|
-        occupancy_type = facility_element.elements['auc:OccupancyClassification'].text
-        if occupancy_type == 'Retail'
-          bldg_type = 'RetailStandalone'
+        $bricr_occupancy_type = facility_element.elements['auc:OccupancyClassification'].text
+        if $bricr_occupancy_type == 'Retail'
+          $bricr_bldg_type = 'RetailStandalone'
           bar_division_method = 'Multiple Space Types - Individual Stories Sliced'
-		  system_type = 'PSZ-AC with gas coil heat'
-        elsif occupancy_type == 'Office'
+		  $bricr_system_type = 'PSZ-AC with gas coil heat'
+        elsif $bricr_occupancy_type == 'Office'
           bar_division_method = 'Single Space Type - Core and Perimeter'
           if floor_area > 0 && floor_area < 20000
-            bldg_type = 'SmallOffice'
-			system_type = 'PSZ-AC with gas coil heat'
+            $bricr_bldg_type = 'SmallOffice'
+			$bricr_system_type = 'PSZ-AC with gas coil heat'
           elsif floor_area >= 20000 && floor_area < 75000
-            bldg_type = 'MediumOffice'
-			system_type = 'PVAV with reheat'
+            $bricr_bldg_type = 'MediumOffice'
+			$bricr_system_type = 'PVAV with reheat'
           else
             raise "Office building size is beyond BRICR scope"
           end
@@ -134,11 +134,11 @@ module BRICR
       # set this value in the osw
       # For measure: create_bar_from_building_type_ratios 
 	  set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'total_bldg_floor_area', floor_area)
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'template', template)
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_a', bldg_type)
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_b', bldg_type)
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_c', bldg_type)
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_d', bldg_type)
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'template', $bricr_template)
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_a', $bricr_bldg_type)
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_b', $bricr_bldg_type)
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_c', $bricr_bldg_type)
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_d', $bricr_bldg_type)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'floor_height', floor_height)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'num_stories_above_grade', num_stories_above_grade)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'num_stories_below_grade', num_stories_below_grade)
@@ -147,11 +147,11 @@ module BRICR
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'wwr', wwr)
       set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bar_division_method', bar_division_method)
       # For measure: create_typical_building_from_model
-	  set_measure_argument(osw, 'create_typical_building_from_model', 'template', template)
-	  set_measure_argument(osw, 'create_typical_building_from_model', 'system_type', system_type)
+	  set_measure_argument(osw, 'create_typical_building_from_model', 'template', $bricr_template)
+	  set_measure_argument(osw, 'create_typical_building_from_model', 'system_type', $bricr_system_type)
 	  # Calibration
-	  set_measure_argument(osw, 'calibrate_baseline_model', 'template', template)
-      set_measure_argument(osw, 'calibrate_baseline_model', 'bldg_type', bldg_type)
+	  set_measure_argument(osw, 'calibrate_baseline_model', 'template', $bricr_template)
+      set_measure_argument(osw, 'calibrate_baseline_model', 'bldg_type', $bricr_bldg_type)
       if defined?(BRICR::DO_MODEL_CALIBRATION) and BRICR::DO_MODEL_CALIBRATION
         set_measure_argument(osw, 'calibrate_baseline_model', '__SKIP__', false)
       end
@@ -166,37 +166,158 @@ module BRICR
 	  measure_ids.each do |measure_id|
         @doc.elements.each("//auc:Measure[@ID='#{measure_id}']") do |measure|
           measure_category = measure.elements['auc:SystemCategoryAffected'].text
-          if /Lighting/.match(measure_category)
-            set_measure_argument(osw, 'SetLightingLoadsByLPD', '__SKIP__', false)
-            set_measure_argument(osw, 'SetLightingLoadsByLPD', 'lpd', 0.6)
+		  
+          # Lighting
+		  if measure_category == "Lighting" 
+			# Lighting / LightingImprovements
+			lighting_measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:LightingImprovements/auc:MeasureName'].text	
+			# Lighting / LightingImprovements / Retrofit with light emitting diode technologies
+			if lighting_measure_name == "Retrofit with light emitting diode technologies"
+				set_measure_argument(osw, 'SetLightingLoadsByLPD', '__SKIP__', false)
+				set_measure_argument(osw, 'SetLightingLoadsByLPD', 'lpd', 0.6)
+			end
+			# Lighting / LightingImprovements / Add daylight controls
+			if lighting_measure_name == "Add daylight controls"
+				set_measure_argument(osw, 'AddDaylightSensors', '__SKIP__', false)
+				if $bricr_bldg_type == "SmallOffice"
+					set_measure_argument(osw, 'AddDaylightSensors', 'space_type', "Office WholeBuilding - Sm Office - #{$bricr_template}")
+				elsif $bricr_bldg_type == "MediumOffice"
+					set_measure_argument(osw, 'AddDaylightSensors', 'space_type', "Office WholeBuilding - Md Office - #{$bricr_template}")
+				elsif $bricr_bldg_type == "RetailStandalone"
+					set_measure_argument(osw, 'AddDaylightSensors', 'space_type', "Retail Retail - #{$bricr_template}")
+				end
+			end
           end
-          if /Plug Load/.match(measure_category)
-            set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', '__SKIP__', false)
-            set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', 'elecequip_power_reduction_percent', 30.0)
+          
+		  # Plug Load
+		  if measure_category == "Plug Load"
+			# Plug Load / PlugLoadReductions
+			plugload_measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:PlugLoadReductions/auc:MeasureName'].text	
+			# Plug Load / PlugLoadReductions / Replace with ENERGY STAR rated
+			if plugload_measure_name == "Replace with ENERGY STAR rated"
+				set_measure_argument(osw, 'tenant_star_internal_loads', '__SKIP__', false)
+				set_measure_argument(osw, 'tenant_star_internal_loads', 'epd', 0.6) # W/ft^2
+			end
+			# Plug Load / PlugLoadReductions / Install plug load controls
+			if plugload_measure_name == "Install plug load controls"
+				set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', '__SKIP__', false)
+				set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', 'elecequip_power_reduction_percent', 20.0)
+			end
           end
-          if /Wall/.match(measure_category)
-            set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', '__SKIP__', false)
-            set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', 'space_infiltration_reduction_percent', 30.0)
+          
+		  # Wall
+		  if measure_category == "Wall"
+			# Wall / BuildingEnvelopeModifications
+			wall_measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:BuildingEnvelopeModifications/auc:MeasureName'].text
+			# Wall / BuildingEnvelopeModifications / Air seal envelope
+			if  wall_measure_name == "Air seal envelope"
+				set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', '__SKIP__', false)
+				set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', 'space_infiltration_reduction_percent', 30.0)
+			end
+			# Wall / BuildingEnvelopeModifications / Increase wall insulation
+			if  wall_measure_name == "Increase wall insulation"
+				set_measure_argument(osw, 'IncreaseInsulationRValueForExteriorWalls', '__SKIP__', false)
+				set_measure_argument(osw, 'IncreaseInsulationRValueForExteriorWalls', 'r_value', 25) # R-value
+			end
+			# Wall / BuildingEnvelopeModifications / Insulate thermal bypasses
+			if  wall_measure_name == "Insulate thermal bypasses"
+				set_measure_argument(osw, 'IncreaseInsulationRValueForExteriorWallsByPercentage', '__SKIP__', false)
+				set_measure_argument(osw, 'IncreaseInsulationRValueForExteriorWallsByPercentage', 'r_value', 20) # R-value increase percentage
+			end
+		  end
+		  
+		  # Roof / Ceiling
+		  if measure_category == "Roof / Ceiling"
+			# Roof / Ceiling / BuildingEnvelopeModifications
+			roof_ceiling_measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:BuildingEnvelopeModifications/auc:MeasureName'].text
+			# Roof / Ceiling / BuildingEnvelopeModifications / Increase roof insulation
+			if  roof_ceiling_measure_name == "Increase roof insulation"
+				set_measure_argument(osw, 'IncreaseInsulationRValueForRoofs', '__SKIP__', false)
+				set_measure_argument(osw, 'IncreaseInsulationRValueForRoofs', 'r_value', 30) # R-value
+			end
+			# Roof / Ceiling / BuildingEnvelopeModifications / Increase ceiling insulation
+			if  roof_ceiling_measure_name == "Increase ceiling insulation"
+				set_measure_argument(osw, 'IncreaseInsulationRValueForRoofsByPercentage', '__SKIP__', false)
+				set_measure_argument(osw, 'IncreaseInsulationRValueForRoofsByPercentage', 'r_value', 20) # R-value increase percentage
+			end
+		  end
+          
+		  # Heating System
+		  if measure_category == "Heating System"
+			# Heating System / OtherHVAC
+			heatingsystem_measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:OtherHVAC/auc:MeasureName'].text		
+			# Heating System / OtherHVAC / Replace burner
+			if heatingsystem_measure_name == "Replace burner"
+				# furnace system
+				if $bricr_system_type == "PSZ-AC with gas coil heat"
+					set_measure_argument(osw, 'SetGasBurnerEfficiency', '__SKIP__', false)
+					set_measure_argument(osw, 'SetGasBurnerEfficiency', 'eff', 0.93)
+				end
+			end
+			# Heating System / BoilerPlantImprovements
+			heatingsystem_measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:BoilerPlantImprovements/auc:MeasureName'].text	
+			# Heating System / BoilerPlantImprovements / Replace boiler
+			if heatingsystem_measure_name == "Replace boiler"
+				# Boiler system for medium office
+				if $bricr_system_type == "PVAV with reheat"
+					set_measure_argument(osw, 'set_boiler_thermal_efficiency', '__SKIP__', false)
+					set_measure_argument(osw, 'set_boiler_thermal_efficiency', 'input_option_manual', true)
+					set_measure_argument(osw, 'set_boiler_thermal_efficiency', 'boiler_thermal_efficiency', 0.93)
+				end
+			end
           end
-          if /Heating System/.match(measure_category)
-            # furnace system
-			set_measure_argument(osw, 'SetGasBurnerEfficiency', '__SKIP__', false)
-			set_measure_argument(osw, 'SetGasBurnerEfficiency', 'eff', 0.93)
-			# Boiler system for medium office
-			set_measure_argument(osw, 'set_boiler_thermal_efficiency', '__SKIP__', false)
-			set_measure_argument(osw, 'set_boiler_thermal_efficiency', 'input_option_manual', true)
-			set_measure_argument(osw, 'set_boiler_thermal_efficiency', 'boiler_thermal_efficiency', 0.93)
+          
+		  # Cooling System
+		  if measure_category == "Cooling System"
+			# Cooling System / OtherHVAC
+			coolingsystem_measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:OtherHVAC/auc:MeasureName'].text	
+		    # Cooling System / OtherHVAC / Replace package units
+			if coolingsystem_measure_name == "Replace package units"
+				if $bricr_system_type == "PSZ-AC with gas coil heat"
+					set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', '__SKIP__', false)
+					set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', 'cop', 4.1)
+				elsif $bricr_system_type == "PVAV with reheat"
+					set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', '__SKIP__', false)
+					set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', 'cop_high', 4.1)
+					set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', 'cop_low', 4.1)
+				end
+			end
+		  end
+			
+		  # Other HVAC
+		  if measure_category == "Other HVAC"
+			# Other HVAC / OtherHVAC
+			otherhvac_measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:OtherHVAC/auc:MeasureName'].text	
+			# Other HVAC / OtherHVAC / Replace HVAC system type to VRF 
+			if otherhvac_measure_name == "Replace HVAC system type to VRF"
+				set_measure_argument(osw, 'vr_fwith_doas', '__SKIP__', false)
+				if $bricr_bldg_type == "SmallOffice"
+					set_measure_argument(osw, 'vr_fwith_doas', "Office WholeBuilding - Sm Office - #{$bricr_template}", true)
+				elsif $bricr_bldg_type == "MediumOffice"
+					set_measure_argument(osw, 'vr_fwith_doas', "Office WholeBuilding - Md Office - #{$bricr_template}", true)
+				elsif $bricr_bldg_type == "RetailStandalone"
+					set_measure_argument(osw, 'vr_fwith_doas', "Retail Retail - #{$bricr_template}", true)
+					set_measure_argument(osw, 'vr_fwith_doas', "Retail Point_of_Sale - #{$bricr_template}", true)
+					set_measure_argument(osw, 'vr_fwith_doas', "Retail Entry - #{$bricr_template}", true)
+					set_measure_argument(osw, 'vr_fwith_doas', "Retail Back_Space - #{$bricr_template}", true)
+				end
+			end
+			# Other HVAC / OtherHVAC / Replace HVAC with GSHP and DOAS 
+			if otherhvac_measure_name == "Replace HVAC with GSHP and DOAS"
+				set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', '__SKIP__', false)
+				if $bricr_bldg_type == "SmallOffice"
+					set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Office WholeBuilding - Sm Office - #{$bricr_template}", true)
+				elsif $bricr_bldg_type == "MediumOffice"
+					set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Office WholeBuilding - Md Office - #{$bricr_template}", true)
+				elsif $bricr_bldg_type == "RetailStandalone"
+					set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Retail Retail - #{$bricr_template}", true)
+					set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Retail Point_of_Sale - #{$bricr_template}", true)
+					set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Retail Entry - #{$bricr_template}", true)
+					set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Retail Back_Space - #{$bricr_template}", true)
+				end
+			end
           end
-          if /Cooling System/.match(measure_category)
-            # PSZ-AC system
-			set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', '__SKIP__', false)
-			set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', 'cop', 4.1)
-			# PVAV system
-			set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', '__SKIP__', false)
-			set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', 'cop_high', 4.1)
-			set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', 'cop_low', 4.1)
-          end
-        end
+		end
       end
     end
 

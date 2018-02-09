@@ -80,6 +80,18 @@
 		}
 	},
 	{
+		"measure_dir_name": "AddDaylightSensors",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "tenant_star_internal_loads",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
 		"measure_dir_name": "ReduceElectricEquipmentLoadsByPercentage",
 		"arguments": {
 		"__SKIP__": true
@@ -87,6 +99,30 @@
 	},
 	{
 		"measure_dir_name": "ReduceSpaceInfiltrationByPercentage",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "IncreaseInsulationRValueForExteriorWalls",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "IncreaseInsulationRValueForExteriorWallsByPercentage",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "IncreaseInsulationRValueForRoofs",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "IncreaseInsulationRValueForRoofsByPercentage",
 		"arguments": {
 		"__SKIP__": true
 		}
@@ -112,6 +148,18 @@
 	},
 	{
 		"measure_dir_name": "SetCOPforTwoSpeedDXCoolingUnits",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "vr_fwith_doas",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "replace_hvac_with_gshp_and_doas",
 		"arguments": {
 		"__SKIP__": true
 		}
