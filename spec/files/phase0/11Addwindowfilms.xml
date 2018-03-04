@@ -1,0 +1,108 @@
+﻿<!-- edited with XMLSpy v2016 rel. 2 sp1 (x64) (http://www.altova.com) by Dan Macumber (NREL) -->
+<auc:Audits xmlns:auc="http://nrel.gov/schemas/bedes-auc/2014" xsi:schemaLocation="http://nrel.gov/schemas/bedes-auc/2014 file:///E:/buildingsync/BuildingSync.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<auc:Audit>
+		<auc:Sites>
+			<auc:Site>
+				<auc:Address>
+					<auc:StreetAddressDetail>
+						<auc:Simplified>
+							<auc:StreetAddress>123 Main St</auc:StreetAddress>
+						</auc:Simplified>
+					</auc:StreetAddressDetail>
+					<auc:City>San Francisco</auc:City>
+					<auc:State>CA</auc:State>
+					<auc:PostalCode>94114</auc:PostalCode>
+				</auc:Address>
+				<auc:ClimateZoneType>
+					<auc:ASHRAE>
+						<auc:ClimateZone>3C</auc:ClimateZone>
+					</auc:ASHRAE>
+					<auc:CaliforniaTitle24>
+						<auc:ClimateZone>Climate Zone 3</auc:ClimateZone>
+					</auc:CaliforniaTitle24>
+				</auc:ClimateZoneType>
+				<auc:WeatherDataStationID>724940</auc:WeatherDataStationID>
+				<auc:WeatherStationName>USA_CA_San.Francisco.Intl.AP</auc:WeatherStationName>
+				<auc:Longitude>-122.42768558472727</auc:Longitude>
+				<auc:Latitude>37.76937674999205</auc:Latitude>
+				<auc:Facilities>
+					<auc:Facility ID="mediumoffice_1">
+						<auc:PremisesName>mediumoffice_1</auc:PremisesName>
+						<auc:PremisesIdentifiers>
+							<auc:PremisesIdentifier>
+								<auc:IdentifierLabel>Assessor parcel number</auc:IdentifierLabel>
+								<auc:IdentifierValue>mediumoffice_1</auc:IdentifierValue>
+							</auc:PremisesIdentifier>
+						</auc:PremisesIdentifiers>
+						<auc:FacilityClassification>Commercial</auc:FacilityClassification>
+						<auc:OccupancyClassification>Office</auc:OccupancyClassification>
+						<auc:FloorsAboveGrade>3</auc:FloorsAboveGrade>
+						<auc:FloorsBelowGrade>0</auc:FloorsBelowGrade>
+						<auc:FloorAreas>
+							<auc:FloorArea>
+								<auc:FloorAreaType>Gross</auc:FloorAreaType>
+								<auc:FloorAreaValue>53608</auc:FloorAreaValue>
+							</auc:FloorArea>
+							<auc:FloorArea>
+								<auc:FloorAreaType>Footprint</auc:FloorAreaType>
+								<auc:FloorAreaValue>53608</auc:FloorAreaValue>
+							</auc:FloorArea>
+						</auc:FloorAreas>
+						<auc:AspectRatio>1.5</auc:AspectRatio>
+						<auc:Perimeter>1325</auc:Perimeter>
+						<auc:YearOfConstruction>1966</auc:YearOfConstruction>
+						<auc:YearOfLastMajorRemodel>1977</auc:YearOfLastMajorRemodel>
+					</auc:Facility>
+				</auc:Facilities>
+			</auc:Site>
+		</auc:Sites>		
+    <auc:Measures>
+      <auc:Measure ID="Measure1">
+        <auc:SystemCategoryAffected>Fenestration</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='mediumoffice_1'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:BuildingEnvelopeModifications>
+              <auc:MeasureName>Add window films</auc:MeasureName>
+            </auc:BuildingEnvelopeModifications>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+    </auc:Measures>
+    <auc:Report>
+      <auc:Scenarios>
+        <auc:Scenario ID="Baseline">
+          <auc:ScenarioName>Baseline</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+        <auc:Scenario>
+          <auc:ScenarioName>Add window films</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure1"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+       </auc:Scenarios>
+    </auc:Report>
+  </auc:Audit>
+</auc:Audits>

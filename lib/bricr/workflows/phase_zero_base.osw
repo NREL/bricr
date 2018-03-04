@@ -86,6 +86,12 @@
 		}
 	},
 	{
+		"measure_dir_name": "ReduceLightingLoadsByPercentage",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
 		"measure_dir_name": "tenant_star_internal_loads",
 		"arguments": {
 		"__SKIP__": true
@@ -128,6 +134,18 @@
 		}
 	},
 	{
+		"measure_dir_name": "replace_simple_glazing",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "improve_simple_glazing_by_percentage",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
 		"measure_dir_name": "SetGasBurnerEfficiency",
 		"arguments": {
 		"__SKIP__": true
@@ -153,13 +171,67 @@
 		}
 	},
 	{
+		"measure_dir_name": "replace_hvac_with_gshp_and_doas",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
 		"measure_dir_name": "vr_fwith_doas",
 		"arguments": {
 		"__SKIP__": true
 		}
 	},
 	{
-		"measure_dir_name": "replace_hvac_with_gshp_and_doas",
+		"measure_dir_name": "add_apszhp_to_each_zone",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "AdjustThermostatSetpointsByDegrees",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "ImproveMotorEfficiency",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "ImproveFanBeltEfficiency",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "EnableDemandControlledVentilation",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "EnableEconomizerControl",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "add_energy_recovery_ventilator",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "set_water_heater_efficiency_heat_lossand_peak_water_flow_rate",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "reduce_water_use_by_percentage",
 		"arguments": {
 		"__SKIP__": true
 		}

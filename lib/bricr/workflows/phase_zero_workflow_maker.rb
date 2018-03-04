@@ -168,16 +168,15 @@ module BRICR
           measure_category = measure.elements['auc:SystemCategoryAffected'].text
 		  
           # Lighting
-		  if measure_category == "Lighting" 
-			# Lighting / LightingImprovements
-			lighting_measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:LightingImprovements/auc:MeasureName'].text	
+		  if measure_category == "Lighting"
+			measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:LightingImprovements/auc:MeasureName'].text
 			# Lighting / LightingImprovements / Retrofit with light emitting diode technologies
-			if lighting_measure_name == "Retrofit with light emitting diode technologies"
+			if measure_name == "Retrofit with light emitting diode technologies"
 				set_measure_argument(osw, 'SetLightingLoadsByLPD', '__SKIP__', false)
 				set_measure_argument(osw, 'SetLightingLoadsByLPD', 'lpd', 0.6)
 			end
 			# Lighting / LightingImprovements / Add daylight controls
-			if lighting_measure_name == "Add daylight controls"
+			if measure_name == "Add daylight controls"
 				set_measure_argument(osw, 'AddDaylightSensors', '__SKIP__', false)
 				if $bricr_bldg_type == "SmallOffice"
 					set_measure_argument(osw, 'AddDaylightSensors', 'space_type', "Office WholeBuilding - Sm Office - #{$bricr_template}")
@@ -187,40 +186,48 @@ module BRICR
 					set_measure_argument(osw, 'AddDaylightSensors', 'space_type', "Retail Retail - #{$bricr_template}")
 				end
 			end
+			# Lighting / LightingImprovements / Add occupancy sensors
+			if measure_name == "Add occupancy sensors"
+				set_measure_argument(osw, 'ReduceLightingLoadsByPercentage', '__SKIP__', false)
+				set_measure_argument(osw, 'ReduceLightingLoadsByPercentage', 'lighting_power_reduction_percent', 5)
+			end
           end
           
 		  # Plug Load
 		  if measure_category == "Plug Load"
-			# Plug Load / PlugLoadReductions
-			plugload_measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:PlugLoadReductions/auc:MeasureName'].text	
+			measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:PlugLoadReductions/auc:MeasureName'].text
 			# Plug Load / PlugLoadReductions / Replace with ENERGY STAR rated
-			if plugload_measure_name == "Replace with ENERGY STAR rated"
+			if measure_name == "Replace with ENERGY STAR rated"
 				set_measure_argument(osw, 'tenant_star_internal_loads', '__SKIP__', false)
 				set_measure_argument(osw, 'tenant_star_internal_loads', 'epd', 0.6) # W/ft^2
 			end
 			# Plug Load / PlugLoadReductions / Install plug load controls
-			if plugload_measure_name == "Install plug load controls"
+			if measure_name == "Install plug load controls"
 				set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', '__SKIP__', false)
 				set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', 'elecequip_power_reduction_percent', 20.0)
+			end
+			# Plug Load / PlugLoadReductions / Replace ice_refrigeration equipment with high efficiency units
+			if measure_name == "Replace ice_refrigeration equipment with high efficiency units"
+				set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', '__SKIP__', false)
+				set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', 'elecequip_power_reduction_percent', 5)
 			end
           end
           
 		  # Wall
 		  if measure_category == "Wall"
-			# Wall / BuildingEnvelopeModifications
-			wall_measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:BuildingEnvelopeModifications/auc:MeasureName'].text
+			measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:BuildingEnvelopeModifications/auc:MeasureName'].text
 			# Wall / BuildingEnvelopeModifications / Air seal envelope
-			if  wall_measure_name == "Air seal envelope"
+			if measure_name == "Air seal envelope"
 				set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', '__SKIP__', false)
 				set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', 'space_infiltration_reduction_percent', 30.0)
 			end
 			# Wall / BuildingEnvelopeModifications / Increase wall insulation
-			if  wall_measure_name == "Increase wall insulation"
+			if  measure_name == "Increase wall insulation"
 				set_measure_argument(osw, 'IncreaseInsulationRValueForExteriorWalls', '__SKIP__', false)
 				set_measure_argument(osw, 'IncreaseInsulationRValueForExteriorWalls', 'r_value', 25) # R-value
 			end
 			# Wall / BuildingEnvelopeModifications / Insulate thermal bypasses
-			if  wall_measure_name == "Insulate thermal bypasses"
+			if  measure_name == "Insulate thermal bypasses"
 				set_measure_argument(osw, 'IncreaseInsulationRValueForExteriorWallsByPercentage', '__SKIP__', false)
 				set_measure_argument(osw, 'IncreaseInsulationRValueForExteriorWallsByPercentage', 'r_value', 20) # R-value increase percentage
 			end
@@ -228,51 +235,75 @@ module BRICR
 		  
 		  # Roof / Ceiling
 		  if measure_category == "Roof / Ceiling"
-			# Roof / Ceiling / BuildingEnvelopeModifications
-			roof_ceiling_measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:BuildingEnvelopeModifications/auc:MeasureName'].text
+			measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:BuildingEnvelopeModifications/auc:MeasureName'].text
 			# Roof / Ceiling / BuildingEnvelopeModifications / Increase roof insulation
-			if  roof_ceiling_measure_name == "Increase roof insulation"
+			if measure_name == "Increase roof insulation"
 				set_measure_argument(osw, 'IncreaseInsulationRValueForRoofs', '__SKIP__', false)
 				set_measure_argument(osw, 'IncreaseInsulationRValueForRoofs', 'r_value', 30) # R-value
 			end
 			# Roof / Ceiling / BuildingEnvelopeModifications / Increase ceiling insulation
-			if  roof_ceiling_measure_name == "Increase ceiling insulation"
+			if measure_name == "Increase ceiling insulation"
 				set_measure_argument(osw, 'IncreaseInsulationRValueForRoofsByPercentage', '__SKIP__', false)
 				set_measure_argument(osw, 'IncreaseInsulationRValueForRoofsByPercentage', 'r_value', 20) # R-value increase percentage
+			end
+		  end
+		  
+		  # Fenestration
+		  if measure_category == "Fenestration"
+			# Fenestration / BuildingEnvelopeModifications
+			measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:BuildingEnvelopeModifications/auc:MeasureName'].text
+			# Fenestration / BuildingEnvelopeModifications / Replace windows
+			if measure_name == "Replace windows"
+				set_measure_argument(osw, 'replace_simple_glazing', '__SKIP__', false)
+				set_measure_argument(osw, 'replace_simple_glazing', 'u_value', 1.65) # W/Km2
+				set_measure_argument(osw, 'replace_simple_glazing', 'shgc', 0.2)
+				set_measure_argument(osw, 'replace_simple_glazing', 'vt', 0.81)
+			end
+
+			# Fenestration / BuildingEnvelopeModifications / Add window films
+			if measure_name == "Add window films"
+				set_measure_argument(osw, 'improve_simple_glazing_by_percentage', '__SKIP__', false)
+				set_measure_argument(osw, 'improve_simple_glazing_by_percentage', 'u_value_improvement_percent', 10)
+				set_measure_argument(osw, 'improve_simple_glazing_by_percentage', 'shgc_improvement_percent', 30)
 			end
 		  end
           
 		  # Heating System
 		  if measure_category == "Heating System"
 			# Heating System / OtherHVAC
-			heatingsystem_measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:OtherHVAC/auc:MeasureName'].text		
-			# Heating System / OtherHVAC / Replace burner
-			if heatingsystem_measure_name == "Replace burner"
-				# furnace system
-				if $bricr_system_type == "PSZ-AC with gas coil heat"
-					set_measure_argument(osw, 'SetGasBurnerEfficiency', '__SKIP__', false)
-					set_measure_argument(osw, 'SetGasBurnerEfficiency', 'eff', 0.93)
+			if defined? (measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:OtherHVAC/auc:MeasureName'].text)
+				measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:OtherHVAC/auc:MeasureName'].text
+				# Heating System / OtherHVAC / Replace burner
+				if measure_name == "Replace burner"
+					# furnace system
+					if $bricr_system_type == "PSZ-AC with gas coil heat"
+						set_measure_argument(osw, 'SetGasBurnerEfficiency', '__SKIP__', false)
+						set_measure_argument(osw, 'SetGasBurnerEfficiency', 'eff', 0.93)
+					end
 				end
-			end
+			end 
+			
 			# Heating System / BoilerPlantImprovements
-			heatingsystem_measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:BoilerPlantImprovements/auc:MeasureName'].text	
-			# Heating System / BoilerPlantImprovements / Replace boiler
-			if heatingsystem_measure_name == "Replace boiler"
-				# Boiler system for medium office
-				if $bricr_system_type == "PVAV with reheat"
-					set_measure_argument(osw, 'set_boiler_thermal_efficiency', '__SKIP__', false)
-					set_measure_argument(osw, 'set_boiler_thermal_efficiency', 'input_option_manual', true)
-					set_measure_argument(osw, 'set_boiler_thermal_efficiency', 'boiler_thermal_efficiency', 0.93)
+			if defined? (measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:BoilerPlantImprovements/auc:MeasureName'].text)
+				measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:BoilerPlantImprovements/auc:MeasureName'].text
+				# Heating System / BoilerPlantImprovements / Replace boiler
+				if measure_name == "Replace boiler"
+					# Boiler system for medium office
+					if $bricr_system_type == "PVAV with reheat"
+						set_measure_argument(osw, 'set_boiler_thermal_efficiency', '__SKIP__', false)
+						set_measure_argument(osw, 'set_boiler_thermal_efficiency', 'input_option_manual', true)
+						set_measure_argument(osw, 'set_boiler_thermal_efficiency', 'boiler_thermal_efficiency', 0.93)
+					end
 				end
 			end
-          end
+		  end
           
 		  # Cooling System
 		  if measure_category == "Cooling System"
 			# Cooling System / OtherHVAC
-			coolingsystem_measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:OtherHVAC/auc:MeasureName'].text	
+			measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:OtherHVAC/auc:MeasureName'].text	
 		    # Cooling System / OtherHVAC / Replace package units
-			if coolingsystem_measure_name == "Replace package units"
+			if measure_name == "Replace package units"
 				if $bricr_system_type == "PSZ-AC with gas coil heat"
 					set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', '__SKIP__', false)
 					set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', 'cop', 4.1)
@@ -287,9 +318,9 @@ module BRICR
 		  # Other HVAC
 		  if measure_category == "Other HVAC"
 			# Other HVAC / OtherHVAC
-			otherhvac_measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:OtherHVAC/auc:MeasureName'].text	
+			measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:OtherHVAC/auc:MeasureName'].text	
 			# Other HVAC / OtherHVAC / Replace HVAC system type to VRF 
-			if otherhvac_measure_name == "Replace HVAC system type to VRF"
+			if measure_name == "Replace HVAC system type to VRF"
 				set_measure_argument(osw, 'vr_fwith_doas', '__SKIP__', false)
 				if $bricr_bldg_type == "SmallOffice"
 					set_measure_argument(osw, 'vr_fwith_doas', "Office WholeBuilding - Sm Office - #{$bricr_template}", true)
@@ -303,7 +334,7 @@ module BRICR
 				end
 			end
 			# Other HVAC / OtherHVAC / Replace HVAC with GSHP and DOAS 
-			if otherhvac_measure_name == "Replace HVAC with GSHP and DOAS"
+			if measure_name == "Replace HVAC with GSHP and DOAS"
 				set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', '__SKIP__', false)
 				if $bricr_bldg_type == "SmallOffice"
 					set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Office WholeBuilding - Sm Office - #{$bricr_template}", true)
@@ -316,8 +347,138 @@ module BRICR
 					set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Retail Back_Space - #{$bricr_template}", true)
 				end
 			end
+			# Other HVAC / OtherHVAC / Replace HVAC system type to PZHP 
+			if measure_name == "Replace HVAC system type to PZHP"
+				set_measure_argument(osw, 'add_apszhp_to_each_zone', '__SKIP__', false)
+				set_measure_argument(osw, 'add_apszhp_to_each_zone', 'delete_existing', true)
+				set_measure_argument(osw, 'add_apszhp_to_each_zone', 'cop_cooling', 3.1)
+				set_measure_argument(osw, 'add_apszhp_to_each_zone', 'cop_heating', 3.1)
+				set_measure_argument(osw, 'add_apszhp_to_each_zone', 'has_electric_coil', true)
+				set_measure_argument(osw, 'add_apszhp_to_each_zone', 'has_dcv', false)
+				set_measure_argument(osw, 'add_apszhp_to_each_zone', 'fan_type', "Constant Volume (default)") # Options: "Constant Volume (default)", "Variable Volume (VFD)"
+				set_measure_argument(osw, 'add_apszhp_to_each_zone', 'fan_pressure_rise', 0)
+				set_measure_argument(osw, 'add_apszhp_to_each_zone', 'filter_type', "By Space Type")
+				if $bricr_bldg_type == "SmallOffice"
+					set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Office WholeBuilding - Sm Office - #{$bricr_template}")
+				elsif $bricr_bldg_type == "MediumOffice"
+					set_measure_argument(osw, 'create_typical_building_from_model', 'system_type', "PSZ-AC with gas coil heat")
+					set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Office WholeBuilding - Md Office - #{$bricr_template}")
+				elsif $bricr_bldg_type == "RetailStandalone"
+					set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Retail - #{$bricr_template}")
+					set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Point_of_Sale - #{$bricr_template}")
+					set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Entry - #{$bricr_template}")
+					set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Back_Space - #{$bricr_template}")
+				end
+			end
+					
           end
-		end
+		  
+		  # General Controls and Operations
+		  if measure_category == "General Controls and Operations"
+			# General Controls and Operations / OtherHVAC
+			measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:OtherHVAC/auc:MeasureName'].text	
+			# General Controls and Operations / OtherHVAC / Upgrade operating protocols, calibration, and_or sequencing 
+			if measure_name == "Upgrade operating protocols, calibration, and_or sequencing"
+				set_measure_argument(osw, 'AdjustThermostatSetpointsByDegrees', '__SKIP__', false)
+				set_measure_argument(osw, 'AdjustThermostatSetpointsByDegrees', 'cooling_adjustment', 1.0)
+				set_measure_argument(osw, 'AdjustThermostatSetpointsByDegrees', 'heating_adjustment', -1.0)
+			end
+		  end
+		
+		  # Fan
+		  if measure_category == "Fan"
+			# Fan / ElectricMotorsAndDrives
+			measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:ElectricMotorsAndDrives/auc:MeasureName'].text	
+		    # Fan / ElectricMotorsAndDrives / Replace with higher efficiency
+			if measure_name == "Replace with higher efficiency"
+				set_measure_argument(osw, 'ImproveMotorEfficiency', '__SKIP__', false)
+				set_measure_argument(osw, 'ImproveMotorEfficiency', 'motor_eff', 96.0) # New efficiency
+			end
+		  end
+		  
+		  # Air Distribution
+		  if measure_category == "Air Distribution"
+			# Air Distribution / OtherHVAC
+			measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:OtherHVAC/auc:MeasureName'].text	
+		    # Air Distribution / OtherHVAC / Improve ventilation fans
+			if measure_name == "Improve ventilation fans"
+				set_measure_argument(osw, 'ImproveFanBeltEfficiency', '__SKIP__', false)
+				set_measure_argument(osw, 'ImproveFanBeltEfficiency', 'motor_eff', 10) # Efficiency improvement
+			end
+			
+			# Air Distribution / OtherHVAC
+			measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:OtherHVAC/auc:MeasureName'].text	
+		    # Air Distribution / OtherHVAC / Enable Demand Controlled Ventilation
+			if measure_name == "Enable Demand Controlled Ventilation"
+				set_measure_argument(osw, 'EnableDemandControlledVentilation', '__SKIP__', false)
+				set_measure_argument(osw, 'EnableDemandControlledVentilation', 'dcv_type', "EnableDCV")
+			end
+			
+			# Air Distribution / OtherHVAC
+			measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:OtherHVAC/auc:MeasureName'].text	
+		    # Air Distribution / OtherHVAC / Add or repair economizer
+			if measure_name == "Add or repair economizer"
+				set_measure_argument(osw, 'EnableEconomizerControl', '__SKIP__', false)
+				set_measure_argument(osw, 'EnableEconomizerControl', 'economizer_type', "FixedDryBulb")
+			end
+		  end
+		  
+		  # Heat Recovery
+		  if measure_category == "Heat Recovery"
+			# Heat Recovery / OtherHVAC
+			measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:OtherHVAC/auc:MeasureName'].text	
+		    # Heat Recovery / OtherHVAC / Add energy recovery
+			if measure_name == "Add energy recovery"
+				set_measure_argument(osw, 'add_energy_recovery_ventilator', '__SKIP__', false)
+				set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_100_heating', 0)
+				set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_100_heating', 0)
+				set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_75_heating', 0)
+				set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_75_heating', 0)
+				set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_100_cooling', 1)
+				set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_100_cooling', 1)
+				set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_75_cooling', 1)
+				set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_75_cooling', 1)
+			end
+		  end
+		  
+		  # Domestic Hot Water
+		  if measure_category == "Domestic Hot Water"
+			# Domestic Hot Water / ChilledWaterHotWaterAndSteamDistributionSystems
+			measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:ChilledWaterHotWaterAndSteamDistributionSystems/auc:MeasureName'].text	
+		    # Domestic Hot Water / ChilledWaterHotWaterAndSteamDistributionSystems / Replace or upgrade water heater
+			if measure_name == "Replace or upgrade water heater"
+				set_measure_argument(osw, 'set_water_heater_efficiency_heat_lossand_peak_water_flow_rate', '__SKIP__', false)
+				set_measure_argument(osw, 'set_water_heater_efficiency_heat_lossand_peak_water_flow_rate', 'heater_fuel_type_widget', "NaturalGas")
+				set_measure_argument(osw, 'set_water_heater_efficiency_heat_lossand_peak_water_flow_rate', 'heater_thermal_efficiency', 0.88)
+			end
+			
+			# Domestic Hot Water / ChilledWaterHotWaterAndSteamDistributionSystems / Add pipe insulation
+			if measure_name == "Add pipe insulation"
+				set_measure_argument(osw, 'set_water_heater_efficiency_heat_lossand_peak_water_flow_rate', '__SKIP__', false)
+				set_measure_argument(osw, 'set_water_heater_efficiency_heat_lossand_peak_water_flow_rate', 'onoff_cycle_loss_coefficient_to_ambient_temperature', 0.25)
+			end
+			
+			# Domestic Hot Water / ChilledWaterHotWaterAndSteamDistributionSystems / Add recirculating pumps
+			if measure_name == "Add recirculating pumps"
+				set_measure_argument(osw, 'set_water_heater_efficiency_heat_lossand_peak_water_flow_rate', '__SKIP__', false)
+				set_measure_argument(osw, 'set_water_heater_efficiency_heat_lossand_peak_water_flow_rate', 'onoff_cycle_loss_coefficient_to_ambient_temperature', 0.1)
+			end
+			
+		  end
+		  
+		  # Water Use
+		  if measure_category == "Water Use"
+			# Domestic Hot Water / WaterAndSewerConservationSystems
+			measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:WaterAndSewerConservationSystems/auc:MeasureName'].text	
+			# Domestic Hot Water / WaterAndSewerConservationSystems / Install low-flow faucets and showerheads
+			if measure_name == "Install low-flow faucets and showerheads"
+				set_measure_argument(osw, 'reduce_water_use_by_percentage', '__SKIP__', false)
+				set_measure_argument(osw, 'reduce_water_use_by_percentage', 'water_use_reduction_percent', 50)
+			end
+			
+		  end
+
+   	    end
       end
     end
 
@@ -397,7 +558,7 @@ module BRICR
         baseline = results['Baseline']
 
         # Check out.osw "openstudio_results" for output variables
-		    total_site_energy = getMeasureResult(result, 'openstudio_results', 'total_site_energy') # in kBtu
+		total_site_energy = getMeasureResult(result, 'openstudio_results', 'total_site_energy') # in kBtu
         baseline_total_site_energy = getMeasureResult(baseline, 'openstudio_results', 'total_site_energy') # in kBtu
         fuel_electricity = getMeasureResult(result, 'openstudio_results', 'fuel_electricity') # in kBtu
         fuel_natural_gas = getMeasureResult(result, 'openstudio_results', 'fuel_natural_gas') # in kBtu
@@ -406,14 +567,14 @@ module BRICR
 		
 
         total_site_energy_savings = 0
-		    total_energy_cost_savings = 0
+		total_energy_cost_savings = 0
         if baseline_total_site_energy && total_site_energy
           total_site_energy_savings = baseline_total_site_energy - total_site_energy
-		      total_energy_cost_savings = baseline_annual_utility_cost - annual_utility_cost
+		  total_energy_cost_savings = baseline_annual_utility_cost - annual_utility_cost
         end
         
         annual_savings_site_energy = REXML::Element.new('auc:AnnualSavingsSiteEnergy')
-		    annual_site_energy = REXML::Element.new('auc:AnnualSiteEnergy')
+		annual_site_energy = REXML::Element.new('auc:AnnualSiteEnergy')
         annual_electricity = REXML::Element.new('auc:AnnualElectricity')
         annual_natural_gas = REXML::Element.new('auc:AnnualNaturalGas')
         annual_savings_energy_cost = REXML::Element.new('auc:AnnualSavingsEnergyCost')

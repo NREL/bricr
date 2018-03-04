@@ -1,0 +1,7 @@
+[18:54:23.314868 WARN] No valid weather file defined in either the osm or osw.
+[18:54:27.143575 WARN] Could not find color for CEC Pre-1978 Office WholeBuilding - Md Office
+[18:54:56.823557 WARN] Space 'Core Space - Story Mid' has no exterior natural lighting. No sensor will be added.
+[18:54:56.826559 WARN] Space 'Core Space - Story Top' has no exterior natural lighting. No sensor will be added.
+[18:54:56.838568 WARN] Space 'Core Space - Story Ground' has no exterior natural lighting. No sensor will be added.
+[18:56:35.586794 WARN] Renaming result key 'ElectricityPurchased:Facility' to remove invalid characters
+[18:56:35.586794 WARN] Renaming result key 'Gas:Facility' to remove invalid characters

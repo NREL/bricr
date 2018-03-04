@@ -1,0 +1,4 @@
+building_id,xml_filename,should_run_simulation,OccupancyClassification,FloorArea(ft2),YearOfConstruction,YearOfLastMajorRemodel
+1,1.xml,1,Office,5500,1966,1977
+11,11.xml,1,Office,53608,1966,1977
+21,21.xml,1,Retail,24683,1966,1977

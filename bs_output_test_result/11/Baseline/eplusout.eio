@@ -1,0 +1,563 @@
+Program Version,EnergyPlus, Version 8.7.0-78a111df4a, YMD=2018.03.01 18:55
+! <Version>, Version ID
+ Version, 8.7
+! <Timesteps per Hour>, #TimeSteps, Minutes per TimeStep {minutes}
+ Timesteps per Hour,  4, 15
+! <System Convergence Limits>, Minimum System TimeStep {minutes}, Max HVAC Iterations, Minimum Plant Iterations, Maximum Plant Iterations
+ System Convergence Limits, 1, 20, 2, 8
+! <Simulation Control>, Do Zone Sizing, Do System Sizing, Do Plant Sizing, Do Design Days, Do Weather Simulation, Do HVAC Sizing Simulation
+ Simulation Control, Yes, Yes, Yes, No, Yes, No
+! <Output Reporting Tolerances>, Tolerance for Time Heating Setpoint Not Met, Tolerance for Zone Cooling Setpoint Not Met Time
+ Output Reporting Tolerances, 0.200, 0.200, 
+! <Site:GroundTemperature:BuildingSurface>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:BuildingSurface,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00
+! <Site:GroundTemperature:FCfactorMethod>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:FCfactorMethod,  10.94,  10.63,  11.18,  12.06,  14.33,  16.09,  17.28,  17.64,  17.02,  15.66,  13.83,  12.14
+! <Site:GroundTemperature:Shallow>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:Shallow,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00
+! <Site:GroundTemperature:Deep>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:Deep,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00
+! <Site:GroundReflectance>,Jan{dimensionless},Feb{dimensionless},Mar{dimensionless},Apr{dimensionless},May{dimensionless},Jun{dimensionless},Jul{dimensionless},Aug{dimensionless},Sep{dimensionless},Oct{dimensionless},Nov{dimensionless},Dec{dimensionless}
+ Site:GroundReflectance,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20
+! <Site:GroundReflectance:SnowModifier>, Normal, Daylighting {dimensionless}
+ Site:GroundReflectance:SnowModifier,   1.000,   1.000
+! <Site:GroundReflectance:Snow>,Jan{dimensionless},Feb{dimensionless},Mar{dimensionless},Apr{dimensionless},May{dimensionless},Jun{dimensionless},Jul{dimensionless},Aug{dimensionless},Sep{dimensionless},Oct{dimensionless},Nov{dimensionless},Dec{dimensionless}
+ Site:GroundReflectance:Snow,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20
+! <Site:GroundReflectance:Snow:Daylighting>,Jan{dimensionless},Feb{dimensionless},Mar{dimensionless},Apr{dimensionless},May{dimensionless},Jun{dimensionless},Jul{dimensionless},Aug{dimensionless},Sep{dimensionless},Oct{dimensionless},Nov{dimensionless},Dec{dimensionless}
+ Site:GroundReflectance:Snow:Daylighting,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20
+! <Environment:Weather Station>,Wind Sensor Height Above Ground {m},Wind Speed Profile Exponent {},Wind Speed Profile Boundary Layer Thickness {m},Air Temperature Sensor Height Above Ground {m},Wind Speed Modifier Coefficient-Internal,Temperature Modifier Coefficient-Internal
+Environment:Weather Station,10.000,0.140,270.000,1.500,1.586,9.750E-003
+! <Site:Location>, Location Name, Latitude {N+/S- Deg}, Longitude {E+/W- Deg},  Time Zone Number {GMT+/-}, Elevation {m},  Standard Pressure at Elevation {Pa}, Standard RhoAir at Elevation
+Site:Location,Climate Zone 3 CA USA CTZRV2 WMO#=724930,37.70,-122.20,-8.00,2.00,101301,1.2040
+! <Building Information>, Building Name,North Axis {deg},Terrain,  Loads Convergence Tolerance Value,Temperature Convergence Tolerance Value,  Solar Distribution,Maximum Number of Warmup Days,Minimum Number of Warmup Days
+ Building Information,CEC Pre-1978|MediumOffice,0.000,Suburbs,4.00000E-002,0.40000,FullExterior,25,6
+! <Inside Convection Algorithm>, Algorithm {Simple | TARP | CeilingDiffuser | AdaptiveConvectionAlgorithm}
+Inside Convection Algorithm,TARP
+! <Outside Convection Algorithm>, Algorithm {SimpleCombined | TARP | MoWitt | DOE-2 | AdaptiveConvectionAlgorithm}
+Outside Convection Algorithm,DOE-2
+! <Sky Radiance Distribution>, Value {Anisotropic}
+Sky Radiance Distribution,Anisotropic
+! <Zone Air Solution Algorithm>, Value {ThirdOrderBackwardDifference | AnalyticalSolution | EulerMethod}
+ Zone Air Solution Algorithm, ThirdOrderBackwardDifference
+! <Zone Air Carbon Dioxide Balance Simulation>, Simulation {Yes/No}, Carbon Dioxide Concentration
+ Zone Air Carbon Dioxide Balance Simulation, No,N/A
+! <Zone Air Generic Contaminant Balance Simulation>, Simulation {Yes/No}, Generic Contaminant Concentration
+ Zone Air Generic Contaminant Balance Simulation, No,N/A
+! <Zone Air Mass Flow Balance Simulation>, Enforce Mass Balance, Adjust Zone Mixing, Adjust Zone Infiltration {AddInfiltration | AdjustInfiltration | None}, Infiltration Zones {MixingSourceZonesOnly | AllZones}
+ Zone Air Mass Flow Balance Simulation, No,N/A,N/A,N/A
+! <Environment:Site Atmospheric Variation>,Wind Speed Profile Exponent {},Wind Speed Profile Boundary Layer Thickness {m},Air Temperature Gradient Coefficient {K/m}
+Environment:Site Atmospheric Variation,0.220,370.000,6.500000E-003
+! <Surface Geometry>,Starting Corner,Vertex Input Direction,Coordinate System,Daylight Reference Point Coordinate System,Rectangular (Simple) Surface Coordinate System
+ Surface Geometry,UpperLeftCorner,Counterclockwise,RelativeCoordinateSystem,RelativeCoordinateSystem,RelativeToZoneOrigin
+! <Surface Heat Transfer Algorithm>, Value {CTF - ConductionTransferFunction | EMPD - MoisturePenetrationDepthConductionTransferFunction | CondFD - ConductionFiniteDifference | HAMT - CombinedHeatAndMoistureFiniteElement} - Description,Inside Surface Max Temperature Limit{C}, Surface Convection Coefficient Lower Limit {W/m2-K}, Surface Convection Coefficient Upper Limit {W/m2-K}
+Surface Heat Transfer Algorithm, CTF - ConductionTransferFunction,200,0.10,1000.0
+! <Shading Summary>, Number of Fixed Detached Shades, Number of Building Detached Shades, Number of Attached Shades
+ Shading Summary,0,0,0
+! <Zone Summary>, Number of Zones, Number of Zone Surfaces, Number of SubSurfaces
+ Zone Summary,15,102,12
+! <Zone Information>,Zone Name,North Axis {deg},Origin X-Coordinate {m},Origin Y-Coordinate {m},Origin Z-Coordinate {m},Centroid X-Coordinate {m},Centroid Y-Coordinate {m},Centroid Z-Coordinate {m},Type,Zone Multiplier,Zone List Multiplier,Minimum X {m},Maximum X {m},Minimum Y {m},Maximum Y {m},Minimum Z {m},Maximum Z {m},Ceiling Height {m},Volume {m3},Zone Inside Convection Algorithm {Simple-Detailed-CeilingDiffuser-TrombeWall},Zone Outside Convection Algorithm {Simple-Detailed-Tarp-MoWitt-DOE-2-BLAST}, Floor Area {m2},Exterior Gross Wall Area {m2},Exterior Net Wall Area {m2},Exterior Window Area {m2}, Number of Surfaces, Number of SubSurfaces, Number of Shading SubSurfaces,  Part of Total Building Area
+ Zone Information, ZONE CORE SPACE - STORY GROUND,0.0,-20.38,-12.06,0.00,1.42E-014,-2.35E-014,1.98,1,1,1,-20.38,20.38,-12.06,12.06,0.00,3.96,3.96,3895.94,TARP,DOE-2,983.23,0.00,0.00,0.00,6,0,0,Yes
+ Zone Information, ZONE CORE SPACE - STORY MID,0.0,-20.38,-12.06,3.96,1.42E-014,-2.35E-014,5.94,1,1,1,-20.38,20.38,-12.06,12.06,3.96,7.92,3.96,3895.94,TARP,DOE-2,983.23,0.00,0.00,0.00,6,0,0,Yes
+ Zone Information, ZONE CORE SPACE - STORY TOP,0.0,-20.38,-12.06,7.92,1.42E-014,-2.35E-014,9.91,1,1,1,-20.38,20.38,-12.06,12.06,7.92,11.89,3.96,3895.94,TARP,DOE-2,983.23,0.00,0.00,0.00,6,0,0,Yes
+ Zone Information, ZONE EAST PERIMETER SPACE - STORY GROUND,0.0,24.95,16.63,0.00,22.88,2.27E-014,1.98,1,1,1,20.38,24.95,-16.63,16.63,0.00,3.96,3.96,519.85,TARP,DOE-2,131.20,131.82,88.32,43.50,6,1,0,Yes
+ Zone Information, ZONE EAST PERIMETER SPACE - STORY MID,0.0,24.95,16.63,3.96,22.88,2.33E-014,5.94,1,1,1,20.38,24.95,-16.63,16.63,3.96,7.92,3.96,519.85,TARP,DOE-2,131.20,131.82,88.32,43.50,6,1,0,Yes
+ Zone Information, ZONE EAST PERIMETER SPACE - STORY TOP,0.0,24.95,16.63,7.92,22.88,2.30E-014,9.91,1,1,1,20.38,24.95,-16.63,16.63,7.92,11.89,3.96,519.85,TARP,DOE-2,131.20,131.82,88.32,43.50,6,1,0,Yes
+ Zone Information, ZONE NORTH PERIMETER SPACE - STORY GROUND,0.0,-24.95,16.63,0.00,1.55E-014,14.49,1.98,1,1,1,-24.95,24.95,12.06,16.63,0.00,3.96,3.96,821.20,TARP,DOE-2,207.25,197.73,132.48,65.25,6,1,0,Yes
+ Zone Information, ZONE NORTH PERIMETER SPACE - STORY MID,0.0,-24.95,16.63,3.96,1.56E-014,14.49,5.94,1,1,1,-24.95,24.95,12.06,16.63,3.96,7.92,3.96,821.20,TARP,DOE-2,207.25,197.73,132.48,65.25,6,1,0,Yes
+ Zone Information, ZONE NORTH PERIMETER SPACE - STORY TOP,0.0,-24.95,16.63,7.92,1.51E-014,14.49,9.91,1,1,1,-24.95,24.95,12.06,16.63,7.92,11.89,3.96,821.20,TARP,DOE-2,207.25,197.73,132.48,65.25,6,1,0,Yes
+ Zone Information, ZONE SOUTH PERIMETER SPACE - STORY GROUND,0.0,24.95,-16.63,0.00,-1.55E-014,-14.49,1.98,1,1,1,-24.95,24.95,-16.63,-12.06,0.00,3.96,3.96,821.20,TARP,DOE-2,207.25,197.73,132.48,65.25,6,1,0,Yes
+ Zone Information, ZONE SOUTH PERIMETER SPACE - STORY MID,0.0,24.95,-16.63,3.96,-1.56E-014,-14.49,5.94,1,1,1,-24.95,24.95,-16.63,-12.06,3.96,7.92,3.96,821.20,TARP,DOE-2,207.25,197.73,132.48,65.25,6,1,0,Yes
+ Zone Information, ZONE SOUTH PERIMETER SPACE - STORY TOP,0.0,24.95,-16.63,7.92,-1.51E-014,-14.49,9.91,1,1,1,-24.95,24.95,-16.63,-12.06,7.92,11.89,3.96,821.20,TARP,DOE-2,207.25,197.73,132.48,65.25,6,1,0,Yes
+ Zone Information, ZONE WEST PERIMETER SPACE - STORY GROUND,0.0,-24.95,-16.63,0.00,-22.88,-2.27E-014,1.98,1,1,1,-24.95,-20.38,-16.63,16.63,0.00,3.96,3.96,519.85,TARP,DOE-2,131.20,131.82,88.32,43.50,6,1,0,Yes
+ Zone Information, ZONE WEST PERIMETER SPACE - STORY MID,0.0,-24.95,-16.63,3.96,-22.88,-2.33E-014,5.94,1,1,1,-24.95,-20.38,-16.63,16.63,3.96,7.92,3.96,519.85,TARP,DOE-2,131.20,131.82,88.32,43.50,6,1,0,Yes
+ Zone Information, ZONE WEST PERIMETER SPACE - STORY TOP,0.0,-24.95,-16.63,7.92,-22.88,-2.30E-014,9.91,1,1,1,-24.95,-20.38,-16.63,16.63,7.92,11.89,3.96,519.85,TARP,DOE-2,131.20,131.82,88.32,43.50,6,1,0,Yes
+! <Zone Internal Gains Nominal>,Zone Name, Floor Area {m2},# Occupants,Area per Occupant {m2/person},Occupant per Area {person/m2},Interior Lighting {W/m2},Electric Load {W/m2},Gas Load {W/m2},Other Load {W/m2},Hot Water Eq {W/m2},Steam Equipment {W/m2},Sum Loads per Area {W/m2},Outdoor Controlled Baseboard Heat
+ Zone Internal Gains Nominal, ZONE CORE SPACE - STORY GROUND,983.23,105.8,9.290,0.108,21.420,14.639,0.000,0.000,0.000,0.000,36.059,No
+ Zone Internal Gains Nominal, ZONE CORE SPACE - STORY MID,983.23,105.8,9.290,0.108,21.420,14.639,0.000,0.000,0.000,0.000,36.059,No
+ Zone Internal Gains Nominal, ZONE CORE SPACE - STORY TOP,983.23,105.8,9.290,0.108,21.420,14.639,0.000,0.000,0.000,0.000,36.059,No
+ Zone Internal Gains Nominal, ZONE EAST PERIMETER SPACE - STORY GROUND,131.20,14.1,9.290,0.108,21.420,14.639,0.000,0.000,0.000,0.000,36.059,No
+ Zone Internal Gains Nominal, ZONE EAST PERIMETER SPACE - STORY MID,131.20,14.1,9.290,0.108,21.420,14.639,0.000,0.000,0.000,0.000,36.059,No
+ Zone Internal Gains Nominal, ZONE EAST PERIMETER SPACE - STORY TOP,131.20,14.1,9.290,0.108,21.420,14.639,0.000,0.000,0.000,0.000,36.059,No
+ Zone Internal Gains Nominal, ZONE NORTH PERIMETER SPACE - STORY GROUND,207.25,22.3,9.290,0.108,21.420,14.639,0.000,0.000,0.000,0.000,36.059,No
+ Zone Internal Gains Nominal, ZONE NORTH PERIMETER SPACE - STORY MID,207.25,22.3,9.290,0.108,21.420,14.639,0.000,0.000,0.000,0.000,36.059,No
+ Zone Internal Gains Nominal, ZONE NORTH PERIMETER SPACE - STORY TOP,207.25,22.3,9.290,0.108,21.420,14.639,0.000,0.000,0.000,0.000,36.059,No
+ Zone Internal Gains Nominal, ZONE SOUTH PERIMETER SPACE - STORY GROUND,207.25,22.3,9.290,0.108,21.420,14.639,0.000,0.000,0.000,0.000,36.059,No
+ Zone Internal Gains Nominal, ZONE SOUTH PERIMETER SPACE - STORY MID,207.25,22.3,9.290,0.108,21.420,14.639,0.000,0.000,0.000,0.000,36.059,No
+ Zone Internal Gains Nominal, ZONE SOUTH PERIMETER SPACE - STORY TOP,207.25,22.3,9.290,0.108,21.420,14.639,0.000,0.000,0.000,0.000,36.059,No
+ Zone Internal Gains Nominal, ZONE WEST PERIMETER SPACE - STORY GROUND,131.20,14.1,9.290,0.108,21.420,14.639,0.000,0.000,0.000,0.000,36.059,No
+ Zone Internal Gains Nominal, ZONE WEST PERIMETER SPACE - STORY MID,131.20,14.1,9.290,0.108,21.420,14.639,0.000,0.000,0.000,0.000,36.059,No
+ Zone Internal Gains Nominal, ZONE WEST PERIMETER SPACE - STORY TOP,131.20,14.1,9.290,0.108,21.420,14.639,0.000,0.000,0.000,0.000,36.059,No
+! <People Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Number of People {},People/Floor Area {person/m2},Floor Area per person {m2/person},Fraction Radiant,Fraction Convected,Sensible Fraction Calculation,Activity level,ASHRAE 55 Warnings,Carbon Dioxide Generation Rate,Nominal Minimum Number of People,Nominal Maximum Number of People
+ People Internal Gains Nominal, ZONE CORE SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE PEOPLE,OFFICEOCCUPANCY,ZONE CORE SPACE - STORY GROUND,983.23,105.8,105.8,0.108,9.290,0.300,0.700,AutoCalculate,OFFICEPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,101
+ People Internal Gains Nominal, ZONE CORE SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE PEOPLE,OFFICEOCCUPANCY,ZONE CORE SPACE - STORY MID,983.23,105.8,105.8,0.108,9.290,0.300,0.700,AutoCalculate,OFFICEPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,101
+ People Internal Gains Nominal, ZONE CORE SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE PEOPLE,OFFICEOCCUPANCY,ZONE CORE SPACE - STORY TOP,983.23,105.8,105.8,0.108,9.290,0.300,0.700,AutoCalculate,OFFICEPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,101
+ People Internal Gains Nominal, ZONE EAST PERIMETER SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE PEOPLE,OFFICEOCCUPANCY,ZONE EAST PERIMETER SPACE - STORY GROUND,131.20,14.1,14.1,0.108,9.290,0.300,0.700,AutoCalculate,OFFICEPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,13
+ People Internal Gains Nominal, ZONE EAST PERIMETER SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE PEOPLE,OFFICEOCCUPANCY,ZONE EAST PERIMETER SPACE - STORY MID,131.20,14.1,14.1,0.108,9.290,0.300,0.700,AutoCalculate,OFFICEPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,13
+ People Internal Gains Nominal, ZONE EAST PERIMETER SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE PEOPLE,OFFICEOCCUPANCY,ZONE EAST PERIMETER SPACE - STORY TOP,131.20,14.1,14.1,0.108,9.290,0.300,0.700,AutoCalculate,OFFICEPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,13
+ People Internal Gains Nominal, ZONE NORTH PERIMETER SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE PEOPLE,OFFICEOCCUPANCY,ZONE NORTH PERIMETER SPACE - STORY GROUND,207.25,22.3,22.3,0.108,9.290,0.300,0.700,AutoCalculate,OFFICEPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,21
+ People Internal Gains Nominal, ZONE NORTH PERIMETER SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE PEOPLE,OFFICEOCCUPANCY,ZONE NORTH PERIMETER SPACE - STORY MID,207.25,22.3,22.3,0.108,9.290,0.300,0.700,AutoCalculate,OFFICEPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,21
+ People Internal Gains Nominal, ZONE NORTH PERIMETER SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE PEOPLE,OFFICEOCCUPANCY,ZONE NORTH PERIMETER SPACE - STORY TOP,207.25,22.3,22.3,0.108,9.290,0.300,0.700,AutoCalculate,OFFICEPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,21
+ People Internal Gains Nominal, ZONE SOUTH PERIMETER SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE PEOPLE,OFFICEOCCUPANCY,ZONE SOUTH PERIMETER SPACE - STORY GROUND,207.25,22.3,22.3,0.108,9.290,0.300,0.700,AutoCalculate,OFFICEPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,21
+ People Internal Gains Nominal, ZONE SOUTH PERIMETER SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE PEOPLE,OFFICEOCCUPANCY,ZONE SOUTH PERIMETER SPACE - STORY MID,207.25,22.3,22.3,0.108,9.290,0.300,0.700,AutoCalculate,OFFICEPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,21
+ People Internal Gains Nominal, ZONE SOUTH PERIMETER SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE PEOPLE,OFFICEOCCUPANCY,ZONE SOUTH PERIMETER SPACE - STORY TOP,207.25,22.3,22.3,0.108,9.290,0.300,0.700,AutoCalculate,OFFICEPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,21
+ People Internal Gains Nominal, ZONE WEST PERIMETER SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE PEOPLE,OFFICEOCCUPANCY,ZONE WEST PERIMETER SPACE - STORY GROUND,131.20,14.1,14.1,0.108,9.290,0.300,0.700,AutoCalculate,OFFICEPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,13
+ People Internal Gains Nominal, ZONE WEST PERIMETER SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE PEOPLE,OFFICEOCCUPANCY,ZONE WEST PERIMETER SPACE - STORY MID,131.20,14.1,14.1,0.108,9.290,0.300,0.700,AutoCalculate,OFFICEPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,13
+ People Internal Gains Nominal, ZONE WEST PERIMETER SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE PEOPLE,OFFICEOCCUPANCY,ZONE WEST PERIMETER SPACE - STORY TOP,131.20,14.1,14.1,0.108,9.290,0.300,0.700,AutoCalculate,OFFICEPEOPLEACTIVITYLEVEL,No,3.8200E-008,0,13
+! <Lights Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Lighting Level {W},Lights/Floor Area {W/m2},Lights per person {W/person},Fraction Return Air,Fraction Radiant,Fraction Short Wave,Fraction Convected,Fraction Replaceable,End-Use Category,Nominal Minimum Lighting Level {W},Nominal Maximum Lighting Level {W}
+ Lights Internal Gains Nominal, ZONE CORE SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE LIGHTS,OFFICELIGHTS,ZONE CORE SPACE - STORY GROUND,983.23,105.8,21060.906,21.420,199.000,0.000,0.000,0.000,1.000,1.000,General,0.000,21060.906
+ Lights Internal Gains Nominal, ZONE CORE SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE LIGHTS,OFFICELIGHTS,ZONE CORE SPACE - STORY MID,983.23,105.8,21060.906,21.420,199.000,0.000,0.000,0.000,1.000,1.000,General,0.000,21060.906
+ Lights Internal Gains Nominal, ZONE CORE SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE LIGHTS,OFFICELIGHTS,ZONE CORE SPACE - STORY TOP,983.23,105.8,21060.906,21.420,199.000,0.000,0.000,0.000,1.000,1.000,General,0.000,21060.906
+ Lights Internal Gains Nominal, ZONE EAST PERIMETER SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE LIGHTS,OFFICELIGHTS,ZONE EAST PERIMETER SPACE - STORY GROUND,131.20,14.1,2810.264,21.420,199.000,0.000,0.000,0.000,1.000,1.000,General,0.000,2810.264
+ Lights Internal Gains Nominal, ZONE EAST PERIMETER SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE LIGHTS,OFFICELIGHTS,ZONE EAST PERIMETER SPACE - STORY MID,131.20,14.1,2810.264,21.420,199.000,0.000,0.000,0.000,1.000,1.000,General,0.000,2810.264
+ Lights Internal Gains Nominal, ZONE EAST PERIMETER SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE LIGHTS,OFFICELIGHTS,ZONE EAST PERIMETER SPACE - STORY TOP,131.20,14.1,2810.264,21.420,199.000,0.000,0.000,0.000,1.000,1.000,General,0.000,2810.264
+ Lights Internal Gains Nominal, ZONE NORTH PERIMETER SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE LIGHTS,OFFICELIGHTS,ZONE NORTH PERIMETER SPACE - STORY GROUND,207.25,22.3,4439.270,21.420,199.000,0.000,0.000,0.000,1.000,1.000,General,0.000,4439.270
+ Lights Internal Gains Nominal, ZONE NORTH PERIMETER SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE LIGHTS,OFFICELIGHTS,ZONE NORTH PERIMETER SPACE - STORY MID,207.25,22.3,4439.270,21.420,199.000,0.000,0.000,0.000,1.000,1.000,General,0.000,4439.270
+ Lights Internal Gains Nominal, ZONE NORTH PERIMETER SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE LIGHTS,OFFICELIGHTS,ZONE NORTH PERIMETER SPACE - STORY TOP,207.25,22.3,4439.270,21.420,199.000,0.000,0.000,0.000,1.000,1.000,General,0.000,4439.270
+ Lights Internal Gains Nominal, ZONE SOUTH PERIMETER SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE LIGHTS,OFFICELIGHTS,ZONE SOUTH PERIMETER SPACE - STORY GROUND,207.25,22.3,4439.270,21.420,199.000,0.000,0.000,0.000,1.000,1.000,General,0.000,4439.270
+ Lights Internal Gains Nominal, ZONE SOUTH PERIMETER SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE LIGHTS,OFFICELIGHTS,ZONE SOUTH PERIMETER SPACE - STORY MID,207.25,22.3,4439.270,21.420,199.000,0.000,0.000,0.000,1.000,1.000,General,0.000,4439.270
+ Lights Internal Gains Nominal, ZONE SOUTH PERIMETER SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE LIGHTS,OFFICELIGHTS,ZONE SOUTH PERIMETER SPACE - STORY TOP,207.25,22.3,4439.270,21.420,199.000,0.000,0.000,0.000,1.000,1.000,General,0.000,4439.270
+ Lights Internal Gains Nominal, ZONE WEST PERIMETER SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE LIGHTS,OFFICELIGHTS,ZONE WEST PERIMETER SPACE - STORY GROUND,131.20,14.1,2810.264,21.420,199.000,0.000,0.000,0.000,1.000,1.000,General,0.000,2810.264
+ Lights Internal Gains Nominal, ZONE WEST PERIMETER SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE LIGHTS,OFFICELIGHTS,ZONE WEST PERIMETER SPACE - STORY MID,131.20,14.1,2810.264,21.420,199.000,0.000,0.000,0.000,1.000,1.000,General,0.000,2810.264
+ Lights Internal Gains Nominal, ZONE WEST PERIMETER SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE LIGHTS,OFFICELIGHTS,ZONE WEST PERIMETER SPACE - STORY TOP,131.20,14.1,2810.264,21.420,199.000,0.000,0.000,0.000,1.000,1.000,General,0.000,2810.264
+! <ElectricEquipment Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Equipment Level {W},Equipment/Floor Area {W/m2},Equipment per person {W/person},Fraction Latent,Fraction Radiant,Fraction Lost,Fraction Convected,End-Use SubCategory,Nominal Minimum Equipment Level {W},Nominal Maximum Equipment Level {W}
+ ElectricEquipment Internal Gains Nominal, ZONE CORE SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE ELEC EQUIP,OFFICERECEPTACLE,ZONE CORE SPACE - STORY GROUND,983.23,105.8,14393.383,14.639,136.000,0.000,0.200,0.000,0.800,General,0.000,14393.383
+ ElectricEquipment Internal Gains Nominal, ZONE CORE SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE ELEC EQUIP,OFFICERECEPTACLE,ZONE CORE SPACE - STORY MID,983.23,105.8,14393.383,14.639,136.000,0.000,0.200,0.000,0.800,General,0.000,14393.383
+ ElectricEquipment Internal Gains Nominal, ZONE CORE SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE ELEC EQUIP,OFFICERECEPTACLE,ZONE CORE SPACE - STORY TOP,983.23,105.8,14393.383,14.639,136.000,0.000,0.200,0.000,0.800,General,0.000,14393.383
+ ElectricEquipment Internal Gains Nominal, ZONE EAST PERIMETER SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE ELEC EQUIP,OFFICERECEPTACLE,ZONE EAST PERIMETER SPACE - STORY GROUND,131.20,14.1,1920.582,14.639,136.000,0.000,0.200,0.000,0.800,General,0.000,1920.582
+ ElectricEquipment Internal Gains Nominal, ZONE EAST PERIMETER SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE ELEC EQUIP,OFFICERECEPTACLE,ZONE EAST PERIMETER SPACE - STORY MID,131.20,14.1,1920.582,14.639,136.000,0.000,0.200,0.000,0.800,General,0.000,1920.582
+ ElectricEquipment Internal Gains Nominal, ZONE EAST PERIMETER SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE ELEC EQUIP,OFFICERECEPTACLE,ZONE EAST PERIMETER SPACE - STORY TOP,131.20,14.1,1920.582,14.639,136.000,0.000,0.200,0.000,0.800,General,0.000,1920.582
+ ElectricEquipment Internal Gains Nominal, ZONE NORTH PERIMETER SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE ELEC EQUIP,OFFICERECEPTACLE,ZONE NORTH PERIMETER SPACE - STORY GROUND,207.25,22.3,3033.873,14.639,136.000,0.000,0.200,0.000,0.800,General,0.000,3033.873
+ ElectricEquipment Internal Gains Nominal, ZONE NORTH PERIMETER SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE ELEC EQUIP,OFFICERECEPTACLE,ZONE NORTH PERIMETER SPACE - STORY MID,207.25,22.3,3033.873,14.639,136.000,0.000,0.200,0.000,0.800,General,0.000,3033.873
+ ElectricEquipment Internal Gains Nominal, ZONE NORTH PERIMETER SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE ELEC EQUIP,OFFICERECEPTACLE,ZONE NORTH PERIMETER SPACE - STORY TOP,207.25,22.3,3033.873,14.639,136.000,0.000,0.200,0.000,0.800,General,0.000,3033.873
+ ElectricEquipment Internal Gains Nominal, ZONE SOUTH PERIMETER SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE ELEC EQUIP,OFFICERECEPTACLE,ZONE SOUTH PERIMETER SPACE - STORY GROUND,207.25,22.3,3033.873,14.639,136.000,0.000,0.200,0.000,0.800,General,0.000,3033.873
+ ElectricEquipment Internal Gains Nominal, ZONE SOUTH PERIMETER SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE ELEC EQUIP,OFFICERECEPTACLE,ZONE SOUTH PERIMETER SPACE - STORY MID,207.25,22.3,3033.873,14.639,136.000,0.000,0.200,0.000,0.800,General,0.000,3033.873
+ ElectricEquipment Internal Gains Nominal, ZONE SOUTH PERIMETER SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE ELEC EQUIP,OFFICERECEPTACLE,ZONE SOUTH PERIMETER SPACE - STORY TOP,207.25,22.3,3033.873,14.639,136.000,0.000,0.200,0.000,0.800,General,0.000,3033.873
+ ElectricEquipment Internal Gains Nominal, ZONE WEST PERIMETER SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE ELEC EQUIP,OFFICERECEPTACLE,ZONE WEST PERIMETER SPACE - STORY GROUND,131.20,14.1,1920.582,14.639,136.000,0.000,0.200,0.000,0.800,General,0.000,1920.582
+ ElectricEquipment Internal Gains Nominal, ZONE WEST PERIMETER SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE ELEC EQUIP,OFFICERECEPTACLE,ZONE WEST PERIMETER SPACE - STORY MID,131.20,14.1,1920.582,14.639,136.000,0.000,0.200,0.000,0.800,General,0.000,1920.582
+ ElectricEquipment Internal Gains Nominal, ZONE WEST PERIMETER SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE ELEC EQUIP,OFFICERECEPTACLE,ZONE WEST PERIMETER SPACE - STORY TOP,131.20,14.1,1920.582,14.639,136.000,0.000,0.200,0.000,0.800,General,0.000,1920.582
+! <Shadowing/Sun Position Calculations Annual Simulations>, Calculation Method, Value {days}, Allowable Number Figures in Shadow Overlap {}, Polygon Clipping Algorithm, Sky Diffuse Modeling Algorithm
+Shadowing/Sun Position Calculations Annual Simulations,AverageOverDaysInFrequency,20,15000,SutherlandHodgman,SimpleSkyDiffuseModeling
+! <Water Heater Information>,Type,Name,Volume {m3},Maximum Capacity {W},Standard Rated Recovery Efficiency, Standard Rated Energy Factor
+! <ZoneInfiltration Airflow Stats Nominal>,Name,Schedule Name,Zone Name, Zone Floor Area {m2}, # Zone Occupants,Design Volume Flow Rate {m3/s},Volume Flow Rate/Floor Area {m3/s/m2},Volume Flow Rate/Exterior Surface Area {m3/s/m2},ACH - Air Changes per Hour,Equation A - Constant Term Coefficient {},Equation B - Temperature Term Coefficient {1/C},Equation C - Velocity Term Coefficient {s/m}, Equation D - Velocity Squared Term Coefficient {s2/m2}
+ ZoneInfiltration Airflow Stats Nominal, ZONE CORE SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE INFILTRATION,OFFICEINFILTRATION,ZONE CORE SPACE - STORY GROUND,983.23,105.8,0.000,0.000,N/A,0.000,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE CORE SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE INFILTRATION,OFFICEINFILTRATION,ZONE CORE SPACE - STORY MID,983.23,105.8,0.000,0.000,N/A,0.000,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE CORE SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE INFILTRATION,OFFICEINFILTRATION,ZONE CORE SPACE - STORY TOP,983.23,105.8,0.000,0.000,0.000,0.000,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE EAST PERIMETER SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE INFILTRATION,OFFICEINFILTRATION,ZONE EAST PERIMETER SPACE - STORY GROUND,131.20,14.1,0.147,1.123E-003,1.118E-003,1.020,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE EAST PERIMETER SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE INFILTRATION,OFFICEINFILTRATION,ZONE EAST PERIMETER SPACE - STORY MID,131.20,14.1,0.147,1.123E-003,1.118E-003,1.020,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE EAST PERIMETER SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE INFILTRATION,OFFICEINFILTRATION,ZONE EAST PERIMETER SPACE - STORY TOP,131.20,14.1,0.147,1.123E-003,5.601E-004,1.020,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE NORTH PERIMETER SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE INFILTRATION,OFFICEINFILTRATION,ZONE NORTH PERIMETER SPACE - STORY GROUND,207.25,22.3,0.221,1.066E-003,1.118E-003,0.969,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE NORTH PERIMETER SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE INFILTRATION,OFFICEINFILTRATION,ZONE NORTH PERIMETER SPACE - STORY MID,207.25,22.3,0.221,1.066E-003,1.118E-003,0.969,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE NORTH PERIMETER SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE INFILTRATION,OFFICEINFILTRATION,ZONE NORTH PERIMETER SPACE - STORY TOP,207.25,22.3,0.221,1.066E-003,5.457E-004,0.969,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE SOUTH PERIMETER SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE INFILTRATION,OFFICEINFILTRATION,ZONE SOUTH PERIMETER SPACE - STORY GROUND,207.25,22.3,0.221,1.066E-003,1.118E-003,0.969,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE SOUTH PERIMETER SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE INFILTRATION,OFFICEINFILTRATION,ZONE SOUTH PERIMETER SPACE - STORY MID,207.25,22.3,0.221,1.066E-003,1.118E-003,0.969,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE SOUTH PERIMETER SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE INFILTRATION,OFFICEINFILTRATION,ZONE SOUTH PERIMETER SPACE - STORY TOP,207.25,22.3,0.221,1.066E-003,5.457E-004,0.969,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE WEST PERIMETER SPACE - STORY GROUND OFFICE WHOLEBUILDING - MD OFFICE INFILTRATION,OFFICEINFILTRATION,ZONE WEST PERIMETER SPACE - STORY GROUND,131.20,14.1,0.147,1.123E-003,1.118E-003,1.020,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE WEST PERIMETER SPACE - STORY MID OFFICE WHOLEBUILDING - MD OFFICE INFILTRATION,OFFICEINFILTRATION,ZONE WEST PERIMETER SPACE - STORY MID,131.20,14.1,0.147,1.123E-003,1.118E-003,1.020,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ZONE WEST PERIMETER SPACE - STORY TOP OFFICE WHOLEBUILDING - MD OFFICE INFILTRATION,OFFICEINFILTRATION,ZONE WEST PERIMETER SPACE - STORY TOP,131.20,14.1,0.147,1.123E-003,5.601E-004,1.020,1.000,0.000,0.000,0.000
+! <AirFlow Model>, Simple
+ AirFlow Model, Simple
+! <RoomAir Model>, Zone Name, Mixing/Mundt/UCSDDV/UCSDCV/UCSDUFI/UCSDUFE/User Defined
+RoomAir Model,ZONE CORE SPACE - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE CORE SPACE - STORY MID,Mixing/Well-Stirred
+RoomAir Model,ZONE CORE SPACE - STORY TOP,Mixing/Well-Stirred
+RoomAir Model,ZONE EAST PERIMETER SPACE - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE EAST PERIMETER SPACE - STORY MID,Mixing/Well-Stirred
+RoomAir Model,ZONE EAST PERIMETER SPACE - STORY TOP,Mixing/Well-Stirred
+RoomAir Model,ZONE NORTH PERIMETER SPACE - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE NORTH PERIMETER SPACE - STORY MID,Mixing/Well-Stirred
+RoomAir Model,ZONE NORTH PERIMETER SPACE - STORY TOP,Mixing/Well-Stirred
+RoomAir Model,ZONE SOUTH PERIMETER SPACE - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE SOUTH PERIMETER SPACE - STORY MID,Mixing/Well-Stirred
+RoomAir Model,ZONE SOUTH PERIMETER SPACE - STORY TOP,Mixing/Well-Stirred
+RoomAir Model,ZONE WEST PERIMETER SPACE - STORY GROUND,Mixing/Well-Stirred
+RoomAir Model,ZONE WEST PERIMETER SPACE - STORY MID,Mixing/Well-Stirred
+RoomAir Model,ZONE WEST PERIMETER SPACE - STORY TOP,Mixing/Well-Stirred
+! <AirflowNetwork Model:Control>, No Multizone or Distribution/Multizone with Distribution/Multizone without Distribution/Multizone with Distribution only during Fan Operation
+AirflowNetwork Model:Control,NoMultizoneOrDistribution
+! <Zone Volume Capacitance Multiplier>, Sensible Heat Capacity Multiplier, Moisture Capacity Multiplier, Carbon Dioxide Capacity Multiplier, Generic Contaminant Capacity Multiplier
+Zone Volume Capacitance Multiplier,   1.000 ,   1.000,   1.000,   1.000
+! <Load Timesteps in Zone Design Calculation Averaging Window>, Value
+ Load Timesteps in Zone Design Calculation Averaging Window,    4
+! <Heating Sizing Factor Information>, Sizing Factor ID, Value
+ Heating Sizing Factor Information, Global,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE CORE SPACE - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE CORE SPACE - STORY MID,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE CORE SPACE - STORY TOP,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE EAST PERIMETER SPACE - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE EAST PERIMETER SPACE - STORY MID,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE EAST PERIMETER SPACE - STORY TOP,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE NORTH PERIMETER SPACE - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE NORTH PERIMETER SPACE - STORY MID,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE NORTH PERIMETER SPACE - STORY TOP,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE SOUTH PERIMETER SPACE - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE SOUTH PERIMETER SPACE - STORY MID,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE SOUTH PERIMETER SPACE - STORY TOP,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE WEST PERIMETER SPACE - STORY GROUND,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE WEST PERIMETER SPACE - STORY MID,   1.2500    
+ Heating Sizing Factor Information, Zone ZONE WEST PERIMETER SPACE - STORY TOP,   1.2500    
+! <Cooling Sizing Factor Information>, Sizing Factor ID, Value
+ Cooling Sizing Factor Information, Global,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE CORE SPACE - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE CORE SPACE - STORY MID,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE CORE SPACE - STORY TOP,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE EAST PERIMETER SPACE - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE EAST PERIMETER SPACE - STORY MID,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE EAST PERIMETER SPACE - STORY TOP,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE NORTH PERIMETER SPACE - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE NORTH PERIMETER SPACE - STORY MID,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE NORTH PERIMETER SPACE - STORY TOP,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE SOUTH PERIMETER SPACE - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE SOUTH PERIMETER SPACE - STORY MID,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE SOUTH PERIMETER SPACE - STORY TOP,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE WEST PERIMETER SPACE - STORY GROUND,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE WEST PERIMETER SPACE - STORY MID,   1.1500    
+ Cooling Sizing Factor Information, Zone ZONE WEST PERIMETER SPACE - STORY TOP,   1.1500    
+! <Zone Sizing Information>, Zone Name, Load Type, Calc Des Load {W}, User Des Load {W}, Calc Des Air Flow Rate {m3/s}, User Des Air Flow Rate {m3/s}, Design Day Name, Date/Time of Peak, Temperature at Peak {C}, Humidity Ratio at Peak {kgWater/kgDryAir}, Floor Area {m2}, # Occupants, Calc Outdoor Air Flow Rate {m3/s}, Calc DOAS Heat Addition Rate {W}
+ Zone Sizing Information, ZONE CORE SPACE - STORY GROUND, Cooling, 46655.18963, 53653.46807, 3.08291, 3.54534, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 06:00:00, 20.44800, 9.30032E-003, 983.22722, 105.83370, 0.74922, 0.00000
+ Zone Sizing Information, ZONE CORE SPACE - STORY GROUND, Heating, 11764.27917, 14705.34896, 0.32156, 0.74922, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 06:00:00, 2.90000, 4.65595E-003, 983.22722, 105.83370, 0.74922, 0.00000
+ Zone Sizing Information, ZONE CORE SPACE - STORY MID, Cooling, 48246.14896, 55483.07130, 3.19938, 3.67928, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 06:00:00, 20.44800, 9.30032E-003, 983.22722, 105.83370, 0.74922, 0.00000
+ Zone Sizing Information, ZONE CORE SPACE - STORY MID, Heating, 13227.35380, 16534.19225, 0.36150, 0.74922, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 06:00:00, 2.90000, 4.65595E-003, 983.22722, 105.83370, 0.74922, 0.00000
+ Zone Sizing Information, ZONE CORE SPACE - STORY TOP, Cooling, 46313.01449, 53259.96666, 3.05769, 3.51635, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 06:00:00, 20.44800, 9.30032E-003, 983.22722, 105.83370, 0.74922, 0.00000
+ Zone Sizing Information, ZONE CORE SPACE - STORY TOP, Heating, 26821.87662, 33527.34578, 0.70721, 0.88401, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 06:00:00, 2.90000, 4.65595E-003, 983.22722, 105.83370, 0.74922, 0.00000
+ Zone Sizing Information, ZONE EAST PERIMETER SPACE - STORY GROUND, Cooling, 21273.87813, 24464.95986, 1.55809, 1.79180, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 09:15:00, 23.94450, 9.30032E-003, 131.19700, 14.12193, 9.99721E-002, 0.00000
+ Zone Sizing Information, ZONE EAST PERIMETER SPACE - STORY GROUND, Heating, 7833.07570, 9791.34462, 0.21254, 0.26567, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 06:00:00, 2.90000, 4.65595E-003, 131.19700, 14.12193, 9.99721E-002, 0.00000
+ Zone Sizing Information, ZONE EAST PERIMETER SPACE - STORY MID, Cooling, 19406.57340, 22317.55941, 1.42133, 1.63453, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 09:15:00, 23.94450, 9.30032E-003, 131.19700, 14.12193, 9.99721E-002, 0.00000
+ Zone Sizing Information, ZONE EAST PERIMETER SPACE - STORY MID, Heating, 8006.27076, 10007.83845, 0.21738, 0.27173, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 06:00:00, 2.90000, 4.65595E-003, 131.19700, 14.12193, 9.99721E-002, 0.00000
+ Zone Sizing Information, ZONE EAST PERIMETER SPACE - STORY TOP, Cooling, 21298.00967, 24492.71112, 1.55985, 1.79383, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 09:15:00, 23.94450, 9.30032E-003, 131.19700, 14.12193, 9.99721E-002, 0.00000
+ Zone Sizing Information, ZONE EAST PERIMETER SPACE - STORY TOP, Heating, 9332.28258, 11665.35322, 0.25456, 0.31820, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 06:00:00, 2.90000, 4.65595E-003, 131.19700, 14.12193, 9.99721E-002, 0.00000
+ Zone Sizing Information, ZONE NORTH PERIMETER SPACE - STORY GROUND, Cooling, 12139.27427, 13960.16541, 0.88907, 1.02244, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 14:45:00, 27.70000, 9.30032E-003, 207.24709, 22.30789, 0.15792, 0.00000
+ Zone Sizing Information, ZONE NORTH PERIMETER SPACE - STORY GROUND, Heating, 11890.30754, 14862.88442, 0.32211, 0.40263, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 06:00:00, 2.90000, 4.65595E-003, 207.24709, 22.30789, 0.15792, 0.00000
+ Zone Sizing Information, ZONE NORTH PERIMETER SPACE - STORY MID, Cooling, 12347.44694, 14199.56398, 0.90432, 1.03997, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 14:45:00, 27.70000, 9.30032E-003, 207.24709, 22.30789, 0.15792, 0.00000
+ Zone Sizing Information, ZONE NORTH PERIMETER SPACE - STORY MID, Heating, 12134.04672, 15167.55840, 0.32895, 0.41118, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 06:00:00, 2.90000, 4.65595E-003, 207.24709, 22.30789, 0.15792, 0.00000
+ Zone Sizing Information, ZONE NORTH PERIMETER SPACE - STORY TOP, Cooling, 13446.18294, 15463.11038, 0.98479, 1.13251, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 14:15:00, 27.70000, 9.30032E-003, 207.24709, 22.30789, 0.15792, 0.00000
+ Zone Sizing Information, ZONE NORTH PERIMETER SPACE - STORY TOP, Heating, 14102.00148, 17627.50185, 0.38412, 0.48015, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 06:00:00, 2.90000, 4.65595E-003, 207.24709, 22.30789, 0.15792, 0.00000
+ Zone Sizing Information, ZONE SOUTH PERIMETER SPACE - STORY GROUND, Cooling, 24611.40136, 28303.11157, 1.80252, 2.07290, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 13:30:00, 27.51500, 9.30032E-003, 207.24709, 22.30789, 0.15792, 0.00000
+ Zone Sizing Information, ZONE SOUTH PERIMETER SPACE - STORY GROUND, Heating, 11912.03985, 14890.04981, 0.32272, 0.40340, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 06:00:00, 2.90000, 4.65595E-003, 207.24709, 22.30789, 0.15792, 0.00000
+ Zone Sizing Information, ZONE SOUTH PERIMETER SPACE - STORY MID, Cooling, 23129.66167, 26599.11092, 1.69400, 1.94810, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 13:30:00, 27.51500, 9.30032E-003, 207.24709, 22.30789, 0.15792, 0.00000
+ Zone Sizing Information, ZONE SOUTH PERIMETER SPACE - STORY MID, Heating, 12133.94389, 15167.42987, 0.32894, 0.41118, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 06:00:00, 2.90000, 4.65595E-003, 207.24709, 22.30789, 0.15792, 0.00000
+ Zone Sizing Information, ZONE SOUTH PERIMETER SPACE - STORY TOP, Cooling, 25594.79479, 29434.01400, 1.87455, 2.15573, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 13:15:00, 27.42250, 9.30031E-003, 207.24709, 22.30789, 0.15792, 0.00000
+ Zone Sizing Information, ZONE SOUTH PERIMETER SPACE - STORY TOP, Heating, 14088.31221, 17610.39026, 0.38373, 0.47967, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 06:00:00, 2.90000, 4.65595E-003, 207.24709, 22.30789, 0.15792, 0.00000
+ Zone Sizing Information, ZONE WEST PERIMETER SPACE - STORY GROUND, Cooling, 22751.00742, 26163.65853, 1.66627, 1.91621, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 17:15:00, 26.47900, 9.30032E-003, 131.19700, 14.12193, 9.99721E-002, 0.00000
+ Zone Sizing Information, ZONE WEST PERIMETER SPACE - STORY GROUND, Heating, 7845.66951, 9807.08689, 0.21290, 0.26612, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 06:00:00, 2.90000, 4.65595E-003, 131.19700, 14.12193, 9.99721E-002, 0.00000
+ Zone Sizing Information, ZONE WEST PERIMETER SPACE - STORY MID, Cooling, 20763.65188, 23878.19966, 1.52072, 1.74882, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 17:15:00, 26.47900, 9.30032E-003, 131.19700, 14.12193, 9.99721E-002, 0.00000
+ Zone Sizing Information, ZONE WEST PERIMETER SPACE - STORY MID, Heating, 8006.13865, 10007.67331, 0.21738, 0.27172, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 06:00:00, 2.90000, 4.65595E-003, 131.19700, 14.12193, 9.99721E-002, 0.00000
+ Zone Sizing Information, ZONE WEST PERIMETER SPACE - STORY TOP, Cooling, 22734.69931, 26144.90421, 1.66508, 1.91484, CLIMATE ZONE 3 ANN CLG .4% CONDNS DB=>MWB, 8/21 16:45:00, 26.81200, 9.30032E-003, 131.19700, 14.12193, 9.99721E-002, 0.00000
+ Zone Sizing Information, ZONE WEST PERIMETER SPACE - STORY TOP, Heating, 9323.23947, 11654.04934, 0.25430, 0.31788, CLIMATE ZONE 3 ANN HTG 99.6% CONDNS DB, 1/21 06:00:00, 2.90000, 4.65595E-003, 131.19700, 14.12193, 9.99721E-002, 0.00000
+! <System Sizing Information>, System Name, Field Description, Value
+ System Sizing Information, 5 ZONE PVAV, Calculated Cooling Design Air Flow Rate [m3/s], 8.62332
+ System Sizing Information, 5 ZONE PVAV, User Cooling Design Air Flow Rate [m3/s], 8.62332
+ System Sizing Information, 5 ZONE PVAV, Calculated Heating Design Air Flow Rate [m3/s], 2.08704
+ System Sizing Information, 5 ZONE PVAV, User Heating Design Air Flow Rate [m3/s], 2.08704
+ System Sizing Information, 5 ZONE PVAV 1, Calculated Cooling Design Air Flow Rate [m3/s], 8.65411
+ System Sizing Information, 5 ZONE PVAV 1, User Cooling Design Air Flow Rate [m3/s], 8.65411
+ System Sizing Information, 5 ZONE PVAV 1, Calculated Heating Design Air Flow Rate [m3/s], 2.11503
+ System Sizing Information, 5 ZONE PVAV 1, User Heating Design Air Flow Rate [m3/s], 2.11503
+ System Sizing Information, 5 ZONE PVAV 2, Calculated Cooling Design Air Flow Rate [m3/s], 9.15416
+ System Sizing Information, 5 ZONE PVAV 2, User Cooling Design Air Flow Rate [m3/s], 9.15416
+ System Sizing Information, 5 ZONE PVAV 2, Calculated Heating Design Air Flow Rate [m3/s], 2.47990
+ System Sizing Information, 5 ZONE PVAV 2, User Heating Design Air Flow Rate [m3/s], 2.47990
+! <Component Sizing Information>, Component Type, Component Name, Input Field Description, Value
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY GROUND VAV TERM, Design Size Maximum Air Flow Rate [m3/s], 3.54534
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY GROUND VAV TERM, Design Size Constant Minimum Air Flow Fraction, 0.00000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY GROUND VAV TERM, User-Specified Constant Minimum Air Flow Fraction, 0.32732
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY GROUND VAV TERM, Design Size Minimum Air Flow Rate [m3/s], 1.16048
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY GROUND VAV TERM, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 1.18028E-003
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY GROUND VAV TERM, Design Size Maximum Flow Fraction during Reheat [], 0.32732
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY GROUND VAV TERM, Design Size Maximum Reheat Water Flow Rate [m3/s], 4.60155E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY GROUND VAV TERM, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 1.16048
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY GROUND VAV TERM, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.66667
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY GROUND VAV TERM, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, ZONE CORE SPACE - STORY GROUND RHT COIL, Design Size Design Coil Load [W], 21395.01671
+ Component Sizing Information, Coil:Heating:Water, ZONE CORE SPACE - STORY GROUND RHT COIL, Design Size Maximum Water Flow Rate [m3/s], 4.60155E-004
+ Component Sizing Information, Coil:Heating:Water, ZONE CORE SPACE - STORY GROUND RHT COIL, Design Size U-Factor Times Area Value [W/K], 426.54182
+! <Water Heating Coil Capacity Information>,Component Type,Name,Nominal Total Capacity {W}
+Water Heating Coil Capacity Information,Coil:Heating:Water,ZONE CORE SPACE - STORY GROUND RHT COIL,21401.89
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY MID VAV TERM, Design Size Maximum Air Flow Rate [m3/s], 3.67928
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY MID VAV TERM, Design Size Constant Minimum Air Flow Fraction, 0.00000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY MID VAV TERM, User-Specified Constant Minimum Air Flow Fraction, 0.31687
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY MID VAV TERM, Design Size Minimum Air Flow Rate [m3/s], 1.16585
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY MID VAV TERM, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 1.18574E-003
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY MID VAV TERM, Design Size Maximum Flow Fraction during Reheat [], 0.31687
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY MID VAV TERM, Design Size Maximum Reheat Water Flow Rate [m3/s], 5.00798E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY MID VAV TERM, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 1.16585
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY MID VAV TERM, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.66667
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY MID VAV TERM, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, ZONE CORE SPACE - STORY MID RHT COIL, Design Size Design Coil Load [W], 23284.72930
+ Component Sizing Information, Coil:Heating:Water, ZONE CORE SPACE - STORY MID RHT COIL, Design Size Maximum Water Flow Rate [m3/s], 5.00798E-004
+ Component Sizing Information, Coil:Heating:Water, ZONE CORE SPACE - STORY MID RHT COIL, Design Size U-Factor Times Area Value [W/K], 469.21975
+Water Heating Coil Capacity Information,Coil:Heating:Water,ZONE CORE SPACE - STORY MID RHT COIL,23291.47
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY TOP VAV TERM, Design Size Maximum Air Flow Rate [m3/s], 3.51635
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY TOP VAV TERM, Design Size Constant Minimum Air Flow Fraction, 0.00000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY TOP VAV TERM, User-Specified Constant Minimum Air Flow Fraction, 0.33686
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY TOP VAV TERM, Design Size Minimum Air Flow Rate [m3/s], 1.18453
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY TOP VAV TERM, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 1.20474E-003
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY TOP VAV TERM, Design Size Maximum Flow Fraction during Reheat [], 0.33686
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY TOP VAV TERM, Design Size Maximum Reheat Water Flow Rate [m3/s], 8.74716E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY TOP VAV TERM, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 1.18453
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY TOP VAV TERM, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.66667
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE CORE SPACE - STORY TOP VAV TERM, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, ZONE CORE SPACE - STORY TOP RHT COIL, Design Size Design Coil Load [W], 40670.15413
+ Component Sizing Information, Coil:Heating:Water, ZONE CORE SPACE - STORY TOP RHT COIL, Design Size Maximum Water Flow Rate [m3/s], 8.74716E-004
+ Component Sizing Information, Coil:Heating:Water, ZONE CORE SPACE - STORY TOP RHT COIL, Design Size U-Factor Times Area Value [W/K], 926.72519
+Water Heating Coil Capacity Information,Coil:Heating:Water,ZONE CORE SPACE - STORY TOP RHT COIL,40663.12
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Maximum Air Flow Rate [m3/s], 1.79180
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Constant Minimum Air Flow Fraction, 0.00000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY GROUND VAV TERM, User-Specified Constant Minimum Air Flow Fraction, 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Minimum Air Flow Rate [m3/s], 0.53754
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 4.09720E-003
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Maximum Flow Fraction during Reheat [], 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Maximum Reheat Water Flow Rate [m3/s], 2.78048E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 0.53754
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.66667
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, ZONE EAST PERIMETER SPACE - STORY GROUND RHT COIL, Design Size Design Coil Load [W], 12927.93594
+ Component Sizing Information, Coil:Heating:Water, ZONE EAST PERIMETER SPACE - STORY GROUND RHT COIL, Design Size Maximum Water Flow Rate [m3/s], 2.78048E-004
+ Component Sizing Information, Coil:Heating:Water, ZONE EAST PERIMETER SPACE - STORY GROUND RHT COIL, Design Size U-Factor Times Area Value [W/K], 268.64732
+Water Heating Coil Capacity Information,Coil:Heating:Water,ZONE EAST PERIMETER SPACE - STORY GROUND RHT COIL,12929.86
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY MID VAV TERM, Design Size Maximum Air Flow Rate [m3/s], 1.63453
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY MID VAV TERM, Design Size Constant Minimum Air Flow Fraction, 0.00000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY MID VAV TERM, User-Specified Constant Minimum Air Flow Fraction, 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY MID VAV TERM, Design Size Minimum Air Flow Rate [m3/s], 0.49036
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY MID VAV TERM, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 3.73757E-003
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY MID VAV TERM, Design Size Maximum Flow Fraction during Reheat [], 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY MID VAV TERM, Design Size Maximum Reheat Water Flow Rate [m3/s], 2.77178E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY MID VAV TERM, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 0.49036
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY MID VAV TERM, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.66667
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY MID VAV TERM, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, ZONE EAST PERIMETER SPACE - STORY MID RHT COIL, Design Size Design Coil Load [W], 12887.45828
+ Component Sizing Information, Coil:Heating:Water, ZONE EAST PERIMETER SPACE - STORY MID RHT COIL, Design Size Maximum Water Flow Rate [m3/s], 2.77178E-004
+ Component Sizing Information, Coil:Heating:Water, ZONE EAST PERIMETER SPACE - STORY MID RHT COIL, Design Size U-Factor Times Area Value [W/K], 272.73707
+Water Heating Coil Capacity Information,Coil:Heating:Water,ZONE EAST PERIMETER SPACE - STORY MID RHT COIL,12888.82
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY TOP VAV TERM, Design Size Maximum Air Flow Rate [m3/s], 1.79383
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY TOP VAV TERM, Design Size Constant Minimum Air Flow Fraction, 0.00000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY TOP VAV TERM, User-Specified Constant Minimum Air Flow Fraction, 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY TOP VAV TERM, Design Size Minimum Air Flow Rate [m3/s], 0.53815
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY TOP VAV TERM, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 4.10184E-003
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY TOP VAV TERM, Design Size Maximum Flow Fraction during Reheat [], 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY TOP VAV TERM, Design Size Maximum Reheat Water Flow Rate [m3/s], 3.19159E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY TOP VAV TERM, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 0.53815
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY TOP VAV TERM, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.66667
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE EAST PERIMETER SPACE - STORY TOP VAV TERM, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, ZONE EAST PERIMETER SPACE - STORY TOP RHT COIL, Design Size Design Coil Load [W], 14839.37835
+ Component Sizing Information, Coil:Heating:Water, ZONE EAST PERIMETER SPACE - STORY TOP RHT COIL, Design Size Maximum Water Flow Rate [m3/s], 3.19159E-004
+ Component Sizing Information, Coil:Heating:Water, ZONE EAST PERIMETER SPACE - STORY TOP RHT COIL, Design Size U-Factor Times Area Value [W/K], 317.52802
+Water Heating Coil Capacity Information,Coil:Heating:Water,ZONE EAST PERIMETER SPACE - STORY TOP RHT COIL,14840.72
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Maximum Air Flow Rate [m3/s], 1.02244
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Constant Minimum Air Flow Fraction, 0.00000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY GROUND VAV TERM, User-Specified Constant Minimum Air Flow Fraction, 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Minimum Air Flow Rate [m3/s], 0.30673
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 1.48002E-003
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Maximum Flow Fraction during Reheat [], 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Maximum Reheat Water Flow Rate [m3/s], 3.72941E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 0.40263
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.66667
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, ZONE NORTH PERIMETER SPACE - STORY GROUND RHT COIL, Design Size Design Coil Load [W], 17340.01074
+ Component Sizing Information, Coil:Heating:Water, ZONE NORTH PERIMETER SPACE - STORY GROUND RHT COIL, Design Size Maximum Water Flow Rate [m3/s], 3.72941E-004
+ Component Sizing Information, Coil:Heating:Water, ZONE NORTH PERIMETER SPACE - STORY GROUND RHT COIL, Design Size U-Factor Times Area Value [W/K], 435.29914
+Water Heating Coil Capacity Information,Coil:Heating:Water,ZONE NORTH PERIMETER SPACE - STORY GROUND RHT COIL,15712.15
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY MID VAV TERM, Design Size Maximum Air Flow Rate [m3/s], 1.03997
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY MID VAV TERM, Design Size Constant Minimum Air Flow Fraction, 0.00000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY MID VAV TERM, User-Specified Constant Minimum Air Flow Fraction, 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY MID VAV TERM, Design Size Minimum Air Flow Rate [m3/s], 0.31199
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY MID VAV TERM, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 1.50541E-003
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY MID VAV TERM, Design Size Maximum Flow Fraction during Reheat [], 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY MID VAV TERM, Design Size Maximum Reheat Water Flow Rate [m3/s], 3.80623E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY MID VAV TERM, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 0.41118
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY MID VAV TERM, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.66667
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY MID VAV TERM, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, ZONE NORTH PERIMETER SPACE - STORY MID RHT COIL, Design Size Design Coil Load [W], 17697.14186
+ Component Sizing Information, Coil:Heating:Water, ZONE NORTH PERIMETER SPACE - STORY MID RHT COIL, Design Size Maximum Water Flow Rate [m3/s], 3.80623E-004
+ Component Sizing Information, Coil:Heating:Water, ZONE NORTH PERIMETER SPACE - STORY MID RHT COIL, Design Size U-Factor Times Area Value [W/K], 444.11714
+Water Heating Coil Capacity Information,Coil:Heating:Water,ZONE NORTH PERIMETER SPACE - STORY MID RHT COIL,16010.87
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY TOP VAV TERM, Design Size Maximum Air Flow Rate [m3/s], 1.13251
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY TOP VAV TERM, Design Size Constant Minimum Air Flow Fraction, 0.00000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY TOP VAV TERM, User-Specified Constant Minimum Air Flow Fraction, 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY TOP VAV TERM, Design Size Minimum Air Flow Rate [m3/s], 0.33975
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY TOP VAV TERM, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 1.63936E-003
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY TOP VAV TERM, Design Size Maximum Flow Fraction during Reheat [], 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY TOP VAV TERM, Design Size Maximum Reheat Water Flow Rate [m3/s], 4.42667E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY TOP VAV TERM, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 0.48015
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY TOP VAV TERM, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.66667
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE NORTH PERIMETER SPACE - STORY TOP VAV TERM, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, ZONE NORTH PERIMETER SPACE - STORY TOP RHT COIL, Design Size Design Coil Load [W], 20581.92032
+ Component Sizing Information, Coil:Heating:Water, ZONE NORTH PERIMETER SPACE - STORY TOP RHT COIL, Design Size Maximum Water Flow Rate [m3/s], 4.42667E-004
+ Component Sizing Information, Coil:Heating:Water, ZONE NORTH PERIMETER SPACE - STORY TOP RHT COIL, Design Size U-Factor Times Area Value [W/K], 515.41025
+Water Heating Coil Capacity Information,Coil:Heating:Water,ZONE NORTH PERIMETER SPACE - STORY TOP RHT COIL,18093.14
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Maximum Air Flow Rate [m3/s], 2.07290
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Constant Minimum Air Flow Fraction, 0.00000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY GROUND VAV TERM, User-Specified Constant Minimum Air Flow Fraction, 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Minimum Air Flow Rate [m3/s], 0.62187
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 3.00062E-003
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Maximum Flow Fraction during Reheat [], 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Maximum Reheat Water Flow Rate [m3/s], 3.99590E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 0.62187
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.66667
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, ZONE SOUTH PERIMETER SPACE - STORY GROUND RHT COIL, Design Size Design Coil Load [W], 18579.03880
+ Component Sizing Information, Coil:Heating:Water, ZONE SOUTH PERIMETER SPACE - STORY GROUND RHT COIL, Design Size Maximum Water Flow Rate [m3/s], 3.99590E-004
+ Component Sizing Information, Coil:Heating:Water, ZONE SOUTH PERIMETER SPACE - STORY GROUND RHT COIL, Design Size U-Factor Times Area Value [W/K], 405.70721
+Water Heating Coil Capacity Information,Coil:Heating:Water,ZONE SOUTH PERIMETER SPACE - STORY GROUND RHT COIL,18578.54
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY MID VAV TERM, Design Size Maximum Air Flow Rate [m3/s], 1.94810
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY MID VAV TERM, Design Size Constant Minimum Air Flow Fraction, 0.00000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY MID VAV TERM, User-Specified Constant Minimum Air Flow Fraction, 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY MID VAV TERM, Design Size Minimum Air Flow Rate [m3/s], 0.58443
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY MID VAV TERM, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 2.81997E-003
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY MID VAV TERM, Design Size Maximum Flow Fraction during Reheat [], 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY MID VAV TERM, Design Size Maximum Reheat Water Flow Rate [m3/s], 4.01209E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY MID VAV TERM, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 0.58443
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY MID VAV TERM, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.66667
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY MID VAV TERM, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, ZONE SOUTH PERIMETER SPACE - STORY MID RHT COIL, Design Size Design Coil Load [W], 18654.30028
+ Component Sizing Information, Coil:Heating:Water, ZONE SOUTH PERIMETER SPACE - STORY MID RHT COIL, Design Size Maximum Water Flow Rate [m3/s], 4.01209E-004
+ Component Sizing Information, Coil:Heating:Water, ZONE SOUTH PERIMETER SPACE - STORY MID RHT COIL, Design Size U-Factor Times Area Value [W/K], 415.17849
+Water Heating Coil Capacity Information,Coil:Heating:Water,ZONE SOUTH PERIMETER SPACE - STORY MID RHT COIL,18653.23
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY TOP VAV TERM, Design Size Maximum Air Flow Rate [m3/s], 2.15573
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY TOP VAV TERM, Design Size Constant Minimum Air Flow Fraction, 0.00000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY TOP VAV TERM, User-Specified Constant Minimum Air Flow Fraction, 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY TOP VAV TERM, Design Size Minimum Air Flow Rate [m3/s], 0.64672
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY TOP VAV TERM, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 3.12052E-003
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY TOP VAV TERM, Design Size Maximum Flow Fraction during Reheat [], 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY TOP VAV TERM, Design Size Maximum Reheat Water Flow Rate [m3/s], 4.62103E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY TOP VAV TERM, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 0.64672
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY TOP VAV TERM, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.66667
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE SOUTH PERIMETER SPACE - STORY TOP VAV TERM, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, ZONE SOUTH PERIMETER SPACE - STORY TOP RHT COIL, Design Size Design Coil Load [W], 21485.58481
+ Component Sizing Information, Coil:Heating:Water, ZONE SOUTH PERIMETER SPACE - STORY TOP RHT COIL, Design Size Maximum Water Flow Rate [m3/s], 4.62103E-004
+ Component Sizing Information, Coil:Heating:Water, ZONE SOUTH PERIMETER SPACE - STORY TOP RHT COIL, Design Size U-Factor Times Area Value [W/K], 484.20698
+Water Heating Coil Capacity Information,Coil:Heating:Water,ZONE SOUTH PERIMETER SPACE - STORY TOP RHT COIL,21482.36
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Maximum Air Flow Rate [m3/s], 1.91621
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Constant Minimum Air Flow Fraction, 0.00000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY GROUND VAV TERM, User-Specified Constant Minimum Air Flow Fraction, 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Minimum Air Flow Rate [m3/s], 0.57486
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 4.38168E-003
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Maximum Flow Fraction during Reheat [], 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Maximum Reheat Water Flow Rate [m3/s], 2.82829E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 0.57486
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.66667
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY GROUND VAV TERM, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, ZONE WEST PERIMETER SPACE - STORY GROUND RHT COIL, Design Size Design Coil Load [W], 13150.19647
+ Component Sizing Information, Coil:Heating:Water, ZONE WEST PERIMETER SPACE - STORY GROUND RHT COIL, Design Size Maximum Water Flow Rate [m3/s], 2.82829E-004
+ Component Sizing Information, Coil:Heating:Water, ZONE WEST PERIMETER SPACE - STORY GROUND RHT COIL, Design Size U-Factor Times Area Value [W/K], 270.78748
+Water Heating Coil Capacity Information,Coil:Heating:Water,ZONE WEST PERIMETER SPACE - STORY GROUND RHT COIL,13153.50
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY MID VAV TERM, Design Size Maximum Air Flow Rate [m3/s], 1.74882
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY MID VAV TERM, Design Size Constant Minimum Air Flow Fraction, 0.00000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY MID VAV TERM, User-Specified Constant Minimum Air Flow Fraction, 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY MID VAV TERM, Design Size Minimum Air Flow Rate [m3/s], 0.52465
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY MID VAV TERM, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 3.99893E-003
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY MID VAV TERM, Design Size Maximum Flow Fraction during Reheat [], 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY MID VAV TERM, Design Size Maximum Reheat Water Flow Rate [m3/s], 2.81250E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY MID VAV TERM, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 0.52465
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY MID VAV TERM, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.66667
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY MID VAV TERM, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, ZONE WEST PERIMETER SPACE - STORY MID RHT COIL, Design Size Design Coil Load [W], 13076.77080
+ Component Sizing Information, Coil:Heating:Water, ZONE WEST PERIMETER SPACE - STORY MID RHT COIL, Design Size Maximum Water Flow Rate [m3/s], 2.81250E-004
+ Component Sizing Information, Coil:Heating:Water, ZONE WEST PERIMETER SPACE - STORY MID RHT COIL, Design Size U-Factor Times Area Value [W/K], 273.65820
+Water Heating Coil Capacity Information,Coil:Heating:Water,ZONE WEST PERIMETER SPACE - STORY MID RHT COIL,13078.48
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY TOP VAV TERM, Design Size Maximum Air Flow Rate [m3/s], 1.91484
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY TOP VAV TERM, Design Size Constant Minimum Air Flow Fraction, 0.00000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY TOP VAV TERM, User-Specified Constant Minimum Air Flow Fraction, 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY TOP VAV TERM, Design Size Minimum Air Flow Rate [m3/s], 0.57445
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY TOP VAV TERM, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 4.37854E-003
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY TOP VAV TERM, Design Size Maximum Flow Fraction during Reheat [], 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY TOP VAV TERM, Design Size Maximum Reheat Water Flow Rate [m3/s], 3.23229E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY TOP VAV TERM, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 0.57445
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY TOP VAV TERM, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.66667
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, ZONE WEST PERIMETER SPACE - STORY TOP VAV TERM, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, ZONE WEST PERIMETER SPACE - STORY TOP RHT COIL, Design Size Design Coil Load [W], 15028.61897
+ Component Sizing Information, Coil:Heating:Water, ZONE WEST PERIMETER SPACE - STORY TOP RHT COIL, Design Size Maximum Water Flow Rate [m3/s], 3.23229E-004
+ Component Sizing Information, Coil:Heating:Water, ZONE WEST PERIMETER SPACE - STORY TOP RHT COIL, Design Size U-Factor Times Area Value [W/K], 317.73042
+Water Heating Coil Capacity Information,Coil:Heating:Water,ZONE WEST PERIMETER SPACE - STORY TOP RHT COIL,15030.24
+ Component Sizing Information, AirLoopHVAC, 5 ZONE PVAV, Design Supply Air Flow Rate [m3/s], 8.62332
+ Component Sizing Information, AirLoopHVAC, 5 ZONE PVAV 1, Design Supply Air Flow Rate [m3/s], 8.65411
+ Component Sizing Information, AirLoopHVAC, 5 ZONE PVAV 2, Design Supply Air Flow Rate [m3/s], 9.15416
+!<Controller:MechanicalVentilation>,Name,Availability Schedule Name,Demand Controlled Ventilation {Yes/No},System Outdoor Air Method,Zone Maximum Outdoor Air Fraction,Number of Zones,Zone Name,DSOA Name,DSZAD Name
+ Controller:MechanicalVentilation,5 ZONE PVAV VENTILATION CONTROLLER,ALWAYS ON DISCRETE,No,ZoneSum,1.00,5,ZONE CORE SPACE - STORY GROUND,OFFICE WHOLEBUILDING - MD OFFICE VENTILATION,ZONE CORE SPACE - STORY GROUND DESIGN SPEC ZONE AIR DIST,ZONE EAST PERIMETER SPACE - STORY GROUND,OFFICE WHOLEBUILDING - MD OFFICE VENTILATION,ZONE EAST PERIMETER SPACE - STORY GROUND DESIGN SPEC ZONE AIR DIST,ZONE NORTH PERIMETER SPACE - STORY GROUND,OFFICE WHOLEBUILDING - MD OFFICE VENTILATION,ZONE NORTH PERIMETER SPACE - STORY GROUND DESIGN SPEC ZONE AIR DIST,ZONE SOUTH PERIMETER SPACE - STORY GROUND,OFFICE WHOLEBUILDING - MD OFFICE VENTILATION,ZONE SOUTH PERIMETER SPACE - STORY GROUND DESIGN SPEC ZONE AIR DIST,ZONE WEST PERIMETER SPACE - STORY GROUND,OFFICE WHOLEBUILDING - MD OFFICE VENTILATION,ZONE WEST PERIMETER SPACE - STORY GROUND DESIGN SPEC ZONE AIR DIST
+ Controller:MechanicalVentilation,5 ZONE PVAV 1 VENTILATION CONTROLLER,ALWAYS ON DISCRETE,No,ZoneSum,1.00,5,ZONE CORE SPACE - STORY MID,OFFICE WHOLEBUILDING - MD OFFICE VENTILATION,ZONE CORE SPACE - STORY MID DESIGN SPEC ZONE AIR DIST,ZONE EAST PERIMETER SPACE - STORY MID,OFFICE WHOLEBUILDING - MD OFFICE VENTILATION,ZONE EAST PERIMETER SPACE - STORY MID DESIGN SPEC ZONE AIR DIST,ZONE NORTH PERIMETER SPACE - STORY MID,OFFICE WHOLEBUILDING - MD OFFICE VENTILATION,ZONE NORTH PERIMETER SPACE - STORY MID DESIGN SPEC ZONE AIR DIST,ZONE SOUTH PERIMETER SPACE - STORY MID,OFFICE WHOLEBUILDING - MD OFFICE VENTILATION,ZONE SOUTH PERIMETER SPACE - STORY MID DESIGN SPEC ZONE AIR DIST,ZONE WEST PERIMETER SPACE - STORY MID,OFFICE WHOLEBUILDING - MD OFFICE VENTILATION,ZONE WEST PERIMETER SPACE - STORY MID DESIGN SPEC ZONE AIR DIST
+ Controller:MechanicalVentilation,5 ZONE PVAV 2 VENTILATION CONTROLLER,ALWAYS ON DISCRETE,No,ZoneSum,1.00,5,ZONE CORE SPACE - STORY TOP,OFFICE WHOLEBUILDING - MD OFFICE VENTILATION,ZONE CORE SPACE - STORY TOP DESIGN SPEC ZONE AIR DIST,ZONE EAST PERIMETER SPACE - STORY TOP,OFFICE WHOLEBUILDING - MD OFFICE VENTILATION,ZONE EAST PERIMETER SPACE - STORY TOP DESIGN SPEC ZONE AIR DIST,ZONE NORTH PERIMETER SPACE - STORY TOP,OFFICE WHOLEBUILDING - MD OFFICE VENTILATION,ZONE NORTH PERIMETER SPACE - STORY TOP DESIGN SPEC ZONE AIR DIST,ZONE SOUTH PERIMETER SPACE - STORY TOP,OFFICE WHOLEBUILDING - MD OFFICE VENTILATION,ZONE SOUTH PERIMETER SPACE - STORY TOP DESIGN SPEC ZONE AIR DIST,ZONE WEST PERIMETER SPACE - STORY TOP,OFFICE WHOLEBUILDING - MD OFFICE VENTILATION,ZONE WEST PERIMETER SPACE - STORY TOP DESIGN SPEC ZONE AIR DIST
+ Component Sizing Information, Controller:OutdoorAir, CONTROLLER OUTDOOR AIR 1, Maximum Outdoor Air Flow Rate [m3/s], 8.62332
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV CLG COIL 487KBTU/HR 6.8EER, Design Size High Speed Rated Air Flow Rate [m3/s], 8.62332
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV CLG COIL 487KBTU/HR 6.8EER, Design Size High Speed Gross Rated Total Cooling Capacity [W], 142746.64371
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV CLG COIL 487KBTU/HR 6.8EER, Design Size High Speed Rated Sensible Heat Ratio, 0.79866
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV CLG COIL 487KBTU/HR 6.8EER, Design Size Low Speed Rated Air Flow Rate [m3/s], 2.87415
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV CLG COIL 487KBTU/HR 6.8EER, Design Size Low Speed Gross Rated Total Cooling Capacity [W], 47577.45635
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV CLG COIL 487KBTU/HR 6.8EER, Design Size Low Speed Gross Rated Sensible Heat Ratio, 0.79866
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV CLG COIL 487KBTU/HR 6.8EER, User-Specified Low Speed Gross Rated Sensible Heat Ratio, 0.69000
+! <VAV DX Cooling Coil Standard Rating Information>, DX Coil Type, DX Coil Name, Fan Type, Fan Name, Standard Net Cooling Capacity {W}, Standard Net Cooling Capacity {Btu/h}, IEER {Btu/W-h}, COP 100% Capacity {W/W}, COP 75% Capacity {W/W}, COP 50% Capacity {W/W}, COP 25% Capacity {W/W}, EER 100% Capacity {Btu/W-h}, EER 75% Capacity {Btu/W-h}, EER 50% Capacity {Btu/W-h}, EER 25% Capacity {Btu/W-h}, Supply Air Flow 100% {kg/s}, Supply Air Flow 75% {kg/s},Supply Air Flow 50% {kg/s},Supply Air Flow 25% {kg/s}
+ VAV DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:TwoSpeed,5 ZONE PVAV CLG COIL 487KBTU/HR 6.8EER,N/A,N/A,135850.99,463542.82,8.28,2.18,2.35,2.52,2.64,7.42,8.03,8.61,8.99,9.9716,7.3087,4.7006,2.1034,
+ Component Sizing Information, Coil:Heating:Water, 5 ZONE PVAV MAIN HTG COIL, Design Size Design Coil Load [W], 32906.09772
+ Component Sizing Information, Coil:Heating:Water, 5 ZONE PVAV MAIN HTG COIL, Design Size Maximum Water Flow Rate [m3/s], 7.07730E-004
+ Component Sizing Information, Coil:Heating:Water, 5 ZONE PVAV MAIN HTG COIL, Design Size U-Factor Times Area Value [W/K], 526.88575
+Water Heating Coil Capacity Information,Coil:Heating:Water,5 ZONE PVAV MAIN HTG COIL,28383.96
+ Component Sizing Information, Fan:VariableVolume, 5 ZONE PVAV FAN, Design Size Maximum Flow Rate [m3/s], 8.62332
+ Component Sizing Information, Controller:WaterCoil, CONTROLLER WATER COIL 1, Maximum Actuated Flow [m3/s], 7.07730E-004
+ Component Sizing Information, Controller:OutdoorAir, CONTROLLER OUTDOOR AIR 2, Maximum Outdoor Air Flow Rate [m3/s], 8.65411
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV 1 CLG COIL 488KBTU/HR 6.8EER, Design Size High Speed Rated Air Flow Rate [m3/s], 8.65411
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV 1 CLG COIL 488KBTU/HR 6.8EER, Design Size High Speed Gross Rated Total Cooling Capacity [W], 143256.27990
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV 1 CLG COIL 488KBTU/HR 6.8EER, Design Size High Speed Rated Sensible Heat Ratio, 0.79866
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV 1 CLG COIL 488KBTU/HR 6.8EER, Design Size Low Speed Rated Air Flow Rate [m3/s], 2.88442
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV 1 CLG COIL 488KBTU/HR 6.8EER, Design Size Low Speed Gross Rated Total Cooling Capacity [W], 47747.31809
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV 1 CLG COIL 488KBTU/HR 6.8EER, Design Size Low Speed Gross Rated Sensible Heat Ratio, 0.79866
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV 1 CLG COIL 488KBTU/HR 6.8EER, User-Specified Low Speed Gross Rated Sensible Heat Ratio, 0.69000
+ VAV DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:TwoSpeed,5 ZONE PVAV 1 CLG COIL 488KBTU/HR 6.8EER,N/A,N/A,136336.01,465197.77,8.28,2.18,2.35,2.53,2.64,7.43,8.03,8.62,9.00,10.0072,7.3348,4.7174,2.1109,
+ Component Sizing Information, Coil:Heating:Water, 5 ZONE PVAV 1 MAIN HTG COIL, Design Size Design Coil Load [W], 32874.42107
+ Component Sizing Information, Coil:Heating:Water, 5 ZONE PVAV 1 MAIN HTG COIL, Design Size Maximum Water Flow Rate [m3/s], 7.07049E-004
+ Component Sizing Information, Coil:Heating:Water, 5 ZONE PVAV 1 MAIN HTG COIL, Design Size U-Factor Times Area Value [W/K], 526.46243
+Water Heating Coil Capacity Information,Coil:Heating:Water,5 ZONE PVAV 1 MAIN HTG COIL,28374.26
+ Component Sizing Information, Fan:VariableVolume, 5 ZONE PVAV 1 FAN, Design Size Maximum Flow Rate [m3/s], 8.65411
+ Component Sizing Information, Controller:WaterCoil, CONTROLLER WATER COIL 7, Maximum Actuated Flow [m3/s], 7.07049E-004
+ Component Sizing Information, Controller:OutdoorAir, CONTROLLER OUTDOOR AIR 3, Maximum Outdoor Air Flow Rate [m3/s], 9.15416
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV 2 CLG COIL 517KBTU/HR 6.8EER, Design Size High Speed Rated Air Flow Rate [m3/s], 9.15416
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV 2 CLG COIL 517KBTU/HR 6.8EER, Design Size High Speed Gross Rated Total Cooling Capacity [W], 151533.89422
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV 2 CLG COIL 517KBTU/HR 6.8EER, Design Size High Speed Rated Sensible Heat Ratio, 0.79866
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV 2 CLG COIL 517KBTU/HR 6.8EER, Design Size Low Speed Rated Air Flow Rate [m3/s], 3.05108
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV 2 CLG COIL 517KBTU/HR 6.8EER, Design Size Low Speed Gross Rated Total Cooling Capacity [W], 50506.24694
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV 2 CLG COIL 517KBTU/HR 6.8EER, Design Size Low Speed Gross Rated Sensible Heat Ratio, 0.79866
+ Component Sizing Information, Coil:Cooling:DX:TwoSpeed, 5 ZONE PVAV 2 CLG COIL 517KBTU/HR 6.8EER, User-Specified Low Speed Gross Rated Sensible Heat Ratio, 0.69000
+ VAV DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:TwoSpeed,5 ZONE PVAV 2 CLG COIL 517KBTU/HR 6.8EER,N/A,N/A,144213.76,492077.76,8.32,2.19,2.37,2.54,2.65,7.47,8.07,8.66,9.04,10.5855,7.7586,4.9900,2.2329,
+ Component Sizing Information, Coil:Heating:Water, 5 ZONE PVAV 2 MAIN HTG COIL, Design Size Design Coil Load [W], 31662.00489
+ Component Sizing Information, Coil:Heating:Water, 5 ZONE PVAV 2 MAIN HTG COIL, Design Size Maximum Water Flow Rate [m3/s], 6.80973E-004
+ Component Sizing Information, Coil:Heating:Water, 5 ZONE PVAV 2 MAIN HTG COIL, Design Size U-Factor Times Area Value [W/K], 508.66920
+Water Heating Coil Capacity Information,Coil:Heating:Water,5 ZONE PVAV 2 MAIN HTG COIL,27667.02
+ Component Sizing Information, Fan:VariableVolume, 5 ZONE PVAV 2 FAN, Design Size Maximum Flow Rate [m3/s], 9.15416
+ Component Sizing Information, Controller:WaterCoil, CONTROLLER WATER COIL 13, Maximum Actuated Flow [m3/s], 6.80973E-004
+Water Heater Information,WaterHeater:Mixed,40.0GAL GAS WATER HEATER - 31KBTU/HR 0.78 THERM EFF 0.78 THERM EFF,0.1514,8942.2,0.781,0.5642
+ Component Sizing Information, PlantLoop, HOT WATER LOOP, Maximum Loop Flow Rate [m3/s], 8.15225E-003
+ Component Sizing Information, PlantLoop, HOT WATER LOOP, Plant Loop Volume [m3], 0.97827
+ Component Sizing Information, Pump:VariableSpeed, HOT WATER LOOP PUMP, Design Flow Rate [m3/s], 8.15225E-003
+ Component Sizing Information, Pump:VariableSpeed, HOT WATER LOOP PUMP, Design Power Consumption [W], 2272.03816
+ Component Sizing Information, Boiler:HotWater, HOT WATER LOOP BOILER 1115KBTU/HR 0.78 THERMAL EFF, Design Size Nominal Capacity [W], 380520.11026
+ Component Sizing Information, Boiler:HotWater, HOT WATER LOOP BOILER 1115KBTU/HR 0.78 THERMAL EFF, Design Size Design Water Flow Rate [m3/s], 8.15225E-003
+ Component Sizing Information, PlantLoop, OFFICE SHARED SERVICE WATER LOOP, Maximum Loop Flow Rate [m3/s], 5.36067E-005
+ Component Sizing Information, PlantLoop, OFFICE SHARED SERVICE WATER LOOP, Plant Loop Volume [m3], 6.43280E-003
+ Component Sizing Information, Pump:ConstantSpeed, SERVICE WATER LOOP PUMP, Design Flow Rate [m3/s], 5.36067E-005
+ Component Sizing Information, Pump:ConstantSpeed, SERVICE WATER LOOP PUMP, Design Power Consumption [W], 2.49004
+ Component Sizing Information, WaterHeater:Mixed, 40.0GAL GAS WATER HEATER - 31KBTU/HR 0.78 THERM EFF 0.78 THERM EFF, Use Side Design Flow Rate [m3/s], 5.36067E-005
+! <Environment>,Environment Name,Environment Type, Start Date, End Date, Start DayOfWeek, Duration {#days}, Source:Start DayOfWeek,  Use Daylight Saving, Use Holidays, Apply Weekend Holiday Rule,  Use Rain Values, Use Snow Values
+! <Environment:Special Days>, Special Day Name, Special Day Type, Source, Start Date, Duration {#days}
+! <Environment:Daylight Saving>, Daylight Saving Indicator, Source, Start Date, End Date
+! <Environment:WarmupDays>, NumberofWarmupDays
+Environment,RUN PERIOD 1,WeatherFileRunPeriod,01/01,12/31,Thursday,365,Use RunPeriod Specified Day,No,No,No,Yes,Yes
+Environment:Daylight Saving,No,RunPeriod Object
+Environment:WarmupDays,  6
+! <Tabular Report>,Style,Unit Conversion
+Tabular Report,HTML,None
+! <Warmup Convergence Information>,Zone Name,Environment Type/Name,Average Warmup Temperature Difference {deltaC},Std Dev Warmup Temperature Difference {deltaC},Max Temperature Pass/Fail Convergence,Min Temperature Pass/Fail Convergence,Average Warmup Load Difference {W},Std Dev Warmup Load Difference {W},Heating Load Pass/Fail Convergence,Cooling Load Pass/Fail Convergence
+ Warmup Convergence Information,ZONE CORE SPACE - STORY GROUND,RunPeriod: RUN PERIOD 1,0.2228507300,0.3304085746,Pass,Pass,0.3149865637,0.7205209875,Pass,Pass
+ Warmup Convergence Information,ZONE CORE SPACE - STORY MID,RunPeriod: RUN PERIOD 1,0.2288290931,0.3293305247,Pass,Pass,0.3073660515,0.6318468694,Pass,Pass
+ Warmup Convergence Information,ZONE CORE SPACE - STORY TOP,RunPeriod: RUN PERIOD 1,0.2261700520,0.4181831471,Pass,Pass,0.5563455379,2.2121562976,Pass,Pass
+ Warmup Convergence Information,ZONE EAST PERIMETER SPACE - STORY GROUND,RunPeriod: RUN PERIOD 1,0.2669366448,0.5871628420,Pass,Pass,0.6559996396,2.2279650897,Pass,Pass
+ Warmup Convergence Information,ZONE EAST PERIMETER SPACE - STORY MID,RunPeriod: RUN PERIOD 1,0.2448270528,0.5897791643,Pass,Pass,0.8340833544,3.7352995317,Pass,Pass
+ Warmup Convergence Information,ZONE EAST PERIMETER SPACE - STORY TOP,RunPeriod: RUN PERIOD 1,0.4056090105,0.7408383877,Pass,Pass,0.4718400711,0.9439428225,Pass,Pass
+ Warmup Convergence Information,ZONE NORTH PERIMETER SPACE - STORY GROUND,RunPeriod: RUN PERIOD 1,0.2728198422,0.6118771291,Pass,Pass,0.3701693978,1.0754188300,Pass,Pass
+ Warmup Convergence Information,ZONE NORTH PERIMETER SPACE - STORY MID,RunPeriod: RUN PERIOD 1,0.2614990529,0.6136311056,Pass,Pass,0.5460998043,1.6573768303,Pass,Pass
+ Warmup Convergence Information,ZONE NORTH PERIMETER SPACE - STORY TOP,RunPeriod: RUN PERIOD 1,0.3990012151,0.7336641801,Pass,Pass,0.6047596964,1.8732693608,Pass,Pass
+ Warmup Convergence Information,ZONE SOUTH PERIMETER SPACE - STORY GROUND,RunPeriod: RUN PERIOD 1,0.2912065985,0.5644777615,Pass,Pass,0.4988554199,1.3367094086,Pass,Pass
+ Warmup Convergence Information,ZONE SOUTH PERIMETER SPACE - STORY MID,RunPeriod: RUN PERIOD 1,0.2943459651,0.5579615254,Pass,Pass,0.6757993683,2.3952906754,Pass,Pass
+ Warmup Convergence Information,ZONE SOUTH PERIMETER SPACE - STORY TOP,RunPeriod: RUN PERIOD 1,0.3347915728,0.6772025268,Pass,Pass,0.4793073851,1.5334547908,Pass,Pass
+ Warmup Convergence Information,ZONE WEST PERIMETER SPACE - STORY GROUND,RunPeriod: RUN PERIOD 1,0.2686034643,0.5744500685,Pass,Pass,0.4534185273,1.1737634906,Pass,Pass
+ Warmup Convergence Information,ZONE WEST PERIMETER SPACE - STORY MID,RunPeriod: RUN PERIOD 1,0.2499856043,0.5716471020,Pass,Pass,2.1496146293,16.0723638671,Pass,Pass
+ Warmup Convergence Information,ZONE WEST PERIMETER SPACE - STORY TOP,RunPeriod: RUN PERIOD 1,0.3995489170,0.7293957098,Pass,Pass,0.3617270567,0.5113708167,Pass,Pass
+! <Program Control Information:Threads/Parallel Sims>, Threading Supported,Maximum Number of Threads, Env Set Threads (OMP_NUM_THREADS), EP Env Set Threads (EP_OMP_NUM_THREADS), IDF Set Threads, Number of Threads Used (Interior Radiant Exchange), Number Nominal Surfaces, Number Parallel Sims
+Program Control:Threads/Parallel Sims, No,1, N/A, N/A, N/A, N/A, N/A, N/A
+End of Data

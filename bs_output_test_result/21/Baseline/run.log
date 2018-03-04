@@ -1,0 +1,8 @@
+[18:54:23.327877 WARN] No valid weather file defined in either the osm or osw.
+[18:54:27.138572 WARN] Could not find color for CEC Pre-1978 Retail Back_Space
+[18:54:27.146577 WARN] Could not find color for CEC Pre-1978 Retail Entry
+[18:54:27.153582 WARN] Could not find color for CEC Pre-1978 Retail Point_of_Sale
+[18:54:27.161589 WARN] Could not find color for CEC Pre-1978 Retail Retail
+[18:54:27.166591 WARN] Floor area of Retail Entry results in a bar with smaller than target minimum width.
+[18:56:34.756206 WARN] Renaming result key 'ElectricityPurchased:Facility' to remove invalid characters
+[18:56:34.756206 WARN] Renaming result key 'Gas:Facility' to remove invalid characters
