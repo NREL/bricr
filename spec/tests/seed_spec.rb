@@ -35,7 +35,7 @@ describe 'BRICR' do
     expect(response[:status]).to eq 'success'
 
     # Note that the upload_buildingsync file now returns the property_view, not the property_state
-    expect(response[:data][:property_view][:state][:custom_id_1]).to eq UBID
+    expect(response[:data][:property_state][:custom_id_1]).to eq UBID
     seed.update_analysis_state(response[:data][:property_view][:id], 'Queued')
 
     # pretend to run energy simulation, now we have building_151_results.xml
