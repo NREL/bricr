@@ -32,6 +32,10 @@ module BRICR
     max_results = 10000 # DLM: temporary workaround to search all results
     search_results = seed.search(nil, nil, max_results)
     
+    if search_results.properties.nil?
+      return 
+    end
+    
     property_ids = []
     search_results.properties.each do |property|
       #puts property[:custom_id_1]
