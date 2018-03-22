@@ -384,7 +384,7 @@ class VRFwithDOAS < OpenStudio::Ruleset::ModelUserScript
      if zoneHVAC.include? "VRF"
       options["heat_pump_loop"] = heat_pump_loop
     end
-		vrf_airconditioners = OsLib_HVAC.createVRFAirConditioners(model,runner,options,parameters)
+	vrf_airconditioners = OsLib_HVAC.createVRFAirConditioners(model,runner,options,parameters)
     ### START CREATE SECONDARY AIRLOOPS
     # populate inputs hash for create primary airloops method
     options = {}

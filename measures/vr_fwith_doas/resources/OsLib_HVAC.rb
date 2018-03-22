@@ -1178,7 +1178,7 @@ end
 				vrfAirConditioner.setEquivalentPipingLengthusedforPipingCorrectionFactorinHeatingMode(vrfEquivPipingLength_si)
 				vrfAirConditioner.setVerticalHeightusedforPipingCorrectionFactor(vrfPipingHeight_si)
 				vrfAirConditioner.setAvailabilitySchedule(model.alwaysOnDiscreteSchedule())
-				vrfAirConditioner.setZoneforMasterThermostatLocation(thermalZonesToAdd[1])
+				vrfAirConditioner.setZoneforMasterThermostatLocation(thermalZonesToAdd[0])
 				if parameters["vrfCondenserType"] == "WaterCooled"
 					vrfAirConditioner.setString(56,"WaterCooled")
 				elsif parameters["vrfCondenserType"] == "EvaporativelyCooled"

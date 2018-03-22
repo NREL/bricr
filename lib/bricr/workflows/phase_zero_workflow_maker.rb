@@ -332,6 +332,9 @@ module BRICR
 					set_measure_argument(osw, 'vr_fwith_doas', "Retail Entry - #{$bricr_template}", true)
 					set_measure_argument(osw, 'vr_fwith_doas', "Retail Back_Space - #{$bricr_template}", true)
 				end
+				set_measure_argument(osw, 'vr_fwith_doas', 'vrfCoolCOP', 6.0)
+				set_measure_argument(osw, 'vr_fwith_doas', 'vrfHeatCOP', 6.0)
+				set_measure_argument(osw, 'vr_fwith_doas', 'doasDXEER', 14)
 			end
 			# Other HVAC / OtherHVAC / Replace HVAC with GSHP and DOAS 
 			if measure_name == "Replace HVAC with GSHP and DOAS"
@@ -391,8 +394,8 @@ module BRICR
 			measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:ElectricMotorsAndDrives/auc:MeasureName'].text	
 		    # Fan / ElectricMotorsAndDrives / Replace with higher efficiency
 			if measure_name == "Replace with higher efficiency"
-				set_measure_argument(osw, 'ImproveMotorEfficiency', '__SKIP__', false)
-				set_measure_argument(osw, 'ImproveMotorEfficiency', 'motor_eff', 96.0) # New efficiency
+				set_measure_argument(osw, 'ReplaceFanTotalEfficiency', '__SKIP__', false)
+				set_measure_argument(osw, 'ReplaceFanTotalEfficiency', 'motor_eff', 80.0) # New efficiency
 			end
 		  end
 		  
@@ -402,8 +405,8 @@ module BRICR
 			measure_name = measure.elements['auc:TechnologyCategories/auc:TechnologyCategory/auc:OtherHVAC/auc:MeasureName'].text	
 		    # Air Distribution / OtherHVAC / Improve ventilation fans
 			if measure_name == "Improve ventilation fans"
-				set_measure_argument(osw, 'ImproveFanBeltEfficiency', '__SKIP__', false)
-				set_measure_argument(osw, 'ImproveFanBeltEfficiency', 'motor_eff', 10) # Efficiency improvement
+				set_measure_argument(osw, 'ImproveFanTotalEfficiencybyPercentage', '__SKIP__', false)
+				set_measure_argument(osw, 'ImproveFanTotalEfficiencybyPercentage', 'motor_eff', 10) # Efficiency improvement
 			end
 			
 			# Air Distribution / OtherHVAC

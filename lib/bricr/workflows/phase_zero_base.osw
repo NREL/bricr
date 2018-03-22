@@ -195,13 +195,13 @@
 		}
 	},
 	{
-		"measure_dir_name": "ImproveMotorEfficiency",
+		"measure_dir_name": "ReplaceFanTotalEfficiency",
 		"arguments": {
 		"__SKIP__": true
 		}
 	},
 	{
-		"measure_dir_name": "ImproveFanBeltEfficiency",
+		"measure_dir_name": "ImproveFanTotalEfficiencybyPercentage",
 		"arguments": {
 		"__SKIP__": true
 		}

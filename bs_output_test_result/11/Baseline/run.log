@@ -1,4 +1,0 @@
-[18:54:23.283846 WARN] No valid weather file defined in either the osm or osw.
-[18:54:27.026494 WARN] Could not find color for CEC Pre-1978 Office WholeBuilding - Md Office
-[18:56:33.811539 WARN] Renaming result key 'ElectricityPurchased:Facility' to remove invalid characters
-[18:56:33.811539 WARN] Renaming result key 'Gas:Facility' to remove invalid characters
