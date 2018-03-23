@@ -17,10 +17,10 @@ module BRICR
   #MAX_DATAPOINTS = 2
 
   # number of parallel jobs per BuildingSync file
-  NUM_PARALLEL = 2
+  NUM_PARALLEL = 4
 
-  # number of parallel buildings per simulation
-  NUM_BUILDINGS_PARALLEL = 4
+  # number of parallel BuildingSync files to run
+  NUM_BUILDINGS_PARALLEL = 2
 
   # do simulations
   DO_SIMULATIONS = false

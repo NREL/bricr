@@ -1,9 +1,8 @@
-# usage: bundle exec ruby upload_seed_buildingsync.rb /path/to/config.rb /path/to/buildingsync_dir/
+# usage: bundle exec ruby run_seed_buildingsyncs.rb /path/to/config.rb 
 
-require 'seed'
+require 'bricr'
 require 'rbconfig'
 require 'parallel'
-require 'open3'
 require 'json'
 require 'fileutils'
 require 'rest-client'
@@ -11,97 +10,95 @@ require 'rest-client'
 config_path = ARGV[0]
 require(config_path)
 
-host = ENV["BRICR_SEED_HOST"] || 'http://localhost:8000' 
-seed = Seed::API.new(host)
+# get seed host, org, and cycle
+seed = BRICR.get_seed()
+org = BRICR.get_seed_org(seed)
+cycle = BRICR.get_seed_cycle(seed)
 
-## Create or get the organization
-org = seed.get_or_create_organization('BRICR Test Organization')
+max_results = 10000 # DLM: temporary workaround to search all results
+#search_results = seed.search('', 'Not Started', max_results) # DLM: Nick I don't think this is working
+search_results = seed.search('', '', max_results)
 
-## Create or get the cycle
-cycle_name = 'BRICR Test Cycle - 2011'
-
-# TODO: look into the time zone of these requests. The times are getting converted and don't look right in the SEED UI
-cycle_start = DateTime.parse('2010-01-01 00:00:00Z')
-cycle_end = DateTime.parse('2010-12-31 23:00:00Z')
-cycle = seed.create_cycle(cycle_name, cycle_start, cycle_end)
-
-search_results = seed.search('', 'Not Started')
 properties = search_results.properties
+
+properties = properties.select{|property| property[:analysis_state] == 0} # DLM: temp work around 
+
+if properties.size > BRICR::MAX_DATAPOINTS
+  properties = properties.slice(0, BRICR::MAX_DATAPOINTS)
+end
 
 if !File.exists?('./run')
   FileUtils.mkdir_p('./run/')
 end
 
-ruby_exe = File.join( RbConfig::CONFIG['bindir'], RbConfig::CONFIG['RUBY_INSTALL_NAME'] + RbConfig::CONFIG['EXEEXT'] )
+ruby_exe = File.join(RbConfig::CONFIG['bindir'], RbConfig::CONFIG['RUBY_INSTALL_NAME'] + RbConfig::CONFIG['EXEEXT'])
 run_buildingsync_rb = File.join(File.dirname(__FILE__), "run_buildingsync.rb")
-  
+
 num_sims = 0
 failure = []
 success = []
 Parallel.each(properties, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_DATAPOINTS].min) do |property|
+#properties.each do |property|
 
-  break if num_sims > BRICR::MAX_DATAPOINTS
-  
-  # DLM: TODO, filter out states that don't require analysis
+  # get ids
+  property_id = property[:property_view_id]
+  custom_id = property[:custom_id_1]
 
-  custom_id = property[:state][:custom_id_1]
-  files = property[:state][:files].select {|file| file[:file_type] == 'BuildingSync'}.sort {|x,y| x[:modified] <=> y[:modified]}
-  
+  # find most recent building sync file for this property
+  files = seed.list_buildingsync_files(property_id)
+
   if files.empty?
-    puts "No BuildingSync file available"
+    puts "No BuildingSync file available for property_id '#{property_id}', custom_id '#{custom_id}'"
     next
   end
-  
+
   # last file is most recent
   file = files[-1][:file]
-  url = File.join(host, file)
-  
+  url = File.join(BRICR.get_seed_host, file)
+
+  # post back analysis state Queued 
+  seed.update_analysis_state(property_id, 'Queued')
+
   # if url is specified, send this URL to the BRICR job queue
   if defined?(BRICR::BRICR_SIM_URL) && BRICR::BRICR_SIM_URL
-  
-    RestClient.post( BRICR::BRICR_SIM_URL, JSON::fast_generate({:building_sync_url => url, :custom_id => custom_id}), {:buildingsyncurl => url, :customid => custom_id, :content_type => 'json', :accept => 'json'})
-  
+
+    RestClient.post(BRICR::BRICR_SIM_URL, JSON::fast_generate({:building_sync_url => url, :custom_id => custom_id}), {:buildingsyncurl => url, :customid => custom_id, :content_type => 'json', :accept => 'json'})
+
   else
     # download and run locally
     xml_file = File.join('./run', "#{custom_id}.xml")
-    
+
     data = RestClient::Request.execute(:method => :get, :url => url, :timeout => 3600)
     File.open(xml_file, "wb") do |f|
       f.write(data)
     end
-    
-    command = "bundle exec '#{ruby_exe}' '#{run_buildingsync_rb}' #{ARGV[0]} '#{xml_file}'"
-      
-    puts "Running '#{command}'"
-        
-    new_env = {}
 
-    # blank out bundler and gem path modifications, will be re-setup by new call
-    new_env["BUNDLER_ORIG_MANPATH"] = nil
-    new_env["GEM_PATH"] = nil
-    new_env["GEM_HOME"] = nil
-    new_env["BUNDLER_ORIG_PATH"] = nil
-    new_env["BUNDLER_VERSION"] = nil
-    new_env["BUNDLE_BIN_PATH"] = nil
-    new_env["BUNDLE_GEMFILE"] = nil
-    new_env["RUBYLIB"] = nil
-    new_env["RUBYOPT"] = nil
-        
-    stdout_str, stderr_str, status = Open3.capture3(new_env, command)
-    
-    if status.success?
-      puts "'#{xml_file}' completed successfully"
-      
-      success << xml_file
-    else
+    # post back analysis state Started
+    seed.update_analysis_state(property_id, 'Started')
+
+    result_xml = nil
+    begin
+      result_xml = BRICR.run_buildingsync(xml_file)
+      puts "'#{xml_file}' completed successfully, output at '#{result_xml}'"
+    rescue
       puts "'#{xml_file}' failed"
-      puts stdout_str
-      puts stderr_str  
-      
       failure << xml_file
     end
+
+    if result_xml
+      # post back analysis state Completed
+      seed.update_property_by_buildingfile(property_id, result_xml)
+      seed.update_analysis_state(property_id, 'Completed')
+    else
+      # post back analysis state Failed
+      seed.update_analysis_state(property_id, 'Failed')
+    end
+
   end
-  
+
   num_sims += 1
-  
+
 end
+
+puts "Attempted to run #{num_sims} files"
+puts "#{failure.size} failures"
