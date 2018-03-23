@@ -2,8 +2,8 @@
   <schema_version>3.0</schema_version>
   <name>tariff_selection_generic</name>
   <uid>d65ae535-f0ea-4745-9f5b-8d42c7070741</uid>
-  <version_id>1846ef16-3894-48cd-b02d-5bbbb01a71b4</version_id>
-  <version_modified>20180123T051147Z</version_modified>
+  <version_id>649d40ef-417b-4729-a723-b69f8142fe87</version_id>
+  <version_modified>20180213T000813Z</version_modified>
   <xml_checksum>43564105</xml_checksum>
   <class_name>TariffSelectionGeneric</class_name>
   <display_name> Tariff Selection-Generic</display_name>
@@ -132,6 +132,18 @@
       <filetype>idf</filetype>
       <usage_type>resource</usage_type>
       <checksum>7D11A76A</checksum>
+    </file>
+    <file>
+      <filename>Comml_170301-171231.xls</filename>
+      <filetype>xls</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>6FC47DB4</checksum>
+    </file>
+    <file>
+      <filename>GAS_SCHEDS_G-NR1.pdf</filename>
+      <filetype>pdf</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>DC295ADC</checksum>
     </file>
   </files>
 </measure>
