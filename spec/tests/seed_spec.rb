@@ -24,30 +24,33 @@ describe 'BRICR' do
     cycle_end = DateTime.parse('2010-12-31 23:00:00Z')
     cycle = seed.create_cycle(cycle_name, cycle_start, cycle_end)
 
-    xml_path = File.expand_path('../files/phase0/building_151.xml', File.dirname(__FILE__))
-    file = seed.upload_buildingsync(xml_path)
+    xml_path = File.expand_path('../files/phase0/151.xml', File.dirname(__FILE__))
+    status, response = seed.upload_buildingsync(xml_path)
 
+    if !status
+      puts response
+    end
     # get building sync that we just uploaded, download and compare to uploaded one
-    expect(file[:status]).to eq 'success'
-    expect(file[:data][:property_state][:custom_id_1]).to eq UBID
+    expect(status).to eq true
+    expect(response[:status]).to eq 'success'
+    
+    # Note that the upload_buildingsync file now returns the property_view, not the property_state
+    expect(response[:data][:property_state][:custom_id_1]).to eq UBID
 
     # pretend to run energy simulation, now we have building_151_results.xml
     puts 'running simulation'
     sleep(1)
 
     # upload results for record, this is not really a new revision of the building, just adding results
-    xml_path = File.join(File.dirname(__FILE__), '../files/phase0/building_151_results.xml')
+    xml_path = File.join(File.dirname(__FILE__), '../files/phase0/151_results.xml')
 
     # search for the building again using the GUID/UBID
-    results = seed.search(UBID)
+    results = seed.search(UBID, nil)
     puts results.properties
 
     # get the first building
     property_id = results.properties.first[:id]
     puts property_id
-
-
-
 
     # post the results to the existing property
     # seed.update_property()

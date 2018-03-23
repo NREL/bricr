@@ -2,6 +2,7 @@
 
 require 'json'
 require 'rexml/document'
+require 'FileUtils'
 
 if ARGV[0].nil? || !File.exist?(ARGV[0])
   puts 'usage: bundle exec ruby geojson_to_buildingsync.rb /path/to/geojson.json'
@@ -51,7 +52,7 @@ def get_facility_classification(feature)
   when 'MISSING DATA'
     result = 'Other'
   else
-    throw "Unknown classification #{classification}"
+    raise "Unknown classification #{classification}"
   end
 
   return result
@@ -65,28 +66,37 @@ def get_occupancy_classification(feature)
   case classification
   when 'CIE'
     result = 'Assembly-Cultural entertainment'
+    raise "#{result} is not a supported Occupancy Classification"
   when 'MED'
     result = 'Health care'
+    raise "#{result} is not a supported Occupancy Classification"
   when 'MIPS'
     result = 'Office'
   when 'MIXED'
     result = 'Mixed-use commercial'
+    raise "#{result} is not a supported Occupancy Classification"
   when 'MIXRES'
     result = 'Residential'
+    raise "#{result} is not a supported Occupancy Classification"
   when 'OPENSPACE', 'OpenSpace'
     result = 'Other'
+    raise "#{result} is not a supported Occupancy Classification"
   when 'PDR'
     result = 'Industrial'
+    raise "#{result} is not a supported Occupancy Classification"
   when "RETAIL\/ENT"
     result = 'Retail'
   when 'RESIDENT'
     result = 'Residential'
+    raise "#{result} is not a supported Occupancy Classification"
   when 'VISITOR'
     result = 'Lodging'
+    raise "#{result} is not a supported Occupancy Classification"
   when 'MISSING DATA'
     result = 'Unknown'
+    raise "#{result} is not a supported Occupancy Classification"
   else
-    throw "Unknown classification #{classification}"
+    raise "Unknown classification #{classification}"
   end
 
   return result
@@ -311,29 +321,89 @@ def convert_feature(feature)
           </auc:TechnologyCategory>
         </auc:TechnologyCategories>
         <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
-        <auc:MVCost>1000</auc:MVCost>
-        <auc:MeasureTotalFirstCost>10000</auc:MeasureTotalFirstCost>
-        <auc:MeasureInstallationCost>8000</auc:MeasureInstallationCost>
-        <auc:MeasureMaterialCost>1000</auc:MeasureMaterialCost>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
         <auc:Recommended>true</auc:Recommended>
         <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
       </auc:Measure>
       <auc:Measure ID="Measure2">
-        <auc:SystemCategoryAffected>Domestic Hot Water</auc:SystemCategoryAffected>
+        <auc:SystemCategoryAffected>Plug Load</auc:SystemCategoryAffected>
         <auc:PremisesAffected>
           <auc:PremiseAffected IDref="FACILITY_ID"/>
         </auc:PremisesAffected>
         <auc:TechnologyCategories>
           <auc:TechnologyCategory>
-            <auc:ChilledWaterHotWaterAndSteamDistributionSystems>
-              <auc:MeasureName>Replace or upgrade water heater</auc:MeasureName>
-            </auc:ChilledWaterHotWaterAndSteamDistributionSystems>
+            <auc:PlugLoadReductions>
+              <auc:MeasureName>Replace with ENERGY STAR rated</auc:MeasureName>
+            </auc:PlugLoadReductions>
           </auc:TechnologyCategory>
         </auc:TechnologyCategories>
         <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
-        <auc:MVCost>1000</auc:MVCost>
-        <auc:MeasureTotalFirstCost>10000</auc:MeasureTotalFirstCost>
-        <auc:MeasureInstallationCost>8000</auc:MeasureInstallationCost>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+      <auc:Measure ID="Measure3">
+        <auc:SystemCategoryAffected>Wall</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:BuildingEnvelopeModifications>
+              <auc:MeasureName>Air seal envelope</auc:MeasureName>
+            </auc:BuildingEnvelopeModifications>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+      <auc:Measure ID="Measure4">
+        <auc:SystemCategoryAffected>Cooling System</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Replace package units</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+      <auc:Measure ID="Measure5">
+        <auc:SystemCategoryAffected>Heating System</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Replace burner</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
         <auc:MeasureMaterialCost>1000</auc:MeasureMaterialCost>
         <auc:Recommended>true</auc:Recommended>
         <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
@@ -353,7 +423,7 @@ def convert_feature(feature)
           </auc:ScenarioType>
         </auc:Scenario>
         <auc:Scenario>
-          <auc:ScenarioName>Lighting Only</auc:ScenarioName>
+          <auc:ScenarioName>LED</auc:ScenarioName>
           <auc:ScenarioType>
             <auc:PackageOfMeasures>
               <auc:ReferenceCase IDref="Baseline"/>
@@ -364,7 +434,7 @@ def convert_feature(feature)
           </auc:ScenarioType>
         </auc:Scenario>
         <auc:Scenario>
-          <auc:ScenarioName>Hot Water Only</auc:ScenarioName>
+          <auc:ScenarioName>Electric_Appliance_30%_Reduction</auc:ScenarioName>
           <auc:ScenarioType>
             <auc:PackageOfMeasures>
               <auc:ReferenceCase IDref="Baseline"/>
@@ -375,20 +445,56 @@ def convert_feature(feature)
           </auc:ScenarioType>
         </auc:Scenario>
         <auc:Scenario>
-          <auc:ScenarioName>Max Tech</auc:ScenarioName>
+          <auc:ScenarioName>Air_Seal_Infiltration_30%_More_Airtight</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure3"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+        <auc:Scenario>
+          <auc:ScenarioName>Cooling_System_SEER 14</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure4"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+        <auc:Scenario>
+          <auc:ScenarioName>Heating_System_Efficiency_0.93</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure5"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+        <auc:Scenario>
+          <auc:ScenarioName>Max_Tech</auc:ScenarioName>
           <auc:ScenarioType>
             <auc:PackageOfMeasures>
               <auc:ReferenceCase IDref="Baseline"/>
               <auc:MeasureIDs>
                 <auc:MeasureID IDref="Measure1"/>
                 <auc:MeasureID IDref="Measure2"/>
+                <auc:MeasureID IDref="Measure3"/>
+                <auc:MeasureID IDref="Measure4"/>
+                <auc:MeasureID IDref="Measure5"/>
               </auc:MeasureIDs>
             </auc:PackageOfMeasures>
           </auc:ScenarioType>
         </auc:Scenario>
       </auc:Scenarios>
     </auc:Report>
-	</auc:Audit>
+  </auc:Audit>
 </auc:Audits>
   '
   id = feature[:properties][:"Building Identifier"]
@@ -410,13 +516,76 @@ end
 outdir = './bs_output'
 FileUtils.mkdir_p(outdir) unless File.exist?(outdir)
 
+summary_file = File.open(outdir + "/summary.csv", 'w')
+summary_file.puts "building_id,xml_filename,should_run_simulation,OccupancyClassification,FloorArea(ft2),YearBuilt,template,SiteEUI(kBtu/ft2),SourceEUI(kBtu/ft2),ElectricityEUI(kBtu/ft2),GasEUI(kBtu/ft2),YearEUI"
+
 geojson[:features].each do |feature|
   id = feature[:properties][:"Building Identifier"]
   puts "id = #{id}"
-  doc = convert_feature(feature)
-
-  filename = File.join(outdir, "#{id}.xml")
-  File.open(filename, 'w') do |file|
-    doc.write(file)
+  
+  begin
+    doc = convert_feature(feature)
+    filename = File.join(outdir, "#{id}.xml")
+    File.open(filename, 'w') do |file|
+      doc.write(file)
+    end
+  rescue
+    puts "Building #{id} not converted"
+    next
   end
+
+  floor_area = convert(feature[:properties][:"Gross Floor Area"], 'ft2', 'ft2')
+  building_type = get_occupancy_classification(feature)
+  year_of_construction = feature[:properties][:"Completed Construction Status Date"]
+  year_of_last_major_remodel = nil
+  if md = /^(\d\d\d\d).*/.match(feature[:properties][:"Last Modified Date"].to_s)
+    year_of_last_major_remodel = md[1]
+  end
+
+  site_eui = nil
+  source_eui =nil
+  ele_eui = nil
+  gas_eui = nil
+  year_eui = nil
+  for year in 2011..2015
+    if feature[:properties][:"#{year} Annual Site Energy Resource Intensity"] != nil
+      site_eui = feature[:properties][:"#{year} Annual Site Energy Resource Intensity"].to_f
+      year_eui = year
+    end
+
+    if feature[:properties][:"#{year} Annual Source Energy Resource Intensity"] != nil
+      source_eui = feature[:properties][:"#{year} Annual Source Energy Resource Intensity"].to_f
+      year_eui = year
+    end
+  end
+
+  if year_of_last_major_remodel != nil and year_of_last_major_remodel.to_i > 1000
+    year_built = year_of_last_major_remodel.to_i
+  else
+    year_built = year_of_construction.to_i
+  end
+
+  if year_built < 1978
+    template = "CEC Pre-1978"
+  elsif year_built >= 1978 && year_built < 1992
+    template = "CEC T24 1978"
+  elsif year_built >= 1992 && year_built < 2001
+    template = "CEC T24 1992"
+  elsif year_built >= 2001 && year_built < 2005
+    template = "CEC T24 2001"
+  elsif year_built >= 2005 && year_built < 2008
+    template = "CEC T24 2005"
+  else
+    template = "CEC T24 2008"
+  end
+
+  # source factor: 1.05 for gas, 3.14 for electricity
+  if site_eui != nil and source_eui != nil
+    ele_eui = (source_eui - site_eui * 1.05)/(3.14-1.05)
+    gas_eui = site_eui - ele_eui
+  end
+
+  summary_file.puts "#{id},#{id}.xml,1,#{building_type},#{floor_area},#{year_built},#{template},#{site_eui},#{source_eui},#{ele_eui},#{gas_eui},#{year_eui}"
 end
+
+summary_file.close

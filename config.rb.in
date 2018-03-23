@@ -1,8 +1,11 @@
 module BRICR
 
-  # location of openstudio CLI
-  OPENSTUDIO_EXE = 'openstudio'
+  #ENV['GEM_HOME'] = 'C:/bricr/gems'
+  #ENV['GEM_PATH'] = 'C:/bricr/gems'
   
+  # location of openstudio CLI
+  OPENSTUDIO_EXE = 'C:/openstudio-2.1.0/bin/openstudio.exe'
+
   # one or more measure paths
   OPENSTUDIO_MEASURES = [File.realpath("./measures", File.dirname(__FILE__)), File.realpath("./../OpenStudio-measures/NREL\ working\ measures", File.dirname(__FILE__))]
 
@@ -12,13 +15,36 @@ module BRICR
   # max number of datapoints to run
   MAX_DATAPOINTS = Float::INFINITY
   #MAX_DATAPOINTS = 2
-  
-  # number of parallel jobs
-  NUM_PARALLEL = 7
-  
+
+  # number of parallel jobs per BuildingSync file
+  NUM_PARALLEL = 2
+
+  # number of parallel buildings per simulation
+  NUM_BUILDINGS_PARALLEL = 4
+
   # do simulations
   DO_SIMULATIONS = false
+
+  # collect results
+  DO_GET_RESULTS = false
   
   # url for seed instance
   SEED_URL = nil
+  
+  ENV['BRICR_SEED_HOST'] = 'http://192.168.99.100'
+  
+  ENV['BRICR_SEED_USERNAME'] = 'user@seed-platform.org'
+  
+  ENV['BRICR_SEED_API_KEY'] = ''
+  # url for bricr-sim
+  BRICR_SIM_URL = nil
+
+  # specify the output folder for the simulation runs
+  SIMULATION_OUTPUT_FOLDER = "D:/BRICR_OUTPUT/"
+
+  # specify to run the baseline simulation only or not
+  SIMULATE_BASELINE_ONLY = true
+
+  # specify to include the model calibration or not
+  DO_MODEL_CALIBRATION = false
 end
