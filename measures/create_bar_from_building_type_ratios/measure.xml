@@ -2,8 +2,8 @@
   <schema_version>3.0</schema_version>
   <name>create_bar_from_building_type_ratios</name>
   <uid>6e3a14f8-c3c7-4e03-bc51-bef8a52e1a05</uid>
-  <version_id>b8a78d3b-95ad-4391-a1d0-9a3ecce1003c</version_id>
-  <version_modified>20170628T205357Z</version_modified>
+  <version_id>d034dfca-cf03-4e11-b40d-ecd5194f3737</version_id>
+  <version_modified>20180123T051147Z</version_modified>
   <xml_checksum>2AF3A68E</xml_checksum>
   <class_name>CreateBarFromBuildingTypeRatios</class_name>
   <display_name>Create Bar From Building Type Ratios</display_name>
@@ -465,6 +465,30 @@
           <value>90.1-2013</value>
           <display_name>90.1-2013</display_name>
         </choice>
+        <choice>
+          <value>CEC Pre-1978</value>
+          <display_name>CEC Pre-1978</display_name>
+        </choice>
+        <choice>
+          <value>CEC T24 1978</value>
+          <display_name>CEC T24 1978</display_name>
+        </choice>
+        <choice>
+          <value>CEC T24 1992</value>
+          <display_name>CEC T24 1992</display_name>
+        </choice>
+        <choice>
+          <value>CEC T24 2001</value>
+          <display_name>CEC T24 2001</display_name>
+        </choice>
+        <choice>
+          <value>CEC T24 2005</value>
+          <display_name>CEC T24 2005</display_name>
+        </choice>
+        <choice>
+          <value>CEC T24 2008</value>
+          <display_name>CEC T24 2008</display_name>
+        </choice>
       </choices>
     </argument>
     <argument>
@@ -701,7 +725,7 @@
       <filename>os_lib_model_generation.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>FF7E1F31</checksum>
+      <checksum>1F9202EC</checksum>
     </file>
   </files>
 </measure>

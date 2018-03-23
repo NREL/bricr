@@ -1,0 +1,924 @@
+
+  <auc:Audits xmlns:auc='http://nrel.gov/schemas/bedes-auc/2014' xsi:schemaLocation='http://nrel.gov/schemas/bedes-auc/2014 file:///E:/buildingsync/BuildingSync.xsd' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
+	<auc:Audit>
+		<auc:Sites>
+		<auc:Site><auc:Address><auc:StreetAddressDetail><auc:Simplified><auc:StreetAddress>444 - 444 BATTERY ST</auc:StreetAddress></auc:Simplified></auc:StreetAddressDetail><auc:City>San Francisco</auc:City><auc:State>CA</auc:State><auc:PostalCode>94111</auc:PostalCode></auc:Address><auc:ClimateZoneType><auc:ASHRAE><auc:ClimateZone>3C</auc:ClimateZone></auc:ASHRAE><auc:CaliforniaTitle24><auc:ClimateZone>Climate Zone 3</auc:ClimateZone></auc:CaliforniaTitle24></auc:ClimateZoneType><auc:WeatherDataStationID>724940</auc:WeatherDataStationID><auc:WeatherStationName>USA_CA_San.Francisco.Intl.AP</auc:WeatherStationName><auc:Longitude>-122.39937597219404</auc:Longitude><auc:Latitude>37.79526286826323</auc:Latitude><auc:Facilities><auc:Facility ID='Building223'><auc:PremisesName>Seven to Nine Maritime Plaza</auc:PremisesName><auc:PremisesIdentifiers><auc:PremisesIdentifier><auc:IdentifierLabel>Assessor parcel number</auc:IdentifierLabel><auc:IdentifierValue>SF0204019</auc:IdentifierValue></auc:PremisesIdentifier><auc:PremisesIdentifier><auc:IdentifierLabel>Custom</auc:IdentifierLabel><auc:IdentifierCustomName>Custom ID</auc:IdentifierCustomName><auc:IdentifierValue>223</auc:IdentifierValue></auc:PremisesIdentifier></auc:PremisesIdentifiers><auc:FacilityClassification>Commercial</auc:FacilityClassification><auc:OccupancyClassification>Office</auc:OccupancyClassification><auc:FloorsAboveGrade>1</auc:FloorsAboveGrade><auc:FloorsBelowGrade>0</auc:FloorsBelowGrade><auc:FloorAreas><auc:FloorArea><auc:FloorAreaType>Gross</auc:FloorAreaType><auc:FloorAreaValue>16775</auc:FloorAreaValue></auc:FloorArea><auc:FloorArea><auc:FloorAreaType>Footprint</auc:FloorAreaType><auc:FloorAreaValue>59911.867399999996</auc:FloorAreaValue></auc:FloorArea></auc:FloorAreas><auc:Perimeter>977</auc:Perimeter><auc:YearOfConstruction>1967</auc:YearOfConstruction><auc:YearOfLastMajorRemodel>2009</auc:YearOfLastMajorRemodel></auc:Facility></auc:Facilities></auc:Site></auc:Sites>
+    <auc:Measures>
+      <auc:Measure ID='Measure1'>
+        <auc:SystemCategoryAffected>Lighting</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:LightingImprovements>
+              <auc:MeasureName>Retrofit with light emitting diode technologies</auc:MeasureName>
+            </auc:LightingImprovements>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+      <auc:Measure ID='Measure2'>
+        <auc:SystemCategoryAffected>Plug Load</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:PlugLoadReductions>
+              <auc:MeasureName>Replace with ENERGY STAR rated</auc:MeasureName>
+            </auc:PlugLoadReductions>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+      <auc:Measure ID='Measure3'>
+        <auc:SystemCategoryAffected>Wall</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:BuildingEnvelopeModifications>
+              <auc:MeasureName>Air seal envelope</auc:MeasureName>
+            </auc:BuildingEnvelopeModifications>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+      <auc:Measure ID='Measure4'>
+        <auc:SystemCategoryAffected>Cooling System</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Replace package units</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+      <auc:Measure ID='Measure5'>
+        <auc:SystemCategoryAffected>Heating System</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Replace burner</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost>1000</auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure6'>
+        <auc:SystemCategoryAffected>Lighting</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:LightingImprovements>
+              <auc:MeasureName>Add daylight controls</auc:MeasureName>
+            </auc:LightingImprovements>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure7'>
+        <auc:SystemCategoryAffected>Lighting</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:LightingImprovements>
+              <auc:MeasureName>Add occupancy sensors</auc:MeasureName>
+            </auc:LightingImprovements>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure8'>
+        <auc:SystemCategoryAffected>Plug Load</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:PlugLoadReductions>
+              <auc:MeasureName>Install plug load controls</auc:MeasureName>
+            </auc:PlugLoadReductions>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure9'>
+        <auc:SystemCategoryAffected>Wall</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:BuildingEnvelopeModifications>
+              <auc:MeasureName>Increase wall insulation</auc:MeasureName>
+            </auc:BuildingEnvelopeModifications>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure10'>
+        <auc:SystemCategoryAffected>Wall</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:BuildingEnvelopeModifications>
+              <auc:MeasureName>Insulate thermal bypasses</auc:MeasureName>
+            </auc:BuildingEnvelopeModifications>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure11'>
+        <auc:SystemCategoryAffected>Roof / Ceiling</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:BuildingEnvelopeModifications>
+              <auc:MeasureName>Increase roof insulation</auc:MeasureName>
+            </auc:BuildingEnvelopeModifications>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure12'>
+        <auc:SystemCategoryAffected>Roof / Ceiling</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:BuildingEnvelopeModifications>
+              <auc:MeasureName>Increase ceiling insulation</auc:MeasureName>
+            </auc:BuildingEnvelopeModifications>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure13'>
+        <auc:SystemCategoryAffected>Fenestration</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:BuildingEnvelopeModifications>
+              <auc:MeasureName>Add window films</auc:MeasureName>
+            </auc:BuildingEnvelopeModifications>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure14'>
+        <auc:SystemCategoryAffected>General Controls and Operations</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Upgrade operating protocols, calibration, and_or sequencing</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure15'>
+        <auc:SystemCategoryAffected>Domestic Hot Water</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:ChilledWaterHotWaterAndSteamDistributionSystems>
+              <auc:MeasureName>Replace or upgrade water heater</auc:MeasureName>
+            </auc:ChilledWaterHotWaterAndSteamDistributionSystems>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure16'>
+        <auc:SystemCategoryAffected>Plug Load</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:PlugLoadReductions>
+              <auc:MeasureName>Replace ice_refrigeration equipment with high efficiency units</auc:MeasureName>
+            </auc:PlugLoadReductions>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure17'>
+        <auc:SystemCategoryAffected>Fenestration</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:BuildingEnvelopeModifications>
+              <auc:MeasureName>Replace windows</auc:MeasureName>
+            </auc:BuildingEnvelopeModifications>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure18'>
+        <auc:SystemCategoryAffected>Heating System</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:BoilerPlantImprovements>
+              <auc:MeasureName>Replace boiler</auc:MeasureName>
+            </auc:BoilerPlantImprovements>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure19'>
+        <auc:SystemCategoryAffected>Other HVAC</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Replace HVAC with GSHP and DOAS</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure20'>
+        <auc:SystemCategoryAffected>Other HVAC</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Replace HVAC system type to VRF</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure21'>
+        <auc:SystemCategoryAffected>Other HVAC</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Replace HVAC system type to PZHP</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure22'>
+        <auc:SystemCategoryAffected>Fan</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:ElectricMotorsAndDrives>
+              <auc:MeasureName>Replace with higher efficiency</auc:MeasureName>
+            </auc:ElectricMotorsAndDrives>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure23'>
+        <auc:SystemCategoryAffected>Air Distribution</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Improve ventilation fans</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure24'>
+        <auc:SystemCategoryAffected>Air Distribution</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Enable Demand Controlled Ventilation</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure25'>
+        <auc:SystemCategoryAffected>Air Distribution</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Add or repair economizer</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure26'>
+        <auc:SystemCategoryAffected>Heat Recovery</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Add energy recovery</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure27'>
+        <auc:SystemCategoryAffected>Domestic Hot Water</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:ChilledWaterHotWaterAndSteamDistributionSystems>
+              <auc:MeasureName>Add pipe insulation</auc:MeasureName>
+            </auc:ChilledWaterHotWaterAndSteamDistributionSystems>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure28'>
+        <auc:SystemCategoryAffected>Domestic Hot Water</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:ChilledWaterHotWaterAndSteamDistributionSystems>
+              <auc:MeasureName>Add recirculating pumps</auc:MeasureName>
+            </auc:ChilledWaterHotWaterAndSteamDistributionSystems>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID='Measure29'>
+        <auc:SystemCategoryAffected>Water Use</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref='Building223'/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:WaterAndSewerConservationSystems>
+              <auc:MeasureName>Install low-flow faucets and showerheads</auc:MeasureName>
+            </auc:WaterAndSewerConservationSystems>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost/>
+        <auc:MeasureTotalFirstCost/>
+        <auc:MeasureInstallationCost/>
+        <auc:MeasureMaterialCost/>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+    </auc:Measures>
+    <auc:Report>
+      <auc:Scenarios>
+        <auc:Scenario ID='Baseline'>
+          <auc:ScenarioName>Baseline</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>0.0</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>569979.3034716165</auc:AnnualSiteEnergy><auc:AnnualElectricity>465842.6364627923</auc:AnnualElectricity><auc:AnnualNaturalGas>104136.66700882417</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>0.0</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+        <auc:Scenario>
+          <auc:ScenarioName>LED</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure1'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>39647.19014270604</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>530332.1133289104</auc:AnnualSiteEnergy><auc:AnnualElectricity>419911.4188124089</auc:AnnualElectricity><auc:AnnualNaturalGas>110420.69451650146</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>3805.1299999999974</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+        <auc:Scenario>
+          <auc:ScenarioName>Electric_Appliance_30%_Reduction</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure2'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>107292.89801946748</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>462686.405452149</auc:AnnualSiteEnergy><auc:AnnualElectricity>343612.1406271869</auc:AnnualElectricity><auc:AnnualNaturalGas>119074.26482496205</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>10385.02</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+        <auc:Scenario>
+          <auc:ScenarioName>Air_Seal_Infiltration_30%_More_Airtight</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure3'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>3345.7944347060984</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>566633.5090369104</auc:AnnualSiteEnergy><auc:AnnualElectricity>465662.5512099328</auc:AnnualElectricity><auc:AnnualNaturalGas>100980.43599818082</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>37.080000000001746</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+        <auc:Scenario>
+          <auc:ScenarioName>Cooling_System_SEER 14</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure4'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>4862.301827207324</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>565117.0016444091</auc:AnnualSiteEnergy><auc:AnnualElectricity>460980.33463558496</auc:AnnualElectricity><auc:AnnualNaturalGas>104136.66700882417</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>507.84999999999854</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+        <auc:Scenario>
+          <auc:ScenarioName>Heating_System_Efficiency_0.93</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure5'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>12331.100735276239</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>557648.2027363402</auc:AnnualSiteEnergy><auc:AnnualElectricity>465842.6364627923</auc:AnnualElectricity><auc:AnnualNaturalGas>91805.5662735479</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>122.75</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Add daylight controls</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure6'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>32585.952596371877</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>537393.3508752446</auc:AnnualSiteEnergy><auc:AnnualElectricity>431180.9643729343</auc:AnnualElectricity><auc:AnnualNaturalGas>106212.38650231034</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>3068.479999999996</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Add occupancy sensors</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure7'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>6814.805095052812</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>563164.4983765637</auc:AnnualSiteEnergy><auc:AnnualElectricity>457947.3198505824</auc:AnnualElectricity><auc:AnnualNaturalGas>105217.17852598135</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>653.3899999999994</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Install plug load controls</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure8'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>47201.29259160318</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>522778.0108800133</auc:AnnualSiteEnergy><auc:AnnualElectricity>412698.5305268246</auc:AnnualElectricity><auc:AnnualNaturalGas>110088.9585243918</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>4507.030000000006</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Increase wall insulation</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure9'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>11601.281552635017</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>558378.0219189815</auc:AnnualSiteEnergy><auc:AnnualElectricity>462648.4927673364</auc:AnnualElectricity><auc:AnnualNaturalGas>95729.52915164504</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>332.59999999999854</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Insulate thermal bypasses</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure10'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>3260.49089387781</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>566718.8125777387</auc:AnnualSiteEnergy><auc:AnnualElectricity>464904.29751368216</auc:AnnualElectricity><auc:AnnualNaturalGas>101814.51506405654</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>96.67000000000553</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Increase roof insulation</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure11'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>18406.60847648466</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>551572.6949951318</auc:AnnualSiteEnergy><auc:AnnualElectricity>465103.33910894796</auc:AnnualElectricity><auc:AnnualNaturalGas>86469.35588618394</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>214.85000000000582</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Increase ceiling insulation</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure12'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>9354.954977492453</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>560624.348494124</auc:AnnualSiteEnergy><auc:AnnualElectricity>465491.9441282764</auc:AnnualElectricity><auc:AnnualNaturalGas>95132.40436584764</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>110.58999999999651</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Add window films</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure13'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>13857.086298980634</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>556122.2171726358</auc:AnnualSiteEnergy><auc:AnnualElectricity>449729.7454174659</auc:AnnualElectricity><auc:AnnualNaturalGas>106392.47175516986</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>1351.3699999999953</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Upgrade operating protocols, calibration, and_or sequencing</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure14'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>29533.98146896297</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>540445.3220026535</auc:AnnualSiteEnergy><auc:AnnualElectricity>455122.8248320487</auc:AnnualElectricity><auc:AnnualNaturalGas>85322.49717060482</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>997.810000000005</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Replace or upgrade water heater</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure15'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>9468.693031930015</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>560510.6104396865</auc:AnnualSiteEnergy><auc:AnnualElectricity>465842.6364627923</auc:AnnualElectricity><auc:AnnualNaturalGas>94667.97397689412</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>91.83999999999651</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Replace ice_refrigeration equipment with high efficiency units</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure16'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>12113.102797604166</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>557866.2006740123</auc:AnnualSiteEnergy><auc:AnnualElectricity>452364.6770119369</auc:AnnualElectricity><auc:AnnualNaturalGas>105511.00183327848</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>1140.8800000000047</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Replace windows</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure17'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>38974.239987283596</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>531005.0634843329</auc:AnnualSiteEnergy><auc:AnnualElectricity>434934.320169375</auc:AnnualElectricity><auc:AnnualNaturalGas>96070.74331495784</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>2688.3899999999994</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Replace boiler</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure18'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>0.0</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>569979.3034716165</auc:AnnualSiteEnergy><auc:AnnualElectricity>465842.6364627923</auc:AnnualElectricity><auc:AnnualNaturalGas>104136.66700882417</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>0.0</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Replace HVAC with GSHP and DOAS</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure19'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>49352.83745471446</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>520626.466016902</auc:AnnualSiteEnergy><auc:AnnualElectricity>416575.1025489061</auc:AnnualElectricity><auc:AnnualNaturalGas>104051.36346799598</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>4495.919999999998</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>VRF with DOAS</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure20'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>-57314.501265346305</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>627293.8047369628</auc:AnnualSiteEnergy><auc:AnnualElectricity>520635.9441881051</auc:AnnualElectricity><auc:AnnualNaturalGas>106648.38237765446</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>-3128.489999999998</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Replace HVAC system type to PZHP</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure21'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>88819.94234456093</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>481159.36112705554</auc:AnnualSiteEnergy><auc:AnnualElectricity>465226.55533458863</auc:AnnualElectricity><auc:AnnualNaturalGas>15932.805792466861</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>2332.4400000000023</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Replace with higher efficiency</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure22'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>0.0</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>569979.3034716165</auc:AnnualSiteEnergy><auc:AnnualElectricity>465842.6364627923</auc:AnnualElectricity><auc:AnnualNaturalGas>104136.66700882417</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>0.040000000000873115</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Improve ventilation fans</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure23'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>0.0</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>569979.3034716165</auc:AnnualSiteEnergy><auc:AnnualElectricity>465842.6364627923</auc:AnnualElectricity><auc:AnnualNaturalGas>104136.66700882417</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>0.0</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Enable Demand Controlled Ventilation</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure24'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>0.0</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>569979.3034716165</auc:AnnualSiteEnergy><auc:AnnualElectricity>465842.6364627923</auc:AnnualElectricity><auc:AnnualNaturalGas>104136.66700882417</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>0.0</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Add or repair economizer</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure25'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>30434.407733260537</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>539544.8957383559</auc:AnnualSiteEnergy><auc:AnnualElectricity>432972.3387303265</auc:AnnualElectricity><auc:AnnualNaturalGas>106572.55700802938</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>2549.8600000000006</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Add energy recovery</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure26'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>0</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy/><auc:AnnualElectricity/><auc:AnnualNaturalGas/><auc:AnnualSavingsEnergyCost>0</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Add pipe insulation</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure27'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>8520.87591161672</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>561458.4275599997</auc:AnnualSiteEnergy><auc:AnnualElectricity>465842.6364627923</auc:AnnualElectricity><auc:AnnualNaturalGas>95615.79109720745</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>82.66000000000349</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Add recirculating pumps</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure28'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>8738.873849288793</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>561240.4296223277</auc:AnnualSiteEnergy><auc:AnnualElectricity>465842.6364627923</auc:AnnualElectricity><auc:AnnualNaturalGas>95397.79315953537</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>84.72000000000116</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Install low-flow faucets and showerheads</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref='Baseline'/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref='Measure29'/>
+              </auc:MeasureIDs>
+            <auc:AnnualSavingsSiteEnergy>3620.6613995968364</auc:AnnualSavingsSiteEnergy><auc:AnnualSiteEnergy>566358.6420720196</auc:AnnualSiteEnergy><auc:AnnualElectricity>465842.6364627923</auc:AnnualElectricity><auc:AnnualNaturalGas>100516.0056092273</auc:AnnualNaturalGas><auc:AnnualSavingsEnergyCost>35.56999999999971</auc:AnnualSavingsEnergyCost></auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+      </auc:Scenarios>
+    </auc:Report>
+  </auc:Audit>
+</auc:Audits>
+  

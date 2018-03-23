@@ -2,8 +2,8 @@
   <schema_version>3.0</schema_version>
   <name>change_building_location</name>
   <uid>d4db4971-f5ba-11e3-a3ac-0800200c9a66</uid>
-  <version_id>04d1e937-c0da-4e99-b815-fca47baaeac5</version_id>
-  <version_modified>20170711T201203Z</version_modified>
+  <version_id>336497de-b542-44a7-a188-f70f5d85c622</version_id>
+  <version_modified>20180123T051147Z</version_modified>
   <xml_checksum>057E8D9D</xml_checksum>
   <class_name>ChangeBuildingLocation</class_name>
   <display_name>ChangeBuildingLocation</display_name>
@@ -93,6 +93,70 @@
         <choice>
           <value>8</value>
           <display_name>8</display_name>
+        </choice>
+        <choice>
+          <value>CEC1</value>
+          <display_name>CEC1</display_name>
+        </choice>
+        <choice>
+          <value>CEC2</value>
+          <display_name>CEC2</display_name>
+        </choice>
+        <choice>
+          <value>CEC3</value>
+          <display_name>CEC3</display_name>
+        </choice>
+        <choice>
+          <value>CEC4</value>
+          <display_name>CEC4</display_name>
+        </choice>
+        <choice>
+          <value>CEC5</value>
+          <display_name>CEC5</display_name>
+        </choice>
+        <choice>
+          <value>CEC6</value>
+          <display_name>CEC6</display_name>
+        </choice>
+        <choice>
+          <value>CEC7</value>
+          <display_name>CEC7</display_name>
+        </choice>
+        <choice>
+          <value>CEC8</value>
+          <display_name>CEC8</display_name>
+        </choice>
+        <choice>
+          <value>CEC9</value>
+          <display_name>CEC9</display_name>
+        </choice>
+        <choice>
+          <value>CEC10</value>
+          <display_name>CEC10</display_name>
+        </choice>
+        <choice>
+          <value>CEC11</value>
+          <display_name>CEC11</display_name>
+        </choice>
+        <choice>
+          <value>CEC12</value>
+          <display_name>CEC12</display_name>
+        </choice>
+        <choice>
+          <value>CEC13</value>
+          <display_name>CEC13</display_name>
+        </choice>
+        <choice>
+          <value>CEC14</value>
+          <display_name>CEC14</display_name>
+        </choice>
+        <choice>
+          <value>CEC15</value>
+          <display_name>CEC15</display_name>
+        </choice>
+        <choice>
+          <value>CEC16</value>
+          <display_name>CEC16</display_name>
         </choice>
         <choice>
           <value>Lookup From Stat File</value>
@@ -216,6 +280,12 @@
       <checksum>F5FABCCF</checksum>
     </file>
     <file>
+      <filename>change_building_location_test.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>test</usage_type>
+      <checksum>41755DC7</checksum>
+    </file>
+    <file>
       <version>
         <software_program>OpenStudio</software_program>
         <identifier>1.3.4</identifier>
@@ -224,13 +294,7 @@
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>E69CBFDD</checksum>
-    </file>
-    <file>
-      <filename>change_building_location_test.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>test</usage_type>
-      <checksum>41755DC7</checksum>
+      <checksum>41F4D878</checksum>
     </file>
   </files>
 </measure>

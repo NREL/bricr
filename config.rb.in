@@ -17,10 +17,10 @@ module BRICR
   #MAX_DATAPOINTS = 2
 
   # number of parallel jobs per BuildingSync file
-  NUM_PARALLEL = 2
+  NUM_PARALLEL = 4
 
-  # number of parallel buildings per simulation
-  NUM_BUILDINGS_PARALLEL = 4
+  # number of parallel BuildingSync files to run
+  NUM_BUILDINGS_PARALLEL = 2
 
   # do simulations
   DO_SIMULATIONS = false
@@ -38,4 +38,13 @@ module BRICR
   ENV['BRICR_SEED_API_KEY'] = ''
   # url for bricr-sim
   BRICR_SIM_URL = nil
+
+  # specify the output folder for the simulation runs
+  SIMULATION_OUTPUT_FOLDER = "D:/BRICR_OUTPUT/"
+
+  # specify to run the baseline simulation only or not
+  SIMULATE_BASELINE_ONLY = true
+
+  # specify to include the model calibration or not
+  DO_MODEL_CALIBRATION = false
 end

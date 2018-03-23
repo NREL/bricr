@@ -26,3 +26,64 @@ RuboCop::RakeTask.new(:rubocop) do |task|
   # don't abort rake on failure
   task.fail_on_error = false
 end
+
+desc 'Update copyright on files'
+task :update_copyright do
+  require 'fileutils'
+  
+  basepath = File.dirname(__FILE__)
+  
+  ruby_copyright = "########################################################################################################################\n"
+  File.open(basepath + "/LICENSE.md") do |f|
+    while (line = f.gets)
+      if line.strip.empty?
+        ruby_copyright += "#" + line
+      else
+        ruby_copyright += "#  " + line
+      end
+    end
+  end
+  ruby_copyright += "########################################################################################################################\n\n"
+  
+  # files that are part of BRICR
+  paths = [basepath + "/bin/**/*.rb",
+           basepath + "/lib/**/*.rb",
+           basepath + "/*.rb"]
+           
+  paths.each do |path|
+    # glob for rb
+    files = Dir.glob(path)
+    files.each do |file|
+      next if File.basename(file) == 'config.rb'
+      
+      # start with copyright
+      text = ruby_copyright
+
+      # read file
+      File.open(file, "r") do |f|
+        # read until end of current copyright
+        while (line = f.gets)
+          if not /^#/.match(line)
+            if not line.chomp.empty?
+              text += line
+            end
+            break
+          end
+        end
+
+        # now keep rest of file
+        while (line = f.gets)
+          text += line
+        end
+      end
+
+      # write file
+      File.open(file, "w") do |f|
+        f << text
+      end
+  
+    end
+  end
+
+  puts ruby_copyright
+end

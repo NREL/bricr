@@ -1,0 +1,106 @@
+<measure>
+  <schema_version>3.0</schema_version>
+  <name>change_lighting_schedule_by_space_type</name>
+  <uid>2dc5ad44-599c-4684-aaf8-6d2b59a83bb0</uid>
+  <version_id>7e9f0ca4-8af8-4ce5-9bb7-3c58d1140106</version_id>
+  <version_modified>20180226T174946Z</version_modified>
+  <xml_checksum>E37C057D</xml_checksum>
+  <class_name>ChangeLightingScheduleBySpaceType</class_name>
+  <display_name>Change Lighting Schedule by SpaceType</display_name>
+  <description>Changes the lighting schedule to a user specified schedule for a user specified space type.</description>
+  <modeler_description>This measure takes a user specified space type, finds the lights object in that space type, and then replaces the existing schedule with the new user specified schedule.  Please note that the user must build the desired schedule before this measure is used.</modeler_description>
+  <arguments>
+    <argument>
+      <name>space_type_object</name>
+      <display_name>Apply the Measure to a Specific Space Type</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+    </argument>
+    <argument>
+      <name>schedule_object</name>
+      <display_name>Replace the lighting schedule in the space type with the following schedule</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+    </argument>
+    <argument>
+      <name>cost_increase</name>
+      <display_name>Increase in Material and Installation Costs ($).</display_name>
+      <type>Double</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>0</default_value>
+    </argument>
+  </arguments>
+  <outputs/>
+  <provenances/>
+  <tags>
+    <tag>Electric Lighting.Electric Lighting Controls</tag>
+  </tags>
+  <attributes>
+    <attribute>
+      <name>Measure Function</name>
+      <value>Measure</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Requires EnergyPlus Results</name>
+      <value>false</value>
+      <datatype>boolean</datatype>
+    </attribute>
+    <attribute>
+      <name>Uses SketchUp API</name>
+      <value>false</value>
+      <datatype>boolean</datatype>
+    </attribute>
+    <attribute>
+      <name>Measure Type</name>
+      <value>ModelMeasure</value>
+      <datatype>string</datatype>
+    </attribute>
+  </attributes>
+  <files>
+    <file>
+      <filename>EnvelopeAndLoadTestModel_01.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>10AA8866</checksum>
+    </file>
+    <file>
+      <filename>EnvelopeAndLoadTestModel_01_Costed.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>E025B7B3</checksum>
+    </file>
+    <file>
+      <filename>ReplaceLightsWithLPD_01_Test.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>test</usage_type>
+      <checksum>09C52DB5</checksum>
+    </file>
+    <file>
+      <filename>School_hvac.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>1F8BE8C1</checksum>
+    </file>
+    <file>
+      <version>
+        <software_program>OpenStudio</software_program>
+        <identifier>0.11.3</identifier>
+        <min_compatible>1.8.0</min_compatible>
+      </version>
+      <filename>measure.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>script</usage_type>
+      <checksum>7CB81B2C</checksum>
+    </file>
+    <file>
+      <filename>ChangeLightingSchedulebySpaceType_Test.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>test</usage_type>
+      <checksum>CCBB4755</checksum>
+    </file>
+  </files>
+</measure>

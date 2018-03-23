@@ -4,10 +4,16 @@
 	"root_directory": null,
 	"run_directory": null,
 	"file_paths": null,
-  "measure_paths": [
+    "measure_paths": [
     "../../../NREL working measures/"
   ],
 	"steps": [
+    {
+      "name": "gem_env_report",
+      "measure_dir_name": "gem_env_report",
+      "arguments": {
+      }
+    },
     {
       "measure_dir_name": "ChangeBuildingLocation",
       "arguments": {
@@ -49,23 +55,50 @@
       "arguments": {
         "template": "CEC T24 2008",
         "system_type": "Inferred",
+		"hvac_delivery_type": "Forced Air",
         "htg_src": "NaturalGas",
         "clg_src": "Electricity",
-        "hvac_delivery_type": "Forced Air",
         "kitchen_makeup": "Adjacent",
         "exterior_lighting_zone": "3 - All Other Areas",
-        "__SKIP__": false
+		"add_constructions": true,
+		"add_space_type_loads": true,
+		"add_elevators": false,
+		"add_exterior_lights": false,
+		"onsite_parking_fraction": 1.0,
+		"add_exhaust": true,
+		"add_swh": true,
+		"add_hvac": true,
+		"remove_objects": false
       }
     },
 	{
-      "measure_dir_name": "AddServiceWaterHeating",
-      "arguments": {
-        "water_heater_fuel_type": "NaturalGas",
-        "hot_water_per_occ_per_day_gal": 1.0
-      }
-    },
+		"measure_dir_name": "calibrate_baseline_model",
+		"arguments": {
+            "bldg_type": "MediumOffice",
+            "template": "CEC T24 2008",
+            "__SKIP__": true
+		}
+	},
 	{
 		"measure_dir_name": "SetLightingLoadsByLPD",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "AddDaylightSensors",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "ReduceLightingLoadsByPercentage",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "tenant_star_internal_loads",
 		"arguments": {
 		"__SKIP__": true
 		}
@@ -83,7 +116,37 @@
 		}
 	},
 	{
-		"measure_dir_name": "SetCOPforSingleSpeedDXCoolingUnits",
+		"measure_dir_name": "IncreaseInsulationRValueForExteriorWalls",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "IncreaseInsulationRValueForExteriorWallsByPercentage",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "IncreaseInsulationRValueForRoofs",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "IncreaseInsulationRValueForRoofsByPercentage",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "replace_simple_glazing",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "improve_simple_glazing_by_percentage",
 		"arguments": {
 		"__SKIP__": true
 		}
@@ -92,6 +155,97 @@
 		"measure_dir_name": "SetGasBurnerEfficiency",
 		"arguments": {
 		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "set_boiler_thermal_efficiency",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+
+	{
+		"measure_dir_name": "SetCOPforSingleSpeedDXCoolingUnits",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "SetCOPforTwoSpeedDXCoolingUnits",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "replace_hvac_with_gshp_and_doas",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "vr_fwith_doas",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "add_apszhp_to_each_zone",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "AdjustThermostatSetpointsByDegrees",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "ReplaceFanTotalEfficiency",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "ImproveFanTotalEfficiencybyPercentage",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "EnableDemandControlledVentilation",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "EnableEconomizerControl",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "add_energy_recovery_ventilator",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "set_water_heater_efficiency_heat_lossand_peak_water_flow_rate",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "reduce_water_use_by_percentage",
+		"arguments": {
+		"__SKIP__": true
+		}
+	},
+	{
+		"measure_dir_name": "tariff_selection_generic",
+		"arguments": {
+		"__SKIP__": false
 		}
 	},
 	{

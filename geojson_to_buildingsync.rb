@@ -1,4 +1,28 @@
-# usage: bundle exec ruby geojson_to_buildingsync.rb /path/to/geojson.json
+########################################################################################################################
+#  BRICR, Copyright (c) 2017, Alliance for Sustainable Energy, LLC and The Regents of the University of California, through Lawrence 
+#  Berkeley National Laboratory (subject to receipt of any required approvals from the U.S. Dept. of Energy). All rights reserved.
+#
+#  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions 
+#  are met:
+#
+#  (1) Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+#
+#  (2) Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in 
+#  the documentation and/or other materials provided with the distribution.
+#
+#  (3) The name of the copyright holder(s), any contributors, the United States Government, the United States Department of Energy, or 
+#  any of their employees may not be used to endorse or promote products derived from this software without specific prior written 
+#  permission from the respective party.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER(S) AND ANY CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, 
+#  BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL 
+#  THE COPYRIGHT HOLDER(S), ANY CONTRIBUTORS, THE UNITED STATES GOVERNMENT, OR THE UNITED STATES DEPARTMENT OF ENERGY, NOR ANY OF THEIR 
+#  EMPLOYEES, BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED 
+#  TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY 
+#  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE 
+#  USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+########################################################################################################################
 
 require 'json'
 require 'rexml/document'
@@ -321,14 +345,274 @@ def convert_feature(feature)
           </auc:TechnologyCategory>
         </auc:TechnologyCategories>
         <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
-        <auc:MVCost>1000</auc:MVCost>
-        <auc:MeasureTotalFirstCost>10000</auc:MeasureTotalFirstCost>
-        <auc:MeasureInstallationCost>8000</auc:MeasureInstallationCost>
-        <auc:MeasureMaterialCost>1000</auc:MeasureMaterialCost>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
         <auc:Recommended>true</auc:Recommended>
         <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
       </auc:Measure>
       <auc:Measure ID="Measure2">
+        <auc:SystemCategoryAffected>Plug Load</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:PlugLoadReductions>
+              <auc:MeasureName>Replace with ENERGY STAR rated</auc:MeasureName>
+            </auc:PlugLoadReductions>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+      <auc:Measure ID="Measure3">
+        <auc:SystemCategoryAffected>Wall</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:BuildingEnvelopeModifications>
+              <auc:MeasureName>Air seal envelope</auc:MeasureName>
+            </auc:BuildingEnvelopeModifications>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+      <auc:Measure ID="Measure4">
+        <auc:SystemCategoryAffected>Cooling System</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Replace package units</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+      <auc:Measure ID="Measure5">
+        <auc:SystemCategoryAffected>Heating System</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Replace burner</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost>1000</auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure6">
+        <auc:SystemCategoryAffected>Lighting</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:LightingImprovements>
+              <auc:MeasureName>Add daylight controls</auc:MeasureName>
+            </auc:LightingImprovements>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure7">
+        <auc:SystemCategoryAffected>Lighting</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:LightingImprovements>
+              <auc:MeasureName>Add occupancy sensors</auc:MeasureName>
+            </auc:LightingImprovements>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure8">
+        <auc:SystemCategoryAffected>Plug Load</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:PlugLoadReductions>
+              <auc:MeasureName>Install plug load controls</auc:MeasureName>
+            </auc:PlugLoadReductions>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure9">
+        <auc:SystemCategoryAffected>Wall</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:BuildingEnvelopeModifications>
+              <auc:MeasureName>Increase wall insulation</auc:MeasureName>
+            </auc:BuildingEnvelopeModifications>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure10">
+        <auc:SystemCategoryAffected>Wall</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:BuildingEnvelopeModifications>
+              <auc:MeasureName>Insulate thermal bypasses</auc:MeasureName>
+            </auc:BuildingEnvelopeModifications>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure11">
+        <auc:SystemCategoryAffected>Roof / Ceiling</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:BuildingEnvelopeModifications>
+              <auc:MeasureName>Increase roof insulation</auc:MeasureName>
+            </auc:BuildingEnvelopeModifications>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure12">
+        <auc:SystemCategoryAffected>Roof / Ceiling</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:BuildingEnvelopeModifications>
+              <auc:MeasureName>Increase ceiling insulation</auc:MeasureName>
+            </auc:BuildingEnvelopeModifications>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure13">
+        <auc:SystemCategoryAffected>Fenestration</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:BuildingEnvelopeModifications>
+              <auc:MeasureName>Add window films</auc:MeasureName>
+            </auc:BuildingEnvelopeModifications>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure14">
+        <auc:SystemCategoryAffected>General Controls and Operations</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Upgrade operating protocols, calibration, and_or sequencing</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure15">
         <auc:SystemCategoryAffected>Domestic Hot Water</auc:SystemCategoryAffected>
         <auc:PremisesAffected>
           <auc:PremiseAffected IDref="FACILITY_ID"/>
@@ -341,10 +625,290 @@ def convert_feature(feature)
           </auc:TechnologyCategory>
         </auc:TechnologyCategories>
         <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
-        <auc:MVCost>1000</auc:MVCost>
-        <auc:MeasureTotalFirstCost>10000</auc:MeasureTotalFirstCost>
-        <auc:MeasureInstallationCost>8000</auc:MeasureInstallationCost>
-        <auc:MeasureMaterialCost>1000</auc:MeasureMaterialCost>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure16">
+        <auc:SystemCategoryAffected>Plug Load</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:PlugLoadReductions>
+              <auc:MeasureName>Replace ice_refrigeration equipment with high efficiency units</auc:MeasureName>
+            </auc:PlugLoadReductions>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure17">
+        <auc:SystemCategoryAffected>Fenestration</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:BuildingEnvelopeModifications>
+              <auc:MeasureName>Replace windows</auc:MeasureName>
+            </auc:BuildingEnvelopeModifications>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure18">
+        <auc:SystemCategoryAffected>Heating System</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:BoilerPlantImprovements>
+              <auc:MeasureName>Replace boiler</auc:MeasureName>
+            </auc:BoilerPlantImprovements>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure19">
+        <auc:SystemCategoryAffected>Other HVAC</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Replace HVAC with GSHP and DOAS</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure20">
+        <auc:SystemCategoryAffected>Other HVAC</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Replace HVAC system type to VRF</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure21">
+        <auc:SystemCategoryAffected>Other HVAC</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Replace HVAC system type to PZHP</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure22">
+        <auc:SystemCategoryAffected>Fan</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:ElectricMotorsAndDrives>
+              <auc:MeasureName>Replace with higher efficiency</auc:MeasureName>
+            </auc:ElectricMotorsAndDrives>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure23">
+        <auc:SystemCategoryAffected>Air Distribution</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Improve ventilation fans</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure24">
+        <auc:SystemCategoryAffected>Air Distribution</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Enable Demand Controlled Ventilation</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure25">
+        <auc:SystemCategoryAffected>Air Distribution</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Add or repair economizer</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure26">
+        <auc:SystemCategoryAffected>Heat Recovery</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:OtherHVAC>
+              <auc:MeasureName>Add energy recovery</auc:MeasureName>
+            </auc:OtherHVAC>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure27">
+        <auc:SystemCategoryAffected>Domestic Hot Water</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:ChilledWaterHotWaterAndSteamDistributionSystems>
+              <auc:MeasureName>Add pipe insulation</auc:MeasureName>
+            </auc:ChilledWaterHotWaterAndSteamDistributionSystems>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure28">
+        <auc:SystemCategoryAffected>Domestic Hot Water</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:ChilledWaterHotWaterAndSteamDistributionSystems>
+              <auc:MeasureName>Add recirculating pumps</auc:MeasureName>
+            </auc:ChilledWaterHotWaterAndSteamDistributionSystems>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
+        <auc:Recommended>true</auc:Recommended>
+        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+      </auc:Measure>
+	  <auc:Measure ID="Measure29">
+        <auc:SystemCategoryAffected>Water Use</auc:SystemCategoryAffected>
+        <auc:PremisesAffected>
+          <auc:PremiseAffected IDref="FACILITY_ID"/>
+        </auc:PremisesAffected>
+        <auc:TechnologyCategories>
+          <auc:TechnologyCategory>
+            <auc:WaterAndSewerConservationSystems>
+              <auc:MeasureName>Install low-flow faucets and showerheads</auc:MeasureName>
+            </auc:WaterAndSewerConservationSystems>
+          </auc:TechnologyCategory>
+        </auc:TechnologyCategories>
+        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MVCost></auc:MVCost>
+        <auc:MeasureTotalFirstCost></auc:MeasureTotalFirstCost>
+        <auc:MeasureInstallationCost></auc:MeasureInstallationCost>
+        <auc:MeasureMaterialCost></auc:MeasureMaterialCost>
         <auc:Recommended>true</auc:Recommended>
         <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
       </auc:Measure>
@@ -363,7 +927,7 @@ def convert_feature(feature)
           </auc:ScenarioType>
         </auc:Scenario>
         <auc:Scenario>
-          <auc:ScenarioName>Lighting Only</auc:ScenarioName>
+          <auc:ScenarioName>LED</auc:ScenarioName>
           <auc:ScenarioType>
             <auc:PackageOfMeasures>
               <auc:ReferenceCase IDref="Baseline"/>
@@ -374,7 +938,7 @@ def convert_feature(feature)
           </auc:ScenarioType>
         </auc:Scenario>
         <auc:Scenario>
-          <auc:ScenarioName>Hot Water Only</auc:ScenarioName>
+          <auc:ScenarioName>Electric_Appliance_30%_Reduction</auc:ScenarioName>
           <auc:ScenarioType>
             <auc:PackageOfMeasures>
               <auc:ReferenceCase IDref="Baseline"/>
@@ -385,20 +949,305 @@ def convert_feature(feature)
           </auc:ScenarioType>
         </auc:Scenario>
         <auc:Scenario>
-          <auc:ScenarioName>Max Tech</auc:ScenarioName>
+          <auc:ScenarioName>Air_Seal_Infiltration_30%_More_Airtight</auc:ScenarioName>
           <auc:ScenarioType>
             <auc:PackageOfMeasures>
               <auc:ReferenceCase IDref="Baseline"/>
               <auc:MeasureIDs>
-                <auc:MeasureID IDref="Measure1"/>
-                <auc:MeasureID IDref="Measure2"/>
+                <auc:MeasureID IDref="Measure3"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+        <auc:Scenario>
+          <auc:ScenarioName>Cooling_System_SEER 14</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure4"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+        <auc:Scenario>
+          <auc:ScenarioName>Heating_System_Efficiency_0.93</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure5"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Add daylight controls</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure6"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Add occupancy sensors</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure7"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Install plug load controls</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure8"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Increase wall insulation</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure9"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Insulate thermal bypasses</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure10"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Increase roof insulation</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure11"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Increase ceiling insulation</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure12"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Add window films</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure13"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Upgrade operating protocols, calibration, and_or sequencing</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure14"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Replace or upgrade water heater</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure15"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Replace ice_refrigeration equipment with high efficiency units</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure16"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Replace windows</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure17"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Replace boiler</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure18"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Replace HVAC with GSHP and DOAS</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure19"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>VRF with DOAS</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure20"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Replace HVAC system type to PZHP</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure21"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Replace with higher efficiency</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure22"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Improve ventilation fans</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure23"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Enable Demand Controlled Ventilation</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure24"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Add or repair economizer</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure25"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Add energy recovery</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure26"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Add pipe insulation</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure27"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Add recirculating pumps</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure28"/>
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+        </auc:Scenario>
+		<auc:Scenario>
+          <auc:ScenarioName>Install low-flow faucets and showerheads</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:MeasureIDs>
+                <auc:MeasureID IDref="Measure29"/>
               </auc:MeasureIDs>
             </auc:PackageOfMeasures>
           </auc:ScenarioType>
         </auc:Scenario>
       </auc:Scenarios>
     </auc:Report>
-	</auc:Audit>
+  </auc:Audit>
 </auc:Audits>
   '
   id = feature[:properties][:"Building Identifier"]
@@ -421,7 +1270,7 @@ outdir = './bs_output'
 FileUtils.mkdir_p(outdir) unless File.exist?(outdir)
 
 summary_file = File.open(outdir + "/summary.csv", 'w')
-summary_file.puts "building_id,xml_filename,should_run_simulation,OccupancyClassification,FloorArea,YearOfConstruction,YearOfLastMajorRemodel"
+summary_file.puts "building_id,xml_filename,should_run_simulation,OccupancyClassification,FloorArea(ft2),YearBuilt,template,SiteEUI(kBtu/ft2),SourceEUI(kBtu/ft2),ElectricityEUI(kBtu/ft2),GasEUI(kBtu/ft2),YearEUI"
 
 geojson[:features].each do |feature|
   id = feature[:properties][:"Building Identifier"]
@@ -429,22 +1278,67 @@ geojson[:features].each do |feature|
   
   begin
     doc = convert_feature(feature)
-    floor_area = convert(feature[:properties][:"Gross Floor Area"], 'ft2', 'ft2')
-    building_type = get_occupancy_classification(feature)
-    year_of_construction = feature[:properties][:"Completed Construction Status Date"]
-    if md = /^(\d\d\d\d).*/.match(feature[:properties][:"Last Modified Date"].to_s)
-      year_of_last_major_remodel = md[1]
-    end
-
-    summary_file.puts "#{id},#{id}.xml,1,#{building_type},#{floor_area},#{year_of_construction},#{year_of_last_major_remodel}"
-
     filename = File.join(outdir, "#{id}.xml")
     File.open(filename, 'w') do |file|
       doc.write(file)
     end
   rescue
     puts "Building #{id} not converted"
+    next
   end
+
+  floor_area = convert(feature[:properties][:"Gross Floor Area"], 'ft2', 'ft2')
+  building_type = get_occupancy_classification(feature)
+  year_of_construction = feature[:properties][:"Completed Construction Status Date"]
+  year_of_last_major_remodel = nil
+  if md = /^(\d\d\d\d).*/.match(feature[:properties][:"Last Modified Date"].to_s)
+    year_of_last_major_remodel = md[1]
+  end
+
+  site_eui = nil
+  source_eui =nil
+  ele_eui = nil
+  gas_eui = nil
+  year_eui = nil
+  for year in 2011..2015
+    if feature[:properties][:"#{year} Annual Site Energy Resource Intensity"] != nil
+      site_eui = feature[:properties][:"#{year} Annual Site Energy Resource Intensity"].to_f
+      year_eui = year
+    end
+
+    if feature[:properties][:"#{year} Annual Source Energy Resource Intensity"] != nil
+      source_eui = feature[:properties][:"#{year} Annual Source Energy Resource Intensity"].to_f
+      year_eui = year
+    end
+  end
+
+  if year_of_last_major_remodel != nil and year_of_last_major_remodel.to_i > 1000
+    year_built = year_of_last_major_remodel.to_i
+  else
+    year_built = year_of_construction.to_i
+  end
+
+  if year_built < 1978
+    template = "CEC Pre-1978"
+  elsif year_built >= 1978 && year_built < 1992
+    template = "CEC T24 1978"
+  elsif year_built >= 1992 && year_built < 2001
+    template = "CEC T24 1992"
+  elsif year_built >= 2001 && year_built < 2005
+    template = "CEC T24 2001"
+  elsif year_built >= 2005 && year_built < 2008
+    template = "CEC T24 2005"
+  else
+    template = "CEC T24 2008"
+  end
+
+  # source factor: 1.05 for gas, 3.14 for electricity
+  if site_eui != nil and source_eui != nil
+    ele_eui = (source_eui - site_eui * 1.05)/(3.14-1.05)
+    gas_eui = site_eui - ele_eui
+  end
+
+  summary_file.puts "#{id},#{id}.xml,1,#{building_type},#{floor_area},#{year_built},#{template},#{site_eui},#{source_eui},#{ele_eui},#{gas_eui},#{year_eui}"
 end
 
 summary_file.close
