@@ -155,32 +155,33 @@ def calculate_aspect_ratio(feature)
 end
 
 def create_site(feature)
-  site = REXML::Element.new('auc:Site')
+  site = REXML::Element.new('n1:Site')
 
   # address
-  address = REXML::Element.new('auc:Address')
-  street_address_detail = REXML::Element.new('auc:StreetAddressDetail')
-  simplified = REXML::Element.new('auc:Simplified')
-  street_address = REXML::Element.new('auc:StreetAddress')
+  address = REXML::Element.new('n1:Address')
+  street_address_detail = REXML::Element.new('n1:StreetAddressDetail')
+  simplified = REXML::Element.new('n1:Simplified')
+  street_address = REXML::Element.new('n1:StreetAddress')
   # DLM: there is also a "To Street Number", check if these are equal
   street_number = feature[:properties][:"From Street Number"].to_s
   if street_number != feature[:properties][:"To Street Number"]
     street_number += " - #{feature[:properties][:"To Street Number"]}"
   end
-  street_address.text = "#{street_number} #{feature[:properties][:"Street Name"]} #{feature[:properties][:"Street Name Post Type"]}"
+  street_address_text = "#{street_number} #{feature[:properties][:"Street Name"]} #{feature[:properties][:"Street Name Post Type"]}"
+  street_address.text = street_address_text
   simplified.add_element(street_address)
   street_address_detail.add_element(simplified)
   address.add_element(street_address_detail)
 
-  city = REXML::Element.new('auc:City')
+  city = REXML::Element.new('n1:City')
   city.text = 'San Francisco'
   address.add_element(city)
 
-  state = REXML::Element.new('auc:State')
+  state = REXML::Element.new('n1:State')
   state.text = 'CA'
   address.add_element(state)
 
-  postal_code = REXML::Element.new('auc:PostalCode')
+  postal_code = REXML::Element.new('n1:PostalCode')
   postal_code.text = feature[:properties][:"ZIP Code"]
   address.add_element(postal_code)
 
@@ -188,16 +189,16 @@ def create_site(feature)
 
   # climate zone
   # DLM: hard code for now
-  climate_zone = REXML::Element.new('auc:ClimateZoneType')
+  climate_zone = REXML::Element.new('n1:ClimateZoneType')
 
-  ashrae = REXML::Element.new('auc:ASHRAE')
-  ashrae_climate = REXML::Element.new('auc:ClimateZone')
+  ashrae = REXML::Element.new('n1:ASHRAE')
+  ashrae_climate = REXML::Element.new('n1:ClimateZone')
   ashrae_climate.text = '3C'
   ashrae.add_element(ashrae_climate)
   climate_zone.add_element(ashrae)
 
-  title24 = REXML::Element.new('auc:CaliforniaTitle24')
-  title24_climate = REXML::Element.new('auc:ClimateZone')
+  title24 = REXML::Element.new('n1:CaliforniaTitle24')
+  title24_climate = REXML::Element.new('n1:ClimateZone')
   title24_climate.text = 'Climate Zone 3'
   title24.add_element(title24_climate)
   climate_zone.add_element(title24)
@@ -207,99 +208,120 @@ def create_site(feature)
   # weather file
   # DLM: hard code for now
 
-  weather_data_station_id = REXML::Element.new('auc:WeatherDataStationID')
+  weather_data_station_id = REXML::Element.new('n1:WeatherDataStationID')
   weather_data_station_id.text = '724940'
   site.add_element(weather_data_station_id)
 
-  weather_station_name = REXML::Element.new('auc:WeatherStationName')
+  weather_station_name = REXML::Element.new('n1:WeatherStationName')
   weather_station_name.text = 'USA_CA_San.Francisco.Intl.AP'
   site.add_element(weather_station_name)
 
   # longitude
-  longitude = REXML::Element.new('auc:Longitude')
+  longitude = REXML::Element.new('n1:Longitude')
   longitude.text = feature[:geometry][:coordinates][0][0][0][0]
   site.add_element(longitude)
 
   # latitude
-  latitude = REXML::Element.new('auc:Latitude')
+  latitude = REXML::Element.new('n1:Latitude')
   latitude.text = feature[:geometry][:coordinates][0][0][0][1]
   site.add_element(latitude)
 
   # ownership
-  ownership = REXML::Element.new('auc:Ownership')
+  ownership = REXML::Element.new('n1:Ownership')
   ownership.text = 'Unknown'
   site.add_element(ownership)
   
   # facilities
-  facilities = REXML::Element.new('auc:Facilities')
-  facility = REXML::Element.new('auc:Facility')
+  facilities = REXML::Element.new('n1:Facilities')
+  facility = REXML::Element.new('n1:Facility')
   facility.attributes['ID'] = "Building#{feature[:properties][:"Building Identifier"]}"
 
-  premises_name = REXML::Element.new('auc:PremisesName')
-  premises_name.text = feature[:properties][:"Building Name"]
+  premises_name = REXML::Element.new('n1:PremisesName')
+  premises_name.text = "#{feature[:properties][:"Building Name"]}, #{street_address_text}"
   facility.add_element(premises_name)
   
-  premises_notes = REXML::Element.new('auc:PremisesNotes')
+  premises_notes = REXML::Element.new('n1:PremisesNotes')
   premises_notes.text = ''
   facility.add_element(premises_notes)
 
-  premises_identifiers = REXML::Element.new('auc:PremisesIdentifiers')
+  premises_identifiers = REXML::Element.new('n1:PremisesIdentifiers')
   
-  premises_identifier = REXML::Element.new('auc:PremisesIdentifier')
-  identifier_label = REXML::Element.new('auc:IdentifierLabel')
+  premises_identifier = REXML::Element.new('n1:PremisesIdentifier')
+  identifier_label = REXML::Element.new('n1:IdentifierLabel')
   identifier_label.text = 'Assessor parcel number'
   premises_identifier.add_element(identifier_label)
-  identifier_value = REXML::Element.new('auc:IdentifierValue')
+  identifier_value = REXML::Element.new('n1:IdentifierValue')
   identifier_value.text = feature[:properties][:"Assessor parcel number"]
   premises_identifier.add_element(identifier_value)
   premises_identifiers.add_element(premises_identifier)
   
-  premises_identifier = REXML::Element.new('auc:PremisesIdentifier')
-  identifier_label = REXML::Element.new('auc:IdentifierLabel')
+  premises_identifier = REXML::Element.new('n1:PremisesIdentifier')
+  identifier_label = REXML::Element.new('n1:IdentifierLabel')
   identifier_label.text = 'Custom'
   premises_identifier.add_element(identifier_label)
-  identifier_name = REXML::Element.new('auc:IdentifierCustomName')
+  identifier_name = REXML::Element.new('n1:IdentifierCustomName')
   identifier_name.text = 'BRICR Custom ID 1'
   premises_identifier.add_element(identifier_name)
-  identifier_value = REXML::Element.new('auc:IdentifierValue')
+  identifier_value = REXML::Element.new('n1:IdentifierValue')
+  identifier_value.text = feature[:properties][:"Building Identifier"]
+  premises_identifier.add_element(identifier_value)
+  premises_identifiers.add_element(premises_identifier)
+  
+  premises_identifier = REXML::Element.new('n1:PremisesIdentifier')
+  identifier_label = REXML::Element.new('n1:IdentifierLabel')
+  identifier_label.text = 'Custom'
+  premises_identifier.add_element(identifier_label)
+  identifier_name = REXML::Element.new('n1:IdentifierCustomName')
+  identifier_name.text = 'City Custom Building ID'
+  premises_identifier.add_element(identifier_name)
+  identifier_value = REXML::Element.new('n1:IdentifierValue')
   identifier_value.text = feature[:properties][:"Building Identifier"]
   premises_identifier.add_element(identifier_value)
   premises_identifiers.add_element(premises_identifier)
   
   facility.add_element(premises_identifiers)
 
-  #facility_classification = REXML::Element.new('auc:FacilityClassification')
+  #facility_classification = REXML::Element.new('n1:FacilityClassification')
   #facility_classification.text = get_facility_classification(feature)
   #facility.add_element(facility_classification)
 
-  #occupancy_classification = REXML::Element.new('auc:OccupancyClassification')
+  #occupancy_classification = REXML::Element.new('n1:OccupancyClassification')
   #occupancy_classification.text = get_occupancy_classification(feature)
   #facility.add_element(occupancy_classification)
 
-  floors_above_grade = REXML::Element.new('auc:FloorsAboveGrade')
+  floors_above_grade = REXML::Element.new('n1:FloorsAboveGrade')
   floors_above_grade.text = feature[:properties][:"Number of Floors"] # DLM need to map this?
   facility.add_element(floors_above_grade)
 
-  floors_below_grade = REXML::Element.new('auc:FloorsBelowGrade')
+  floors_below_grade = REXML::Element.new('n1:FloorsBelowGrade')
   floors_below_grade.text = 0 # DLM need to map this?
   facility.add_element(floors_below_grade)
 
-  floor_areas = REXML::Element.new('auc:FloorAreas')
+  floor_areas = REXML::Element.new('n1:FloorAreas')
 
-  floor_area = REXML::Element.new('auc:FloorArea')
-  floor_area_type = REXML::Element.new('auc:FloorAreaType')
+  floor_area = REXML::Element.new('n1:FloorArea')
+  floor_area_type = REXML::Element.new('n1:FloorAreaType')
   floor_area_type.text = 'Gross'
   floor_area.add_element(floor_area_type)
-  floor_area_value = REXML::Element.new('auc:FloorAreaValue')
+  floor_area_value = REXML::Element.new('n1:FloorAreaValue')
   floor_area_value.text = convert(feature[:properties][:"Gross Floor Area"], 'ft2', 'ft2')
   floor_area.add_element(floor_area_value)
   floor_areas.add_element(floor_area)
-
-  floor_area = REXML::Element.new('auc:FloorArea')
-  floor_area_type = REXML::Element.new('auc:FloorAreaType')
+  
+  floor_area = REXML::Element.new('n1:FloorArea')
+  floor_area_type = REXML::Element.new('n1:FloorAreaType')
+  floor_area_type.text = 'Heated and Cooled'
+  floor_area.add_element(floor_area_type)
+  floor_area_value = REXML::Element.new('n1:FloorAreaValue')
+  floor_area_value.text = convert(feature[:properties][:"Gross Floor Area"], 'ft2', 'ft2')
+  floor_area.add_element(floor_area_value)
+  floor_areas.add_element(floor_area)
+  
+  floor_area = REXML::Element.new('n1:FloorArea')
+  floor_area_type = REXML::Element.new('n1:FloorAreaType')
   floor_area_type.text = 'Footprint'
   floor_area.add_element(floor_area_type)
-  floor_area_value = REXML::Element.new('auc:FloorAreaValue')
+  floor_area_value = REXML::Element.new('n1:FloorAreaValue')
   floor_area_value.text = convert(feature[:properties][:"Building Footprint Floor Area"], 'm2', 'ft2')
   floor_area.add_element(floor_area_value)
   floor_areas.add_element(floor_area)
@@ -308,59 +330,71 @@ def create_site(feature)
 
   # aspect ratio and perimeter
   if ar = calculate_aspect_ratio(feature)
-    aspect_ratio = REXML::Element.new('auc:AspectRatio')
+    aspect_ratio = REXML::Element.new('n1:AspectRatio')
     aspect_ratio.text = ar
     facility.add_element(aspect_ratio)
   end
 
-  perimeter = REXML::Element.new('auc:Perimeter')
+  perimeter = REXML::Element.new('n1:Perimeter')
   perimeter.text = convert(feature[:properties][:"Building Perimeter"], 'm', 'ft').to_i # DLM: BS thinks this is an int
   facility.add_element(perimeter)
 
   # year of construction and modified
-  year_of_construction = REXML::Element.new('auc:YearOfConstruction')
+  year_of_construction = REXML::Element.new('n1:YearOfConstruction')
   year_of_construction.text = feature[:properties][:"Completed Construction Status Date"]
   facility.add_element(year_of_construction)
 
   if md = /^(\d\d\d\d).*/.match(feature[:properties][:"Last Modified Date"].to_s)
-    year_of_last_major_remodel = REXML::Element.new('auc:YearOfLastMajorRemodel')
+    year_of_last_major_remodel = REXML::Element.new('n1:YearOfLastMajorRemodel')
     year_of_last_major_remodel.text = md[1]
     facility.add_element(year_of_last_major_remodel)
   end
   
   # subsections
-  subsections = REXML::Element.new('auc:Subsections')
+  subsections = REXML::Element.new('n1:Subsections')
   
   # create single subsection
-  subsection = REXML::Element.new('auc:Subsection')
+  subsection = REXML::Element.new('n1:Subsection')
   subsection.attributes['ID'] = "Default_Subsection"
 
-  occupancy_classification = REXML::Element.new('auc:OccupancyClassification')
+  occupancy_classification = REXML::Element.new('n1:OccupancyClassification')
   occupancy_classification.text = get_occupancy_classification(feature)
   subsection.add_element(occupancy_classification)
   
-  typical_occupant_usages = REXML::Element.new('auc:TypicalOccupantUsages')
+  typical_occupant_usages = REXML::Element.new('n1:TypicalOccupantUsages')
   
-  typical_occupant_usage = REXML::Element.new('auc:TypicalOccupantUsage')
-  typical_occupant_usage_value = REXML::Element.new('auc:TypicalOccupantUsageValue')
+  typical_occupant_usage = REXML::Element.new('n1:TypicalOccupantUsage')
+  typical_occupant_usage_value = REXML::Element.new('n1:TypicalOccupantUsageValue')
   typical_occupant_usage_value.text = '40.0'
   typical_occupant_usage.add_element(typical_occupant_usage_value)
-  typical_occupant_usage_units = REXML::Element.new('auc:TypicalOccupantUsageUnits')
+  typical_occupant_usage_units = REXML::Element.new('n1:TypicalOccupantUsageUnits')
   typical_occupant_usage_units.text = 'Hours per week'
   typical_occupant_usage.add_element(typical_occupant_usage_units)
   typical_occupant_usages.add_element(typical_occupant_usage)
   
-  typical_occupant_usage = REXML::Element.new('auc:TypicalOccupantUsage')
-  typical_occupant_usage_value = REXML::Element.new('auc:TypicalOccupantUsageValue')
+  typical_occupant_usage = REXML::Element.new('n1:TypicalOccupantUsage')
+  typical_occupant_usage_value = REXML::Element.new('n1:TypicalOccupantUsageValue')
   typical_occupant_usage_value.text = '50.0'
   typical_occupant_usage.add_element(typical_occupant_usage_value)
-  typical_occupant_usage_units = REXML::Element.new('auc:TypicalOccupantUsageUnits')
+  typical_occupant_usage_units = REXML::Element.new('n1:TypicalOccupantUsageUnits')
   typical_occupant_usage_units.text = 'Weeks per year'
   typical_occupant_usage.add_element(typical_occupant_usage_units)
   typical_occupant_usages.add_element(typical_occupant_usage)
   
   subsection.add_element(typical_occupant_usages)
   
+  floor_areas = REXML::Element.new('n1:FloorAreas')
+
+  floor_area = REXML::Element.new('n1:FloorArea')
+  floor_area_type = REXML::Element.new('n1:FloorAreaType')
+  floor_area_type.text = 'Gross'
+  floor_area.add_element(floor_area_type)
+  floor_area_value = REXML::Element.new('n1:FloorAreaValue')
+  floor_area_value.text = convert(feature[:properties][:"Gross Floor Area"], 'ft2', 'ft2')
+  floor_area.add_element(floor_area_value)
+  floor_areas.add_element(floor_area)
+  
+  subsection.add_element(floor_areas)
   
   # put it all together
   subsections.add_element(subsection)
@@ -642,79 +676,79 @@ def convert_feature(feature)
                MeasureTotalFirstCost: 1*floor_area}
                                                        
   source = '
-  <auc:Audits xmlns:auc="http://nrel.gov/schemas/bedes-auc/2014" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nrel.gov/schemas/bedes-auc/2014 file:///E:/buildingsync/BuildingSync.xsd">
-	<auc:Audit>
-		<auc:Sites>
-		</auc:Sites>
-    <auc:Measures>
+  <n1:Audits xmlns:n1="http://nrel.gov/schemas/bedes-auc/2014" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nrel.gov/schemas/bedes-auc/2014 https://github.com/BuildingSync/schema/releases/download/v0.3/BuildingSync.xsd">
+	<n1:Audit>
+		<n1:Sites>
+		</n1:Sites>
+    <n1:Measures>
 '
   measures.each do |measure|
-    source += "      <auc:Measure ID=\"#{measure[:ID]}\">
-        <auc:SystemCategoryAffected>#{measure[:SystemCategoryAffected]}</auc:SystemCategoryAffected>
-        <auc:PremisesAffected>
-          <auc:PremiseAffected IDref=\"#{facility_id}\"/>
-        </auc:PremisesAffected>
-        <auc:TechnologyCategories>
-          <auc:TechnologyCategory>
-            <auc:#{measure[:TechnologyCategory]}>
-              <auc:MeasureName>#{measure[:MeasureName]}</auc:MeasureName>
-            </auc:#{measure[:TechnologyCategory]}>
-          </auc:TechnologyCategory>
-        </auc:TechnologyCategories>
-        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
-        <auc:LongDescription>#{measure[:MeasureName]}</auc:LongDescription>
-        <auc:MVCost>0</auc:MVCost>
-        <auc:UsefulLife>#{measure[:UsefulLife]}</auc:UsefulLife>
-        <auc:MeasureTotalFirstCost>#{measure[:MeasureTotalFirstCost]}</auc:MeasureTotalFirstCost>
-        <auc:MeasureInstallationCost>0</auc:MeasureInstallationCost>
-        <auc:MeasureMaterialCost>0</auc:MeasureMaterialCost>
-        <auc:Recommended>true</auc:Recommended>
-        <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
-        <auc:UserDefinedFields>
-          <auc:UserDefinedField>
-            <auc:FieldName>OpenStudioMeasureName</auc:FieldName>
-            <auc:FieldValue>#{measure[:OpenStudioMeasureName]}</auc:FieldValue>
-          </auc:UserDefinedField>  
-        </auc:UserDefinedFields>
-      </auc:Measure>
+    source += "      <n1:Measure ID=\"#{measure[:ID]}\">
+        <n1:SystemCategoryAffected>#{measure[:SystemCategoryAffected]}</n1:SystemCategoryAffected>
+        <n1:PremisesAffected>
+          <n1:PremiseAffected IDref=\"#{facility_id}\"/>
+        </n1:PremisesAffected>
+        <n1:TechnologyCategories>
+          <n1:TechnologyCategory>
+            <n1:#{measure[:TechnologyCategory]}>
+              <n1:MeasureName>#{measure[:MeasureName]}</n1:MeasureName>
+            </n1:#{measure[:TechnologyCategory]}>
+          </n1:TechnologyCategory>
+        </n1:TechnologyCategories>
+        <n1:MeasureScaleOfApplication>Entire facility</n1:MeasureScaleOfApplication>
+        <n1:LongDescription>#{measure[:MeasureName]}</n1:LongDescription>
+        <n1:MVCost>0</n1:MVCost>
+        <n1:UsefulLife>#{measure[:UsefulLife]}</n1:UsefulLife>
+        <n1:MeasureTotalFirstCost>#{measure[:MeasureTotalFirstCost]}</n1:MeasureTotalFirstCost>
+        <n1:MeasureInstallationCost>0</n1:MeasureInstallationCost>
+        <n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
+        <n1:Recommended>true</n1:Recommended>
+        <n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
+        <n1:UserDefinedFields>
+          <n1:UserDefinedField>
+            <n1:FieldName>OpenStudioMeasureName</n1:FieldName>
+            <n1:FieldValue>#{measure[:OpenStudioMeasureName]}</n1:FieldValue>
+          </n1:UserDefinedField>  
+        </n1:UserDefinedFields>
+      </n1:Measure>
 "    
   end
 
-  source += '   </auc:Measures>
-    <auc:Report>
-      <auc:Scenarios>
-        <auc:Scenario ID="Baseline">
-          <auc:ScenarioName>Baseline</auc:ScenarioName>
-          <auc:ScenarioType>
-            <auc:PackageOfMeasures>
-              <auc:ReferenceCase IDref="Baseline"/>
-            </auc:PackageOfMeasures>
-          </auc:ScenarioType>
-        </auc:Scenario>
+  source += '   </n1:Measures>
+    <n1:Report>
+      <n1:Scenarios>
+        <n1:Scenario ID="Baseline">
+          <n1:ScenarioName>Baseline</n1:ScenarioName>
+          <n1:ScenarioType>
+            <n1:PackageOfMeasures>
+              <n1:ReferenceCase IDref="Baseline"/>
+            </n1:PackageOfMeasures>
+          </n1:ScenarioType>
+        </n1:Scenario>
   '
   measures.each do |measure|
-    source += "        <auc:Scenario>
-          <auc:ScenarioName>#{measure[:ScenarioName]} Only</auc:ScenarioName>
-          <auc:ScenarioType>
-            <auc:PackageOfMeasures>
-              <auc:ReferenceCase IDref=\"Baseline\"/>
-              <auc:MeasureIDs>
-                <auc:MeasureID IDref=\"#{measure[:ID]}\"/>
-              </auc:MeasureIDs>
-            </auc:PackageOfMeasures>
-          </auc:ScenarioType>
-        </auc:Scenario>
+    source += "        <n1:Scenario>
+          <n1:ScenarioName>#{measure[:ScenarioName]} Only</n1:ScenarioName>
+          <n1:ScenarioType>
+            <n1:PackageOfMeasures>
+              <n1:ReferenceCase IDref=\"Baseline\"/>
+              <n1:MeasureIDs>
+                <n1:MeasureID IDref=\"#{measure[:ID]}\"/>
+              </n1:MeasureIDs>
+            </n1:PackageOfMeasures>
+          </n1:ScenarioType>
+        </n1:Scenario>
 "    
   end
   
-  source += '      </auc:Scenarios>
-    </auc:Report>
-  </auc:Audit>
-</auc:Audits>
+  source += '      </n1:Scenarios>
+    </n1:Report>
+  </n1:Audit>
+</n1:Audits>
   '
   
   doc = REXML::Document.new(source)
-  sites = doc.elements['*/*/auc:Sites']
+  sites = doc.elements['*/*/n1:Sites']
   site = create_site(feature)
   sites.add_element(site)
 
