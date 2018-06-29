@@ -385,6 +385,7 @@ def convert_feature(feature)
                TechnologyCategory: 'LightingImprovements', 
                MeasureName: 'Retrofit with light emitting diode technologies',
                ScenarioName: 'LED',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
                
@@ -393,6 +394,7 @@ def convert_feature(feature)
                TechnologyCategory: 'PlugLoadReductions', 
                MeasureName: 'Replace with ENERGY STAR rated',
                ScenarioName: 'Electric_Appliance_30%_Reduction',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
                
@@ -401,6 +403,7 @@ def convert_feature(feature)
                TechnologyCategory: 'BuildingEnvelopeModifications', 
                MeasureName: 'Air seal envelope',
                ScenarioName: 'Air_Seal_Infiltration_30%_More_Airtight',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
 
@@ -409,6 +412,7 @@ def convert_feature(feature)
                TechnologyCategory: 'OtherHVAC', 
                MeasureName: 'Replace package units',
                ScenarioName: 'Cooling_System_SEER 14',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
                
@@ -417,6 +421,7 @@ def convert_feature(feature)
                TechnologyCategory: 'OtherHVAC', 
                MeasureName: 'Replace burner',
                ScenarioName: 'Heating_System_Efficiency_0.93',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
                
@@ -425,6 +430,7 @@ def convert_feature(feature)
                TechnologyCategory: 'LightingImprovements', 
                MeasureName: 'Add daylight controls',
                ScenarioName: 'Add daylight controls',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
       
@@ -433,6 +439,7 @@ def convert_feature(feature)
                TechnologyCategory: 'LightingImprovements', 
                MeasureName: 'Add occupancy sensors',
                ScenarioName: 'Add occupancy sensors',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
      
@@ -441,6 +448,7 @@ def convert_feature(feature)
                TechnologyCategory: 'PlugLoadReductions', 
                MeasureName: 'Install plug load controls',
                ScenarioName: 'Install plug load controls',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
      
@@ -449,6 +457,7 @@ def convert_feature(feature)
                TechnologyCategory: 'BuildingEnvelopeModifications', 
                MeasureName: 'Increase wall insulation',
                ScenarioName: 'Increase wall insulation',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
       
@@ -457,6 +466,7 @@ def convert_feature(feature)
                TechnologyCategory: 'BuildingEnvelopeModifications', 
                MeasureName: 'Insulate thermal bypasses',
                ScenarioName: 'Insulate thermal bypasses',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
 
@@ -465,6 +475,7 @@ def convert_feature(feature)
                TechnologyCategory: 'BuildingEnvelopeModifications', 
                MeasureName: 'Increase roof insulation',
                ScenarioName: 'Increase roof insulation',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
                
@@ -473,6 +484,7 @@ def convert_feature(feature)
                TechnologyCategory: 'BuildingEnvelopeModifications', 
                MeasureName: 'Increase ceiling insulation',
                ScenarioName: 'Increase ceiling insulation',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
                
@@ -481,14 +493,16 @@ def convert_feature(feature)
                TechnologyCategory: 'BuildingEnvelopeModifications', 
                MeasureName: 'Add window films',
                ScenarioName: 'Add window films',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
                
   measures << {ID: 'Measure14',
                SystemCategoryAffected: 'General Controls and Operations', 
                TechnologyCategory: 'OtherHVAC', 
-               MeasureName: 'Upgrade operating protocols, calibration, and_or sequencing',
-               ScenarioName: 'Upgrade operating protocols, calibration, and_or sequencing',
+               MeasureName: 'Upgrade operating protocols, calibration, and/or sequencing',
+               ScenarioName: 'Upgrade operating protocols, calibration, and/or sequencing',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
   
@@ -497,14 +511,16 @@ def convert_feature(feature)
                TechnologyCategory: 'ChilledWaterHotWaterAndSteamDistributionSystems', 
                MeasureName: 'Replace or upgrade water heater',
                ScenarioName: 'Replace or upgrade water heater',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
   
   measures << {ID: 'Measure16',
-               SystemCategoryAffected: 'Plug Load', 
-               TechnologyCategory: 'PlugLoadReductions', 
-               MeasureName: 'Replace ice_refrigeration equipment with high efficiency units',
-               ScenarioName: 'Replace ice_refrigeration equipment with high efficiency units',
+               SystemCategoryAffected: 'Refrigeration', 
+               TechnologyCategory: 'Refrigeration', 
+               MeasureName: 'Replace ice/refrigeration equipment with high efficiency units',
+               ScenarioName: 'Replace ice/refrigeration equipment with high efficiency units',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
   
@@ -513,6 +529,7 @@ def convert_feature(feature)
                TechnologyCategory: 'BuildingEnvelopeModifications', 
                MeasureName: 'Replace windows',
                ScenarioName: 'Replace windows',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
   
@@ -521,38 +538,43 @@ def convert_feature(feature)
                TechnologyCategory: 'BoilerPlantImprovements', 
                MeasureName: 'Replace boiler',
                ScenarioName: 'Replace boiler',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
   
   measures << {ID: 'Measure19',
                SystemCategoryAffected: 'Other HVAC', 
                TechnologyCategory: 'OtherHVAC', 
-               MeasureName: 'Replace HVAC with GSHP and DOAS',
+               MeasureName: 'Replace AC and heating units with ground coupled heat pump systems',
                ScenarioName: 'Replace HVAC with GSHP and DOAS',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
   
   measures << {ID: 'Measure20',
                SystemCategoryAffected: 'Other HVAC', 
                TechnologyCategory: 'OtherHVAC', 
-               MeasureName: 'Replace HVAC system type to VRF',
+               MeasureName: 'Other',
                ScenarioName: 'VRF with DOAS',
+               OpenStudioMeasureName: 'Replace HVAC system type to VRF',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
   
   measures << {ID: 'Measure21',
                SystemCategoryAffected: 'Other HVAC', 
                TechnologyCategory: 'OtherHVAC', 
-               MeasureName: 'Replace HVAC system type to PZHP',
+               MeasureName: 'Other',
                ScenarioName: 'Replace HVAC system type to PZHP',
+               OpenStudioMeasureName: 'Replace HVAC system type to PZHP',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
   
   measures << {ID: 'Measure22',
                SystemCategoryAffected: 'Fan', 
-               TechnologyCategory: 'ElectricMotorsAndDrives', 
+               TechnologyCategory: 'OtherElectricMotorsAndDrives', 
                MeasureName: 'Replace with higher efficiency',
                ScenarioName: 'Replace with higher efficiency',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
   
@@ -561,14 +583,16 @@ def convert_feature(feature)
                TechnologyCategory: 'OtherHVAC', 
                MeasureName: 'Improve ventilation fans',
                ScenarioName: 'Improve ventilation fans',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
   
   measures << {ID: 'Measure24',
                SystemCategoryAffected: 'Air Distribution', 
                TechnologyCategory: 'OtherHVAC', 
-               MeasureName: 'Enable Demand Controlled Ventilation',
-               ScenarioName: 'Enable Demand Controlled Ventilation',
+               MeasureName: 'Install demand control ventilation',
+               ScenarioName: 'Install demand control ventilation',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
 
@@ -577,6 +601,7 @@ def convert_feature(feature)
                TechnologyCategory: 'OtherHVAC', 
                MeasureName: 'Add or repair economizer',
                ScenarioName: 'Add or repair economizer',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
   
@@ -585,6 +610,7 @@ def convert_feature(feature)
                TechnologyCategory: 'OtherHVAC', 
                MeasureName: 'Add energy recovery',
                ScenarioName: 'Add energy recovery',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
   
@@ -593,6 +619,7 @@ def convert_feature(feature)
                TechnologyCategory: 'ChilledWaterHotWaterAndSteamDistributionSystems', 
                MeasureName: 'Add pipe insulation',
                ScenarioName: 'Add pipe insulation',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
   
@@ -601,6 +628,7 @@ def convert_feature(feature)
                TechnologyCategory: 'ChilledWaterHotWaterAndSteamDistributionSystems', 
                MeasureName: 'Add recirculating pumps',
                ScenarioName: 'Add recirculating pumps',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
   
@@ -609,6 +637,7 @@ def convert_feature(feature)
                TechnologyCategory: 'WaterAndSewerConservationSystems', 
                MeasureName: 'Install low-flow faucets and showerheads',
                ScenarioName: 'Install low-flow faucets and showerheads',
+               OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
                                                        
@@ -641,6 +670,12 @@ def convert_feature(feature)
         <auc:MeasureMaterialCost>0</auc:MeasureMaterialCost>
         <auc:Recommended>true</auc:Recommended>
         <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
+        <auc:UserDefinedFields>
+          <auc:UserDefinedField>
+            <auc:FieldName>OpenStudioMeasureName</auc:FieldName>
+            <auc:FieldValue>#{measure[:OpenStudioMeasureName]}</auc:FieldValue>
+          </auc:UserDefinedField>  
+        </auc:UserDefinedFields>
       </auc:Measure>
 "    
   end
@@ -709,8 +744,8 @@ geojson[:features].each do |feature|
     File.open(filename, 'w') do |file|
       doc.write(file)
     end
-  rescue
-    puts "Building #{id} not converted"
+  rescue => e
+    puts "Building #{id} not converted, #{e.message}"
     next
   end
 
