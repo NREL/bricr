@@ -394,6 +394,24 @@ def create_site(feature)
   floor_area.add_element(floor_area_value)
   floor_areas.add_element(floor_area)
   
+  floor_area = REXML::Element.new('n1:FloorArea')
+  floor_area_type = REXML::Element.new('n1:FloorAreaType')
+  floor_area_type.text = 'Tenant'
+  floor_area.add_element(floor_area_type)
+  floor_area_value = REXML::Element.new('n1:FloorAreaValue')
+  floor_area_value.text = convert(feature[:properties][:"Gross Floor Area"], 'ft2', 'ft2')
+  floor_area.add_element(floor_area_value)
+  floor_areas.add_element(floor_area)
+  
+  floor_area = REXML::Element.new('n1:FloorArea')
+  floor_area_type = REXML::Element.new('n1:FloorAreaType')
+  floor_area_type.text = 'Common'
+  floor_area.add_element(floor_area_type)
+  floor_area_value = REXML::Element.new('n1:FloorAreaValue')
+  floor_area_value.text = '0.0'
+  floor_area.add_element(floor_area_value)
+  floor_areas.add_element(floor_area)
+  
   subsection.add_element(floor_areas)
   
   # put it all together
