@@ -2,8 +2,8 @@
   <schema_version>3.0</schema_version>
   <name>create_bar_from_building_type_ratios</name>
   <uid>6e3a14f8-c3c7-4e03-bc51-bef8a52e1a05</uid>
-  <version_id>d034dfca-cf03-4e11-b40d-ecd5194f3737</version_id>
-  <version_modified>20180123T051147Z</version_modified>
+  <version_id>512366d0-ef92-4089-a67a-70ed492a6556</version_id>
+  <version_modified>20180717T215711Z</version_modified>
   <xml_checksum>2AF3A68E</xml_checksum>
   <class_name>CreateBarFromBuildingTypeRatios</class_name>
   <display_name>Create Bar From Building Type Ratios</display_name>
@@ -466,28 +466,32 @@
           <display_name>90.1-2013</display_name>
         </choice>
         <choice>
+          <value>NREL ZNE Ready 2017</value>
+          <display_name>NREL ZNE Ready 2017</display_name>
+        </choice>
+        <choice>
           <value>CEC Pre-1978</value>
           <display_name>CEC Pre-1978</display_name>
         </choice>
         <choice>
-          <value>CEC T24 1978</value>
-          <display_name>CEC T24 1978</display_name>
+          <value>CBES T24 1978</value>
+          <display_name>CBES T24 1978</display_name>
         </choice>
         <choice>
-          <value>CEC T24 1992</value>
-          <display_name>CEC T24 1992</display_name>
+          <value>CBES T24 1992</value>
+          <display_name>CBES T24 1992</display_name>
         </choice>
         <choice>
-          <value>CEC T24 2001</value>
-          <display_name>CEC T24 2001</display_name>
+          <value>CBES T24 2001</value>
+          <display_name>CBES T24 2001</display_name>
         </choice>
         <choice>
-          <value>CEC T24 2005</value>
-          <display_name>CEC T24 2005</display_name>
+          <value>CBES T24 2005</value>
+          <display_name>CBES T24 2005</display_name>
         </choice>
         <choice>
-          <value>CEC T24 2008</value>
-          <display_name>CEC T24 2008</display_name>
+          <value>CBES T24 2008</value>
+          <display_name>CBES T24 2008</display_name>
         </choice>
       </choices>
     </argument>
@@ -651,6 +655,25 @@
         </choice>
       </choices>
     </argument>
+    <argument>
+      <name>use_upstream_args</name>
+      <display_name>Use Upstream Argument Values</display_name>
+      <description>When true this will look for arguments or registerValues in upstream measures that match arguments from this measure, and will use the value from the upstream measure in place of what is entered for this measure.</description>
+      <type>Boolean</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>true</default_value>
+      <choices>
+        <choice>
+          <value>true</value>
+          <display_name>true</display_name>
+        </choice>
+        <choice>
+          <value>false</value>
+          <display_name>false</display_name>
+        </choice>
+      </choices>
+    </argument>
   </arguments>
   <outputs/>
   <provenances/>
@@ -690,19 +713,19 @@
       <filename>os_lib_geometry.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>ABF2B8A1</checksum>
+      <checksum>3D17299B</checksum>
     </file>
     <file>
       <filename>os_lib_helper_methods.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>02263B97</checksum>
+      <checksum>9CFC43FB</checksum>
     </file>
     <file>
       <filename>os_lib_model_simplification.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>EA7B0C98</checksum>
+      <checksum>EAEEA8B6</checksum>
     </file>
     <file>
       <version>
@@ -713,19 +736,19 @@
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>13303D56</checksum>
+      <checksum>F2EED23D</checksum>
     </file>
     <file>
       <filename>create_bar_from_building_type_ratios_test.rb</filename>
       <filetype>rb</filetype>
       <usage_type>test</usage_type>
-      <checksum>262A113F</checksum>
+      <checksum>A6A8530B</checksum>
     </file>
     <file>
       <filename>os_lib_model_generation.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>1F9202EC</checksum>
+      <checksum>F7DD3B14</checksum>
     </file>
   </files>
 </measure>

@@ -38,7 +38,12 @@ module BRICR
       FileUtils.mkdir_p(dir)
     end
 
-    def gatherResults(dir); end
+    def gatherResults(dir)
+    end
+    
+    def failed_scenarios
+      return []
+    end
 
     def saveXML(filename)
       File.open(filename, 'w') do |file|

@@ -2,8 +2,8 @@
   <schema_version>3.0</schema_version>
   <name>calibrate_baseline_model</name>
   <uid>2753b04c-ec8c-49d1-ba3a-120bfc9737ef</uid>
-  <version_id>534e9aef-c904-4aff-a93e-ce336d4e57af</version_id>
-  <version_modified>20180123T051147Z</version_modified>
+  <version_id>e8cd52e0-c872-44b3-8190-ac9df398e60d</version_id>
+  <version_modified>20180717T215711Z</version_modified>
   <xml_checksum>FD815A15</xml_checksum>
   <class_name>CalibrateBaselineModel</class_name>
   <display_name>Calibrate Baseline Model</display_name>
@@ -16,7 +16,7 @@
       <type>Choice</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
-      <default_value>CEC T24 2008</default_value>
+      <default_value>CBES T24 2008</default_value>
       <choices>
         <choice>
           <value>DOE Ref Pre-1980</value>
@@ -47,24 +47,24 @@
           <display_name>CEC Pre-1978</display_name>
         </choice>
         <choice>
-          <value>CEC T24 1978</value>
-          <display_name>CEC T24 1978</display_name>
+          <value>CBES T24 1978</value>
+          <display_name>CBES T24 1978</display_name>
         </choice>
         <choice>
-          <value>CEC T24 1992</value>
-          <display_name>CEC T24 1992</display_name>
+          <value>CBES T24 1992</value>
+          <display_name>CBES T24 1992</display_name>
         </choice>
         <choice>
-          <value>CEC T24 2001</value>
-          <display_name>CEC T24 2001</display_name>
+          <value>CBES T24 2001</value>
+          <display_name>CBES T24 2001</display_name>
         </choice>
         <choice>
-          <value>CEC T24 2005</value>
-          <display_name>CEC T24 2005</display_name>
+          <value>CBES T24 2005</value>
+          <display_name>CBES T24 2005</display_name>
         </choice>
         <choice>
-          <value>CEC T24 2008</value>
-          <display_name>CEC T24 2008</display_name>
+          <value>CBES T24 2008</value>
+          <display_name>CBES T24 2008</display_name>
         </choice>
       </choices>
     </argument>
@@ -193,17 +193,6 @@
       <checksum>53D14E69</checksum>
     </file>
     <file>
-      <version>
-        <software_program>OpenStudio</software_program>
-        <identifier>2.2.0</identifier>
-        <min_compatible>2.2.0</min_compatible>
-      </version>
-      <filename>measure.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>script</usage_type>
-      <checksum>70DD55BD</checksum>
-    </file>
-    <file>
       <filename>calibrate_factors.json</filename>
       <filetype>json</filetype>
       <usage_type>resource</usage_type>
@@ -216,10 +205,21 @@
       <checksum>02263B97</checksum>
     </file>
     <file>
+      <version>
+        <software_program>OpenStudio</software_program>
+        <identifier>2.2.0</identifier>
+        <min_compatible>2.2.0</min_compatible>
+      </version>
+      <filename>measure.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>script</usage_type>
+      <checksum>46132D79</checksum>
+    </file>
+    <file>
       <filename>os_lib_model_generation.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>1F9202EC</checksum>
+      <checksum>F0A61FDE</checksum>
     </file>
   </files>
 </measure>

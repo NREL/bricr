@@ -57,6 +57,10 @@ module BRICR
     def gatherResults(dir)
       @workflow_maker.gatherResults(dir)
     end
+    
+    def failed_scenarios()
+      @workflow_maker.failed_scenarios
+    end
 
     def saveXML(filename)
       @workflow_maker.saveXML(filename)

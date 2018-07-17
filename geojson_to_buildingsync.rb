@@ -835,15 +835,15 @@ geojson[:features].each do |feature|
   if year_built < 1978
     template = "CEC Pre-1978"
   elsif year_built >= 1978 && year_built < 1992
-    template = "CEC T24 1978"
+    template = "CBES T24 1978"
   elsif year_built >= 1992 && year_built < 2001
-    template = "CEC T24 1992"
+    template = "CBES T24 1992"
   elsif year_built >= 2001 && year_built < 2005
-    template = "CEC T24 2001"
+    template = "CBES T24 2001"
   elsif year_built >= 2005 && year_built < 2008
-    template = "CEC T24 2005"
+    template = "CBES T24 2005"
   else
-    template = "CEC T24 2008"
+    template = "CBES T24 2008"
   end
 
   # source factor: 1.05 for gas, 3.14 for electricity

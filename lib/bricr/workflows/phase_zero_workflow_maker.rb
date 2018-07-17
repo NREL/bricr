@@ -32,6 +32,9 @@ module BRICR
 
       # load the workflow
       @workflow = nil
+      
+      # log failed scenarios
+      @failed_scenarios = []
 
       # select base osw for standalone, small office, medium office
       base_osw = 'phase_zero_base.osw'
@@ -84,15 +87,15 @@ module BRICR
         if built_year < 1978
           $bricr_template = "CEC Pre-1978"
         elsif built_year >= 1978 && built_year < 1992
-          $bricr_template = "CEC T24 1978"
+          $bricr_template = "CBES T24 1978"
         elsif built_year >= 1992 && built_year < 2001
-          $bricr_template = "CEC T24 1992"
+          $bricr_template = "CBES T24 1992"
         elsif built_year >= 2001 && built_year < 2005
-          $bricr_template = "CEC T24 2001"
+          $bricr_template = "CBES T24 2001"
         elsif built_year >= 2005 && built_year < 2008
-          $bricr_template = "CEC T24 2005"
+          $bricr_template = "CBES T24 2005"
         else
-          $bricr_template = "CEC T24 2008"
+          $bricr_template = "CBES T24 2008"
         end
 		
 		#$bricr_template = "90.1-2004"
@@ -585,9 +588,15 @@ module BRICR
 
         result = results[scenario_name]
         baseline = results['Baseline']
+        
+        if result['completed_status'] == 'Success' || result[:completed_status] == 'Success'
+          # success
+        else
+          @failed_scenarios << scenario_name
+        end
 
         # Check out.osw "openstudio_results" for output variables
-		total_site_energy = getMeasureResult(result, 'openstudio_results', 'total_site_energy') # in kBtu
+        total_site_energy = getMeasureResult(result, 'openstudio_results', 'total_site_energy') # in kBtu
         baseline_total_site_energy = getMeasureResult(baseline, 'openstudio_results', 'total_site_energy') # in kBtu
         fuel_electricity = getMeasureResult(result, 'openstudio_results', 'fuel_electricity') # in kBtu
         fuel_natural_gas = getMeasureResult(result, 'openstudio_results', 'fuel_natural_gas') # in kBtu
@@ -596,14 +605,14 @@ module BRICR
 		
 
         total_site_energy_savings = 0
-		total_energy_cost_savings = 0
+        total_energy_cost_savings = 0
         if baseline_total_site_energy && total_site_energy
           total_site_energy_savings = baseline_total_site_energy - total_site_energy
-		  total_energy_cost_savings = baseline_annual_utility_cost - annual_utility_cost
+          total_energy_cost_savings = baseline_annual_utility_cost - annual_utility_cost
         end
         
         annual_savings_site_energy = REXML::Element.new('auc:AnnualSavingsSiteEnergy')
-		annual_site_energy = REXML::Element.new('auc:AnnualSiteEnergy')
+        annual_site_energy = REXML::Element.new('auc:AnnualSiteEnergy')
         annual_electricity = REXML::Element.new('auc:AnnualElectricity')
         annual_natural_gas = REXML::Element.new('auc:AnnualNaturalGas')
         annual_savings_energy_cost = REXML::Element.new('auc:AnnualSavingsEnergyCost')
@@ -621,5 +630,10 @@ module BRICR
         package_of_measures.add_element(annual_savings_energy_cost)
       end
     end
+    
+    def failed_scenarios
+      return @failed_scenarios
+    end
+    
   end
 end

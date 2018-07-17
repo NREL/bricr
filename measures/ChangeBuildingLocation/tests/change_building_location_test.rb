@@ -1,16 +1,47 @@
+# *******************************************************************************
+# OpenStudio(R), Copyright (c) 2008-2018, Alliance for Sustainable Energy, LLC.
+# All rights reserved.
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# (1) Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+#
+# (2) Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation
+# and/or other materials provided with the distribution.
+#
+# (3) Neither the name of the copyright holder nor the names of any contributors
+# may be used to endorse or promote products derived from this software without
+# specific prior written permission from the respective party.
+#
+# (4) Other than as required in clauses (1) and (2), distributions in any form
+# of modifications or other derivative works may not use the "OpenStudio"
+# trademark, "OS", "os", or any other confusingly similar designation without
+# specific prior written permission from Alliance for Sustainable Energy, LLC.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER(S) AND ANY CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER(S), ANY CONTRIBUTORS, THE
+# UNITED STATES GOVERNMENT, OR THE UNITED STATES DEPARTMENT OF ENERGY, NOR ANY OF
+# THEIR EMPLOYEES, BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+# OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+# STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# *******************************************************************************
+
 require 'openstudio'
-require 'openstudio/ruleset/ShowRunnerOutput'
-
-require 'minitest/autorun'
-
-require_relative '../measure.rb'
-
+require 'openstudio/measure/ShowRunnerOutput'
 require 'fileutils'
 
-class ChangeBuildingLocation_Test < MiniTest::Unit::TestCase
+require_relative '../measure.rb'
+require 'minitest/autorun'
 
+class ChangeBuildingLocation_Test < Minitest::Test
   def run_dir(test_name)
-
     # will make directory if it doesn't exist
     output_dir = File.expand_path('output', File.dirname(__FILE__))
     FileUtils.mkdir output_dir unless Dir.exist? output_dir
@@ -21,14 +52,13 @@ class ChangeBuildingLocation_Test < MiniTest::Unit::TestCase
 
   # method to apply arguments, run measure, and assert results (only populate args hash with non-default argument values)
   def apply_measure_to_model(test_name, args, model_name = nil, result_value = 'Success', warnings_count = 0, info_count = nil)
-
     # create an instance of the measure
     measure = ChangeBuildingLocation.new
 
     # create an instance of a runner with OSW
-    osw_path = OpenStudio::Path.new(File.dirname(__FILE__) + "/test.osw")
+    osw_path = OpenStudio::Path.new(File.dirname(__FILE__) + '/test.osw')
     osw = OpenStudio::WorkflowJSON.load(osw_path).get
-    runner = OpenStudio::Ruleset::OSRunner.new(osw)
+    runner = OpenStudio::Measure::OSRunner.new(osw)
 
     # get model
     if model_name.nil?
@@ -37,20 +67,20 @@ class ChangeBuildingLocation_Test < MiniTest::Unit::TestCase
     else
       # load the test model
       translator = OpenStudio::OSVersion::VersionTranslator.new
-      path = OpenStudio::Path.new(File.dirname(__FILE__) + "/" + model_name)
+      path = OpenStudio::Path.new(File.dirname(__FILE__) + '/' + model_name)
       model = translator.loadModel(path)
-      assert((not model.empty?))
+      assert(!model.empty?)
       model = model.get
     end
 
     # get arguments
     arguments = measure.arguments(model)
-    argument_map = OpenStudio::Ruleset.convertOSArgumentVectorToMap(arguments)
+    argument_map = OpenStudio::Measure.convertOSArgumentVectorToMap(arguments)
 
     # populate argument with specified hash value if specified
     arguments.each do |arg|
       temp_arg_var = arg.clone
-      if args.has_key?(arg.name)
+      if args.key?(arg.name)
         assert(temp_arg_var.setValue(args[arg.name]))
       end
       argument_map[arg.name] = temp_arg_var
@@ -59,7 +89,7 @@ class ChangeBuildingLocation_Test < MiniTest::Unit::TestCase
     # temporarily change directory to the run directory and run the measure (because of sizing run)
     start_dir = Dir.pwd
     begin
-      unless Dir.exists?(run_dir(test_name))
+      unless Dir.exist?(run_dir(test_name))
         Dir.mkdir(run_dir(test_name))
       end
       Dir.chdir(run_dir(test_name))
@@ -67,7 +97,6 @@ class ChangeBuildingLocation_Test < MiniTest::Unit::TestCase
       # run the measure
       measure.run(model, runner, argument_map)
       result = runner.result
-
     ensure
       Dir.chdir(start_dir)
 
@@ -92,31 +121,30 @@ class ChangeBuildingLocation_Test < MiniTest::Unit::TestCase
 
     # save the model to test output directory
     output_file_path = OpenStudio::Path.new(File.dirname(__FILE__) + "/output/#{test_name}_test_output.osm")
-    model.save(output_file_path,true)
+    model.save(output_file_path, true)
   end
 
   def test_weather_file
     args = {}
-    args["weather_file_name"] = 'USA_MA_Boston-Logan.Intl.AP.725090_TMY3.epw' # seems to search directory of OSW even with empty file_paths
-    apply_measure_to_model(__method__.to_s.gsub('test_',''), args, 'test.osm',nil,nil)
+    args['weather_file_name'] = 'USA_MA_Boston-Logan.Intl.AP.725090_TMY3.epw' # seems to search directory of OSW even with empty file_paths
+    apply_measure_to_model(__method__.to_s.gsub('test_', ''), args, 'test.osm', nil, nil)
   end
 
   def test_weather_file_WA_Renton
     args = {}
-    args["weather_file_name"] = 'USA_WA_Renton.Muni.AP.727934_TMY3.epw' # seems to search directory of OSW even with empty file_paths
-    apply_measure_to_model(__method__.to_s.gsub('test_',''), args, 'test.osm',nil,nil)
+    args['weather_file_name'] = 'USA_WA_Renton.Muni.AP.727934_TMY3.epw' # seems to search directory of OSW even with empty file_paths
+    apply_measure_to_model(__method__.to_s.gsub('test_', ''), args, 'test.osm', nil, nil)
   end
 
   def test_multiyear_weather_file
     args = {}
-    args["weather_file_name"] = 'multiyear.epw' # seems to search directory of OSW even with empty file_paths
-    apply_measure_to_model(__method__.to_s.gsub('test_',''), args, 'test.osm',nil,nil)
+    args['weather_file_name'] = 'multiyear.epw' # seems to search directory of OSW even with empty file_paths
+    apply_measure_to_model(__method__.to_s.gsub('test_', ''), args, 'test.osm', nil, nil)
   end
 
   def test_weather_file_bad
     args = {}
-    args["weather_file_name"] = 'BadFileName.epw' # seems to search directory of OSW even with empty file_paths
-    apply_measure_to_model(__method__.to_s.gsub('test_',''), args, 'test.osm',"Fail",nil)
+    args['weather_file_name'] = 'BadFileName.epw' # seems to search directory of OSW even with empty file_paths
+    apply_measure_to_model(__method__.to_s.gsub('test_', ''), args, 'test.osm', 'Fail', nil)
   end
-
 end

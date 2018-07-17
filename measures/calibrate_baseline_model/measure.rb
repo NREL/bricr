@@ -39,7 +39,7 @@ class CalibrateBaselineModel < OpenStudio::Ruleset::ModelUserScript
     # Make argument for template
     template = OpenStudio::Ruleset::OSArgument::makeChoiceArgument('template', get_templates, true)
     template.setDisplayName('Target Standard')
-    template.setDefaultValue('CEC T24 2008')
+    template.setDefaultValue('CBES T24 2008')
     args << template
 
     # Make an argument for the bldg_type_a

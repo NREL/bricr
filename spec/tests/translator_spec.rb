@@ -34,14 +34,16 @@ describe 'BRICR' do
       Parallel.each(osw_files, in_threads: [BRICR::NUM_PARALLEL, BRICR::MAX_DATAPOINTS].min) do |osw|
         break if num_sims > BRICR::MAX_DATAPOINTS
 
-        cmd = "\"#{BRICR::OPENSTUDIO_EXE}\" run -w \"#{osw}\""
+        cmd = "\"#{BRICR::OPENSTUDIO_EXE}\" -I E:/openstudio-standards/lib run -w \"#{osw}\""
         puts "Running cmd: #{cmd}"
-        system(cmd)
-
+        result = system(cmd)
+        expect(result).to be true
+        
         num_sims += 1
       end
 
       translator.gatherResults(out_path)
+      expect(translator.failed_scenarios.empty?).to be(true), "Scenarios #{translator.failed_scenarios.join(', ')} failed to run"
       translator.saveXML(File.join(out_path, 'results.xml'))
     end
   end

@@ -1,3 +1,38 @@
+# *******************************************************************************
+# OpenStudio(R), Copyright (c) 2008-2018, Alliance for Sustainable Energy, LLC.
+# All rights reserved.
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# (1) Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+#
+# (2) Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation
+# and/or other materials provided with the distribution.
+#
+# (3) Neither the name of the copyright holder nor the names of any contributors
+# may be used to endorse or promote products derived from this software without
+# specific prior written permission from the respective party.
+#
+# (4) Other than as required in clauses (1) and (2), distributions in any form
+# of modifications or other derivative works may not use the "OpenStudio"
+# trademark, "OS", "os", or any other confusingly similar designation without
+# specific prior written permission from Alliance for Sustainable Energy, LLC.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER(S) AND ANY CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER(S), ANY CONTRIBUTORS, THE
+# UNITED STATES GOVERNMENT, OR THE UNITED STATES DEPARTMENT OF ENERGY, NOR ANY OF
+# THEIR EMPLOYEES, BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+# OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+# STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# *******************************************************************************
+
 ######################################################################
 #  Copyright (c) 2008-2013, Alliance for Sustainable Energy.
 #  All rights reserved.
@@ -55,12 +90,12 @@ module EnergyPlus
 
     # the mean of the mean monthly dry bulbs
     def mean_dry_bulb
-      if not @monthly_dry_bulb.empty? then
+      if !@monthly_dry_bulb.empty?
         sum = 0
         @monthly_dry_bulb.each { |db| sum += db }
-        mean = sum/@monthly_dry_bulb.size
+        mean = sum / @monthly_dry_bulb.size
       else
-        mean = ""
+        mean = ''
       end
 
       mean.to_f
@@ -68,10 +103,10 @@ module EnergyPlus
 
     # max - min of the mean monthly dry bulbs
     def delta_dry_bulb
-      if not @monthly_dry_bulb.empty? then
-        delta_t = @monthly_dry_bulb.max-@monthly_dry_bulb.min
+      if !@monthly_dry_bulb.empty?
+        delta_t = @monthly_dry_bulb.max - @monthly_dry_bulb.min
       else
-        delta_t = ""
+        delta_t = ''
       end
 
       delta_t.to_f
@@ -83,7 +118,7 @@ module EnergyPlus
     def init
       if @path.exist?
         File.open(@path) do |f|
-          text = f.read.force_encoding("iso-8859-1")
+          text = f.read.force_encoding('iso-8859-1')
           parse(text)
         end
       end
@@ -98,12 +133,12 @@ module EnergyPlus
         return
       else
 
-        @lat = match_data[2].to_f + (match_data[3].to_f)/60.0
+        @lat = match_data[2].to_f + match_data[3].to_f / 60.0
         if match_data[1] == 'S'
           @lat = -@lat
         end
 
-        @lon = match_data[5].to_f + (match_data[6].to_f)/60.0
+        @lon = match_data[5].to_f + match_data[6].to_f / 60.0
         if match_data[4] == 'W'
           @lon = -@lon
         end
@@ -161,8 +196,7 @@ module EnergyPlus
         @hdd18 = match_data[1].to_f
       end
 
-
-      #use regex to get the temperatures
+      # use regex to get the temperatures
       regex = /Daily Avg(.*)\n/
       match_data = text.match(regex)
       if match_data.nil?
@@ -185,6 +219,5 @@ module EnergyPlus
       # now we are valid
       @valid = true
     end
-
   end
 end
