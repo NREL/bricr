@@ -4,7 +4,11 @@ module BRICR
   #ENV['GEM_PATH'] = 'C:/bricr/gems'
   
   # location of openstudio CLI
-  OPENSTUDIO_EXE = 'C:/openstudio-2.6.0/bin/openstudio.exe'
+  if /mswin/.match(RUBY_PLATFORM) || /mingw/.match(RUBY_PLATFORM)
+    OPENSTUDIO_EXE = 'C:/openstudio-2.6.0/bin/openstudio.exe'
+  else
+    OPENSTUDIO_EXE = 'openstudio'
+  end
 
   # one or more measure paths
   OPENSTUDIO_MEASURES = [File.realpath("./measures", File.dirname(__FILE__)), File.realpath("./../openstudio-measures/nrel_published", File.dirname(__FILE__)), File.realpath("./../openstudio-measures/nrel_dev", File.dirname(__FILE__))]
@@ -37,16 +41,12 @@ module BRICR
   # collect results
   DO_GET_RESULTS = false
   
-  # url for seed instance
-  SEED_URL = nil
+  # configuration for SEED
+  ENV['BRICR_SEED_HOST'] = 'YOUR_SEED_HOST'
+  ENV['BRICR_SEED_USERNAME'] = 'YOUR_SEED_USERNAME'
+  ENV['BRICR_SEED_API_KEY'] = 'YOUR_SEED_API_KEY'
   
-  ENV['BRICR_SEED_HOST'] = 'http://192.168.99.100'
-  
-  ENV['BRICR_SEED_USERNAME'] = 'user@seed-platform.org'
-  
-  ENV['BRICR_SEED_API_KEY'] = ''
   # url for bricr-sim
   BRICR_SIM_URL = nil
-
 
 end

@@ -21,7 +21,7 @@ services:
   db-redis:
     image: redis
   web:
-    image: seedplatform/seed:buildingsync-upload
+    image: seedplatform/seed:develop
     environment:
       - POSTGRES_DB=seed
       - POSTGRES_USER=seed
@@ -40,7 +40,7 @@ services:
       - "80:80"
   web-celery:
     command: /seed/docker/start_celery_docker.sh
-    image: seedplatform/seed:buildingsync-upload
+    image: seedplatform/seed:develop
     environment:
       - POSTGRES_DB=seed
       - POSTGRES_USER=seed
