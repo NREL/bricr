@@ -26,16 +26,16 @@ module BRICR
   DO_SIMULATIONS = false
   
   # specify the output folder for the simulation runs
-  SIMULATION_OUTPUT_FOLDER = "D:/BRICR_OUTPUT/"
+  #SIMULATION_OUTPUT_FOLDER = "D:/BRICR_OUTPUT/"
 
   # specify to run the baseline simulation only or not
-  SIMULATE_BASELINE_ONLY = true
+  SIMULATE_BASELINE_ONLY = false
 
   # specify to include the model calibration or not
   DO_MODEL_CALIBRATION = false
   
   # collect results
-  DO_GET_RESULTS = true
+  DO_GET_RESULTS = false
   
   # url for seed instance
   SEED_URL = nil
