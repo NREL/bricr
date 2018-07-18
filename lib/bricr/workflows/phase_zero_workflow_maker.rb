@@ -53,6 +53,9 @@ module BRICR
       if BRICR::OPENSTUDIO_FILES
         @workflow['file_paths'] = BRICR::OPENSTUDIO_FILES
       end
+      
+      @facility = {}
+      @subsections = []
 
       # configure the workflow based on properties in the xml
       configureForDoc(@workflow)
@@ -60,22 +63,26 @@ module BRICR
 
     def configureForDoc(osw)
 
-      # get the floor area
-      floor_area = nil
+      # get the facility floor areas
+      @facility['gross_floor_area'] = nil
+      @facility['heated_and_cooled_floor_area'] = nil
+      @facility['footprint_floor_area'] = nil
       @doc.elements.each('/n1:Audits/n1:Audit/n1:Sites/n1:Site/n1:Facilities/n1:Facility/n1:FloorAreas/n1:FloorArea') do |floor_area_element|
+        floor_area = floor_area_element.elements['n1:FloorAreaValue'].text.to_f
+        next if floor_area.nil?
+        
         floor_area_type = floor_area_element.elements['n1:FloorAreaType'].text
         if floor_area_type == 'Gross'
-          # SHL- How about multiple space types?
-          floor_area = floor_area_element.elements['n1:FloorAreaValue'].text.to_f
-          # SHL-Check whether we get floor area or not.
-          if floor_area == nil
-            raise "Can not find the floor area"
-          end
+          @facility['gross_floor_area'] = floor_area
+        elsif floor_area_type == 'Heated and Cooled'
+          @facility['heated_and_cooled_floor_area'] = floor_area
+        elsif floor_area_type == 'Footprint'
+          @facility['footprint_floor_area'] = floor_area
         end
       end
 
       # SHL- get the template (vintage)
-      $bricr_template = nil
+      @facility['template'] = nil
       @doc.elements.each('/n1:Audits/n1:Audit/n1:Sites/n1:Site/n1:Facilities/n1:Facility') do |facility_element|
         built_year = facility_element.elements['n1:YearOfConstruction'].text.to_f
         
@@ -85,102 +92,151 @@ module BRICR
         end
 
         if built_year < 1978
-          $bricr_template = "CEC Pre-1978"
+          @facility['template'] = "CEC Pre-1978"
         elsif built_year >= 1978 && built_year < 1992
-          $bricr_template = "CBES T24 1978"
+          @facility['template'] = "CBES T24 1978"
         elsif built_year >= 1992 && built_year < 2001
-          $bricr_template = "CBES T24 1992"
+          @facility['template'] = "CBES T24 1992"
         elsif built_year >= 2001 && built_year < 2005
-          $bricr_template = "CBES T24 2001"
+          @facility['template'] = "CBES T24 2001"
         elsif built_year >= 2005 && built_year < 2008
-          $bricr_template = "CBES T24 2005"
+          @facility['template'] = "CBES T24 2005"
         else
-          $bricr_template = "CBES T24 2008"
+          @facility['template'] = "CBES T24 2008"
         end
-    
-        #$bricr_template = "90.1-2004"
 
       end
 
-      # For measure: create_bar_from_building_type_ratios 
-      $bricr_bldg_type = nil
-      bar_division_method = nil
-      num_stories_above_grade = nil
-      num_stories_below_grade = nil
-      ns_to_ew_ratio = nil
-      building_rotation = nil # TBD
-      floor_height = nil # TBD
-      wwr = nil # TBD
-      # For measure: create_typical_building_from_model
-      $bricr_system_type = nil
+      @facility['num_stories_above_grade'] = nil
+      @facility['num_stories_below_grade'] = nil
+      @facility['ns_to_ew_ratio'] = nil
+      @facility['building_rotation'] = nil # TBD
+      @facility['floor_height'] = nil # TBD
+      @facility['wwr'] = nil # TBD
 
       @doc.elements.each('/n1:Audits/n1:Audit/n1:Sites/n1:Site/n1:Facilities/n1:Facility') do |facility_element|
-        $bricr_occupancy_type = facility_element.elements['n1:OccupancyClassification'].text
-        if $bricr_occupancy_type == 'Retail'
-          $bricr_bldg_type = 'RetailStandalone'
-          bar_division_method = 'Multiple Space Types - Individual Stories Sliced'
-          $bricr_system_type = 'PSZ-AC with gas coil heat'
-        elsif $bricr_occupancy_type == 'Office'
-          bar_division_method = 'Single Space Type - Core and Perimeter'
-          if floor_area > 0 && floor_area < 20000
-            $bricr_bldg_type = 'SmallOffice'
-            $bricr_system_type = 'PSZ-AC with gas coil heat'
-          elsif floor_area >= 20000 && floor_area < 75000
-            $bricr_bldg_type = 'MediumOffice'
-            $bricr_system_type = 'PVAV with reheat'
-          else
-            raise "Office building size is beyond BRICR scope"
-          end
-        else
-          raise "Building type is beyond BRICR scope"
-        end
-    
+
         if facility_element.elements['n1:FloorsAboveGrade']
-          num_stories_above_grade = facility_element.elements['n1:FloorsAboveGrade'].text.to_f
-        end
-        if num_stories_above_grade == 0.0
-          num_stories_above_grade = 1.0 # setDefaultValue
+          @facility['num_stories_above_grade'] = facility_element.elements['n1:FloorsAboveGrade'].text.to_f
+        else
+          @facility['num_stories_above_grade'] = 1.0 # setDefaultValue
         end
         
         if facility_element.elements['n1:FloorsBelowGrade']
-          num_stories_below_grade = facility_element.elements['n1:FloorsBelowGrade'].text.to_f
+          @facility['num_stories_below_grade'] = facility_element.elements['n1:FloorsBelowGrade'].text.to_f
         else 
-          num_stories_below_grade = 0.0 # setDefaultValue
+          @facility['num_stories_below_grade'] = 0.0 # setDefaultValue
         end
         
         if facility_element.elements['n1:AspectRatio']
-          ns_to_ew_ratio = facility_element.elements['n1:AspectRatio'].text.to_f
+          @facility['ns_to_ew_ratio'] = facility_element.elements['n1:AspectRatio'].text.to_f
         else
-          ns_to_ew_ratio = 0.0 # setDefaultValue
+          @facility['ns_to_ew_ratio'] = 0.0 # setDefaultValue
         end
         
-        building_rotation = 0.0 # setDefaultValue
-        floor_height = 0.0 # setDefaultValue in ft
-        wwr = 0.0 # setDefaultValue in fraction
-    
+        @facility['building_rotation'] = 0.0 # setDefaultValue
+        @facility['floor_height'] = 0.0 # setDefaultValue in ft
+        @facility['wwr'] = 0.0 # setDefaultValue in fraction
+      
+        subsections = []
+        facility_element.elements.each('n1:Subsections/n1:Subsection') do |subsection_element|
+          subsection = {'gross_floor_area' => nil, 'heated_and_cooled_floor_area' => nil, 'footprint_floor_area' => nil, 'occupancy_type' => nil, 'bldg_type' => nil, 'bar_division_method' => nil, 'system_type' => nil}
+          
+          subsection_element.elements.each('n1:FloorAreas/n1:FloorArea') do |floor_area_element|
+            
+            floor_area = floor_area_element.elements['n1:FloorAreaValue'].text.to_f
+            next if floor_area.nil?
+            
+            floor_area_type = floor_area_element.elements['n1:FloorAreaType'].text
+            if floor_area_type == 'Gross'
+              subsection['gross_floor_area'] = floor_area
+            elsif floor_area_type == 'Heated and Cooled'
+              subsection['heated_and_cooled_floor_area'] = floor_area
+            elsif floor_area_type == 'Footprint'
+              subsection['footprint_floor_area'] = floor_area
+            end
+          end
+          
+          subsection['occupancy_type'] = subsection_element.elements['n1:OccupancyClassification'].text
+          if subsection['occupancy_type'] == 'Retail'
+            subsection['bldg_type'] = 'RetailStandalone'
+            subsection['bar_division_method'] = 'Multiple Space Types - Individual Stories Sliced'
+            subsection['system_type'] = 'PSZ-AC with gas coil heat'
+          elsif subsection['occupancy_type']  == 'Office'
+            subsection['bar_division_method'] = 'Single Space Type - Core and Perimeter'
+            if subsection['gross_floor_area'] > 0 && subsection['gross_floor_area'] < 20000
+              subsection['bldg_type'] = 'SmallOffice'
+              subsection['system_type'] = 'PSZ-AC with gas coil heat'
+            elsif floor_area >= 20000 && floor_area < 75000
+              subsection['bldg_type'] = 'MediumOffice'
+              subsection['system_type'] = 'PVAV with reheat'
+            else
+              raise "Office building size is beyond BRICR scope"
+            end
+          else
+            raise "Building type is beyond BRICR scope"
+          end
+          
+          raise "Subsection does not define gross floor area" if subsection['gross_floor_area'].nil?
+          
+          subsections << subsection
+        end
+        
+        # sort subsections from largest to smallest
+        @subsections = subsections.sort{|x,y| y['gross_floor_area'] <=> x['gross_floor_area']}
+        
+        raise "No subsections defined" if @subsections.empty?
+        
+        subsection_total_gross_area = 0
+        @subsections.each {|ss| subsection_total_gross_area += ss['gross_floor_area']}
+        
+        raise "Zero total subsection gross area" if subsection_total_gross_area < 1.0
+        
+        @subsections.each {|ss| ss['fract_bldg_area'] = ss['gross_floor_area'] / subsection_total_gross_area}
+
+        @facility['bar_division_method'] = @subsections[0]['bar_division_method']
+        @facility['system_type'] = @subsections[0]['system_type']
+        @facility['bldg_type'] = @subsections[0]['bldg_type']
       end
+      
     
       # set this value in the osw
       # For measure: create_bar_from_building_type_ratios 
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'total_bldg_floor_area', floor_area)
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'template', $bricr_template)
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_a', $bricr_bldg_type)
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_b', $bricr_bldg_type)
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_c', $bricr_bldg_type)
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_d', $bricr_bldg_type)
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'floor_height', floor_height)
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'num_stories_above_grade', num_stories_above_grade)
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'num_stories_below_grade', num_stories_below_grade)
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'building_rotation', building_rotation)
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'ns_to_ew_ratio', ns_to_ew_ratio)
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'wwr', wwr)
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bar_division_method', bar_division_method)
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'total_bldg_floor_area', @facility['gross_floor_area'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'template', @facility['template'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_a', @subsections[0]['bldg_type'])
+      if @subsections.size > 1
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_b', @subsections[1]['bldg_type'])
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_b_fract_bldg_area', @subsections[1]['fract_bldg_area'])
+      else
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_b', @facility['bldg_type'])
+      end
+      if @subsections.size > 2
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_c', @subsections[2]['bldg_type'])
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_c_fract_bldg_area', @subsections[2]['fract_bldg_area'])      
+      else
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_c', @facility['bldg_type'])
+      end
+      if @subsections.size > 3
+         set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_d', @subsections[3]['bldg_type'])
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_d_fract_bldg_area', @subsections[3]['fract_bldg_area'])          
+      else
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_d', @facility['bldg_type'])
+      end
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'floor_height', @facility['floor_height'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'num_stories_above_grade', @facility['num_stories_above_grade'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'num_stories_below_grade', @facility['num_stories_below_grade'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'building_rotation', @facility['building_rotation'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'ns_to_ew_ratio', @facility['ns_to_ew_ratio'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'wwr', @facility['wwr'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bar_division_method', @facility['bar_division_method'])
+      
       # For measure: create_typical_building_from_model
-      set_measure_argument(osw, 'create_typical_building_from_model', 'template', $bricr_template)
-      set_measure_argument(osw, 'create_typical_building_from_model', 'system_type', $bricr_system_type)
+      set_measure_argument(osw, 'create_typical_building_from_model', 'template', @facility['template'])
+      set_measure_argument(osw, 'create_typical_building_from_model', 'system_type', @facility['system_type'] )
       # Calibration
-      set_measure_argument(osw, 'calibrate_baseline_model', 'template', $bricr_template)
-      set_measure_argument(osw, 'calibrate_baseline_model', 'bldg_type', $bricr_bldg_type)
+      set_measure_argument(osw, 'calibrate_baseline_model', 'template', @facility['template'])
+      set_measure_argument(osw, 'calibrate_baseline_model', 'bldg_type', @facility['bldg_type'])
       if defined?(BRICR::DO_MODEL_CALIBRATION) and BRICR::DO_MODEL_CALIBRATION
         set_measure_argument(osw, 'calibrate_baseline_model', '__SKIP__', false)
       end
@@ -207,12 +263,12 @@ module BRICR
             # Lighting / LightingImprovements / Add daylight controls
             if measure_name == "Add daylight controls"
               set_measure_argument(osw, 'AddDaylightSensors', '__SKIP__', false)
-              if $bricr_bldg_type == "SmallOffice"
-                set_measure_argument(osw, 'AddDaylightSensors', 'space_type', "Office WholeBuilding - Sm Office - #{$bricr_template}")
-              elsif $bricr_bldg_type == "MediumOffice"
-                set_measure_argument(osw, 'AddDaylightSensors', 'space_type', "Office WholeBuilding - Md Office - #{$bricr_template}")
-              elsif $bricr_bldg_type == "RetailStandalone"
-                set_measure_argument(osw, 'AddDaylightSensors', 'space_type', "Retail Retail - #{$bricr_template}")
+              if @facility['bldg_type'] == "SmallOffice"
+                set_measure_argument(osw, 'AddDaylightSensors', 'space_type', "Office WholeBuilding - Sm Office - #{@facility['template']}")
+              elsif @facility['bldg_type'] == "MediumOffice"
+                set_measure_argument(osw, 'AddDaylightSensors', 'space_type', "Office WholeBuilding - Md Office - #{@facility['template']}")
+              elsif @facility['bldg_type'] == "RetailStandalone"
+                set_measure_argument(osw, 'AddDaylightSensors', 'space_type', "Retail Retail - #{@facility['template']}")
               end
             end
             # Lighting / LightingImprovements / Add occupancy sensors
@@ -351,15 +407,15 @@ module BRICR
             # Other HVAC / OtherHVAC / Replace HVAC system type to VRF 
             if measure_name == "Replace HVAC system type to VRF"
               set_measure_argument(osw, 'vr_fwith_doas', '__SKIP__', false)
-              if $bricr_bldg_type == "SmallOffice"
-                set_measure_argument(osw, 'vr_fwith_doas', "Office WholeBuilding - Sm Office - #{$bricr_template}", true)
-              elsif $bricr_bldg_type == "MediumOffice"
-                set_measure_argument(osw, 'vr_fwith_doas', "Office WholeBuilding - Md Office - #{$bricr_template}", true)
-              elsif $bricr_bldg_type == "RetailStandalone"
-                set_measure_argument(osw, 'vr_fwith_doas', "Retail Retail - #{$bricr_template}", true)
-                set_measure_argument(osw, 'vr_fwith_doas', "Retail Point_of_Sale - #{$bricr_template}", true)
-                set_measure_argument(osw, 'vr_fwith_doas', "Retail Entry - #{$bricr_template}", true)
-                set_measure_argument(osw, 'vr_fwith_doas', "Retail Back_Space - #{$bricr_template}", true)
+              if @facility['bldg_type'] == "SmallOffice"
+                set_measure_argument(osw, 'vr_fwith_doas', "Office WholeBuilding - Sm Office - #{@facility['template']}", true)
+              elsif @facility['bldg_type'] == "MediumOffice"
+                set_measure_argument(osw, 'vr_fwith_doas', "Office WholeBuilding - Md Office - #{@facility['template']}", true)
+              elsif @facility['bldg_type'] == "RetailStandalone"
+                set_measure_argument(osw, 'vr_fwith_doas', "Retail Retail - #{@facility['template']}", true)
+                set_measure_argument(osw, 'vr_fwith_doas', "Retail Point_of_Sale - #{@facility['template']}", true)
+                set_measure_argument(osw, 'vr_fwith_doas', "Retail Entry - #{@facility['template']}", true)
+                set_measure_argument(osw, 'vr_fwith_doas', "Retail Back_Space - #{@facility['template']}", true)
               end
               set_measure_argument(osw, 'vr_fwith_doas', 'vrfCoolCOP', 6.0)
               set_measure_argument(osw, 'vr_fwith_doas', 'vrfHeatCOP', 6.0)
@@ -369,15 +425,15 @@ module BRICR
             # Other HVAC / OtherHVAC / Replace HVAC with GSHP and DOAS 
             if measure_name == "Replace HVAC with GSHP and DOAS"
               set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', '__SKIP__', false)
-              if $bricr_bldg_type == "SmallOffice"
-                set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Office WholeBuilding - Sm Office - #{$bricr_template}", true)
-              elsif $bricr_bldg_type == "MediumOffice"
-                set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Office WholeBuilding - Md Office - #{$bricr_template}", true)
-              elsif $bricr_bldg_type == "RetailStandalone"
-                set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Retail Retail - #{$bricr_template}", true)
-                set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Retail Point_of_Sale - #{$bricr_template}", true)
-                set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Retail Entry - #{$bricr_template}", true)
-                set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Retail Back_Space - #{$bricr_template}", true)
+              if @facility['bldg_type'] == "SmallOffice"
+                set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Office WholeBuilding - Sm Office - #{@facility['template']}", true)
+              elsif @facility['bldg_type'] == "MediumOffice"
+                set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Office WholeBuilding - Md Office - #{@facility['template']}", true)
+              elsif @facility['bldg_type'] == "RetailStandalone"
+                set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Retail Retail - #{@facility['template']}", true)
+                set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Retail Point_of_Sale - #{@facility['template']}", true)
+                set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Retail Entry - #{@facility['template']}", true)
+                set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Retail Back_Space - #{@facility['template']}", true)
               end
             end
             
@@ -392,16 +448,16 @@ module BRICR
               set_measure_argument(osw, 'add_apszhp_to_each_zone', 'fan_type', "Constant Volume (default)") # Options: "Constant Volume (default)", "Variable Volume (VFD)"
               set_measure_argument(osw, 'add_apszhp_to_each_zone', 'fan_pressure_rise', 0)
               set_measure_argument(osw, 'add_apszhp_to_each_zone', 'filter_type', "By Space Type")
-              if $bricr_bldg_type == "SmallOffice"
-                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Office WholeBuilding - Sm Office - #{$bricr_template}")
-              elsif $bricr_bldg_type == "MediumOffice"
+              if @facility['bldg_type'] == "SmallOffice"
+                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Office WholeBuilding - Sm Office - #{@facility['template']}")
+              elsif @facility['bldg_type'] == "MediumOffice"
                 set_measure_argument(osw, 'create_typical_building_from_model', 'system_type', "PSZ-AC with gas coil heat")
-                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Office WholeBuilding - Md Office - #{$bricr_template}")
-              elsif $bricr_bldg_type == "RetailStandalone"
-                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Retail - #{$bricr_template}")
-                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Point_of_Sale - #{$bricr_template}")
-                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Entry - #{$bricr_template}")
-                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Back_Space - #{$bricr_template}")
+                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Office WholeBuilding - Md Office - #{@facility['template']}")
+              elsif @facility['bldg_type'] == "RetailStandalone"
+                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Retail - #{@facility['template']}")
+                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Point_of_Sale - #{@facility['template']}")
+                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Entry - #{@facility['template']}")
+                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Back_Space - #{@facility['template']}")
               end
             end
           end
@@ -421,7 +477,7 @@ module BRICR
           # Fan
           if measure_category == "Fan"
             # Fan / ElectricMotorsAndDrives
-            measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:ElectricMotorsAndDrives/n1:MeasureName'].text 
+            measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:OtherElectricMotorsAndDrives/n1:MeasureName'].text 
               # Fan / ElectricMotorsAndDrives / Replace with higher efficiency
             if measure_name == "Replace with higher efficiency"
               set_measure_argument(osw, 'ReplaceFanTotalEfficiency', '__SKIP__', false)

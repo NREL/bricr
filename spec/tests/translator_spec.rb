@@ -27,7 +27,7 @@ describe 'BRICR' do
     osw_files = []
     Dir.glob("#{out_path}/**/*.osw") { |osw| osw_files << osw }
 
-    expect(osw_files.size).to eq 4
+    expect(osw_files.size).to eq 30
 
     if BRICR::DO_SIMULATIONS
       num_sims = 0
