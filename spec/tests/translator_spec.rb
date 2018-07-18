@@ -43,8 +43,9 @@ describe 'BRICR' do
       end
 
       translator.gatherResults(out_path)
-      expect(translator.failed_scenarios.empty?).to be(true), "Scenarios #{translator.failed_scenarios.join(', ')} failed to run"
       translator.saveXML(File.join(out_path, 'results.xml'))
+      
+      expect(translator.failed_scenarios.empty?).to be(true), "Scenarios #{translator.failed_scenarios.join(', ')} failed to run"
     end
   end
 end

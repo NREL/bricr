@@ -402,8 +402,20 @@ module BRICR
       
           # Other HVAC
           if measure_category == "Other HVAC"
+          
             # Other HVAC / OtherHVAC
             measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:OtherHVAC/n1:MeasureName'].text 
+            
+            # DLM: somme measures don't have a direct BuildingSync equivalent, use UserDefinedField 'OpenStudioMeasureName' for now
+            if measure_name == 'Other'
+              measure.elements.each('n1:UserDefinedFields/n1:UserDefinedField') do |user_defined_field|
+                field_name = user_defined_field.elements['n1:FieldName'].text 
+                if field_name == 'OpenStudioMeasureName'
+                  measure_name = user_defined_field.elements['n1:FieldValue'].text 
+                end
+              end
+            end
+            
             # Other HVAC / OtherHVAC / Replace HVAC system type to VRF 
             if measure_name == "Replace HVAC system type to VRF"
               set_measure_argument(osw, 'vr_fwith_doas', '__SKIP__', false)
@@ -423,7 +435,7 @@ module BRICR
             end
       
             # Other HVAC / OtherHVAC / Replace HVAC with GSHP and DOAS 
-            if measure_name == "Replace HVAC with GSHP and DOAS"
+            if measure_name == "Replace HVAC with GSHP and DOAS" || measure_name == "Replace AC and heating units with ground coupled heat pump systems"
               set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', '__SKIP__', false)
               if @facility['bldg_type'] == "SmallOffice"
                 set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Office WholeBuilding - Sm Office - #{@facility['template']}", true)
