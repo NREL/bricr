@@ -64,14 +64,14 @@ def get_results(result_xml_path)
   raise "File '#{result_xml_path}' does not exist" unless File.exist?(result_xml_path)
   File.open(result_xml_path, 'r') do |file|
     doc = REXML::Document.new(file)
-    doc.elements.each('auc:Audits/auc:Audit/auc:Report/auc:Scenarios/auc:Scenario') do |scenario|
+    doc.elements.each('n1:Audits/n1:Audit/n1:Report/n1:Scenarios/n1:Scenario') do |scenario|
       # get information about the scenario
-      scenario_name = scenario.elements['auc:ScenarioName'].text
+      scenario_name = scenario.elements['n1:ScenarioName'].text
       next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
-      package_of_measures = scenario.elements['auc:ScenarioType'].elements['auc:PackageOfMeasures']
-      results['annual_electricity'] = package_of_measures.elements['auc:AnnualElectricity'].text.to_f
-      results['annual_natural_gas'] = package_of_measures.elements['auc:AnnualNaturalGas'].text.to_f
+      package_of_measures = scenario.elements['n1:ScenarioType'].elements['n1:PackageOfMeasures']
+      results['annual_electricity'] = package_of_measures.elements['n1:AnnualElectricity'].text.to_f
+      results['annual_natural_gas'] = package_of_measures.elements['n1:AnnualNaturalGas'].text.to_f
     end
   end
   return results
@@ -178,9 +178,9 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
     File.open(result_path, 'r') do |file|
 	  doc = REXML::Document.new(file)
 	  
-	  doc.elements.each('auc:Audits/auc:Audit/auc:Report/auc:Scenarios/auc:Scenario') do |scenario|
+	  doc.elements.each('n1:Audits/n1:Audit/n1:Report/n1:Scenarios/n1:Scenario') do |scenario|
 		# get information about the scenario
-        scenario_name = scenario.elements['auc:ScenarioName'].text
+        scenario_name = scenario.elements['n1:ScenarioName'].text
         
 		next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
@@ -189,9 +189,9 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
         csv_header.push "[#{scenario_name}]:site_eui(kBtu/sf)"
 		#csv_header.push "[#{scenario_name}]:source_eui(kBtu/sf)"
 		
-        package_of_measures = scenario.elements['auc:ScenarioType'].elements['auc:PackageOfMeasures']
-		results['annual_electricity'] = package_of_measures.elements['auc:AnnualElectricity'].text.to_f
-		results['annual_natural_gas'] = package_of_measures.elements['auc:AnnualNaturalGas'].text.to_f
+        package_of_measures = scenario.elements['n1:ScenarioType'].elements['n1:PackageOfMeasures']
+		results['annual_electricity'] = package_of_measures.elements['n1:AnnualElectricity'].text.to_f
+		results['annual_natural_gas'] = package_of_measures.elements['n1:AnnualNaturalGas'].text.to_f
 		
 		electricity_eui = results['annual_electricity'] / floor_area_sf
 		gas_eui = results['annual_natural_gas'] / floor_area_sf
