@@ -255,6 +255,19 @@ def create_site(feature)
   premises_identifier.add_element(identifier_value)
   premises_identifiers.add_element(premises_identifier)
   
+  # DLM: Custom ID is deprecated, just keeping here for testing with old seed instance
+  premises_identifier = REXML::Element.new('n1:PremisesIdentifier')
+  identifier_label = REXML::Element.new('n1:IdentifierLabel')
+  identifier_label.text = 'Custom'
+  premises_identifier.add_element(identifier_label)
+  identifier_name = REXML::Element.new('n1:IdentifierCustomName')
+  identifier_name.text = 'Custom ID'
+  premises_identifier.add_element(identifier_name)
+  identifier_value = REXML::Element.new('n1:IdentifierValue')
+  identifier_value.text = feature[:properties][:"Building Identifier"]
+  premises_identifier.add_element(identifier_value)
+  premises_identifiers.add_element(premises_identifier)
+  
   premises_identifier = REXML::Element.new('n1:PremisesIdentifier')
   identifier_label = REXML::Element.new('n1:IdentifierLabel')
   identifier_label.text = 'Custom'
@@ -778,7 +791,7 @@ File.open(ARGV[0], 'r') do |file|
   geojson = JSON.parse(file.read, symbolize_names: true)
 end
 
-outdir = './bs_output_test'
+outdir = './bs_output'
 FileUtils.mkdir_p(outdir) unless File.exist?(outdir)
 
 summary_file = File.open(outdir + "/summary.csv", 'w')
@@ -786,8 +799,7 @@ summary_file.puts "building_id,xml_filename,should_run_simulation,OccupancyClass
 
 geojson[:features].each do |feature|
   id = feature[:properties][:"Building Identifier"]
-  next if id != 151
-  
+
   puts "id = #{id}"
   
   begin
