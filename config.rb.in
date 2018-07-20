@@ -7,7 +7,7 @@ module BRICR
   if /mswin/.match(RUBY_PLATFORM) || /mingw/.match(RUBY_PLATFORM)
     OPENSTUDIO_EXE = 'C:/openstudio-2.6.0/bin/openstudio.exe'
   else
-    OPENSTUDIO_EXE = 'openstudio'
+    OPENSTUDIO_EXE = '/usr/local/bin/openstudio'
   end
 
   # one or more measure paths
