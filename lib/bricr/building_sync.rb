@@ -48,7 +48,7 @@ module BRICR
       result = nil
       @doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility/auc:PremisesIdentifiers/auc:PremisesIdentifier') do |identifier|
         name = identifier.elements['auc:IdentifierCustomName']
-        if name && name.text == "Custom ID"
+        if name && name.text == "BRICR Custom ID 1"
           result = identifier.elements['auc:IdentifierValue'].text
           break
         end
