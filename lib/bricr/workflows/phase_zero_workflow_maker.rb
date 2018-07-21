@@ -660,15 +660,36 @@ module BRICR
         else
           @failed_scenarios << scenario_name
         end
-
+        
+        user_defined_fields = REXML::Element.new('n1:UserDefinedFields')
+        user_defined_field = REXML::Element.new('n1:UserDefinedField')
+        field_name = REXML::Element.new('n1:FieldName')
+        field_name.text = 'OpenStudioCompletedStatus'
+        field_value = REXML::Element.new('n1:FieldValue')
+        field_value.text = result[:completed_status]
+        user_defined_field.add_element(field_name)
+        user_defined_field.add_element(field_value)
+        user_defined_fields.add_element(user_defined_field)
+        
+        user_defined_field = REXML::Element.new('n1:UserDefinedField')
+        field_name = REXML::Element.new('n1:FieldName')
+        field_name.text = 'OpenStudioBaselineCompletedStatus'
+        field_value = REXML::Element.new('n1:FieldValue')
+        field_value.text = baseline[:completed_status]
+        user_defined_field.add_element(field_name)
+        user_defined_field.add_element(field_value)
+        user_defined_fields.add_element(user_defined_field)        
+        
         # Check out.osw "openstudio_results" for output variables
-        total_site_energy = getMeasureResult(result, 'openstudio_results', 'total_site_energy') # in kBtu
+        total_site_energy = getMeasureResult(result, 'openstudio_results', 'total_site_energy') # in kBtu/year
+        total_site_energy = total_site_energy / 1000.0 # kBtu/year -> MMBtu/year
         baseline_total_site_energy = getMeasureResult(baseline, 'openstudio_results', 'total_site_energy') # in kBtu
-        fuel_electricity = getMeasureResult(result, 'openstudio_results', 'fuel_electricity') # in kBtu
-        fuel_natural_gas = getMeasureResult(result, 'openstudio_results', 'fuel_natural_gas') # in kBtu
+        baseline_total_site_energy = baseline_total_site_energy / 1000.0 # kBtu/year -> MMBtu/year
+        fuel_electricity = getMeasureResult(result, 'openstudio_results', 'fuel_electricity') # in kBtu/year
+        #fuel_electricity = fuel_electricity * 0.2930710702 # kBtu/year -> kWh
+        fuel_natural_gas = getMeasureResult(result, 'openstudio_results', 'fuel_natural_gas') # in kBtu/year
         annual_utility_cost = getMeasureResult(result, 'openstudio_results', 'annual_utility_cost') # in $
         baseline_annual_utility_cost = getMeasureResult(baseline, 'openstudio_results', 'annual_utility_cost') # in $
-    
 
         total_site_energy_savings = 0
         total_energy_cost_savings = 0
@@ -678,22 +699,53 @@ module BRICR
         end
         
         annual_savings_site_energy = REXML::Element.new('n1:AnnualSavingsSiteEnergy')
-        annual_site_energy = REXML::Element.new('n1:AnnualSiteEnergy')
-        annual_electricity = REXML::Element.new('n1:AnnualElectricity')
-        annual_natural_gas = REXML::Element.new('n1:AnnualNaturalGas')
-        annual_savings_energy_cost = REXML::Element.new('n1:AnnualSavingsEnergyCost')
-
+        annual_savings_energy_cost = REXML::Element.new('n1:AnnualSavingsCost')
+        
+        # DLM: these are not valid BuildingSync fields
+        #annual_site_energy = REXML::Element.new('n1:AnnualSiteEnergy')
+        #annual_electricity = REXML::Element.new('n1:AnnualElectricity')
+        #annual_natural_gas = REXML::Element.new('n1:AnnualNaturalGas')
+        
         annual_savings_site_energy.text = total_site_energy_savings
-        annual_site_energy.text = total_site_energy
-        annual_electricity.text = fuel_electricity
-        annual_natural_gas.text = fuel_natural_gas
-        annual_savings_energy_cost.text = total_energy_cost_savings
-
+        annual_savings_energy_cost.text = total_energy_cost_savings.to_i # BuildingSync wants an integer, might be a BuildingSync bug
+        #annual_site_energy.text = total_site_energy
+        #annual_electricity.text = fuel_electricity
+        #annual_natural_gas.text = fuel_natural_gas
+        
+        user_defined_field = REXML::Element.new('n1:UserDefinedField')
+        field_name = REXML::Element.new('n1:FieldName')
+        field_name.text = 'OpenStudioAnnualSiteEnergy_MMBtu'
+        field_value = REXML::Element.new('n1:FieldValue')
+        field_value.text = total_site_energy.to_s
+        user_defined_field.add_element(field_name)
+        user_defined_field.add_element(field_value)
+        user_defined_fields.add_element(user_defined_field)
+        
+        user_defined_field = REXML::Element.new('n1:UserDefinedField')
+        field_name = REXML::Element.new('n1:FieldName')
+        field_name.text = 'OpenStudioAnnualElectricity_kBtu'
+        field_value = REXML::Element.new('n1:FieldValue')
+        field_value.text = fuel_electricity.to_s
+        user_defined_field.add_element(field_name)
+        user_defined_field.add_element(field_value)
+        user_defined_fields.add_element(user_defined_field)
+        
+        user_defined_field = REXML::Element.new('n1:UserDefinedField')
+        field_name = REXML::Element.new('n1:FieldName')
+        field_name.text = 'OpenStudioAnnualNaturalGas_kBtu'
+        field_value = REXML::Element.new('n1:FieldValue')
+        field_value.text = fuel_natural_gas.to_s
+        user_defined_field.add_element(field_name)
+        user_defined_field.add_element(field_value)
+        user_defined_fields.add_element(user_defined_field)
+        
         package_of_measures.add_element(annual_savings_site_energy)
-        package_of_measures.add_element(annual_site_energy)
-        package_of_measures.add_element(annual_electricity)
-        package_of_measures.add_element(annual_natural_gas)
         package_of_measures.add_element(annual_savings_energy_cost)
+        #package_of_measures.add_element(annual_site_energy)
+        #package_of_measures.add_element(annual_electricity)
+        #package_of_measures.add_element(annual_natural_gas)
+
+        scenario.add_element(user_defined_fields)
       end
     end
     
