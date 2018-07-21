@@ -114,9 +114,9 @@ module BRICR
           out_log = osw + '.log'
           
           if Gem.win_platform?
-            out_log = "nul"
+            #out_log = "nul"
           else
-            out_log = "/dev/null"
+            #out_log = "/dev/null"
           end
         
           cmd = nil

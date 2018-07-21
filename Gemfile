@@ -11,7 +11,7 @@ gem 'json'
 gem 'seed_ruby_client', github: 'SEED-platform/ruby-client', branch: 'develop'
 
 #gem 'openstudio-standards', path: '../openstudio-standards'
-gem 'openstudio-standards', github: 'NREL/OpenStudio-standards', branch: 'master'
+gem 'openstudio-standards', github: 'NREL/OpenStudio-standards', branch: 'bricr'
 
 group :test do
   gem 'rake'

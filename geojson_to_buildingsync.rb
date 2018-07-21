@@ -566,7 +566,7 @@ def convert_feature(feature)
                SystemCategoryAffected: 'General Controls and Operations', 
                TechnologyCategory: 'OtherHVAC', 
                MeasureName: 'Upgrade operating protocols, calibration, and/or sequencing',
-               ScenarioName: 'Upgrade operating protocols, calibration, and/or sequencing',
+               ScenarioName: 'Upgrade operating protocols, calibration, and-or sequencing',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
@@ -584,7 +584,7 @@ def convert_feature(feature)
                SystemCategoryAffected: 'Refrigeration', 
                TechnologyCategory: 'Refrigeration', 
                MeasureName: 'Replace ice/refrigeration equipment with high efficiency units',
-               ScenarioName: 'Replace ice/refrigeration equipment with high efficiency units',
+               ScenarioName: 'Replace ice-refrigeration equipment with high efficiency units',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
