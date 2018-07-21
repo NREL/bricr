@@ -143,7 +143,7 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
 
   puts "Running cmd (#{index}/#{total_xml_files.to_i} #{(100*index/total_xml_files).to_i}%): #{command.join(' ')}\n"
 
-  result = bricr_run_command(command)
+  result = BRICR::bricr_run_command(command)
 
   building_info[xml_path_ids[index]].push result
   building_info[xml_path_ids[index]].push BRICR::DO_SIMULATIONS

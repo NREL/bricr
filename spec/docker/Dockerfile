@@ -7,6 +7,6 @@ FROM circleci/ruby:2.2
 
 ADD . /app
 RUN sudo chown -R circleci:circleci /app
-
+RUN ls /app
 CMD ["echo", "0"]
 
