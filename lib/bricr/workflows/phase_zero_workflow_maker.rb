@@ -167,7 +167,7 @@ module BRICR
             if subsection['gross_floor_area'] > 0 && subsection['gross_floor_area'] < 20000
               subsection['bldg_type'] = 'SmallOffice'
               subsection['system_type'] = 'PSZ-AC with gas coil heat'
-            elsif floor_area >= 20000 && floor_area < 75000
+            elsif subsection['gross_floor_area'] >= 20000 && subsection['gross_floor_area'] < 75000
               subsection['bldg_type'] = 'MediumOffice'
               subsection['system_type'] = 'PVAV with reheat'
             else

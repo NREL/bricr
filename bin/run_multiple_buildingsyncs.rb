@@ -69,8 +69,20 @@ def get_results(result_xml_path)
       next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
       package_of_measures = scenario.elements['n1:ScenarioType'].elements['n1:PackageOfMeasures']
-      results['annual_electricity'] = package_of_measures.elements['n1:AnnualElectricity'].text.to_f
-      results['annual_natural_gas'] = package_of_measures.elements['n1:AnnualNaturalGas'].text.to_f
+      scenario.elements.each('n1:UserDefinedFields/n1:UserDefinedField') do |user_defined_field|
+        field_name = user_defined_field.elements['n1:FieldName'].text
+        field_value = user_defined_field.elements['n1:FieldValue'].text
+        
+        if field_name == 'OpenStudioCompletedStatus'
+          results['completed_status'] = field_value
+        elsif field_name == 'OpenStudioAnnualSiteEnergy_MMBtu'
+          results['annual_energy'] = field_value.to_f       
+        elsif field_name == 'OpenStudioAnnualElectricity_kBtu'
+          results['annual_electricity'] = field_value.to_f
+        elsif field_name == 'OpenStudioAnnualNaturalGas_kBtu'
+          results['annual_natural_gas'] = field_value.to_f
+        end
+      end
     end
   end
   return results
