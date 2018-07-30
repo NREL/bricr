@@ -92,7 +92,7 @@ module BRICR
         end
 
         if built_year < 1978
-          @facility['template'] = "CEC Pre-1978"
+          @facility['template'] = "CBES Pre-1978"
         elsif built_year >= 1978 && built_year < 1992
           @facility['template'] = "CBES T24 1978"
         elsif built_year >= 1992 && built_year < 2001

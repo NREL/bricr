@@ -69,7 +69,7 @@ module OsLib_ModelGeneration
     array << '90.1-2010'
     array << '90.1-2013'
     array << 'NREL ZNE Ready 2017'
-    array << 'CEC Pre-1978'
+    array << 'CBES Pre-1978'
     array << 'CBES T24 1978'
     array << 'CBES T24 1992'
     array << 'CBES T24 2001'

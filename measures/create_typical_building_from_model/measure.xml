@@ -2,8 +2,8 @@
   <schema_version>3.0</schema_version>
   <name>create_typical_building_from_model</name>
   <uid>339a2e3a-273c-4494-bb50-bfe586a0647c</uid>
-  <version_id>d9258493-adb5-41a7-a2cd-b6b0dc3a5db8</version_id>
-  <version_modified>20180717T215711Z</version_modified>
+  <version_id>621e187a-52d9-452e-8005-994c2f03e06e</version_id>
+  <version_modified>20180730T193946Z</version_modified>
   <xml_checksum>EE13F09F</xml_checksum>
   <class_name>CreateTypicalBuildingFromModel</class_name>
   <display_name>Create Typical Building from Model</display_name>
@@ -47,8 +47,8 @@
           <display_name>NREL ZNE Ready 2017</display_name>
         </choice>
         <choice>
-          <value>CEC Pre-1978</value>
-          <display_name>CEC Pre-1978</display_name>
+          <value>CBES Pre-1978</value>
+          <display_name>CBES Pre-1978</display_name>
         </choice>
         <choice>
           <value>CBES T24 1978</value>
@@ -717,7 +717,7 @@
       <filename>os_lib_model_generation.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>60F6D676</checksum>
+      <checksum>2E3AE28C</checksum>
     </file>
   </files>
 </measure>

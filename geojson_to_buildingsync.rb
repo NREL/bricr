@@ -845,7 +845,7 @@ geojson[:features].each do |feature|
   end
 
   if year_built < 1978
-    template = "CEC Pre-1978"
+    template = "CBES Pre-1978"
   elsif year_built >= 1978 && year_built < 1992
     template = "CBES T24 1978"
   elsif year_built >= 1992 && year_built < 2001

@@ -2,8 +2,8 @@
   <schema_version>3.0</schema_version>
   <name>calibrate_baseline_model</name>
   <uid>2753b04c-ec8c-49d1-ba3a-120bfc9737ef</uid>
-  <version_id>e8cd52e0-c872-44b3-8190-ac9df398e60d</version_id>
-  <version_modified>20180717T215711Z</version_modified>
+  <version_id>6abf5673-119d-4b65-8087-944da112edc0</version_id>
+  <version_modified>20180730T193946Z</version_modified>
   <xml_checksum>FD815A15</xml_checksum>
   <class_name>CalibrateBaselineModel</class_name>
   <display_name>Calibrate Baseline Model</display_name>
@@ -43,8 +43,8 @@
           <display_name>90.1-2013</display_name>
         </choice>
         <choice>
-          <value>CEC Pre-1978</value>
-          <display_name>CEC Pre-1978</display_name>
+          <value>CBES Pre-1978</value>
+          <display_name>CBES Pre-1978</display_name>
         </choice>
         <choice>
           <value>CBES T24 1978</value>
@@ -219,7 +219,7 @@
       <filename>os_lib_model_generation.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>F0A61FDE</checksum>
+      <checksum>30E5863B</checksum>
     </file>
   </files>
 </measure>

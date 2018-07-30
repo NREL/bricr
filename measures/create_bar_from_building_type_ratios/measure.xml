@@ -2,8 +2,8 @@
   <schema_version>3.0</schema_version>
   <name>create_bar_from_building_type_ratios</name>
   <uid>6e3a14f8-c3c7-4e03-bc51-bef8a52e1a05</uid>
-  <version_id>512366d0-ef92-4089-a67a-70ed492a6556</version_id>
-  <version_modified>20180717T215711Z</version_modified>
+  <version_id>23fec75d-2862-4096-a506-455a213c9a32</version_id>
+  <version_modified>20180730T193946Z</version_modified>
   <xml_checksum>2AF3A68E</xml_checksum>
   <class_name>CreateBarFromBuildingTypeRatios</class_name>
   <display_name>Create Bar From Building Type Ratios</display_name>
@@ -470,8 +470,8 @@
           <display_name>NREL ZNE Ready 2017</display_name>
         </choice>
         <choice>
-          <value>CEC Pre-1978</value>
-          <display_name>CEC Pre-1978</display_name>
+          <value>CBES Pre-1978</value>
+          <display_name>CBES Pre-1978</display_name>
         </choice>
         <choice>
           <value>CBES T24 1978</value>
@@ -748,7 +748,7 @@
       <filename>os_lib_model_generation.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>F7DD3B14</checksum>
+      <checksum>3F6A95F6</checksum>
     </file>
   </files>
 </measure>
