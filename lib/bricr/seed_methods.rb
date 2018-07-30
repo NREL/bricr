@@ -64,9 +64,9 @@ module BRICR
     
     property_ids = []
     search_results.properties.each do |property|
-      #puts property[:custom_id_1]
-      if property[:custom_id_1] == custom_id
-        property_ids << property[:property_view_id]
+      #puts property[:state][:custom_id_1]
+      if property[:state][:custom_id_1] == custom_id
+        property_ids << property[:id]
       end
     end
     property_ids.uniq!
@@ -76,10 +76,10 @@ module BRICR
     
     #property_ids = []
     #search_results.properties.each do |property|
-    #  if property[:custom_id_1] != custom_id
+    #  if property[:state][:custom_id_1] != custom_id
     #    raise "property incorrectly associated with custom_id '#{custom_id}', #{property}"
     #  end
-    #  property_ids << property[:property_view_id]
+    #  property_ids << property[:id]
     #end
     #property_ids.uniq!
 
