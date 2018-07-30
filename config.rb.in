@@ -48,5 +48,6 @@ module BRICR
   
   # url for bricr-sim
   BRICR_SIM_URL = nil
+  #BRICR_SIM_URL = 'http://192.168.99.100:81/api/bricr'
 
 end
