@@ -643,6 +643,16 @@ module BRICR
         File.open(path, 'r') do |file|
           results[scenario_name] = JSON.parse(file.read, symbolize_names: true)
         end
+        
+        # cleanup large files
+        path = File.join(osw_dir, 'eplusout.sql')
+        FileUtils.rm_f(path) if File.exists?(path)
+        
+        path = File.join(osw_dir, 'data_point.zip')
+        FileUtils.rm_f(path) if File.exists?(path)
+        
+        path = File.join(osw_dir, 'eplusout.eso')
+        FileUtils.rm_f(path) if File.exists?(path)
       end
 
       @doc.elements.each('n1:Audits/n1:Audit/n1:Report/n1:Scenarios/n1:Scenario') do |scenario|
