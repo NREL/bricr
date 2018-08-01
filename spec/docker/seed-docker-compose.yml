@@ -21,7 +21,7 @@ services:
   db-redis:
     image: redis
   web:
-    image: seedplatform/seed:develop
+    image: seedplatform/seed:bricr
     environment:
       - POSTGRES_DB=seed
       - POSTGRES_USER=seed
@@ -40,7 +40,7 @@ services:
       - "80:80"
   web-celery:
     command: /seed/docker/start_celery_docker.sh
-    image: seedplatform/seed:develop
+    image: seedplatform/seed:bricr
     environment:
       - POSTGRES_DB=seed
       - POSTGRES_USER=seed
@@ -53,12 +53,6 @@ services:
       - web
     volumes:
       - seed_media:/seed/media
-  test_container:
-    build:
-      context: ../..
-      dockerfile: spec/docker/Dockerfile
-    links:
-      - web
 volumes:
   seed_pgdata:
     external: true
