@@ -177,6 +177,30 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
     building_info[xml_path_ids[index]].push(gas_eui)
     building_info[xml_path_ids[index]].push(electricity_eui + gas_eui)
     building_info[xml_path_ids[index]].push(electricity_eui * 3.14 + gas_eui * 1.05)
+	# parse the xml
+    File.open(result_path, 'r') do |file|
+	  doc = REXML::Document.new(file)
+	  
+	  doc.elements.each('n1:Audits/n1:Audit/n1:Report/n1:Scenarios/n1:Scenario') do |scenario|
+		# get information about the scenario
+        scenario_name = scenario.elements['n1:ScenarioName'].text
+        
+		next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
+
+        csv_header.push "[#{scenario_name}]:electricity_eui(kBtu/sf)"
+        csv_header.push "[#{scenario_name}]:natural gas_eui(kBtu/sf)"
+        csv_header.push "[#{scenario_name}]:site_eui(kBtu/sf)"
+		
+        package_of_measures = scenario.elements['n1:ScenarioType'].elements['n1:PackageOfMeasures']
+		electricity_eui = results['annual_electricity'] / floor_area_sf
+		gas_eui = results['annual_natural_gas'] / floor_area_sf
+
+		building_info[xml_path_ids[index]].push(electricity_eui)
+		building_info[xml_path_ids[index]].push(gas_eui)
+		building_info[xml_path_ids[index]].push(electricity_eui + gas_eui)
+
+      end
+	end
 
     if defined?(BRICR::DO_MODEL_CALIBRATION) and BRICR::DO_MODEL_CALIBRATION
       out_osw_path = File.join(out_dir, 'baseline', 'out.osw')

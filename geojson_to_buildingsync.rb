@@ -566,7 +566,7 @@ def convert_feature(feature)
                SystemCategoryAffected: 'General Controls and Operations', 
                TechnologyCategory: 'OtherHVAC', 
                MeasureName: 'Upgrade operating protocols, calibration, and/or sequencing',
-               ScenarioName: 'Upgrade operating protocols, calibration, and-or sequencing',
+               ScenarioName: 'Upgrade operating protocols calibration and-or sequencing',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 10,
                MeasureTotalFirstCost: 1*floor_area}
@@ -771,7 +771,93 @@ def convert_feature(feature)
         </n1:Scenario>
 "    
   end
-  
+
+  source += '     <n1:Scenario>
+         <n1:ScenarioName>Retail Package</n1:ScenarioName>
+          <n1:ScenarioType>
+            <n1:PackageOfMeasures>
+              <n1:ReferenceCase IDref="Baseline"/>
+              <n1:MeasureIDs>
+                <n1:MeasureID IDref="Measure1"/>
+				<n1:MeasureID IDref="Measure2"/>
+				<n1:MeasureID IDref="Measure8"/>
+				<n1:MeasureID IDref="Measure14"/>
+				<n1:MeasureID IDref="Measure29"/>
+              </n1:MeasureIDs>
+            </n1:PackageOfMeasures>
+          </n1:ScenarioType>
+        </n1:Scenario>
+		
+		<n1:Scenario>
+          <n1:ScenarioName>Office-Tenant Package</n1:ScenarioName>
+          <n1:ScenarioType>
+            <n1:PackageOfMeasures>
+              <n1:ReferenceCase IDref="Baseline"/>
+              <n1:MeasureIDs>
+                <n1:MeasureID IDref="Measure1"/>
+				<n1:MeasureID IDref="Measure7"/>
+				<n1:MeasureID IDref="Measure2"/>
+				<n1:MeasureID IDref="Measure8"/>
+				<n1:MeasureID IDref="Measure13"/>
+				<n1:MeasureID IDref="Measure14"/>
+				<n1:MeasureID IDref="Measure24"/>
+				<n1:MeasureID IDref="Measure29"/>
+              </n1:MeasureIDs>
+            </n1:PackageOfMeasures>
+          </n1:ScenarioType>
+        </n1:Scenario>
+		
+		<n1:Scenario>
+          <n1:ScenarioName>Office-Central Systems Package</n1:ScenarioName>
+          <n1:ScenarioType>
+            <n1:PackageOfMeasures>
+              <n1:ReferenceCase IDref="Baseline"/>
+              <n1:MeasureIDs>
+                <n1:MeasureID IDref="Measure1"/>
+				<n1:MeasureID IDref="Measure7"/>
+				<n1:MeasureID IDref="Measure2"/>
+				<n1:MeasureID IDref="Measure8"/>
+				<n1:MeasureID IDref="Measure11"/>
+				<n1:MeasureID IDref="Measure13"/>
+				<n1:MeasureID IDref="Measure18"/>
+				<n1:MeasureID IDref="Measure14"/>
+				<n1:MeasureID IDref="Measure23"/>
+				<n1:MeasureID IDref="Measure24"/>
+				<n1:MeasureID IDref="Measure25"/>
+				<n1:MeasureID IDref="Measure27"/>
+				<n1:MeasureID IDref="Measure29"/>
+              </n1:MeasureIDs>
+            </n1:PackageOfMeasures>
+          </n1:ScenarioType>
+        </n1:Scenario>
+		
+		<n1:Scenario>
+          <n1:ScenarioName>Office-Central Systems Package</n1:ScenarioName>
+          <n1:ScenarioType>
+            <n1:PackageOfMeasures>
+              <n1:ReferenceCase IDref="Baseline"/>
+              <n1:MeasureIDs>
+                <n1:MeasureID IDref="Measure1"/>
+				<n1:MeasureID IDref="Measure6"/>
+				<n1:MeasureID IDref="Measure7"/>
+				<n1:MeasureID IDref="Measure2"/>
+				<n1:MeasureID IDref="Measure8"/>
+				<n1:MeasureID IDref="Measure3"/>
+				<n1:MeasureID IDref="Measure10"/>
+				<n1:MeasureID IDref="Measure17"/>
+				<n1:MeasureID IDref="Measure18"/>
+				<n1:MeasureID IDref="Measure20"/>
+				<n1:MeasureID IDref="Measure14"/>
+				<n1:MeasureID IDref="Measure23"/>
+				<n1:MeasureID IDref="Measure24"/>
+				<n1:MeasureID IDref="Measure15"/>
+				<n1:MeasureID IDref="Measure27"/>
+				<n1:MeasureID IDref="Measure29"/>
+              </n1:MeasureIDs>
+            </n1:PackageOfMeasures>
+          </n1:ScenarioType>
+        </n1:Scenario> 
+  '
   source += '      </n1:Scenarios>
     </n1:Report>
   </n1:Audit>

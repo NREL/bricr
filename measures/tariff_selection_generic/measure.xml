@@ -16,10 +16,10 @@
       <type>Choice</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
-      <default_value>BRICR_SF_Commercial_Electricity</default_value>
+      <default_value>BRICR_SF_Commercial_Electricity_03_2018</default_value>
       <choices>
         <choice>
-          <value>BRICR_SF_Commercial_Electricity</value>
+          <value>BRICR_SF_Commercial_Electricity_03_2018</value>
           <display_name>PGE_Commercial_A1</display_name>
         </choice>
       </choices>
@@ -30,10 +30,10 @@
       <type>Choice</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
-      <default_value>BRICR_SF_Commercial_Gas</default_value>
+      <default_value>BRICR_SF_Commercial_Gas_08_2018</default_value>
       <choices>
         <choice>
-          <value>BRICR_SF_Commercial_Gas</value>
+          <value>BRICR_SF_Commercial_Gas_08_2018</value>
           <display_name>PGE_G-NR1</display_name>
         </choice>
       </choices>
@@ -122,28 +122,16 @@
       <checksum>FB49C385</checksum>
     </file>
     <file>
-      <filename>BRICR_SF_Commercial_Electricity.idf</filename>
+      <filename>BRICR_SF_Commercial_Electricity_03_2018.idf</filename>
       <filetype>idf</filetype>
       <usage_type>resource</usage_type>
       <checksum>7F2DFCBA</checksum>
     </file>
     <file>
-      <filename>BRICR_SF_Commercial_Gas.idf</filename>
+      <filename>BRICR_SF_Commercial_Gas_08_2018.idf</filename>
       <filetype>idf</filetype>
       <usage_type>resource</usage_type>
       <checksum>7D11A76A</checksum>
-    </file>
-    <file>
-      <filename>Comml_170301-171231.xls</filename>
-      <filetype>xls</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>6FC47DB4</checksum>
-    </file>
-    <file>
-      <filename>GAS_SCHEDS_G-NR1.pdf</filename>
-      <filetype>pdf</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>DC295ADC</checksum>
     </file>
   </files>
 </measure>
