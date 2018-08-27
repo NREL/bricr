@@ -41,9 +41,15 @@ module BRICR
         @doc = REXML::Document.new(file)
       end
 
+      # test for the namespace
+      @ns = 'auc'
+      @doc.root.namespaces.each_pair do |k,v|
+        @ns = k if /bedes-auc/.match(v)
+      end
+
       # validate the doc
       audits = []
-      @doc.elements.each('n1:Audits/n1:Audit/') { |audit| audits << audit }
+      @doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/") { |audit| audits << audit }
       raise 'BuildingSync file must have exactly 1 audit' if audits.size != 1
 
       # choose the correct workflow maker based on xml
@@ -70,7 +76,7 @@ module BRICR
 
     def chooseWorkflowMaker
       # for now there is only one workflow maker
-      @workflow_maker = PhaseZeroWorkflowMaker.new(@doc)
+      @workflow_maker = PhaseZeroWorkflowMaker.new(@doc, @ns)
     end
   end
 end

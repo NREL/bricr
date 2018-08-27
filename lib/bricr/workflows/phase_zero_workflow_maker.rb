@@ -27,7 +27,7 @@
 module BRICR
   # base class for objects that will configure workflows based on building sync files
   class PhaseZeroWorkflowMaker < WorkflowMaker
-    def initialize(doc)
+    def initialize(doc, ns)
       super
 
       # load the workflow
@@ -67,11 +67,11 @@ module BRICR
       @facility['gross_floor_area'] = nil
       @facility['heated_and_cooled_floor_area'] = nil
       @facility['footprint_floor_area'] = nil
-      @doc.elements.each('/n1:Audits/n1:Audit/n1:Sites/n1:Site/n1:Facilities/n1:Facility/n1:FloorAreas/n1:FloorArea') do |floor_area_element|
-        floor_area = floor_area_element.elements['n1:FloorAreaValue'].text.to_f
+      @doc.elements.each("/#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:FloorAreas/#{@ns}:FloorArea") do |floor_area_element|
+        floor_area = floor_area_element.elements["#{@ns}:FloorAreaValue"].text.to_f
         next if floor_area.nil?
         
-        floor_area_type = floor_area_element.elements['n1:FloorAreaType'].text
+        floor_area_type = floor_area_element.elements["#{@ns}:FloorAreaType"].text
         if floor_area_type == 'Gross'
           @facility['gross_floor_area'] = floor_area
         elsif floor_area_type == 'Heated and Cooled'
@@ -83,11 +83,11 @@ module BRICR
 
       # SHL- get the template (vintage)
       @facility['template'] = nil
-      @doc.elements.each('/n1:Audits/n1:Audit/n1:Sites/n1:Site/n1:Facilities/n1:Facility') do |facility_element|
-        built_year = facility_element.elements['n1:YearOfConstruction'].text.to_f
+      @doc.elements.each("/#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Facilities/#{@ns}:Facility") do |facility_element|
+        built_year = facility_element.elements["#{@ns}:YearOfConstruction"].text.to_f
         
-        if facility_element.elements['n1:YearOfLastMajorRemodel']
-          major_remodel_year = facility_element.elements['n1:YearOfLastMajorRemodel'].text.to_f
+        if facility_element.elements["#{@ns}:YearOfLastMajorRemodel"]
+          major_remodel_year = facility_element.elements["#{@ns}:YearOfLastMajorRemodel"].text.to_f
           built_year = major_remodel_year if major_remodel_year > built_year
         end
 
@@ -114,22 +114,22 @@ module BRICR
       @facility['floor_height'] = nil # TBD
       @facility['wwr'] = nil # TBD
 
-      @doc.elements.each('/n1:Audits/n1:Audit/n1:Sites/n1:Site/n1:Facilities/n1:Facility') do |facility_element|
+      @doc.elements.each("/#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Facilities/#{@ns}:Facility") do |facility_element|
 
-        if facility_element.elements['n1:FloorsAboveGrade']
-          @facility['num_stories_above_grade'] = facility_element.elements['n1:FloorsAboveGrade'].text.to_f
+        if facility_element.elements["#{@ns}:FloorsAboveGrade"]
+          @facility['num_stories_above_grade'] = facility_element.elements["#{@ns}:FloorsAboveGrade"].text.to_f
         else
           @facility['num_stories_above_grade'] = 1.0 # setDefaultValue
         end
         
-        if facility_element.elements['n1:FloorsBelowGrade']
-          @facility['num_stories_below_grade'] = facility_element.elements['n1:FloorsBelowGrade'].text.to_f
+        if facility_element.elements["#{@ns}:FloorsBelowGrade"]
+          @facility['num_stories_below_grade'] = facility_element.elements["#{@ns}:FloorsBelowGrade"].text.to_f
         else 
           @facility['num_stories_below_grade'] = 0.0 # setDefaultValue
         end
         
-        if facility_element.elements['n1:AspectRatio']
-          @facility['ns_to_ew_ratio'] = facility_element.elements['n1:AspectRatio'].text.to_f
+        if facility_element.elements["#{@ns}:AspectRatio"]
+          @facility['ns_to_ew_ratio'] = facility_element.elements["#{@ns}:AspectRatio"].text.to_f
         else
           @facility['ns_to_ew_ratio'] = 0.0 # setDefaultValue
         end
@@ -139,15 +139,15 @@ module BRICR
         @facility['wwr'] = 0.0 # setDefaultValue in fraction
       
         subsections = []
-        facility_element.elements.each('n1:Subsections/n1:Subsection') do |subsection_element|
+        facility_element.elements.each("#{@ns}:Subsections/#{@ns}:Subsection") do |subsection_element|
           subsection = {'gross_floor_area' => nil, 'heated_and_cooled_floor_area' => nil, 'footprint_floor_area' => nil, 'occupancy_type' => nil, 'bldg_type' => nil, 'bar_division_method' => nil, 'system_type' => nil}
           
-          subsection_element.elements.each('n1:FloorAreas/n1:FloorArea') do |floor_area_element|
+          subsection_element.elements.each("#{@ns}:FloorAreas/#{@ns}:FloorArea") do |floor_area_element|
             
-            floor_area = floor_area_element.elements['n1:FloorAreaValue'].text.to_f
+            floor_area = floor_area_element.elements["#{@ns}:FloorAreaValue"].text.to_f
             next if floor_area.nil?
             
-            floor_area_type = floor_area_element.elements['n1:FloorAreaType'].text
+            floor_area_type = floor_area_element.elements["#{@ns}:FloorAreaType"].text
             if floor_area_type == 'Gross'
               subsection['gross_floor_area'] = floor_area
             elsif floor_area_type == 'Heated and Cooled'
@@ -156,8 +156,9 @@ module BRICR
               subsection['footprint_floor_area'] = floor_area
             end
           end
-          
-          subsection['occupancy_type'] = subsection_element.elements['n1:OccupancyClassification'].text
+
+          #puts subsection_element
+          subsection['occupancy_type'] = subsection_element.elements["#{@ns}:OccupancyClassification"].text
           if subsection['occupancy_type'] == 'Retail'
             subsection['bldg_type'] = 'RetailStandalone'
             subsection['bar_division_method'] = 'Multiple Space Types - Individual Stories Sliced'
@@ -174,7 +175,7 @@ module BRICR
               raise "Office building size is beyond BRICR scope"
             end
           else
-            raise "Building type is beyond BRICR scope"
+            raise "Building type '#{subsection['occupancy_type']}' is beyond BRICR scope"
           end
           
           raise "Subsection does not define gross floor area" if subsection['gross_floor_area'].nil?
@@ -244,17 +245,17 @@ module BRICR
 
     def configureForScenario(osw, scenario)
       measure_ids = []
-      scenario.elements.each('n1:ScenarioType/n1:PackageOfMeasures/n1:MeasureIDs/n1:MeasureID') do |measure_id|
+      scenario.elements.each("#{@ns}:ScenarioType/#{@ns}:PackageOfMeasures/#{@ns}:MeasureIDs/#{@ns}:MeasureID") do |measure_id|
         measure_ids << measure_id.attributes['IDref']
       end
 
       measure_ids.each do |measure_id|
-        @doc.elements.each("//n1:Measure[@ID='#{measure_id}']") do |measure|
-          measure_category = measure.elements['n1:SystemCategoryAffected'].text
+        @doc.elements.each("/#{@ns}:Measure[@ID='#{measure_id}']") do |measure|
+          measure_category = measure.elements["#{@ns}:SystemCategoryAffected"].text
       
           # Lighting
           if measure_category == "Lighting"
-            measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:LightingImprovements/n1:MeasureName'].text
+            measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:LightingImprovements/#{@ns}:MeasureName"].text
             # Lighting / LightingImprovements / Retrofit with light emitting diode technologies
             if measure_name == "Retrofit with light emitting diode technologies"
               set_measure_argument(osw, 'SetLightingLoadsByLPD', '__SKIP__', false)
@@ -280,7 +281,7 @@ module BRICR
           
           # Plug Load
           if measure_category == "Plug Load"
-            measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:PlugLoadReductions/n1:MeasureName'].text
+            measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:PlugLoadReductions/#{@ns}:MeasureName"].text
             # Plug Load / PlugLoadReductions / Replace with ENERGY STAR rated
             if measure_name == "Replace with ENERGY STAR rated"
               set_measure_argument(osw, 'tenant_star_internal_loads', '__SKIP__', false)
@@ -295,7 +296,7 @@ module BRICR
 		  
 		  # Refrigeration
 		  if measure_category == "Refrigeration"
-            measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:Refrigeration/n1:MeasureName'].text
+            measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:Refrigeration/#{@ns}:MeasureName"].text
             # Refrigeration / Refrigeration / Replace ice/refrigeration equipment with high efficiency units
             if measure_name == "Replace ice/refrigeration equipment with high efficiency units"
               set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', '__SKIP__', false)
@@ -305,7 +306,7 @@ module BRICR
           
           # Wall
           if measure_category == "Wall"
-            measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:BuildingEnvelopeModifications/n1:MeasureName'].text
+            measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:BuildingEnvelopeModifications/#{@ns}:MeasureName"].text
             # Wall / BuildingEnvelopeModifications / Air seal envelope
             if measure_name == "Air seal envelope"
               set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', '__SKIP__', false)
@@ -325,7 +326,7 @@ module BRICR
       
           # Roof
           if measure_category == "Roof"
-            measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:BuildingEnvelopeModifications/n1:MeasureName'].text
+            measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:BuildingEnvelopeModifications/#{@ns}:MeasureName"].text
             # Roof / BuildingEnvelopeModifications / Increase roof insulation
             if measure_name == "Increase roof insulation"
               set_measure_argument(osw, 'IncreaseInsulationRValueForRoofs', '__SKIP__', false)
@@ -335,7 +336,7 @@ module BRICR
 		  
 		  # Ceiling
           if measure_category == "Ceiling"
-            measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:BuildingEnvelopeModifications/n1:MeasureName'].text
+            measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:BuildingEnvelopeModifications/#{@ns}:MeasureName"].text
             # Ceiling / BuildingEnvelopeModifications / Increase ceiling insulation
             if measure_name == "Increase ceiling insulation"
               set_measure_argument(osw, 'IncreaseInsulationRValueForRoofsByPercentage', '__SKIP__', false)
@@ -346,7 +347,7 @@ module BRICR
           # Fenestration
           if measure_category == "Fenestration"
             # Fenestration / BuildingEnvelopeModifications
-            measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:BuildingEnvelopeModifications/n1:MeasureName'].text
+            measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:BuildingEnvelopeModifications/#{@ns}:MeasureName"].text
             # Fenestration / BuildingEnvelopeModifications / Replace windows
             if measure_name == "Replace windows"
               set_measure_argument(osw, 'replace_simple_glazing', '__SKIP__', false)
@@ -366,8 +367,8 @@ module BRICR
           # Heating System
           if measure_category == "Heating System"
             # Heating System / OtherHVAC
-            if defined? (measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:OtherHVAC/n1:MeasureName'].text)
-              measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:OtherHVAC/n1:MeasureName'].text
+            if defined? (measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:OtherHVAC/#{@ns}:MeasureName"].text)
+              measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:OtherHVAC/#{@ns}:MeasureName"].text
               # Heating System / OtherHVAC / Replace burner
               if measure_name == "Replace burner"
                 # furnace system
@@ -379,8 +380,8 @@ module BRICR
             end 
         
             # Heating System / BoilerPlantImprovements
-            if defined? (measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:BoilerPlantImprovements/n1:MeasureName'].text)
-              measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:BoilerPlantImprovements/n1:MeasureName'].text
+            if defined? (measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:BoilerPlantImprovements/#{@ns}:MeasureName"].text)
+              measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:BoilerPlantImprovements/#{@ns}:MeasureName"].text
               # Heating System / BoilerPlantImprovements / Replace boiler
               if measure_name == "Replace boiler"
                 # Boiler system for medium office
@@ -396,7 +397,7 @@ module BRICR
           # Cooling System
           if measure_category == "Cooling System"
             # Cooling System / OtherHVAC
-            measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:OtherHVAC/n1:MeasureName'].text 
+            measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:OtherHVAC/#{@ns}:MeasureName"].text 
               # Cooling System / OtherHVAC / Replace package units
             if measure_name == "Replace package units"
               if @facility['system_type'] == "PSZ-AC with gas coil heat"
@@ -414,14 +415,14 @@ module BRICR
           if measure_category == "Other HVAC"
           
             # Other HVAC / OtherHVAC
-            measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:OtherHVAC/n1:MeasureName'].text 
+            measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:OtherHVAC/#{@ns}:MeasureName"].text 
             
             # DLM: somme measures don't have a direct BuildingSync equivalent, use UserDefinedField 'OpenStudioMeasureName' for now
             if measure_name == 'Other'
-              measure.elements.each('n1:UserDefinedFields/n1:UserDefinedField') do |user_defined_field|
-                field_name = user_defined_field.elements['n1:FieldName'].text 
+              measure.elements.each("#{@ns}:UserDefinedFields/#{@ns}:UserDefinedField") do |user_defined_field|
+                field_name = user_defined_field.elements["#{@ns}:FieldName"].text 
                 if field_name == 'OpenStudioMeasureName'
-                  measure_name = user_defined_field.elements['n1:FieldValue'].text 
+                  measure_name = user_defined_field.elements["#{@ns}:FieldValue"].text 
                 end
               end
             end
@@ -487,7 +488,7 @@ module BRICR
           # General Controls and Operations
           if measure_category == "General Controls and Operations"
             # General Controls and Operations / OtherHVAC
-            measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:OtherHVAC/n1:MeasureName'].text 
+            measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:OtherHVAC/#{@ns}:MeasureName"].text 
             # General Controls and Operations / OtherHVAC / Upgrade operating protocols, calibration, and/or sequencing 
             if measure_name == "Upgrade operating protocols, calibration, and/or sequencing"
               set_measure_argument(osw, 'AdjustThermostatSetpointsByDegrees', '__SKIP__', false)
@@ -499,7 +500,7 @@ module BRICR
           # Fan
           if measure_category == "Fan"
             # Fan / ElectricMotorsAndDrives
-            measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:OtherElectricMotorsAndDrives/n1:MeasureName'].text 
+            measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:OtherElectricMotorsAndDrives/#{@ns}:MeasureName"].text 
               # Fan / ElectricMotorsAndDrives / Replace with higher efficiency
             if measure_name == "Replace with higher efficiency"
               set_measure_argument(osw, 'ReplaceFanTotalEfficiency', '__SKIP__', false)
@@ -510,7 +511,7 @@ module BRICR
           # Air Distribution
           if measure_category == "Air Distribution"
             # Air Distribution / OtherHVAC
-            measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:OtherHVAC/n1:MeasureName'].text 
+            measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:OtherHVAC/#{@ns}:MeasureName"].text 
               # Air Distribution / OtherHVAC / Improve ventilation fans
             if measure_name == "Improve ventilation fans"
               set_measure_argument(osw, 'ImproveFanTotalEfficiencybyPercentage', '__SKIP__', false)
@@ -518,7 +519,7 @@ module BRICR
             end
             
             # Air Distribution / OtherHVAC
-            measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:OtherHVAC/n1:MeasureName'].text 
+            measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:OtherHVAC/#{@ns}:MeasureName"].text 
               # Air Distribution / OtherHVAC / Install demand control ventilation
             if measure_name == "Install demand control ventilation"
               set_measure_argument(osw, 'EnableDemandControlledVentilation', '__SKIP__', false)
@@ -526,7 +527,7 @@ module BRICR
             end
             
             # Air Distribution / OtherHVAC
-            measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:OtherHVAC/n1:MeasureName'].text 
+            measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:OtherHVAC/#{@ns}:MeasureName"].text 
               # Air Distribution / OtherHVAC / Add or repair economizer
             if measure_name == "Add or repair economizer"
               set_measure_argument(osw, 'EnableEconomizerControl', '__SKIP__', false)
@@ -537,7 +538,7 @@ module BRICR
           # Heat Recovery
           if measure_category == "Heat Recovery"
             # Heat Recovery / OtherHVAC
-            measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:OtherHVAC/n1:MeasureName'].text 
+            measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:OtherHVAC/#{@ns}:MeasureName"].text 
               # Heat Recovery / OtherHVAC / Add energy recovery
             if measure_name == "Add energy recovery"
               set_measure_argument(osw, 'add_energy_recovery_ventilator', '__SKIP__', false)
@@ -555,7 +556,7 @@ module BRICR
           # Domestic Hot Water
           if measure_category == "Domestic Hot Water"
             # Domestic Hot Water / ChilledWaterHotWaterAndSteamDistributionSystems
-            measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:ChilledWaterHotWaterAndSteamDistributionSystems/n1:MeasureName'].text 
+            measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:ChilledWaterHotWaterAndSteamDistributionSystems/#{@ns}:MeasureName"].text 
               # Domestic Hot Water / ChilledWaterHotWaterAndSteamDistributionSystems / Replace or upgrade water heater
             if measure_name == "Replace or upgrade water heater"
               set_measure_argument(osw, 'set_water_heater_efficiency_heat_lossand_peak_water_flow_rate', '__SKIP__', false)
@@ -579,7 +580,7 @@ module BRICR
           # Water Use
           if measure_category == "Water Use"
             # Domestic Hot Water / WaterAndSewerConservationSystems
-            measure_name = measure.elements['n1:TechnologyCategories/n1:TechnologyCategory/n1:WaterAndSewerConservationSystems/n1:MeasureName'].text  
+            measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:WaterAndSewerConservationSystems/#{@ns}:MeasureName"].text  
             # Domestic Hot Water / WaterAndSewerConservationSystems / Install low-flow faucets and showerheads
             if measure_name == "Install low-flow faucets and showerheads"
               set_measure_argument(osw, 'reduce_water_use_by_percentage', '__SKIP__', false)
@@ -594,9 +595,9 @@ module BRICR
       super
 
       # write an osw for each scenario
-      @doc.elements.each('n1:Audits/n1:Audit/n1:Report/n1:Scenarios/n1:Scenario') do |scenario|
+      @doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
         # get information about the scenario
-        scenario_name = scenario.elements['n1:ScenarioName'].text
+        scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
         next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
         # deep clone
@@ -639,9 +640,9 @@ module BRICR
       results = {}
 
       # write an osw for each scenario
-      @doc.elements.each('n1:Audits/n1:Audit/n1:Report/n1:Scenarios/n1:Scenario') do |scenario|
+      @doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
         # get information about the scenario
-        scenario_name = scenario.elements['n1:ScenarioName'].text
+        scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
         next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
         # dir for the osw
@@ -665,12 +666,12 @@ module BRICR
         FileUtils.rm_f(path) if File.exists?(path)
       end
 
-      @doc.elements.each('n1:Audits/n1:Audit/n1:Report/n1:Scenarios/n1:Scenario') do |scenario|
+      @doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
         # get information about the scenario
-        scenario_name = scenario.elements['n1:ScenarioName'].text
+        scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
         next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
-        package_of_measures = scenario.elements['n1:ScenarioType'].elements['n1:PackageOfMeasures']
+        package_of_measures = scenario.elements["#{@ns}:ScenarioType"].elements["#{@ns}:PackageOfMeasures"]
 
         result = results[scenario_name]
         baseline = results['Baseline']
@@ -681,20 +682,20 @@ module BRICR
           @failed_scenarios << scenario_name
         end
         
-        user_defined_fields = REXML::Element.new('n1:UserDefinedFields')
-        user_defined_field = REXML::Element.new('n1:UserDefinedField')
-        field_name = REXML::Element.new('n1:FieldName')
+        user_defined_fields = REXML::Element.new("#{@ns}:UserDefinedFields")
+        user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
+        field_name = REXML::Element.new("#{@ns}:FieldName")
         field_name.text = 'OpenStudioCompletedStatus'
-        field_value = REXML::Element.new('n1:FieldValue')
+        field_value = REXML::Element.new("#{@ns}:FieldValue")
         field_value.text = result[:completed_status]
         user_defined_field.add_element(field_name)
         user_defined_field.add_element(field_value)
         user_defined_fields.add_element(user_defined_field)
         
-        user_defined_field = REXML::Element.new('n1:UserDefinedField')
-        field_name = REXML::Element.new('n1:FieldName')
+        user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
+        field_name = REXML::Element.new("#{@ns}:FieldName")
         field_name.text = 'OpenStudioBaselineCompletedStatus'
-        field_value = REXML::Element.new('n1:FieldValue')
+        field_value = REXML::Element.new("#{@ns}:FieldValue")
         field_value.text = baseline[:completed_status]
         user_defined_field.add_element(field_name)
         user_defined_field.add_element(field_value)
@@ -718,13 +719,13 @@ module BRICR
           total_energy_cost_savings = baseline_annual_utility_cost - annual_utility_cost
         end
         
-        annual_savings_site_energy = REXML::Element.new('n1:AnnualSavingsSiteEnergy')
-        annual_savings_energy_cost = REXML::Element.new('n1:AnnualSavingsCost')
+        annual_savings_site_energy = REXML::Element.new("#{@ns}:AnnualSavingsSiteEnergy")
+        annual_savings_energy_cost = REXML::Element.new("#{@ns}:AnnualSavingsCost")
         
         # DLM: these are not valid BuildingSync fields
-        #annual_site_energy = REXML::Element.new('n1:AnnualSiteEnergy')
-        #annual_electricity = REXML::Element.new('n1:AnnualElectricity')
-        #annual_natural_gas = REXML::Element.new('n1:AnnualNaturalGas')
+        #annual_site_energy = REXML::Element.new("#{@ns}:AnnualSiteEnergy")
+        #annual_electricity = REXML::Element.new("#{@ns}:AnnualElectricity")
+        #annual_natural_gas = REXML::Element.new("#{@ns}:AnnualNaturalGas")
         
         annual_savings_site_energy.text = total_site_energy_savings
         annual_savings_energy_cost.text = total_energy_cost_savings.to_i # BuildingSync wants an integer, might be a BuildingSync bug
@@ -732,28 +733,28 @@ module BRICR
         #annual_electricity.text = fuel_electricity
         #annual_natural_gas.text = fuel_natural_gas
         
-        user_defined_field = REXML::Element.new('n1:UserDefinedField')
-        field_name = REXML::Element.new('n1:FieldName')
+        user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
+        field_name = REXML::Element.new("#{@ns}:FieldName")
         field_name.text = 'OpenStudioAnnualSiteEnergy_MMBtu'
-        field_value = REXML::Element.new('n1:FieldValue')
+        field_value = REXML::Element.new("#{@ns}:FieldValue")
         field_value.text = total_site_energy.to_s
         user_defined_field.add_element(field_name)
         user_defined_field.add_element(field_value)
         user_defined_fields.add_element(user_defined_field)
         
-        user_defined_field = REXML::Element.new('n1:UserDefinedField')
-        field_name = REXML::Element.new('n1:FieldName')
+        user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
+        field_name = REXML::Element.new("#{@ns}:FieldName")
         field_name.text = 'OpenStudioAnnualElectricity_kBtu'
-        field_value = REXML::Element.new('n1:FieldValue')
+        field_value = REXML::Element.new("#{@ns}:FieldValue")
         field_value.text = fuel_electricity.to_s
         user_defined_field.add_element(field_name)
         user_defined_field.add_element(field_value)
         user_defined_fields.add_element(user_defined_field)
         
-        user_defined_field = REXML::Element.new('n1:UserDefinedField')
-        field_name = REXML::Element.new('n1:FieldName')
+        user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
+        field_name = REXML::Element.new("#{@ns}:FieldName")
         field_name.text = 'OpenStudioAnnualNaturalGas_kBtu'
-        field_value = REXML::Element.new('n1:FieldValue')
+        field_value = REXML::Element.new("#{@ns}:FieldValue")
         field_value.text = fuel_natural_gas.to_s
         user_defined_field.add_element(field_name)
         user_defined_field.add_element(field_value)

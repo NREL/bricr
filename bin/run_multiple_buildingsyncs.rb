@@ -63,15 +63,15 @@ def get_results(result_xml_path)
   raise "File '#{result_xml_path}' does not exist" unless File.exist?(result_xml_path)
   File.open(result_xml_path, 'r') do |file|
     doc = REXML::Document.new(file)
-    doc.elements.each('n1:Audits/n1:Audit/n1:Report/n1:Scenarios/n1:Scenario') do |scenario|
+    doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
       # get information about the scenario
-      scenario_name = scenario.elements['n1:ScenarioName'].text
+      scenario_name = scenario.elements["#{@ns}:ScenarioName'].text
       next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
-      package_of_measures = scenario.elements['n1:ScenarioType'].elements['n1:PackageOfMeasures']
-      scenario.elements.each('n1:UserDefinedFields/n1:UserDefinedField') do |user_defined_field|
-        field_name = user_defined_field.elements['n1:FieldName'].text
-        field_value = user_defined_field.elements['n1:FieldValue'].text
+      package_of_measures = scenario.elements["#{@ns}:ScenarioType'].elements["#{@ns}:PackageOfMeasures"]
+      scenario.elements.each("#{@ns}:UserDefinedFields/#{@ns}:UserDefinedField") do |user_defined_field|
+        field_name = user_defined_field.elements["#{@ns}:FieldName"].text
+        field_value = user_defined_field.elements["#{@ns}:FieldValue"].text
         
         if field_name == 'OpenStudioCompletedStatus'
           results['completed_status'] = field_value
@@ -181,9 +181,9 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
     File.open(result_path, 'r') do |file|
 	  doc = REXML::Document.new(file)
 	  
-	  doc.elements.each('n1:Audits/n1:Audit/n1:Report/n1:Scenarios/n1:Scenario') do |scenario|
+	  doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario') do |scenario|
 		# get information about the scenario
-        scenario_name = scenario.elements['n1:ScenarioName'].text
+        scenario_name = scenario.elements["#{@ns}:ScenarioName'].text
         
 		next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
@@ -191,7 +191,7 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
         csv_header.push "[#{scenario_name}]:natural gas_eui(kBtu/sf)"
         csv_header.push "[#{scenario_name}]:site_eui(kBtu/sf)"
 		
-        package_of_measures = scenario.elements['n1:ScenarioType'].elements['n1:PackageOfMeasures']
+        package_of_measures = scenario.elements["#{@ns}:ScenarioType'].elements["#{@ns}:PackageOfMeasures']
 		electricity_eui = results['annual_electricity'] / floor_area_sf
 		gas_eui = results['annual_natural_gas'] / floor_area_sf
 

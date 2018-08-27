@@ -30,8 +30,9 @@ require 'json'
 module BRICR
   # base class for objects that will configure workflows based on building sync files
   class WorkflowMaker
-    def initialize(doc)
+    def initialize(doc, ns)
       @doc = doc
+      @ns = ns
     end
 
     def writeOSWs(dir)
