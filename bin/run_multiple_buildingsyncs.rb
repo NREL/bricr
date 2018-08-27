@@ -65,10 +65,10 @@ def get_results(result_xml_path)
     doc = REXML::Document.new(file)
     doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
       # get information about the scenario
-      scenario_name = scenario.elements["#{@ns}:ScenarioName'].text
+      scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
       next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
-      package_of_measures = scenario.elements["#{@ns}:ScenarioType'].elements["#{@ns}:PackageOfMeasures"]
+      package_of_measures = scenario.elements["#{@ns}:ScenarioType"].elements["#{@ns}:PackageOfMeasures"]
       scenario.elements.each("#{@ns}:UserDefinedFields/#{@ns}:UserDefinedField") do |user_defined_field|
         field_name = user_defined_field.elements["#{@ns}:FieldName"].text
         field_value = user_defined_field.elements["#{@ns}:FieldValue"].text
@@ -181,9 +181,9 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
     File.open(result_path, 'r') do |file|
 	  doc = REXML::Document.new(file)
 	  
-	  doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario') do |scenario|
+	  doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
 		# get information about the scenario
-        scenario_name = scenario.elements["#{@ns}:ScenarioName'].text
+        scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
         
 		next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
@@ -191,7 +191,7 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
         csv_header.push "[#{scenario_name}]:natural gas_eui(kBtu/sf)"
         csv_header.push "[#{scenario_name}]:site_eui(kBtu/sf)"
 		
-        package_of_measures = scenario.elements["#{@ns}:ScenarioType'].elements["#{@ns}:PackageOfMeasures']
+        package_of_measures = scenario.elements["#{@ns}:ScenarioType"].elements["#{@ns}:PackageOfMeasures"]
 		electricity_eui = results['annual_electricity'] / floor_area_sf
 		gas_eui = results['annual_natural_gas'] / floor_area_sf
 
