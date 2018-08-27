@@ -31,6 +31,11 @@ require 'json'
 require 'fileutils'
 require 'rest-client'
 
+if !File.exists?(ARGV[0])
+  puts 'usage: bundle exec ruby run_seed_buildingsyncs.rb /path/to/config.rb'
+  exit(1)
+end
+
 config_path = ARGV[0]
 require(config_path)
 

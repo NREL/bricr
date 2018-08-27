@@ -28,6 +28,11 @@ require 'bricr'
 require 'rbconfig'
 require 'parallel'
 
+if !File.exists?(ARGV[0]) || !File.exists?(ARGV[1])
+  puts 'usage: bundle exec ruby upload_seed_buildingsyncs.rb /path/to/config.rb /path/to/buildingsync/dir/'
+  exit(1)
+end
+
 config_path = ARGV[0]
 require(config_path)
 
