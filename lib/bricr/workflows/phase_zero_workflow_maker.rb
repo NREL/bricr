@@ -703,9 +703,9 @@ module BRICR
         
         # Check out.osw "openstudio_results" for output variables
         total_site_energy = getMeasureResult(result, 'openstudio_results', 'total_site_energy') # in kBtu/year
-        total_site_energy = total_site_energy / 1000.0 # kBtu/year -> MMBtu/year
+        total_site_energy = total_site_energy / 1000.0 if total_site_energy # kBtu/year -> MMBtu/year
         baseline_total_site_energy = getMeasureResult(baseline, 'openstudio_results', 'total_site_energy') # in kBtu
-        baseline_total_site_energy = baseline_total_site_energy / 1000.0 # kBtu/year -> MMBtu/year
+        baseline_total_site_energy = baseline_total_site_energy / 1000.0 if baseline_total_site_energy # kBtu/year -> MMBtu/year
         fuel_electricity = getMeasureResult(result, 'openstudio_results', 'fuel_electricity') # in kBtu/year
         #fuel_electricity = fuel_electricity * 0.2930710702 # kBtu/year -> kWh
         fuel_natural_gas = getMeasureResult(result, 'openstudio_results', 'fuel_natural_gas') # in kBtu/year
