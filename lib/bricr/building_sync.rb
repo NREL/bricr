@@ -53,12 +53,20 @@ module BRICR
     # custom id is used to identify file in SEED
     def customId
       result = nil
+      alt_result = nil
       @doc.elements.each("/#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:PremisesIdentifiers/#{@ns}:PremisesIdentifier") do |identifier|
         name = identifier.elements["#{@ns}:IdentifierCustomName"]
-        if name && name.text == "BRICR Custom ID 1"
-          result = identifier.elements["#{@ns}:IdentifierValue"].text
-          break
+        if name 
+          if name.text == "Custom ID 1"
+            result = identifier.elements["#{@ns}:IdentifierValue"].text
+            break
+          elsif name.text == "BRICR Custom ID 1"
+            alt_result = identifier.elements["#{@ns}:IdentifierValue"].text
+          end
         end
+      end
+      if result.nil? && !alt_result.nil?
+        result = alt_result
       end
       return result
     end

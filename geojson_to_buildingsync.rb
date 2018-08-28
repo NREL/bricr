@@ -273,7 +273,7 @@ def create_site(feature)
   identifier_label.text = 'Custom'
   premises_identifier.add_element(identifier_label)
   identifier_name = REXML::Element.new('auc:IdentifierCustomName')
-  identifier_name.text = 'BRICR Custom ID 1'
+  identifier_name.text = 'Custom ID 1'
   premises_identifier.add_element(identifier_name)
   identifier_value = REXML::Element.new('auc:IdentifierValue')
   identifier_value.text = feature[:properties][:"Building Identifier"]
