@@ -64,29 +64,31 @@ def get_results(result_xml_path)
   File.open(result_xml_path, 'r') do |file|
     doc = REXML::Document.new(file)
   
-	ns = 'auc'
-	doc.root.namespaces.each_pair do |k,v|
-		ns = k if /bedes-auc/.match(v)
-	end
+    ns = 'auc'
+    doc.root.namespaces.each_pair do |k,v|
+      ns = k if /bedes-auc/.match(v)
+    end
 	
     doc.elements.each("#{ns}:Audits/#{ns}:Audit/#{ns}:Report/#{ns}:Scenarios/#{ns}:Scenario") do |scenario|
       # get information about the scenario
       scenario_name = scenario.elements["#{ns}:ScenarioName"].text
       next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
+      results[scenario_name] = {}
+     
       package_of_measures = scenario.elements["#{ns}:ScenarioType"].elements["#{ns}:PackageOfMeasures"]
       scenario.elements.each("#{ns}:UserDefinedFields/#{ns}:UserDefinedField") do |user_defined_field|
         field_name = user_defined_field.elements["#{ns}:FieldName"].text
         field_value = user_defined_field.elements["#{ns}:FieldValue"].text
         
         if field_name == 'OpenStudioCompletedStatus'
-          results['completed_status'] = field_value
+          results[scenario_name]['completed_status'] = field_value
         elsif field_name == 'OpenStudioAnnualSiteEnergy_MMBtu'
-          results['annual_energy'] = field_value.to_f       
+          results[scenario_name]['annual_energy'] = field_value.to_f       
         elsif field_name == 'OpenStudioAnnualElectricity_kBtu'
-          results['annual_electricity'] = field_value.to_f
+          results[scenario_name]['annual_electricity'] = field_value.to_f
         elsif field_name == 'OpenStudioAnnualNaturalGas_kBtu'
-          results['annual_natural_gas'] = field_value.to_f
+          results[scenario_name]['annual_natural_gas'] = field_value.to_f
         end
       end
     end
@@ -176,8 +178,8 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
     result_path = File.join(out_dir, 'results.xml')
     results = get_results(result_path)
     floor_area_sf = building_info[xml_path_ids[index]][floor_area_index].to_f
-    electricity_eui = results['annual_electricity'] / floor_area_sf
-    gas_eui = results['annual_natural_gas'] / floor_area_sf
+    electricity_eui = results['Baseline']['annual_electricity'] / floor_area_sf
+    gas_eui = results['Baseline']['annual_natural_gas'] / floor_area_sf
 
     building_info[xml_path_ids[index]].push(electricity_eui)
     building_info[xml_path_ids[index]].push(gas_eui)
@@ -199,17 +201,18 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
         
       next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
-        csv_header.push "[#{scenario_name}]:electricity_eui(kBtu/sf)"
-        csv_header.push "[#{scenario_name}]:natural gas_eui(kBtu/sf)"
-        csv_header.push "[#{scenario_name}]:site_eui(kBtu/sf)"
-      
-        package_of_measures = scenario.elements["#{ns}:ScenarioType"].elements["#{ns}:PackageOfMeasures"]
-        electricity_eui = results['annual_electricity'] / floor_area_sf
-        gas_eui = results['annual_natural_gas'] / floor_area_sf
+      csv_header.push "[#{scenario_name}]:electricity_eui(kBtu/sf)"
+      csv_header.push "[#{scenario_name}]:natural gas_eui(kBtu/sf)"
+      csv_header.push "[#{scenario_name}]:site_eui(kBtu/sf)"
+      csv_header.push "[#{scenario_name}]:source_eui(kBtu/sf)"
+    
+      electricity_eui = results[scenario_name]['annual_electricity'] / floor_area_sf
+      gas_eui = results[scenario_name]['annual_natural_gas'] / floor_area_sf
 
-        building_info[xml_path_ids[index]].push(electricity_eui)
-        building_info[xml_path_ids[index]].push(gas_eui)
-        building_info[xml_path_ids[index]].push(electricity_eui + gas_eui)
+      building_info[xml_path_ids[index]].push(electricity_eui)
+      building_info[xml_path_ids[index]].push(gas_eui)
+      building_info[xml_path_ids[index]].push(electricity_eui + gas_eui)
+      building_info[xml_path_ids[index]].push(electricity_eui * 3.14 + gas_eui * 1.05)
 
       end
     end
@@ -231,6 +234,8 @@ if defined?(BRICR::SIMULATION_OUTPUT_FOLDER) && BRICR::SIMULATION_OUTPUT_FOLDER
 else
   summary_output_path = 'summary_output.csv'
 end
+
+puts "summary_output_path = '#{summary_output_path}'"
 
 File.open(summary_output_path, 'w') do |file|
   file.puts csv_header.join(',')
