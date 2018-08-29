@@ -183,7 +183,8 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
     building_info[xml_path_ids[index]].push(gas_eui)
     building_info[xml_path_ids[index]].push(electricity_eui + gas_eui)
     building_info[xml_path_ids[index]].push(electricity_eui * 3.14 + gas_eui * 1.05)
-	# parse the xml
+	
+    # parse the xml
     File.open(result_path, 'r') do |file|
 	  doc = REXML::Document.new(file)
 	  

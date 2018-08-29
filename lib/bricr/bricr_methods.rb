@@ -45,20 +45,33 @@ module BRICR
     new_env["RUBYLIB"] = nil
     new_env["RUBYOPT"] = nil
   
-    Open3.popen3(new_env, *command) do |stdin, stdout, stderr, wait_thr|
-      # calling wait_thr.value blocks until command is complete
-      if wait_thr.value.success?
-        puts "Command completed successfully"
-        #puts "stdout: #{stdout.read}"
-        #puts "stderr: #{stderr.read}"
-        return true
-      else
-        puts "Error running command: '#{command.join(' ')}'"
-        puts "stdout: #{stdout.read}"
-        puts "stderr: #{stderr.read}"
-        return false
-      end
+    stdout_str, stderr_str, status = Open3.capture3(new_env, command.join(' '))
+    if status.success?
+      puts "Command completed successfully"
+      #puts "stdout: #{stdout_str}"
+      #puts "stderr: #{stderr_str}"
+      return true
+    else
+      puts "Error running command: '#{command.join(' ')}'"
+      puts "stdout: #{stdout_str}"
+      puts "stderr: #{stderr_str}"
+      return false 
     end
+    
+    #Open3.popen3(new_env, *command) do |stdin, stdout, stderr, wait_thr|
+    #  # calling wait_thr.value blocks until command is complete
+    #  if wait_thr.value.success?
+    #    puts "Command completed successfully"
+    #    #puts "stdout: #{stdout.read}"
+    #    #puts "stderr: #{stderr.read}"
+    #    return true
+    #  else
+    #    puts "Error running command: '#{command.join(' ')}'"
+    #    puts "stdout: #{stdout.read}"
+    #    puts "stderr: #{stderr.read}"
+    #    return false
+    #  end
+    #end
     
     return false
   end
@@ -114,9 +127,9 @@ module BRICR
           out_log = osw + '.log'
           
           if Gem.win_platform?
-            out_log = "nul"
+            #out_log = "nul"
           else
-            out_log = "/dev/null"
+            #out_log = "/dev/null"
           end
         
           cmd = nil
