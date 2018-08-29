@@ -201,11 +201,14 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
         
       next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
-      csv_header.push "[#{scenario_name}]:electricity_eui(kBtu/sf)"
-      csv_header.push "[#{scenario_name}]:natural gas_eui(kBtu/sf)"
-      csv_header.push "[#{scenario_name}]:site_eui(kBtu/sf)"
-      csv_header.push "[#{scenario_name}]:source_eui(kBtu/sf)"
-    
+      if index == 0
+        # push headers for first row only, assumes all xmls have same measures in same order
+        csv_header.push "[#{scenario_name}]:electricity_eui(kBtu/sf)"
+        csv_header.push "[#{scenario_name}]:natural gas_eui(kBtu/sf)"
+        csv_header.push "[#{scenario_name}]:site_eui(kBtu/sf)"
+        csv_header.push "[#{scenario_name}]:source_eui(kBtu/sf)"
+      end
+      
       electricity_eui = results[scenario_name]['annual_electricity'] / floor_area_sf
       gas_eui = results[scenario_name]['annual_natural_gas'] / floor_area_sf
 
