@@ -154,6 +154,14 @@ def calculate_aspect_ratio(feature)
   return aspect
 end
 
+def get_facility_id(feature)
+  return "Building#{feature[:properties][:"Building Identifier"]}"
+end
+
+def get_floor_area(feature)
+  return convert(feature[:properties][:"Gross Floor Area"], 'ft2', 'ft2')
+end
+
 def create_site(feature)
   site = REXML::Element.new('auc:Site')
 
@@ -234,7 +242,7 @@ def create_site(feature)
   # facilities
   facilities = REXML::Element.new('auc:Facilities')
   facility = REXML::Element.new('auc:Facility')
-  facility.attributes['ID'] = "Building#{feature[:properties][:"Building Identifier"]}"
+  facility.attributes['ID'] = get_facility_id(feature)
 
   premises_name = REXML::Element.new('auc:PremisesName')
   premises_name.text = "#{feature[:properties][:"Building Name"]}, #{street_address_text}"
@@ -439,10 +447,8 @@ end
 def convert_feature(feature)
   
   # this is where we estimate Phase 0 measure costs
-  id = feature[:properties][:"Building Identifier"]
-  floor_area = convert(feature[:properties][:"Gross Floor Area"], 'ft2', 'ft2')
-  
-  facility_id = "Building#{id}"
+  facility_id = get_facility_id(feature)
+  floor_area = get_floor_area(feature)
   
   measures = []
   measures << {ID: 'Measure1',
@@ -768,96 +774,151 @@ def convert_feature(feature)
               </auc:MeasureIDs>
             </auc:PackageOfMeasures>
           </auc:ScenarioType>
+          <auc:LinkedPremises>
+						<auc:Facility>
+							<auc:LinkedFacilityID IDref=\"#{facility_id}\"/>
+						</auc:Facility>
+					</auc:LinkedPremises>
+					<auc:UserDefinedFields>
+						<auc:UserDefinedField>
+							<auc:FieldName>Recommendation Category</auc:FieldName>
+							<auc:FieldValue>Potential Capital Recommendations</auc:FieldValue>
+						</auc:UserDefinedField>
+					</auc:UserDefinedFields>
         </auc:Scenario>
 "    
   end
 
-  source += '     <auc:Scenario>
+  source += "     <auc:Scenario>
          <auc:ScenarioName>Retail Package</auc:ScenarioName>
           <auc:ScenarioType>
             <auc:PackageOfMeasures>
-              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:ReferenceCase IDref=\"Baseline\"/>
               <auc:MeasureIDs>
-                <auc:MeasureID IDref="Measure1"/>
-				<auc:MeasureID IDref="Measure2"/>
-				<auc:MeasureID IDref="Measure8"/>
-				<auc:MeasureID IDref="Measure14"/>
-				<auc:MeasureID IDref="Measure29"/>
+                <auc:MeasureID IDref=\"Measure1\"/>
+                <auc:MeasureID IDref=\"Measure2\"/>
+                <auc:MeasureID IDref=\"Measure8\"/>
+                <auc:MeasureID IDref=\"Measure14\"/>
+                <auc:MeasureID IDref=\"Measure29\"/>
               </auc:MeasureIDs>
             </auc:PackageOfMeasures>
           </auc:ScenarioType>
+          <auc:LinkedPremises>
+						<auc:Facility>
+							<auc:LinkedFacilityID IDref=\"#{facility_id}\"/>
+						</auc:Facility>
+					</auc:LinkedPremises>
+					<auc:UserDefinedFields>
+						<auc:UserDefinedField>
+							<auc:FieldName>Recommendation Category</auc:FieldName>
+							<auc:FieldValue>Potential Capital Recommendations</auc:FieldValue>
+						</auc:UserDefinedField>
+					</auc:UserDefinedFields>
         </auc:Scenario>
 		
 		<auc:Scenario>
           <auc:ScenarioName>Office-Tenant Package</auc:ScenarioName>
           <auc:ScenarioType>
             <auc:PackageOfMeasures>
-              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:ReferenceCase IDref=\"Baseline\"/>
               <auc:MeasureIDs>
-                <auc:MeasureID IDref="Measure1"/>
-				<auc:MeasureID IDref="Measure7"/>
-				<auc:MeasureID IDref="Measure2"/>
-				<auc:MeasureID IDref="Measure8"/>
-				<auc:MeasureID IDref="Measure13"/>
-				<auc:MeasureID IDref="Measure14"/>
-				<auc:MeasureID IDref="Measure24"/>
-				<auc:MeasureID IDref="Measure29"/>
+                <auc:MeasureID IDref=\"Measure1\"/>
+                <auc:MeasureID IDref=\"Measure7\"/>
+                <auc:MeasureID IDref=\"Measure2\"/>
+                <auc:MeasureID IDref=\"Measure8\"/>
+                <auc:MeasureID IDref=\"Measure13\"/>
+                <auc:MeasureID IDref=\"Measure14\"/>
+                <auc:MeasureID IDref=\"Measure24\"/>
+                <auc:MeasureID IDref=\"Measure29\"/>
               </auc:MeasureIDs>
             </auc:PackageOfMeasures>
           </auc:ScenarioType>
+          <auc:LinkedPremises>
+						<auc:Facility>
+							<auc:LinkedFacilityID IDref=\"#{facility_id}\"/>
+						</auc:Facility>
+					</auc:LinkedPremises>
+					<auc:UserDefinedFields>
+						<auc:UserDefinedField>
+							<auc:FieldName>Recommendation Category</auc:FieldName>
+							<auc:FieldValue>Potential Capital Recommendations</auc:FieldValue>
+						</auc:UserDefinedField>
+					</auc:UserDefinedFields>
         </auc:Scenario>
 		
 		<auc:Scenario>
           <auc:ScenarioName>Office-Central Systems Package</auc:ScenarioName>
           <auc:ScenarioType>
             <auc:PackageOfMeasures>
-              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:ReferenceCase IDref=\"Baseline\"/>
               <auc:MeasureIDs>
-                <auc:MeasureID IDref="Measure1"/>
-				<auc:MeasureID IDref="Measure7"/>
-				<auc:MeasureID IDref="Measure2"/>
-				<auc:MeasureID IDref="Measure8"/>
-				<auc:MeasureID IDref="Measure11"/>
-				<auc:MeasureID IDref="Measure13"/>
-				<auc:MeasureID IDref="Measure18"/>
-				<auc:MeasureID IDref="Measure14"/>
-				<auc:MeasureID IDref="Measure23"/>
-				<auc:MeasureID IDref="Measure24"/>
-				<auc:MeasureID IDref="Measure25"/>
-				<auc:MeasureID IDref="Measure27"/>
-				<auc:MeasureID IDref="Measure29"/>
+                <auc:MeasureID IDref=\"Measure1\"/>
+                <auc:MeasureID IDref=\"Measure7\"/>
+                <auc:MeasureID IDref=\"Measure2\"/>
+                <auc:MeasureID IDref=\"Measure8\"/>
+                <auc:MeasureID IDref=\"Measure11\"/>
+                <auc:MeasureID IDref=\"Measure13\"/>
+                <auc:MeasureID IDref=\"Measure18\"/>
+                <auc:MeasureID IDref=\"Measure14\"/>
+                <auc:MeasureID IDref=\"Measure23\"/>
+                <auc:MeasureID IDref=\"Measure24\"/>
+                <auc:MeasureID IDref=\"Measure25\"/>
+                <auc:MeasureID IDref=\"Measure27\"/>
+                <auc:MeasureID IDref=\"Measure29\"/>
               </auc:MeasureIDs>
             </auc:PackageOfMeasures>
           </auc:ScenarioType>
+          <auc:LinkedPremises>
+						<auc:Facility>
+							<auc:LinkedFacilityID IDref=\"#{facility_id}\"/>
+						</auc:Facility>
+					</auc:LinkedPremises>
+					<auc:UserDefinedFields>
+						<auc:UserDefinedField>
+							<auc:FieldName>Recommendation Category</auc:FieldName>
+							<auc:FieldValue>Potential Capital Recommendations</auc:FieldValue>
+						</auc:UserDefinedField>
+					</auc:UserDefinedFields>
         </auc:Scenario>
 		
 		<auc:Scenario>
           <auc:ScenarioName>Office-Central Systems Package</auc:ScenarioName>
           <auc:ScenarioType>
             <auc:PackageOfMeasures>
-              <auc:ReferenceCase IDref="Baseline"/>
+              <auc:ReferenceCase IDref=\"Baseline\"/>
               <auc:MeasureIDs>
-                <auc:MeasureID IDref="Measure1"/>
-				<auc:MeasureID IDref="Measure6"/>
-				<auc:MeasureID IDref="Measure7"/>
-				<auc:MeasureID IDref="Measure2"/>
-				<auc:MeasureID IDref="Measure8"/>
-				<auc:MeasureID IDref="Measure3"/>
-				<auc:MeasureID IDref="Measure10"/>
-				<auc:MeasureID IDref="Measure17"/>
-				<auc:MeasureID IDref="Measure18"/>
-				<auc:MeasureID IDref="Measure20"/>
-				<auc:MeasureID IDref="Measure14"/>
-				<auc:MeasureID IDref="Measure23"/>
-				<auc:MeasureID IDref="Measure24"/>
-				<auc:MeasureID IDref="Measure15"/>
-				<auc:MeasureID IDref="Measure27"/>
-				<auc:MeasureID IDref="Measure29"/>
+                <auc:MeasureID IDref=\"Measure1\"/>
+                <auc:MeasureID IDref=\"Measure6\"/>
+                <auc:MeasureID IDref=\"Measure7\"/>
+                <auc:MeasureID IDref=\"Measure2\"/>
+                <auc:MeasureID IDref=\"Measure8\"/>
+                <auc:MeasureID IDref=\"Measure3\"/>
+                <auc:MeasureID IDref=\"Measure10\"/>
+                <auc:MeasureID IDref=\"Measure17\"/>
+                <auc:MeasureID IDref=\"Measure18\"/>
+                <auc:MeasureID IDref=\"Measure20\"/>
+                <auc:MeasureID IDref=\"Measure14\"/>
+                <auc:MeasureID IDref=\"Measure23\"/>
+                <auc:MeasureID IDref=\"Measure24\"/>
+                <auc:MeasureID IDref=\"Measure15\"/>
+                <auc:MeasureID IDref=\"Measure27\"/>
+                <auc:MeasureID IDref=\"Measure29\"/>
               </auc:MeasureIDs>
             </auc:PackageOfMeasures>
           </auc:ScenarioType>
+          <auc:LinkedPremises>
+						<auc:Facility>
+							<auc:LinkedFacilityID IDref=\"#{facility_id}\"/>
+						</auc:Facility>
+					</auc:LinkedPremises>
+					<auc:UserDefinedFields>
+						<auc:UserDefinedField>
+							<auc:FieldName>Recommendation Category</auc:FieldName>
+							<auc:FieldValue>Potential Capital Recommendations</auc:FieldValue>
+						</auc:UserDefinedField>
+					</auc:UserDefinedFields>
         </auc:Scenario> 
-  '
+  "
   source += '      </auc:Scenarios>
     </auc:Report>
   </auc:Audit>
@@ -899,7 +960,7 @@ geojson[:features].each do |feature|
     next
   end
 
-  floor_area = convert(feature[:properties][:"Gross Floor Area"], 'ft2', 'ft2')
+  floor_area = get_floor_area(feature)
   building_type = get_occupancy_classification(feature)
   year_of_construction = feature[:properties][:"Completed Construction Status Date"]
   year_of_last_major_remodel = nil
