@@ -451,8 +451,8 @@ def convert_feature(feature)
                MeasureName: 'Retrofit with light emitting diode technologies',
                ScenarioName: 'LED',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 3.8*floor_area}
                
   measures << {ID: 'Measure2',
                SystemCategoryAffected: 'Plug Load', 
@@ -460,8 +460,8 @@ def convert_feature(feature)
                MeasureName: 'Replace with ENERGY STAR rated',
                ScenarioName: 'Electric_Appliance_30%_Reduction',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 0.5*floor_area}
                
   measures << {ID: 'Measure3',
                SystemCategoryAffected: 'Wall', 
@@ -469,8 +469,8 @@ def convert_feature(feature)
                MeasureName: 'Air seal envelope',
                ScenarioName: 'Air_Seal_Infiltration_30%_More_Airtight',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 2.3*floor_area}
 
   measures << {ID: 'Measure4',
                SystemCategoryAffected: 'Cooling System', 
@@ -478,8 +478,8 @@ def convert_feature(feature)
                MeasureName: 'Replace package units',
                ScenarioName: 'Cooling_System_SEER 14',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 7.2*floor_area}
                
   measures << {ID: 'Measure5',
                SystemCategoryAffected: 'Heating System', 
@@ -487,8 +487,8 @@ def convert_feature(feature)
                MeasureName: 'Replace burner',
                ScenarioName: 'Heating_System_Efficiency_0.93',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 1.0*floor_area}
                
   measures << {ID: 'Measure6',
                SystemCategoryAffected: 'Lighting', 
@@ -496,8 +496,8 @@ def convert_feature(feature)
                MeasureName: 'Add daylight controls',
                ScenarioName: 'Add daylight controls',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 0.8*floor_area}
       
   measures << {ID: 'Measure7',
                SystemCategoryAffected: 'Lighting', 
@@ -505,8 +505,8 @@ def convert_feature(feature)
                MeasureName: 'Add occupancy sensors',
                ScenarioName: 'Add occupancy sensors',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 1.5*floor_area}
      
   measures << {ID: 'Measure8',
                SystemCategoryAffected: 'Plug Load', 
@@ -514,8 +514,8 @@ def convert_feature(feature)
                MeasureName: 'Install plug load controls',
                ScenarioName: 'Install plug load controls',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 0.8*floor_area}
      
   measures << {ID: 'Measure9',
                SystemCategoryAffected: 'Wall', 
@@ -523,8 +523,8 @@ def convert_feature(feature)
                MeasureName: 'Increase wall insulation',
                ScenarioName: 'Increase wall insulation',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 2.7*floor_area}
       
   measures << {ID: 'Measure10',
                SystemCategoryAffected: 'Wall', 
@@ -532,8 +532,8 @@ def convert_feature(feature)
                MeasureName: 'Insulate thermal bypasses',
                ScenarioName: 'Insulate thermal bypasses',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 1.0*floor_area}
 
   measures << {ID: 'Measure11',
                SystemCategoryAffected: 'Roof', 
@@ -541,8 +541,8 @@ def convert_feature(feature)
                MeasureName: 'Increase roof insulation',
                ScenarioName: 'Increase roof insulation',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 4.0*floor_area}
                
   measures << {ID: 'Measure12',
                SystemCategoryAffected: 'Ceiling', 
@@ -550,8 +550,8 @@ def convert_feature(feature)
                MeasureName: 'Increase ceiling insulation',
                ScenarioName: 'Increase ceiling insulation',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 2.7*floor_area}
                
   measures << {ID: 'Measure13',
                SystemCategoryAffected: 'Fenestration', 
@@ -559,8 +559,8 @@ def convert_feature(feature)
                MeasureName: 'Add window films',
                ScenarioName: 'Add window films',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 1.0*floor_area}
                
   measures << {ID: 'Measure14',
                SystemCategoryAffected: 'General Controls and Operations', 
@@ -568,7 +568,7 @@ def convert_feature(feature)
                MeasureName: 'Upgrade operating protocols, calibration, and/or sequencing',
                ScenarioName: 'Upgrade operating protocols calibration and-or sequencing',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
+               UsefulLife: 20,
                MeasureTotalFirstCost: 1*floor_area}
   
   measures << {ID: 'Measure15',
@@ -577,8 +577,8 @@ def convert_feature(feature)
                MeasureName: 'Replace or upgrade water heater',
                ScenarioName: 'Replace or upgrade water heater',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 0.5*floor_area}
   
   measures << {ID: 'Measure16',
                SystemCategoryAffected: 'Refrigeration', 
@@ -586,8 +586,8 @@ def convert_feature(feature)
                MeasureName: 'Replace ice/refrigeration equipment with high efficiency units',
                ScenarioName: 'Replace ice-refrigeration equipment with high efficiency units',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 1.4*floor_area}
   
   measures << {ID: 'Measure17',
                SystemCategoryAffected: 'Fenestration', 
@@ -595,7 +595,7 @@ def convert_feature(feature)
                MeasureName: 'Replace windows',
                ScenarioName: 'Replace windows',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
+               UsefulLife: 20,
                MeasureTotalFirstCost: 1*floor_area}
   
   measures << {ID: 'Measure18',
@@ -604,8 +604,8 @@ def convert_feature(feature)
                MeasureName: 'Replace boiler',
                ScenarioName: 'Replace boiler',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 3.8*floor_area}
   
   measures << {ID: 'Measure19',
                SystemCategoryAffected: 'Other HVAC', 
@@ -613,8 +613,8 @@ def convert_feature(feature)
                MeasureName: 'Replace AC and heating units with ground coupled heat pump systems',
                ScenarioName: 'Replace HVAC with GSHP and DOAS',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 13.0*floor_area}
   
   measures << {ID: 'Measure20',
                SystemCategoryAffected: 'Other HVAC', 
@@ -622,8 +622,8 @@ def convert_feature(feature)
                MeasureName: 'Other',
                ScenarioName: 'VRF with DOAS',
                OpenStudioMeasureName: 'Replace HVAC system type to VRF',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 20*floor_area}
   
   measures << {ID: 'Measure21',
                SystemCategoryAffected: 'Other HVAC', 
@@ -631,8 +631,8 @@ def convert_feature(feature)
                MeasureName: 'Other',
                ScenarioName: 'Replace HVAC system type to PZHP',
                OpenStudioMeasureName: 'Replace HVAC system type to PZHP',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 7.8*floor_area}
   
   measures << {ID: 'Measure22',
                SystemCategoryAffected: 'Fan', 
@@ -640,8 +640,8 @@ def convert_feature(feature)
                MeasureName: 'Replace with higher efficiency',
                ScenarioName: 'Replace with higher efficiency',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 13.4*floor_area}
   
   measures << {ID: 'Measure23',
                SystemCategoryAffected: 'Air Distribution', 
@@ -649,8 +649,8 @@ def convert_feature(feature)
                MeasureName: 'Improve ventilation fans',
                ScenarioName: 'Improve ventilation fans',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 1.0*floor_area}
   
   measures << {ID: 'Measure24',
                SystemCategoryAffected: 'Air Distribution', 
@@ -658,8 +658,8 @@ def convert_feature(feature)
                MeasureName: 'Install demand control ventilation',
                ScenarioName: 'Install demand control ventilation',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 0.9*floor_area}
 
   measures << {ID: 'Measure25',
                SystemCategoryAffected: 'Air Distribution', 
@@ -667,8 +667,8 @@ def convert_feature(feature)
                MeasureName: 'Add or repair economizer',
                ScenarioName: 'Add or repair economizer',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 1.2*floor_area}
   
   measures << {ID: 'Measure26',
                SystemCategoryAffected: 'Heat Recovery', 
@@ -676,8 +676,8 @@ def convert_feature(feature)
                MeasureName: 'Add energy recovery',
                ScenarioName: 'Add energy recovery',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 8.0*floor_area}
   
   measures << {ID: 'Measure27',
                SystemCategoryAffected: 'Domestic Hot Water', 
@@ -685,8 +685,8 @@ def convert_feature(feature)
                MeasureName: 'Add pipe insulation',
                ScenarioName: 'Add pipe insulation',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 0.02*floor_area}
   
   measures << {ID: 'Measure28',
                SystemCategoryAffected: 'Domestic Hot Water', 
@@ -694,8 +694,8 @@ def convert_feature(feature)
                MeasureName: 'Add recirculating pumps',
                ScenarioName: 'Add recirculating pumps',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 0.5*floor_area}
   
   measures << {ID: 'Measure29',
                SystemCategoryAffected: 'Water Use', 
@@ -703,8 +703,8 @@ def convert_feature(feature)
                MeasureName: 'Install low-flow faucets and showerheads',
                ScenarioName: 'Install low-flow faucets and showerheads',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 10,
-               MeasureTotalFirstCost: 1*floor_area}
+               UsefulLife: 20,
+               MeasureTotalFirstCost: 1.0*floor_area}
                                                        
   source = '
   <auc:Audits xmlns:auc="http://nrel.gov/schemas/bedes-auc/2014" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nrel.gov/schemas/bedes-auc/2014 https://github.com/BuildingSync/schema/releases/download/v0.3/BuildingSync.xsd">
