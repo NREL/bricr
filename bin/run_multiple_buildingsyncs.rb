@@ -186,6 +186,14 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
     building_info[xml_path_ids[index]].push(electricity_eui + gas_eui)
     building_info[xml_path_ids[index]].push(electricity_eui * 3.14 + gas_eui * 1.05)
 	
+    if defined?(BRICR::DO_MODEL_CALIBRATION) and BRICR::DO_MODEL_CALIBRATION
+      out_osw_path = File.join(out_dir, 'baseline', 'out.osw')
+      cal_results  = get_calibration_parameters(out_osw_path)
+      calibration_parameter_names.each do |parameter_name|
+        building_info[xml_path_ids[index]].push(cal_results[parameter_name])
+      end
+    end
+	
     # parse the xml
     File.open(result_path, 'r') do |file|
 	  doc = REXML::Document.new(file)
@@ -220,13 +228,6 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
       end
     end
 
-    if defined?(BRICR::DO_MODEL_CALIBRATION) and BRICR::DO_MODEL_CALIBRATION
-      out_osw_path = File.join(out_dir, 'baseline', 'out.osw')
-      cal_results  = get_calibration_parameters(out_osw_path)
-      calibration_parameter_names.each do |parameter_name|
-        building_info[xml_path_ids[index]].push(cal_results[parameter_name])
-      end
-    end
   end
 
   num_sims += 1
