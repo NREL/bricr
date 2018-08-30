@@ -593,7 +593,52 @@ module BRICR
 
     def writeOSWs(dir)
       super
+      
+      #ensure there is a 'Baseline' scenario
+      found_baseline = false
+      @doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
+        scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
+        if scenario_name == 'Baseline'
+          found_baseline = true
+          break
+        end
+      end
+      
+      if !found_baseline
+        scenarios_element = @doc.elements["#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios"]
+        
+        scenario_element = REXML::Element.new("#{@ns}:Scenario")
+        scenario_element.attributes['ID'] = 'Baseline'
+        
+        scenario_name_element = REXML::Element.new("#{@ns}:ScenarioName")
+        scenario_name_element.text = 'Baseline'
+        scenario_element.add_element(scenario_name_element)
+        
+        scenario_type_element = REXML::Element.new("#{@ns}:ScenarioType")
+        package_of_measures_element = REXML::Element.new("#{@ns}:PackageOfMeasures")
+        reference_case_element = REXML::Element.new("#{@ns}:ReferenceCase")
+        reference_case_element.attributes['IDref'] = 'Baseline'
+        package_of_measures_element.add_element(reference_case_element)
+        scenario_type_element.add_element(package_of_measures_element)
+        scenario_element.add_element(scenario_type_element)
 
+        scenarios_element.add_element(scenario_element)
+      end
+      
+      found_baseline = false
+      @doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
+        scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
+        if scenario_name == 'Baseline'
+          found_baseline = true
+          break
+        end
+      end
+      
+       if !found_baseline
+        puts "Cannot find or create Baseline scenario"
+        exit
+      end
+      
       # write an osw for each scenario
       @doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
         # get information about the scenario
@@ -682,7 +727,15 @@ module BRICR
           @failed_scenarios << scenario_name
         end
         
-        user_defined_fields = REXML::Element.new("#{@ns}:UserDefinedFields")
+        # preserve existing user defined fields if they exist
+        user_defined_fields = scenario.elements["#{@ns}:UserDefinedFields"]
+        if user_defined_fields.nil?
+          user_defined_fields = REXML::Element.new("#{@ns}:UserDefinedFields")
+          puts "new user_defined_fields = #{user_defined_fields}"
+        else
+          puts "using existing user_defined_fields = #{user_defined_fields}"
+        end
+        
         user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
         field_name = REXML::Element.new("#{@ns}:FieldName")
         field_name.text = 'OpenStudioCompletedStatus'
@@ -766,6 +819,7 @@ module BRICR
         #package_of_measures.add_element(annual_electricity)
         #package_of_measures.add_element(annual_natural_gas)
 
+        scenario.elements.delete("#{@ns}:UserDefinedFields")
         scenario.add_element(user_defined_fields)
       end
     end
