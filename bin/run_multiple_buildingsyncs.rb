@@ -77,10 +77,16 @@ def get_results(result_xml_path)
       results[scenario_name] = {}
      
       package_of_measures = scenario.elements["#{ns}:ScenarioType"].elements["#{ns}:PackageOfMeasures"]
-      scenario.elements.each("#{ns}:UserDefinedFields/#{ns}:UserDefinedField") do |user_defined_field|
+      # energy saving, utility cost saving
+	  annual_energy_saving = package_of_measures.elements["#{ns}:AnnualSavingsSiteEnergy"].text
+	  annual_energy_cost_saving = package_of_measures.elements["#{ns}:AnnualSavingsCost"].text
+	  
+	  results[scenario_name]['annual_energy_saving'] = annual_energy_saving.to_f
+	  results[scenario_name]['annual_energy_cost_saving'] = annual_energy_cost_saving.to_f
+	  
+	  scenario.elements.each("#{ns}:UserDefinedFields/#{ns}:UserDefinedField") do |user_defined_field|
         field_name = user_defined_field.elements["#{ns}:FieldName"].text
         field_value = user_defined_field.elements["#{ns}:FieldValue"].text
-        
         if field_name == 'OpenStudioCompletedStatus'
           results[scenario_name]['completed_status'] = field_value
         elsif field_name == 'OpenStudioAnnualSiteEnergy_MMBtu'
@@ -145,7 +151,7 @@ run_buildingsync_rb = File.join(File.dirname(__FILE__), "run_buildingsync.rb")
 
 csv_header.push 'Simulation Status,do simulations?,do get results?'
 csv_header.push 'electricity_eui(kBtu/sf),natural gas_eui(kBtu/sf)'
-csv_header.push 'site_eui(kBtu/sf),source_eui(kBtu/sf)'
+csv_header.push 'site_eui(kBtu/sf), energy_saving(MMBtu), energy_cost_saving($)' #source_eui(kBtu/sf)
 calibration_parameter_names = ['lpd_change_rate', 'epd_change_rate', 'occupancy_change_rate','cop_change_rate', 'heating_efficiency_change_rate',
                                'initial_lpd','initial_epd','initial_occupancy','initial_cop','initial_eff',
                                'after_lpd','after_epd','after_occupancy','after_cop','after_eff']
@@ -180,11 +186,15 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
     floor_area_sf = building_info[xml_path_ids[index]][floor_area_index].to_f
     electricity_eui = results['Baseline']['annual_electricity'] / floor_area_sf
     gas_eui = results['Baseline']['annual_natural_gas'] / floor_area_sf
+	energy_saving = results['Baseline']['annual_energy_saving']
+	energy_cost_saving = results['Baseline']['annual_energy_cost_saving']
 
     building_info[xml_path_ids[index]].push(electricity_eui)
     building_info[xml_path_ids[index]].push(gas_eui)
     building_info[xml_path_ids[index]].push(electricity_eui + gas_eui)
-    building_info[xml_path_ids[index]].push(electricity_eui * 3.14 + gas_eui * 1.05)
+    building_info[xml_path_ids[index]].push(energy_saving)
+	building_info[xml_path_ids[index]].push(energy_cost_saving)
+	#building_info[xml_path_ids[index]].push(electricity_eui * 3.14 + gas_eui * 1.05)
 	
     if defined?(BRICR::DO_MODEL_CALIBRATION) and BRICR::DO_MODEL_CALIBRATION
       out_osw_path = File.join(out_dir, 'baseline', 'out.osw')
@@ -212,18 +222,23 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
       if index == 0
         # push headers for first row only, assumes all xmls have same measures in same order
         csv_header.push "[#{scenario_name}]:electricity_eui(kBtu/sf)"
-        csv_header.push "[#{scenario_name}]:natural gas_eui(kBtu/sf)"
+        csv_header.push "[#{scenario_name}]:natural_gas_eui(kBtu/sf)"
         csv_header.push "[#{scenario_name}]:site_eui(kBtu/sf)"
-        csv_header.push "[#{scenario_name}]:source_eui(kBtu/sf)"
+		csv_header.push "[#{scenario_name}]:energy_saving(MMBtu)"
+		csv_header.push "[#{scenario_name}]:energy_cost_saving($)"
+        #csv_header.push "[#{scenario_name}]:source_eui(kBtu/sf)"
       end
       
       electricity_eui = results[scenario_name]['annual_electricity'] / floor_area_sf
       gas_eui = results[scenario_name]['annual_natural_gas'] / floor_area_sf
+	  energy_cost_saving = results[scenario_name]['annual_energy_cost_saving']
 
       building_info[xml_path_ids[index]].push(electricity_eui)
       building_info[xml_path_ids[index]].push(gas_eui)
       building_info[xml_path_ids[index]].push(electricity_eui + gas_eui)
-      building_info[xml_path_ids[index]].push(electricity_eui * 3.14 + gas_eui * 1.05)
+      building_info[xml_path_ids[index]].push(energy_saving)
+	  building_info[xml_path_ids[index]].push(energy_cost_saving)
+	  #building_info[xml_path_ids[index]].push(electricity_eui * 3.14 + gas_eui * 1.05)
 
       end
     end
