@@ -739,14 +739,7 @@ module BRICR
 
         # dir for the osw
         osw_dir = File.join(dir, scenario_name)
-
-        # find the osw
-        path = File.join(osw_dir, 'out.osw')
-        workflow = nil
-        File.open(path, 'r') do |file|
-          results[scenario_name] = JSON.parse(file.read, symbolize_names: true)
-        end
-        
+  
         # cleanup large files
         path = File.join(osw_dir, 'eplusout.sql')
         FileUtils.rm_f(path) if File.exists?(path)
@@ -756,6 +749,20 @@ module BRICR
         
         path = File.join(osw_dir, 'eplusout.eso')
         FileUtils.rm_f(path) if File.exists?(path)
+        
+        # find the osw
+        path = File.join(osw_dir, 'out.osw')
+        if !File.exists?(path)
+          puts "Cannot load results for scenario #{scenario_name}"
+          next
+        end
+        
+        workflow = nil
+        File.open(path, 'r') do |file|
+          results[scenario_name] = JSON.parse(file.read, symbolize_names: true)
+        end
+        
+       
       end
 
       @doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
@@ -767,6 +774,16 @@ module BRICR
 
         result = results[scenario_name]
         baseline = results['Baseline']
+        
+        if result.nil?
+          puts "Cannot load results for scenario #{scenario_name}"
+          @failed_scenarios << scenario_name
+          next        
+        elsif baseline.nil?
+          puts "Cannot load baseline results for scenario #{scenario_name}"
+          @failed_scenarios << scenario_name
+          next       
+        end
         
         if result['completed_status'] == 'Success' || result[:completed_status] == 'Success'
           # success
