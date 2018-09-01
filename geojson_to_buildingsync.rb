@@ -452,266 +452,364 @@ def convert_feature(feature)
   
   measures = []
   measures << {ID: 'Measure1',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Lighting', 
                TechnologyCategory: 'LightingImprovements', 
                MeasureName: 'Retrofit with light emitting diode technologies',
+               LongDescription: 'Retrofit with light emitting diode technologies',
                ScenarioName: 'LED',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 3.8*floor_area}
                
   measures << {ID: 'Measure2',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Plug Load', 
                TechnologyCategory: 'PlugLoadReductions', 
                MeasureName: 'Replace with ENERGY STAR rated',
+               LongDescription: 'Replace with ENERGY STAR rated',
                ScenarioName: 'Electric_Appliance_30%_Reduction',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 0.5*floor_area}
                
   measures << {ID: 'Measure3',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Wall', 
                TechnologyCategory: 'BuildingEnvelopeModifications', 
                MeasureName: 'Air seal envelope',
+               LongDescription: 'Air seal envelope',
                ScenarioName: 'Air_Seal_Infiltration_30%_More_Airtight',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 2.3*floor_area}
 
   measures << {ID: 'Measure4',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Cooling System', 
                TechnologyCategory: 'OtherHVAC', 
                MeasureName: 'Replace package units',
+               LongDescription: 'Replace package units',
                ScenarioName: 'Cooling_System_SEER 14',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 7.2*floor_area}
                
   measures << {ID: 'Measure5',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Heating System', 
                TechnologyCategory: 'OtherHVAC', 
                MeasureName: 'Replace burner',
+               LongDescription: 'Replace burner',
                ScenarioName: 'Heating_System_Efficiency_0.93',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 1.0*floor_area}
                
   measures << {ID: 'Measure6',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Lighting', 
                TechnologyCategory: 'LightingImprovements', 
                MeasureName: 'Add daylight controls',
+               LongDescription: 'Add daylight controls',
                ScenarioName: 'Add daylight controls',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 0.8*floor_area}
       
   measures << {ID: 'Measure7',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Lighting', 
                TechnologyCategory: 'LightingImprovements', 
                MeasureName: 'Add occupancy sensors',
+               LongDescription: 'Add occupancy sensors',
                ScenarioName: 'Add occupancy sensors',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 1.5*floor_area}
      
   measures << {ID: 'Measure8',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Plug Load', 
                TechnologyCategory: 'PlugLoadReductions', 
                MeasureName: 'Install plug load controls',
+               LongDescription: 'Install plug load controls',
                ScenarioName: 'Install plug load controls',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 0.8*floor_area}
      
   measures << {ID: 'Measure9',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Wall', 
                TechnologyCategory: 'BuildingEnvelopeModifications', 
                MeasureName: 'Increase wall insulation',
+               LongDescription: 'Increase wall insulation',
                ScenarioName: 'Increase wall insulation',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 2.7*floor_area}
       
   measures << {ID: 'Measure10',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Wall', 
                TechnologyCategory: 'BuildingEnvelopeModifications', 
                MeasureName: 'Insulate thermal bypasses',
+               LongDescription: 'Insulate thermal bypasses',
                ScenarioName: 'Insulate thermal bypasses',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 1.0*floor_area}
 
   measures << {ID: 'Measure11',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Roof', 
                TechnologyCategory: 'BuildingEnvelopeModifications', 
                MeasureName: 'Increase roof insulation',
+               LongDescription: 'Increase roof insulation',
                ScenarioName: 'Increase roof insulation',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 4.0*floor_area}
                
   measures << {ID: 'Measure12',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Ceiling', 
                TechnologyCategory: 'BuildingEnvelopeModifications', 
                MeasureName: 'Increase ceiling insulation',
+               LongDescription: 'Increase ceiling insulation',
                ScenarioName: 'Increase ceiling insulation',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 2.7*floor_area}
                
   measures << {ID: 'Measure13',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Fenestration', 
                TechnologyCategory: 'BuildingEnvelopeModifications', 
                MeasureName: 'Add window films',
+               LongDescription: 'Add window films',
                ScenarioName: 'Add window films',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 1.0*floor_area}
                
   measures << {ID: 'Measure14',
+               SingleMeasure: true,
                SystemCategoryAffected: 'General Controls and Operations', 
                TechnologyCategory: 'OtherHVAC', 
                MeasureName: 'Upgrade operating protocols, calibration, and/or sequencing',
+               LongDescription: 'Upgrade operating protocols, calibration, and/or sequencing',
                ScenarioName: 'Upgrade operating protocols calibration and-or sequencing',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 1*floor_area}
   
   measures << {ID: 'Measure15',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Domestic Hot Water', 
                TechnologyCategory: 'ChilledWaterHotWaterAndSteamDistributionSystems', 
                MeasureName: 'Replace or upgrade water heater',
+               LongDescription: 'Replace or upgrade water heater',
                ScenarioName: 'Replace or upgrade water heater',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 0.5*floor_area}
   
   measures << {ID: 'Measure16',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Refrigeration', 
                TechnologyCategory: 'Refrigeration', 
                MeasureName: 'Replace ice/refrigeration equipment with high efficiency units',
+               LongDescription: 'Replace ice/refrigeration equipment with high efficiency units',
                ScenarioName: 'Replace ice-refrigeration equipment with high efficiency units',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 1.4*floor_area}
   
   measures << {ID: 'Measure17',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Fenestration', 
                TechnologyCategory: 'BuildingEnvelopeModifications', 
                MeasureName: 'Replace windows',
+               LongDescription: 'Replace windows',
                ScenarioName: 'Replace windows',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 1*floor_area}
   
   measures << {ID: 'Measure18',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Heating System', 
                TechnologyCategory: 'BoilerPlantImprovements', 
                MeasureName: 'Replace boiler',
+               LongDescription: 'Replace boiler',
                ScenarioName: 'Replace boiler',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 3.8*floor_area}
   
   measures << {ID: 'Measure19',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Other HVAC', 
                TechnologyCategory: 'OtherHVAC', 
                MeasureName: 'Replace AC and heating units with ground coupled heat pump systems',
+               LongDescription: 'Replace AC and heating units with ground coupled heat pump systems',
                ScenarioName: 'Replace HVAC with GSHP and DOAS',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 13.0*floor_area}
   
   measures << {ID: 'Measure20',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Other HVAC', 
                TechnologyCategory: 'OtherHVAC', 
                MeasureName: 'Other',
+               LongDescription: 'VRF with DOAS',
                ScenarioName: 'VRF with DOAS',
                OpenStudioMeasureName: 'Replace HVAC system type to VRF',
                UsefulLife: 20,
                MeasureTotalFirstCost: 20*floor_area}
   
   measures << {ID: 'Measure21',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Other HVAC', 
                TechnologyCategory: 'OtherHVAC', 
                MeasureName: 'Other',
+               LongDescription: 'Replace HVAC system type to PZHP',
                ScenarioName: 'Replace HVAC system type to PZHP',
                OpenStudioMeasureName: 'Replace HVAC system type to PZHP',
                UsefulLife: 20,
                MeasureTotalFirstCost: 7.8*floor_area}
   
   measures << {ID: 'Measure22',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Fan', 
                TechnologyCategory: 'OtherElectricMotorsAndDrives', 
                MeasureName: 'Replace with higher efficiency',
+               LongDescription: 'Replace with higher efficiency',
                ScenarioName: 'Replace with higher efficiency',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 13.4*floor_area}
   
   measures << {ID: 'Measure23',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Air Distribution', 
                TechnologyCategory: 'OtherHVAC', 
                MeasureName: 'Improve ventilation fans',
+               LongDescription: 'Improve ventilation fans',
                ScenarioName: 'Improve ventilation fans',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 1.0*floor_area}
   
   measures << {ID: 'Measure24',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Air Distribution', 
                TechnologyCategory: 'OtherHVAC', 
                MeasureName: 'Install demand control ventilation',
+               LongDescription: 'Install demand control ventilation',
                ScenarioName: 'Install demand control ventilation',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 0.9*floor_area}
 
   measures << {ID: 'Measure25',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Air Distribution', 
                TechnologyCategory: 'OtherHVAC', 
                MeasureName: 'Add or repair economizer',
+               LongDescription: 'Add or repair economizer',
                ScenarioName: 'Add or repair economizer',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 1.2*floor_area}
   
   measures << {ID: 'Measure26',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Heat Recovery', 
                TechnologyCategory: 'OtherHVAC', 
                MeasureName: 'Add energy recovery',
+               LongDescription: 'Add energy recovery',
                ScenarioName: 'Add energy recovery',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 8.0*floor_area}
   
   measures << {ID: 'Measure27',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Domestic Hot Water', 
                TechnologyCategory: 'ChilledWaterHotWaterAndSteamDistributionSystems', 
                MeasureName: 'Add pipe insulation',
+               LongDescription: 'Add pipe insulation',
                ScenarioName: 'Add pipe insulation',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 0.02*floor_area}
   
   measures << {ID: 'Measure28',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Domestic Hot Water', 
                TechnologyCategory: 'ChilledWaterHotWaterAndSteamDistributionSystems', 
                MeasureName: 'Add recirculating pumps',
+               LongDescription: 'Add recirculating pumps',
                ScenarioName: 'Add recirculating pumps',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 0.5*floor_area}
   
   measures << {ID: 'Measure29',
+               SingleMeasure: true,
                SystemCategoryAffected: 'Water Use', 
                TechnologyCategory: 'WaterAndSewerConservationSystems', 
                MeasureName: 'Install low-flow faucets and showerheads',
+               LongDescription: 'Install low-flow faucets and showerheads',
                ScenarioName: 'Install low-flow faucets and showerheads',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
                MeasureTotalFirstCost: 1.0*floor_area}
-                                                       
+  
+  packages = []
+  packages << {ScenarioName: 'Retail Package',
+               MeasureIDs: ['Measure1', 'Measure2', 'Measure8', 'Measure14', 'Measure29']}
+  
+  packages << {ScenarioName: 'Office-Tenant Package',
+               MeasureIDs: ['Measure1', 'Measure2', 'Measure7', 'Measure8', 'Measure13', 'Measure14', 'Measure24', 'Measure29']}
+  
+  packages << {ScenarioName: 'Office-Central Systems Package',
+               MeasureIDs: ['Measure1', 'Measure2', 'Measure7', 'Measure8', 'Measure11', 'Measure13', 'Measure14', 'Measure18', 'Measure23', 'Measure24', 'Measure25', 'Measure27', 'Measure29']}
+  
+  # Sang-hoon is one of these supposed to be 'Retail-Central Systems Package'?
+  packages << {ScenarioName: 'Office-Central Systems Package 2',
+               MeasureIDs: ['Measure1', 'Measure2', 'Measure3', 'Measure6', 'Measure7', 'Measure8', 'Measure10', 'Measure13', 'Measure14', 'Measure15', 'Measure17', 'Measure18', 'Measure20', 'Measure23', 'Measure24', 'Measure27', 'Measure29']}
+  
+  # create unique measures for each package
+  packages.each_index do |i|
+    package = packages[i]
+    this_measures = []
+    package[:MeasureIDs].each do |measureID|
+      measures.each do |measure|
+        this_measures << measure if measure[:ID] == measureID
+      end
+    end
+    
+    #puts "Package: #{package[:ScenarioName]}"
+    new_measure_ids = []
+    this_measures.each do |this_measure|
+      #puts "  #{this_measure[:MeasureName]}"
+      new_measure = this_measure.clone
+      new_measure_id = new_measure[:ID] + "_Package#{i}"
+      new_measure_ids << new_measure_id
+      new_measure[:ID] = new_measure_id
+      new_measure[:LongDescription] = new_measure[:LongDescription] + " Package#{i}"
+      new_measure[:SingleMeasure] = false
+      new_measure[:ScenarioName] = package[:ScenarioName]
+      measures << new_measure
+    end
+    package[:MeasureIDs] = new_measure_ids
+  end
+        
   source = '
   <auc:Audits xmlns:auc="http://nrel.gov/schemas/bedes-auc/2014" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nrel.gov/schemas/bedes-auc/2014 https://github.com/BuildingSync/schema/releases/download/v0.3/BuildingSync.xsd">
 	<auc:Audit>
@@ -719,6 +817,7 @@ def convert_feature(feature)
 		</auc:Sites>
     <auc:Measures>
 '
+  # add measures
   measures.each do |measure|
     source += "      <auc:Measure ID=\"#{measure[:ID]}\">
         <auc:SystemCategoryAffected>#{measure[:SystemCategoryAffected]}</auc:SystemCategoryAffected>
@@ -733,7 +832,7 @@ def convert_feature(feature)
           </auc:TechnologyCategory>
         </auc:TechnologyCategories>
         <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
-        <auc:LongDescription>#{measure[:MeasureName]}</auc:LongDescription>
+        <auc:LongDescription>#{measure[:LongDescription]}</auc:LongDescription>
         <auc:MVCost>0</auc:MVCost>
         <auc:UsefulLife>#{measure[:UsefulLife]}</auc:UsefulLife>
         <auc:MeasureTotalFirstCost>#{measure[:MeasureTotalFirstCost]}</auc:MeasureTotalFirstCost>
@@ -763,7 +862,12 @@ def convert_feature(feature)
           </auc:ScenarioType>
         </auc:Scenario>
   '
+  # add single measures
   measures.each do |measure|
+    
+    # skip duplicate measures added for packages
+    next if !measure[:SingleMeasure]
+    
     source += "        <auc:Scenario>
           <auc:ScenarioName>#{measure[:ScenarioName]} Only</auc:ScenarioName>
           <auc:ScenarioType>
@@ -788,137 +892,40 @@ def convert_feature(feature)
         </auc:Scenario>
 "    
   end
+  
+   # add measure paackages
+   packages.each do |package|
+   
+    measure_ids = []
+    package[:MeasureIDs].each do |measure_id|
+      measure_ids << "<auc:MeasureID IDref=\"#{measure_id}\"/>"
+    end
+    measure_ids = measure_ids.join("\n")
+   
+    source += "     <auc:Scenario>
+         <auc:ScenarioName>#{package[:ScenarioName]}</auc:ScenarioName>
+          <auc:ScenarioType>
+            <auc:PackageOfMeasures>
+              <auc:ReferenceCase IDref=\"Baseline\"/>
+              <auc:MeasureIDs>
+                #{measure_ids}
+              </auc:MeasureIDs>
+            </auc:PackageOfMeasures>
+          </auc:ScenarioType>
+          <auc:LinkedPremises>
+						<auc:Facility>
+							<auc:LinkedFacilityID IDref=\"#{facility_id}\"/>
+						</auc:Facility>
+					</auc:LinkedPremises>
+					<auc:UserDefinedFields>
+						<auc:UserDefinedField>
+							<auc:FieldName>Recommendation Category</auc:FieldName>
+							<auc:FieldValue>Potential Capital Recommendations</auc:FieldValue>
+						</auc:UserDefinedField>
+					</auc:UserDefinedFields>
+        </auc:Scenario>"
+   end
 
-  source += "     <auc:Scenario>
-         <auc:ScenarioName>Retail Package</auc:ScenarioName>
-          <auc:ScenarioType>
-            <auc:PackageOfMeasures>
-              <auc:ReferenceCase IDref=\"Baseline\"/>
-              <auc:MeasureIDs>
-                <auc:MeasureID IDref=\"Measure1\"/>
-                <auc:MeasureID IDref=\"Measure2\"/>
-                <auc:MeasureID IDref=\"Measure8\"/>
-                <auc:MeasureID IDref=\"Measure14\"/>
-                <auc:MeasureID IDref=\"Measure29\"/>
-              </auc:MeasureIDs>
-            </auc:PackageOfMeasures>
-          </auc:ScenarioType>
-          <auc:LinkedPremises>
-						<auc:Facility>
-							<auc:LinkedFacilityID IDref=\"#{facility_id}\"/>
-						</auc:Facility>
-					</auc:LinkedPremises>
-					<auc:UserDefinedFields>
-						<auc:UserDefinedField>
-							<auc:FieldName>Recommendation Category</auc:FieldName>
-							<auc:FieldValue>Potential Capital Recommendations</auc:FieldValue>
-						</auc:UserDefinedField>
-					</auc:UserDefinedFields>
-        </auc:Scenario>
-		
-		<auc:Scenario>
-          <auc:ScenarioName>Office-Tenant Package</auc:ScenarioName>
-          <auc:ScenarioType>
-            <auc:PackageOfMeasures>
-              <auc:ReferenceCase IDref=\"Baseline\"/>
-              <auc:MeasureIDs>
-                <auc:MeasureID IDref=\"Measure1\"/>
-                <auc:MeasureID IDref=\"Measure7\"/>
-                <auc:MeasureID IDref=\"Measure2\"/>
-                <auc:MeasureID IDref=\"Measure8\"/>
-                <auc:MeasureID IDref=\"Measure13\"/>
-                <auc:MeasureID IDref=\"Measure14\"/>
-                <auc:MeasureID IDref=\"Measure24\"/>
-                <auc:MeasureID IDref=\"Measure29\"/>
-              </auc:MeasureIDs>
-            </auc:PackageOfMeasures>
-          </auc:ScenarioType>
-          <auc:LinkedPremises>
-						<auc:Facility>
-							<auc:LinkedFacilityID IDref=\"#{facility_id}\"/>
-						</auc:Facility>
-					</auc:LinkedPremises>
-					<auc:UserDefinedFields>
-						<auc:UserDefinedField>
-							<auc:FieldName>Recommendation Category</auc:FieldName>
-							<auc:FieldValue>Potential Capital Recommendations</auc:FieldValue>
-						</auc:UserDefinedField>
-					</auc:UserDefinedFields>
-        </auc:Scenario>
-		
-		<auc:Scenario>
-          <auc:ScenarioName>Office-Central Systems Package</auc:ScenarioName>
-          <auc:ScenarioType>
-            <auc:PackageOfMeasures>
-              <auc:ReferenceCase IDref=\"Baseline\"/>
-              <auc:MeasureIDs>
-                <auc:MeasureID IDref=\"Measure1\"/>
-                <auc:MeasureID IDref=\"Measure7\"/>
-                <auc:MeasureID IDref=\"Measure2\"/>
-                <auc:MeasureID IDref=\"Measure8\"/>
-                <auc:MeasureID IDref=\"Measure11\"/>
-                <auc:MeasureID IDref=\"Measure13\"/>
-                <auc:MeasureID IDref=\"Measure18\"/>
-                <auc:MeasureID IDref=\"Measure14\"/>
-                <auc:MeasureID IDref=\"Measure23\"/>
-                <auc:MeasureID IDref=\"Measure24\"/>
-                <auc:MeasureID IDref=\"Measure25\"/>
-                <auc:MeasureID IDref=\"Measure27\"/>
-                <auc:MeasureID IDref=\"Measure29\"/>
-              </auc:MeasureIDs>
-            </auc:PackageOfMeasures>
-          </auc:ScenarioType>
-          <auc:LinkedPremises>
-						<auc:Facility>
-							<auc:LinkedFacilityID IDref=\"#{facility_id}\"/>
-						</auc:Facility>
-					</auc:LinkedPremises>
-					<auc:UserDefinedFields>
-						<auc:UserDefinedField>
-							<auc:FieldName>Recommendation Category</auc:FieldName>
-							<auc:FieldValue>Potential Capital Recommendations</auc:FieldValue>
-						</auc:UserDefinedField>
-					</auc:UserDefinedFields>
-        </auc:Scenario>
-		
-		<auc:Scenario>
-          <auc:ScenarioName>Office-Central Systems Package</auc:ScenarioName>
-          <auc:ScenarioType>
-            <auc:PackageOfMeasures>
-              <auc:ReferenceCase IDref=\"Baseline\"/>
-              <auc:MeasureIDs>
-                <auc:MeasureID IDref=\"Measure1\"/>
-                <auc:MeasureID IDref=\"Measure6\"/>
-                <auc:MeasureID IDref=\"Measure7\"/>
-                <auc:MeasureID IDref=\"Measure2\"/>
-                <auc:MeasureID IDref=\"Measure8\"/>
-                <auc:MeasureID IDref=\"Measure3\"/>
-                <auc:MeasureID IDref=\"Measure10\"/>
-                <auc:MeasureID IDref=\"Measure17\"/>
-                <auc:MeasureID IDref=\"Measure18\"/>
-                <auc:MeasureID IDref=\"Measure20\"/>
-                <auc:MeasureID IDref=\"Measure14\"/>
-                <auc:MeasureID IDref=\"Measure23\"/>
-                <auc:MeasureID IDref=\"Measure24\"/>
-                <auc:MeasureID IDref=\"Measure15\"/>
-                <auc:MeasureID IDref=\"Measure27\"/>
-                <auc:MeasureID IDref=\"Measure29\"/>
-              </auc:MeasureIDs>
-            </auc:PackageOfMeasures>
-          </auc:ScenarioType>
-          <auc:LinkedPremises>
-						<auc:Facility>
-							<auc:LinkedFacilityID IDref=\"#{facility_id}\"/>
-						</auc:Facility>
-					</auc:LinkedPremises>
-					<auc:UserDefinedFields>
-						<auc:UserDefinedField>
-							<auc:FieldName>Recommendation Category</auc:FieldName>
-							<auc:FieldValue>Potential Capital Recommendations</auc:FieldValue>
-						</auc:UserDefinedField>
-					</auc:UserDefinedFields>
-        </auc:Scenario> 
-  "
   source += '      </auc:Scenarios>
     </auc:Report>
   </auc:Audit>

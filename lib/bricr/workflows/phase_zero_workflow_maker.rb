@@ -691,16 +691,21 @@ module BRICR
         osw = JSON.load(JSON.generate(@workflow))
 
         # configure the workflow based on measures in this scenario
-        configureForScenario(osw, scenario)
+        begin
+          configureForScenario(osw, scenario)
 
-        # dir for the osw
-        osw_dir = File.join(dir, scenario_name)
-        FileUtils.mkdir_p(osw_dir)
+          # dir for the osw
+          osw_dir = File.join(dir, scenario_name)
+          FileUtils.mkdir_p(osw_dir)
 
-        # write the osw
-        path = File.join(osw_dir, 'in.osw')
-        File.open(path, 'w') do |file|
-          file << JSON.generate(osw)
+          # write the osw
+          path = File.join(osw_dir, 'in.osw')
+          File.open(path, 'w') do |file|
+            file << JSON.generate(osw)
+          end
+        rescue => e
+          puts "Could not configure for scenario #{scenario_name}"
+          puts e.backtrace.join("\n\t")
         end
       end
     end
