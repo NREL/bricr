@@ -240,7 +240,7 @@ module BRICR
       set_measure_argument(osw, 'calibrate_baseline_model', 'bldg_type', @facility['bldg_type'])
       if defined?(BRICR::DO_MODEL_CALIBRATION) and BRICR::DO_MODEL_CALIBRATION
         set_measure_argument(osw, 'calibrate_baseline_model', '__SKIP__', false)
-	  end
+      end
     end
 
     def configureForScenario(osw, scenario)
@@ -249,20 +249,23 @@ module BRICR
         measure_ids << measure_id.attributes['IDref']
       end
 
+      num_measures = 0
       measure_ids.each do |measure_id|
-        @doc.elements.each("/#{@ns}:Measure[@ID='#{measure_id}']") do |measure|
+        @doc.elements.each("//#{@ns}:Measure[@ID='#{measure_id}']") do |measure|
           measure_category = measure.elements["#{@ns}:SystemCategoryAffected"].text
-      
+
           # Lighting
           if measure_category == "Lighting"
             measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:LightingImprovements/#{@ns}:MeasureName"].text
             # Lighting / LightingImprovements / Retrofit with light emitting diode technologies
             if measure_name == "Retrofit with light emitting diode technologies"
+              num_measures += 1
               set_measure_argument(osw, 'SetLightingLoadsByLPD', '__SKIP__', false)
               set_measure_argument(osw, 'SetLightingLoadsByLPD', 'lpd', 0.6)
             end
             # Lighting / LightingImprovements / Add daylight controls
             if measure_name == "Add daylight controls"
+              num_measures += 1
               set_measure_argument(osw, 'AddDaylightSensors', '__SKIP__', false)
               if @facility['bldg_type'] == "SmallOffice"
                 set_measure_argument(osw, 'AddDaylightSensors', 'space_type', "Office WholeBuilding - Sm Office - #{@facility['template']}")
@@ -274,6 +277,7 @@ module BRICR
             end
             # Lighting / LightingImprovements / Add occupancy sensors
             if measure_name == "Add occupancy sensors"
+              num_measures += 1
               set_measure_argument(osw, 'ReduceLightingLoadsByPercentage', '__SKIP__', false)
               set_measure_argument(osw, 'ReduceLightingLoadsByPercentage', 'lighting_power_reduction_percent', 5)
             end
@@ -284,41 +288,47 @@ module BRICR
             measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:PlugLoadReductions/#{@ns}:MeasureName"].text
             # Plug Load / PlugLoadReductions / Replace with ENERGY STAR rated
             if measure_name == "Replace with ENERGY STAR rated"
+              num_measures += 1
               set_measure_argument(osw, 'tenant_star_internal_loads', '__SKIP__', false)
               set_measure_argument(osw, 'tenant_star_internal_loads', 'epd', 0.6) # W/ft^2
             end
             # Plug Load / PlugLoadReductions / Install plug load controls
             if measure_name == "Install plug load controls"
+              num_measures += 1
               set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', '__SKIP__', false)
               set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', 'elecequip_power_reduction_percent', 20.0)
             end
           end
 		  
-		  # Refrigeration
-		  if measure_category == "Refrigeration"
+          # Refrigeration
+          if measure_category == "Refrigeration"
             measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:Refrigeration/#{@ns}:MeasureName"].text
             # Refrigeration / Refrigeration / Replace ice/refrigeration equipment with high efficiency units
             if measure_name == "Replace ice/refrigeration equipment with high efficiency units"
+              num_measures += 1
               set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', '__SKIP__', false)
               set_measure_argument(osw, 'ReduceElectricEquipmentLoadsByPercentage', 'elecequip_power_reduction_percent', 5)
             end
-		  end
+          end
           
           # Wall
           if measure_category == "Wall"
             measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:BuildingEnvelopeModifications/#{@ns}:MeasureName"].text
             # Wall / BuildingEnvelopeModifications / Air seal envelope
             if measure_name == "Air seal envelope"
+              num_measures += 1
               set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', '__SKIP__', false)
               set_measure_argument(osw, 'ReduceSpaceInfiltrationByPercentage', 'space_infiltration_reduction_percent', 30.0)
             end
             # Wall / BuildingEnvelopeModifications / Increase wall insulation
             if  measure_name == "Increase wall insulation"
+              num_measures += 1
               set_measure_argument(osw, 'IncreaseInsulationRValueForExteriorWalls', '__SKIP__', false)
               set_measure_argument(osw, 'IncreaseInsulationRValueForExteriorWalls', 'r_value', 25) # R-value
             end
             # Wall / BuildingEnvelopeModifications / Insulate thermal bypasses
             if  measure_name == "Insulate thermal bypasses"
+              num_measures += 1
               set_measure_argument(osw, 'IncreaseInsulationRValueForExteriorWallsByPercentage', '__SKIP__', false)
               set_measure_argument(osw, 'IncreaseInsulationRValueForExteriorWallsByPercentage', 'r_value', 20) # R-value increase percentage
             end
@@ -329,16 +339,18 @@ module BRICR
             measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:BuildingEnvelopeModifications/#{@ns}:MeasureName"].text
             # Roof / BuildingEnvelopeModifications / Increase roof insulation
             if measure_name == "Increase roof insulation"
+              num_measures += 1
               set_measure_argument(osw, 'IncreaseInsulationRValueForRoofs', '__SKIP__', false)
               set_measure_argument(osw, 'IncreaseInsulationRValueForRoofs', 'r_value', 30) # R-value
             end
           end
 		  
-		  # Ceiling
+          # Ceiling
           if measure_category == "Ceiling"
             measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:BuildingEnvelopeModifications/#{@ns}:MeasureName"].text
             # Ceiling / BuildingEnvelopeModifications / Increase ceiling insulation
             if measure_name == "Increase ceiling insulation"
+              num_measures += 1
               set_measure_argument(osw, 'IncreaseInsulationRValueForRoofsByPercentage', '__SKIP__', false)
               set_measure_argument(osw, 'IncreaseInsulationRValueForRoofsByPercentage', 'r_value', 20) # R-value increase percentage
             end
@@ -350,6 +362,7 @@ module BRICR
             measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:BuildingEnvelopeModifications/#{@ns}:MeasureName"].text
             # Fenestration / BuildingEnvelopeModifications / Replace windows
             if measure_name == "Replace windows"
+              num_measures += 1
               set_measure_argument(osw, 'replace_simple_glazing', '__SKIP__', false)
               set_measure_argument(osw, 'replace_simple_glazing', 'u_value', 1.65) # W/Km2
               set_measure_argument(osw, 'replace_simple_glazing', 'shgc', 0.2)
@@ -358,6 +371,7 @@ module BRICR
 
             # Fenestration / BuildingEnvelopeModifications / Add window films
             if measure_name == "Add window films"
+              num_measures += 1
               set_measure_argument(osw, 'improve_simple_glazing_by_percentage', '__SKIP__', false)
               set_measure_argument(osw, 'improve_simple_glazing_by_percentage', 'u_value_improvement_percent', 10)
               set_measure_argument(osw, 'improve_simple_glazing_by_percentage', 'shgc_improvement_percent', 30)
@@ -373,8 +387,12 @@ module BRICR
               if measure_name == "Replace burner"
                 # furnace system
                 if @facility['system_type'] == "PSZ-AC with gas coil heat"
+                  num_measures += 1
                   set_measure_argument(osw, 'SetGasBurnerEfficiency', '__SKIP__', false)
                   set_measure_argument(osw, 'SetGasBurnerEfficiency', 'eff', 0.93)
+                else
+                  # measure is NA
+                  num_measures += 1                
                 end
               end
             end 
@@ -386,9 +404,13 @@ module BRICR
               if measure_name == "Replace boiler"
                 # Boiler system for medium office
                 if @facility['system_type'] == "PVAV with reheat"
+                  num_measures += 1
                   set_measure_argument(osw, 'set_boiler_thermal_efficiency', '__SKIP__', false)
                   set_measure_argument(osw, 'set_boiler_thermal_efficiency', 'input_option_manual', true)
                   set_measure_argument(osw, 'set_boiler_thermal_efficiency', 'boiler_thermal_efficiency', 0.93)
+                else
+                  # measure is NA
+                  num_measures += 1
                 end
               end
             end
@@ -398,12 +420,14 @@ module BRICR
           if measure_category == "Cooling System"
             # Cooling System / OtherHVAC
             measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:OtherHVAC/#{@ns}:MeasureName"].text 
-              # Cooling System / OtherHVAC / Replace package units
+            # Cooling System / OtherHVAC / Replace package units
             if measure_name == "Replace package units"
               if @facility['system_type'] == "PSZ-AC with gas coil heat"
+                num_measures += 1
                 set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', '__SKIP__', false)
                 set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', 'cop', 4.1)
               elsif @facility['system_type'] == "PVAV with reheat"
+                num_measures += 1
                 set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', '__SKIP__', false)
                 set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', 'cop_high', 4.1)
                 set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', 'cop_low', 4.1)
@@ -429,6 +453,7 @@ module BRICR
             
             # Other HVAC / OtherHVAC / Replace HVAC system type to VRF 
             if measure_name == "Replace HVAC system type to VRF"
+              num_measures += 1
               set_measure_argument(osw, 'vr_fwith_doas', '__SKIP__', false)
               if @facility['bldg_type'] == "SmallOffice"
                 set_measure_argument(osw, 'vr_fwith_doas', "Office WholeBuilding - Sm Office - #{@facility['template']}", true)
@@ -447,6 +472,7 @@ module BRICR
       
             # Other HVAC / OtherHVAC / Replace HVAC with GSHP and DOAS 
             if measure_name == "Replace HVAC with GSHP and DOAS" || measure_name == "Replace AC and heating units with ground coupled heat pump systems"
+              num_measures += 1
               set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', '__SKIP__', false)
               if @facility['bldg_type'] == "SmallOffice"
                 set_measure_argument(osw, 'replace_hvac_with_gshp_and_doas', "Office WholeBuilding - Sm Office - #{@facility['template']}", true)
@@ -462,6 +488,7 @@ module BRICR
             
             # Other HVAC / OtherHVAC / Replace HVAC system type to PZHP 
             if measure_name == "Replace HVAC system type to PZHP"
+              num_measures += 1
               set_measure_argument(osw, 'add_apszhp_to_each_zone', '__SKIP__', false)
               set_measure_argument(osw, 'add_apszhp_to_each_zone', 'delete_existing', true)
               set_measure_argument(osw, 'add_apszhp_to_each_zone', 'cop_cooling', 3.1)
@@ -491,6 +518,7 @@ module BRICR
             measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:OtherHVAC/#{@ns}:MeasureName"].text 
             # General Controls and Operations / OtherHVAC / Upgrade operating protocols, calibration, and/or sequencing 
             if measure_name == "Upgrade operating protocols, calibration, and/or sequencing"
+              num_measures += 1
               set_measure_argument(osw, 'AdjustThermostatSetpointsByDegrees', '__SKIP__', false)
               set_measure_argument(osw, 'AdjustThermostatSetpointsByDegrees', 'cooling_adjustment', 1.0)
               set_measure_argument(osw, 'AdjustThermostatSetpointsByDegrees', 'heating_adjustment', -1.0)
@@ -501,8 +529,9 @@ module BRICR
           if measure_category == "Fan"
             # Fan / ElectricMotorsAndDrives
             measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:OtherElectricMotorsAndDrives/#{@ns}:MeasureName"].text 
-              # Fan / ElectricMotorsAndDrives / Replace with higher efficiency
+            # Fan / ElectricMotorsAndDrives / Replace with higher efficiency
             if measure_name == "Replace with higher efficiency"
+              num_measures += 1
               set_measure_argument(osw, 'ReplaceFanTotalEfficiency', '__SKIP__', false)
               set_measure_argument(osw, 'ReplaceFanTotalEfficiency', 'motor_eff', 80.0) # New efficiency
             end
@@ -512,24 +541,27 @@ module BRICR
           if measure_category == "Air Distribution"
             # Air Distribution / OtherHVAC
             measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:OtherHVAC/#{@ns}:MeasureName"].text 
-              # Air Distribution / OtherHVAC / Improve ventilation fans
+            # Air Distribution / OtherHVAC / Improve ventilation fans
             if measure_name == "Improve ventilation fans"
+              num_measures += 1
               set_measure_argument(osw, 'ImproveFanTotalEfficiencybyPercentage', '__SKIP__', false)
               set_measure_argument(osw, 'ImproveFanTotalEfficiencybyPercentage', 'motor_eff', 10) # Efficiency improvement
             end
             
             # Air Distribution / OtherHVAC
             measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:OtherHVAC/#{@ns}:MeasureName"].text 
-              # Air Distribution / OtherHVAC / Install demand control ventilation
+            # Air Distribution / OtherHVAC / Install demand control ventilation
             if measure_name == "Install demand control ventilation"
+              num_measures += 1
               set_measure_argument(osw, 'EnableDemandControlledVentilation', '__SKIP__', false)
               set_measure_argument(osw, 'EnableDemandControlledVentilation', 'dcv_type', "EnableDCV")
             end
             
             # Air Distribution / OtherHVAC
             measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:OtherHVAC/#{@ns}:MeasureName"].text 
-              # Air Distribution / OtherHVAC / Add or repair economizer
+            # Air Distribution / OtherHVAC / Add or repair economizer
             if measure_name == "Add or repair economizer"
+              num_measures += 1
               set_measure_argument(osw, 'EnableEconomizerControl', '__SKIP__', false)
               set_measure_argument(osw, 'EnableEconomizerControl', 'economizer_type', "FixedDryBulb")
             end
@@ -539,8 +571,9 @@ module BRICR
           if measure_category == "Heat Recovery"
             # Heat Recovery / OtherHVAC
             measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:OtherHVAC/#{@ns}:MeasureName"].text 
-              # Heat Recovery / OtherHVAC / Add energy recovery
+            # Heat Recovery / OtherHVAC / Add energy recovery
             if measure_name == "Add energy recovery"
+              num_measures += 1
               set_measure_argument(osw, 'add_energy_recovery_ventilator', '__SKIP__', false)
               set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_100_heating', 0)
               set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_100_heating', 0)
@@ -557,8 +590,9 @@ module BRICR
           if measure_category == "Domestic Hot Water"
             # Domestic Hot Water / ChilledWaterHotWaterAndSteamDistributionSystems
             measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:ChilledWaterHotWaterAndSteamDistributionSystems/#{@ns}:MeasureName"].text 
-              # Domestic Hot Water / ChilledWaterHotWaterAndSteamDistributionSystems / Replace or upgrade water heater
+            # Domestic Hot Water / ChilledWaterHotWaterAndSteamDistributionSystems / Replace or upgrade water heater
             if measure_name == "Replace or upgrade water heater"
+              num_measures += 1
               set_measure_argument(osw, 'set_water_heater_efficiency_heat_lossand_peak_water_flow_rate', '__SKIP__', false)
               set_measure_argument(osw, 'set_water_heater_efficiency_heat_lossand_peak_water_flow_rate', 'heater_fuel_type_widget', "NaturalGas")
               set_measure_argument(osw, 'set_water_heater_efficiency_heat_lossand_peak_water_flow_rate', 'heater_thermal_efficiency', 0.88)
@@ -566,12 +600,14 @@ module BRICR
             
             # Domestic Hot Water / ChilledWaterHotWaterAndSteamDistributionSystems / Add pipe insulation
             if measure_name == "Add pipe insulation"
+              num_measures += 1
               set_measure_argument(osw, 'set_water_heater_efficiency_heat_lossand_peak_water_flow_rate', '__SKIP__', false)
               set_measure_argument(osw, 'set_water_heater_efficiency_heat_lossand_peak_water_flow_rate', 'onoff_cycle_loss_coefficient_to_ambient_temperature', 0.25)
             end
             
             # Domestic Hot Water / ChilledWaterHotWaterAndSteamDistributionSystems / Add recirculating pumps
             if measure_name == "Add recirculating pumps"
+              num_measures += 1
               set_measure_argument(osw, 'set_water_heater_efficiency_heat_lossand_peak_water_flow_rate', '__SKIP__', false)
               set_measure_argument(osw, 'set_water_heater_efficiency_heat_lossand_peak_water_flow_rate', 'onoff_cycle_loss_coefficient_to_ambient_temperature', 0.1)
             end
@@ -583,11 +619,17 @@ module BRICR
             measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:WaterAndSewerConservationSystems/#{@ns}:MeasureName"].text  
             # Domestic Hot Water / WaterAndSewerConservationSystems / Install low-flow faucets and showerheads
             if measure_name == "Install low-flow faucets and showerheads"
+              num_measures += 1
               set_measure_argument(osw, 'reduce_water_use_by_percentage', '__SKIP__', false)
               set_measure_argument(osw, 'reduce_water_use_by_percentage', 'water_use_reduction_percent', 50)
             end
           end
         end
+      end
+      
+      # ensure that we didn't miss any measures by accident
+      if num_measures != measure_ids.size
+        raise "#{measure_ids.size} measures expected, #{num_measures} found,  measure_ids = #{measure_ids}"
       end
     end
 
@@ -731,9 +773,6 @@ module BRICR
         user_defined_fields = scenario.elements["#{@ns}:UserDefinedFields"]
         if user_defined_fields.nil?
           user_defined_fields = REXML::Element.new("#{@ns}:UserDefinedFields")
-          puts "new user_defined_fields = #{user_defined_fields}"
-        else
-          puts "using existing user_defined_fields = #{user_defined_fields}"
         end
         
         user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
