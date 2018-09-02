@@ -231,6 +231,7 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
       
       electricity_eui = results[scenario_name]['annual_electricity'] / floor_area_sf
       gas_eui = results[scenario_name]['annual_natural_gas'] / floor_area_sf
+	  energy_saving = results[scenario_name]['annual_energy_saving']
 	  energy_cost_saving = results[scenario_name]['annual_energy_cost_saving']
 
       building_info[xml_path_ids[index]].push(electricity_eui)
