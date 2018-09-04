@@ -779,9 +779,8 @@ def convert_feature(feature)
   
   packages << {ScenarioName: 'Office-Central Systems Package',
                MeasureIDs: ['Measure1', 'Measure2', 'Measure7', 'Measure8', 'Measure11', 'Measure13', 'Measure14', 'Measure18', 'Measure23', 'Measure24', 'Measure25', 'Measure27', 'Measure29']}
-  
-  # Sang-hoon is one of these supposed to be 'Retail-Central Systems Package'?
-  packages << {ScenarioName: 'Office-Central Systems Package 2',
+
+  packages << {ScenarioName: 'Office-Deep Package',
                MeasureIDs: ['Measure1', 'Measure2', 'Measure3', 'Measure6', 'Measure7', 'Measure8', 'Measure10', 'Measure13', 'Measure14', 'Measure15', 'Measure17', 'Measure18', 'Measure20', 'Measure23', 'Measure24', 'Measure27', 'Measure29']}
   
   # create unique measures for each package
