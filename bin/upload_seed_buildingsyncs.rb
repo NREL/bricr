@@ -52,7 +52,7 @@ Parallel.each(xml_files, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_
 
   uploaded += 1
 
-  command = ['bundle', 'exec', ruby_exe, upload_seed_buildingsync_rb, ARGV[0], xml_file, 'Not Started']
+  command = ['bundle', 'exec', ruby_exe, upload_seed_buildingsync_rb, ARGV[0], xml_file, "'Not Started'"]
 
   puts "Running '#{command.join(' ')}'"
   
