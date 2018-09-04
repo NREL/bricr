@@ -8,7 +8,7 @@ gem 'parallel', '1.12.0'
 gem 'json'
 
 #gem 'seed_ruby_client', path: '../ruby-client'
-gem 'seed_ruby_client', github: 'SEED-platform/ruby-client', branch: 'update_spec'
+gem 'seed_ruby_client', github: 'SEED-platform/ruby-client', branch: 'develop'
 
 #gem 'openstudio-standards', path: '../openstudio-standards'
 gem 'openstudio-standards', github: 'NREL/OpenStudio-standards', branch: 'bricr'
