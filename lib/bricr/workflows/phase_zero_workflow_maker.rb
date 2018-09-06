@@ -771,7 +771,11 @@ module BRICR
         next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
 
         package_of_measures = scenario.elements["#{@ns}:ScenarioType"].elements["#{@ns}:PackageOfMeasures"]
-
+        
+        # delete previous results
+        package_of_measures.elements.delete("#{@ns}:AnnualSavingsSiteEnergy")
+        package_of_measures.elements.delete("#{@ns}:AnnualSavingsCost")
+        
         result = results[scenario_name]
         baseline = results['Baseline']
         
@@ -795,6 +799,20 @@ module BRICR
         user_defined_fields = scenario.elements["#{@ns}:UserDefinedFields"]
         if user_defined_fields.nil?
           user_defined_fields = REXML::Element.new("#{@ns}:UserDefinedFields")
+        end
+        
+        # delete previous results
+        to_remove = []
+       user_defined_fields.elements.each("#{@ns}:UserDefinedField") do |user_defined_field|
+          name_element = user_defined_field.elements["#{@ns}:FieldName"]
+          if name_element.nil?
+            to_remove << user_defined_field
+          elsif /OpenStudio/.match(name_element.text)
+            to_remove << user_defined_field
+          end
+        end        
+        to_remove.each do |element|
+          user_defined_fields.elements.delete(element)
         end
         
         user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")

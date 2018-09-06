@@ -24,7 +24,7 @@
 #
 ########################################################################################################################
 
-if !File.exists?(ARGV[0])
+if ARGV[0].nil? || !File.exists?(ARGV[0])
   puts 'usage: bundle exec ruby monitor_seed.rb /path/to/config.rb'
   exit(1)
 end
@@ -34,5 +34,5 @@ run_script = File.realpath(run_script)
 
 while true
   system("bundle exec ruby '#{run_script}' '#{ARGV[0]}'")
-  sleep(6.minutes)
+  sleep(1 * 60)
 end
