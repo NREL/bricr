@@ -647,7 +647,7 @@ def convert_feature(feature)
                ScenarioName: 'Replace boiler',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 3.8*floor_area}
+               MeasureTotalFirstCost: 0.7*floor_area}
   
   measures << {ID: 'Measure19',
                SingleMeasure: true,
