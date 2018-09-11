@@ -118,10 +118,13 @@ module BRICR
 
         if facility_element.elements["#{@ns}:FloorsAboveGrade"]
           @facility['num_stories_above_grade'] = facility_element.elements["#{@ns}:FloorsAboveGrade"].text.to_f
+		  if @facility['num_stories_above_grade'] == 0
+			@facility['num_stories_above_grade'] = 1.0
+		  end
         else
           @facility['num_stories_above_grade'] = 1.0 # setDefaultValue
         end
-        
+	       
         if facility_element.elements["#{@ns}:FloorsBelowGrade"]
           @facility['num_stories_below_grade'] = facility_element.elements["#{@ns}:FloorsBelowGrade"].text.to_f
         else 
