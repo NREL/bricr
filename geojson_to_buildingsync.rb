@@ -164,6 +164,9 @@ end
 
 def create_site(feature)
   site = REXML::Element.new('auc:Site')
+  feature_id = get_facility_id(feature)
+  
+  raise "Facility ID is empty" if feature_id.nil?
 
   # address
   address = REXML::Element.new('auc:Address')
@@ -189,6 +192,9 @@ def create_site(feature)
   state.text = 'CA'
   address.add_element(state)
 
+  # if zip code is nil, default for now
+  feature[:properties][:"ZIP Code"] = 94104 if feature[:properties][:"ZIP Code"].nil?
+  raise "ZIP Code is not set" if feature[:properties][:"ZIP Code"].nil?
   postal_code = REXML::Element.new('auc:PostalCode')
   postal_code.text = feature[:properties][:"ZIP Code"]
   address.add_element(postal_code)
@@ -225,11 +231,13 @@ def create_site(feature)
   site.add_element(weather_station_name)
 
   # longitude
+  raise "Longitude is not set" if feature[:geometry].nil? || feature[:geometry][:coordinates].nil?
   longitude = REXML::Element.new('auc:Longitude')
   longitude.text = feature[:geometry][:coordinates][0][0][0][0]
   site.add_element(longitude)
 
   # latitude
+  raise "Latitude is not set" if feature[:geometry].nil? || feature[:geometry][:coordinates].nil?
   latitude = REXML::Element.new('auc:Latitude')
   latitude.text = feature[:geometry][:coordinates][0][0][0][1]
   site.add_element(latitude)
@@ -242,10 +250,13 @@ def create_site(feature)
   # facilities
   facilities = REXML::Element.new('auc:Facilities')
   facility = REXML::Element.new('auc:Facility')
-  facility.attributes['ID'] = get_facility_id(feature)
+  facility.attributes['ID'] = feature_id
 
+  # default name
+  feature[:properties][:"Building Name"] = "Building" if feature[:properties][:"Building Name"].nil?
+  raise "Building Name is not set" if feature[:properties][:"Building Name"].nil?
   premises_name = REXML::Element.new('auc:PremisesName')
-  premises_name.text = "#{feature[:properties][:"Building Name"]}, #{street_address_text}"
+  premises_name.text = "#{feature[:properties][:"Building Name"]} [#{street_address_text}]"
   facility.add_element(premises_name)
   
   premises_notes = REXML::Element.new('auc:PremisesNotes')
