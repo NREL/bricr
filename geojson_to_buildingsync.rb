@@ -471,7 +471,7 @@ def convert_feature(feature)
                ScenarioName: 'LED',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 3.8*floor_area}
+               MeasureTotalFirstCost: 3.85*floor_area}
                
   measures << {ID: 'Measure2',
                SingleMeasure: true,
@@ -482,7 +482,7 @@ def convert_feature(feature)
                ScenarioName: 'Electric_Appliance_30%_Reduction',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 0.5*floor_area}
+               MeasureTotalFirstCost: 0.51*floor_area}
                
   measures << {ID: 'Measure3',
                SingleMeasure: true,
@@ -493,7 +493,7 @@ def convert_feature(feature)
                ScenarioName: 'Air_Seal_Infiltration_30%_More_Airtight',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 2.3*floor_area}
+               MeasureTotalFirstCost: 2.34*floor_area}
 
   measures << {ID: 'Measure4',
                SingleMeasure: true,
@@ -504,7 +504,7 @@ def convert_feature(feature)
                ScenarioName: 'Cooling_System_SEER 14',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 7.2*floor_area}
+               MeasureTotalFirstCost: 4.18*floor_area}
                
   measures << {ID: 'Measure5',
                SingleMeasure: true,
@@ -515,7 +515,7 @@ def convert_feature(feature)
                ScenarioName: 'Heating_System_Efficiency_0.93',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 1.0*floor_area}
+               MeasureTotalFirstCost: 0.89*floor_area}
                
   measures << {ID: 'Measure6',
                SingleMeasure: true,
@@ -526,7 +526,7 @@ def convert_feature(feature)
                ScenarioName: 'Add daylight controls',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 0.8*floor_area}
+               MeasureTotalFirstCost: 0.53*floor_area}
       
   measures << {ID: 'Measure7',
                SingleMeasure: true,
@@ -537,7 +537,7 @@ def convert_feature(feature)
                ScenarioName: 'Add occupancy sensors',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 1.5*floor_area}
+               MeasureTotalFirstCost: 1.55*floor_area}
      
   measures << {ID: 'Measure8',
                SingleMeasure: true,
@@ -548,7 +548,7 @@ def convert_feature(feature)
                ScenarioName: 'Install plug load controls',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 0.8*floor_area}
+               MeasureTotalFirstCost: 0.82*floor_area}
      
   measures << {ID: 'Measure9',
                SingleMeasure: true,
@@ -559,7 +559,7 @@ def convert_feature(feature)
                ScenarioName: 'Increase wall insulation',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 2.7*floor_area}
+               MeasureTotalFirstCost: 1.63*floor_area}
       
   measures << {ID: 'Measure10',
                SingleMeasure: true,
@@ -570,7 +570,7 @@ def convert_feature(feature)
                ScenarioName: 'Insulate thermal bypasses',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 1.0*floor_area}
+               MeasureTotalFirstCost: 1.00*floor_area}
 
   measures << {ID: 'Measure11',
                SingleMeasure: true,
@@ -581,7 +581,7 @@ def convert_feature(feature)
                ScenarioName: 'Increase roof insulation',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 4.0*floor_area}
+               MeasureTotalFirstCost: 14.46*floor_area}
                
   measures << {ID: 'Measure12',
                SingleMeasure: true,
@@ -592,7 +592,7 @@ def convert_feature(feature)
                ScenarioName: 'Increase ceiling insulation',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 2.7*floor_area}
+               MeasureTotalFirstCost: 2.67*floor_area}
                
   measures << {ID: 'Measure13',
                SingleMeasure: true,
@@ -603,7 +603,7 @@ def convert_feature(feature)
                ScenarioName: 'Add window films',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 1.0*floor_area}
+               MeasureTotalFirstCost: 1.00*floor_area}
                
   measures << {ID: 'Measure14',
                SingleMeasure: true,
@@ -614,7 +614,7 @@ def convert_feature(feature)
                ScenarioName: 'Upgrade operating protocols calibration and-or sequencing',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 1*floor_area}
+               MeasureTotalFirstCost: 0.005*floor_area}
   
   measures << {ID: 'Measure15',
                SingleMeasure: true,
@@ -625,7 +625,7 @@ def convert_feature(feature)
                ScenarioName: 'Replace or upgrade water heater',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 0.5*floor_area}
+               MeasureTotalFirstCost: 0.17*floor_area}
   
   measures << {ID: 'Measure16',
                SingleMeasure: true,
@@ -636,7 +636,7 @@ def convert_feature(feature)
                ScenarioName: 'Replace ice-refrigeration equipment with high efficiency units',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 1.4*floor_area}
+               MeasureTotalFirstCost: 1.95*floor_area}
   
   measures << {ID: 'Measure17',
                SingleMeasure: true,
@@ -647,7 +647,7 @@ def convert_feature(feature)
                ScenarioName: 'Replace windows',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 1*floor_area}
+               MeasureTotalFirstCost: 2.23*floor_area}
   
   measures << {ID: 'Measure18',
                SingleMeasure: true,
@@ -658,7 +658,7 @@ def convert_feature(feature)
                ScenarioName: 'Replace boiler',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 0.7*floor_area}
+               MeasureTotalFirstCost: 0.95*floor_area}
   
   measures << {ID: 'Measure19',
                SingleMeasure: true,
@@ -669,7 +669,7 @@ def convert_feature(feature)
                ScenarioName: 'Replace HVAC with GSHP and DOAS',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 13.0*floor_area}
+               MeasureTotalFirstCost: 14.00*floor_area}
   
   measures << {ID: 'Measure20',
                SingleMeasure: true,
@@ -680,7 +680,7 @@ def convert_feature(feature)
                ScenarioName: 'VRF with DOAS',
                OpenStudioMeasureName: 'Replace HVAC system type to VRF',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 20*floor_area}
+               MeasureTotalFirstCost: 16.66*floor_area}
   
   measures << {ID: 'Measure21',
                SingleMeasure: true,
@@ -691,7 +691,7 @@ def convert_feature(feature)
                ScenarioName: 'Replace HVAC system type to PZHP',
                OpenStudioMeasureName: 'Replace HVAC system type to PZHP',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 7.8*floor_area}
+               MeasureTotalFirstCost: 4.26*floor_area}
   
   measures << {ID: 'Measure22',
                SingleMeasure: true,
@@ -702,7 +702,7 @@ def convert_feature(feature)
                ScenarioName: 'Replace with higher efficiency',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 13.4*floor_area}
+               MeasureTotalFirstCost: 10.75*floor_area}
   
   measures << {ID: 'Measure23',
                SingleMeasure: true,
@@ -713,7 +713,7 @@ def convert_feature(feature)
                ScenarioName: 'Improve ventilation fans',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 1.0*floor_area}
+               MeasureTotalFirstCost: 1.00*floor_area}
   
   measures << {ID: 'Measure24',
                SingleMeasure: true,
@@ -724,7 +724,7 @@ def convert_feature(feature)
                ScenarioName: 'Install demand control ventilation',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 0.9*floor_area}
+               MeasureTotalFirstCost: 0.33*floor_area}
 
   measures << {ID: 'Measure25',
                SingleMeasure: true,
@@ -735,7 +735,7 @@ def convert_feature(feature)
                ScenarioName: 'Add or repair economizer',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 1.2*floor_area}
+               MeasureTotalFirstCost: 0.80*floor_area}
   
   measures << {ID: 'Measure26',
                SingleMeasure: true,
@@ -746,7 +746,7 @@ def convert_feature(feature)
                ScenarioName: 'Add energy recovery',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 8.0*floor_area}
+               MeasureTotalFirstCost: 4.53*floor_area}
   
   measures << {ID: 'Measure27',
                SingleMeasure: true,
@@ -757,7 +757,7 @@ def convert_feature(feature)
                ScenarioName: 'Add pipe insulation',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 0.02*floor_area}
+                MeasureTotalFirstCost: 0.14*floor_area}
   
   measures << {ID: 'Measure28',
                SingleMeasure: true,
@@ -768,7 +768,7 @@ def convert_feature(feature)
                ScenarioName: 'Add recirculating pumps',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 0.5*floor_area}
+               MeasureTotalFirstCost: 0.18*floor_area}
   
   measures << {ID: 'Measure29',
                SingleMeasure: true,
@@ -779,7 +779,7 @@ def convert_feature(feature)
                ScenarioName: 'Install low-flow faucets and showerheads',
                OpenStudioMeasureName: 'TBD',
                UsefulLife: 20,
-               MeasureTotalFirstCost: 1.0*floor_area}
+               MeasureTotalFirstCost: 1.00*floor_area}
   
   packages = []
   packages << {ScenarioName: 'Retail Package',
