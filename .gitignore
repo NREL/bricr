@@ -12,5 +12,6 @@ reports/
 rubocop-results.xml
 spec/files/phase0/*
 seed.json
+seed-docker.json
 seed-configs.json
 gems/

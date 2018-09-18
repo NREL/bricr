@@ -33,13 +33,13 @@ describe 'BRICR' do
     # get building sync that we just uploaded, download and compare to uploaded one
     expect(status).to eq true
     expect(response[:status]).to eq 'success'
-    
+
     expect(response[:data]).to_not be_nil
     expect(response[:data][:property_view]).to_not be_nil
     expect(response[:data][:property_view][:id]).to_not be_nil
-    
+
     property_id = response[:data][:property_view][:id]
-    
+
     # Note that the upload_buildingsync file now returns the property_view, not the property_state
     seed.update_analysis_state(property_id, 'Queued')
 
@@ -57,7 +57,7 @@ describe 'BRICR' do
     #property_id_2 = results.properties.first[:id]
     #expect(property_id_2).to_not be_nil
     #expect(property_id_2).to eq property_id
-    
+
     # search for the building again using the property_id
     #results = seed.search(property_id, nil)
     #expect(results).to_not be_nil
