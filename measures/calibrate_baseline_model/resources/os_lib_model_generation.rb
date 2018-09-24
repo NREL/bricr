@@ -34,12 +34,12 @@ module OsLib_ModelGeneration
     # array << '189.1-2009' # if turn this on need to update space_type_array for stripmall
     array << '90.1-2010'
     array << '90.1-2013'
-	array << 'CEC Pre-1978'
-	array << 'CEC T24 1978'
-	array << 'CEC T24 1992'
-	array << 'CEC T24 2001'
-	array << 'CEC T24 2005'
-	array << 'CEC T24 2008'
+	array << 'CBES Pre-1978'
+	array << 'CBES T24 1978'
+	array << 'CBES T24 1992'
+	array << 'CBES T24 2001'
+	array << 'CBES T24 2005'
+	array << 'CBES T24 2008'
 
     return array
   end

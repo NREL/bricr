@@ -26,6 +26,11 @@
 
 require 'bricr'
 
+if !File.exists?(ARGV[0]) || !File.exists?(ARGV[1]) || ARGV[2].nil?
+  puts 'usage: bundle exec ruby upload_seed_buildingsync.rb /path/to/config.rb /path/to/buildingsync.xml status'
+  exit(1)
+end
+
 config_path = ARGV[0]
 require(config_path)
 

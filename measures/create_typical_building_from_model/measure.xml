@@ -2,8 +2,8 @@
   <schema_version>3.0</schema_version>
   <name>create_typical_building_from_model</name>
   <uid>339a2e3a-273c-4494-bb50-bfe586a0647c</uid>
-  <version_id>7cce7fa3-8bab-4460-a0ab-14e4f5dc8d80</version_id>
-  <version_modified>20180123T051147Z</version_modified>
+  <version_id>621e187a-52d9-452e-8005-994c2f03e06e</version_id>
+  <version_modified>20180730T193946Z</version_modified>
   <xml_checksum>EE13F09F</xml_checksum>
   <class_name>CreateTypicalBuildingFromModel</class_name>
   <display_name>Create Typical Building from Model</display_name>
@@ -43,28 +43,32 @@
           <display_name>90.1-2013</display_name>
         </choice>
         <choice>
-          <value>CEC Pre-1978</value>
-          <display_name>CEC Pre-1978</display_name>
+          <value>NREL ZNE Ready 2017</value>
+          <display_name>NREL ZNE Ready 2017</display_name>
         </choice>
         <choice>
-          <value>CEC T24 1978</value>
-          <display_name>CEC T24 1978</display_name>
+          <value>CBES Pre-1978</value>
+          <display_name>CBES Pre-1978</display_name>
         </choice>
         <choice>
-          <value>CEC T24 1992</value>
-          <display_name>CEC T24 1992</display_name>
+          <value>CBES T24 1978</value>
+          <display_name>CBES T24 1978</display_name>
         </choice>
         <choice>
-          <value>CEC T24 2001</value>
-          <display_name>CEC T24 2001</display_name>
+          <value>CBES T24 1992</value>
+          <display_name>CBES T24 1992</display_name>
         </choice>
         <choice>
-          <value>CEC T24 2005</value>
-          <display_name>CEC T24 2005</display_name>
+          <value>CBES T24 2001</value>
+          <display_name>CBES T24 2001</display_name>
         </choice>
         <choice>
-          <value>CEC T24 2008</value>
-          <display_name>CEC T24 2008</display_name>
+          <value>CBES T24 2005</value>
+          <display_name>CBES T24 2005</display_name>
+        </choice>
+        <choice>
+          <value>CBES T24 2008</value>
+          <display_name>CBES T24 2008</display_name>
         </choice>
       </choices>
     </argument>
@@ -597,6 +601,25 @@
         </choice>
       </choices>
     </argument>
+    <argument>
+      <name>use_upstream_args</name>
+      <display_name>Use Upstream Argument Values</display_name>
+      <description>When true this will look for arguments or registerValues in upstream measures that match arguments from this measure, and will use the value from the upstream measure in place of what is entered for this measure.</description>
+      <type>Boolean</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>true</default_value>
+      <choices>
+        <choice>
+          <value>true</value>
+          <display_name>true</display_name>
+        </choice>
+        <choice>
+          <value>false</value>
+          <display_name>false</display_name>
+        </choice>
+      </choices>
+    </argument>
   </arguments>
   <outputs/>
   <provenances/>
@@ -650,22 +673,10 @@
       <checksum>6DB338FC</checksum>
     </file>
     <file>
-      <filename>os_lib_helper_methods.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>02263B97</checksum>
-    </file>
-    <file>
       <filename>LargeOffice04.osm</filename>
       <filetype>osm</filetype>
       <usage_type>test</usage_type>
       <checksum>1F375CE5</checksum>
-    </file>
-    <file>
-      <filename>Model.hvac.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>6C20C818</checksum>
     </file>
     <file>
       <filename>test_hvac.rb</filename>
@@ -680,6 +691,18 @@
       <checksum>77EBCBD3</checksum>
     </file>
     <file>
+      <filename>os_lib_helper_methods.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>9CFC43FB</checksum>
+    </file>
+    <file>
+      <filename>Model.hvac.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>AE1BD721</checksum>
+    </file>
+    <file>
       <version>
         <software_program>OpenStudio</software_program>
         <identifier>2.0.0</identifier>
@@ -688,13 +711,13 @@
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>625BB367</checksum>
+      <checksum>F8E692FD</checksum>
     </file>
     <file>
       <filename>os_lib_model_generation.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>1F9202EC</checksum>
+      <checksum>2E3AE28C</checksum>
     </file>
   </files>
 </measure>

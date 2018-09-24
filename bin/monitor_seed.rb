@@ -24,14 +24,15 @@
 #
 ########################################################################################################################
 
-require_relative 'bricr/version'
-require_relative 'bricr/bricr_methods'
-require_relative 'bricr/building_sync'
-require_relative 'bricr/seed_methods'
-require_relative 'bricr/translator'
-require_relative 'bricr/workflow_maker'
-require_relative 'bricr/workflows/phase_zero_workflow_maker'
+if ARGV[0].nil? || !File.exists?(ARGV[0])
+  puts 'usage: bundle exec ruby monitor_seed.rb /path/to/config.rb'
+  exit(1)
+end
 
-module BRICR
-  DIRECTORY = File.realpath(File.dirname(__FILE__)).freeze
+run_script = File.join(File.dirname(__FILE__), 'run_seed_buildingsyncs.rb')
+run_script = File.realpath(run_script)
+
+while true
+  system("bundle exec ruby '#{run_script}' '#{ARGV[0]}'")
+  sleep(1 * 60)
 end

@@ -4,13 +4,25 @@ module BRICR
   #ENV['GEM_PATH'] = 'C:/bricr/gems'
   
   # location of openstudio CLI
-  OPENSTUDIO_EXE = 'C:/openstudio-2.1.0/bin/openstudio.exe'
+  if /mswin/.match(RUBY_PLATFORM) || /mingw/.match(RUBY_PLATFORM)
+    OPENSTUDIO_EXE = 'C:/openstudio-2.6.0/bin/openstudio.exe'
+  else
+    OPENSTUDIO_EXE = '/usr/local/bin/openstudio'
+  end
 
   # one or more measure paths
-  OPENSTUDIO_MEASURES = [File.realpath("./measures", File.dirname(__FILE__)), File.realpath("./../OpenStudio-measures/NREL\ working\ measures", File.dirname(__FILE__))]
+  OPENSTUDIO_MEASURES = [
+      File.realpath("./measures", File.dirname(__FILE__)),
+      File.realpath("./../openstudio-measures/nrel_published",
+      File.dirname(__FILE__)),
+      File.realpath("./../openstudio-measures/nrel_dev", File.dirname(__FILE__))
+  ]
 
   # one or more file paths
-  OPENSTUDIO_FILES = [File.realpath("./weather", File.dirname(__FILE__)), File.realpath("./../OpenStudio-measures/NREL_integration_testing/weather", File.dirname(__FILE__))]
+  OPENSTUDIO_FILES = [
+      File.realpath("./weather",
+      File.dirname(__FILE__))
+  ]
 
   # max number of datapoints to run
   MAX_DATAPOINTS = Float::INFINITY
@@ -24,27 +36,26 @@ module BRICR
 
   # do simulations
   DO_SIMULATIONS = false
-
-  # collect results
-  DO_GET_RESULTS = false
   
-  # url for seed instance
-  SEED_URL = nil
-  
-  ENV['BRICR_SEED_HOST'] = 'http://192.168.99.100'
-  
-  ENV['BRICR_SEED_USERNAME'] = 'user@seed-platform.org'
-  
-  ENV['BRICR_SEED_API_KEY'] = ''
-  # url for bricr-sim
-  BRICR_SIM_URL = nil
-
   # specify the output folder for the simulation runs
-  SIMULATION_OUTPUT_FOLDER = "D:/BRICR_OUTPUT/"
+  #SIMULATION_OUTPUT_FOLDER = "D:/BRICR_OUTPUT/"
 
   # specify to run the baseline simulation only or not
-  SIMULATE_BASELINE_ONLY = true
+  SIMULATE_BASELINE_ONLY = false
 
   # specify to include the model calibration or not
   DO_MODEL_CALIBRATION = false
+  
+  # collect results
+  DO_GET_RESULTS = false
+  
+  # configuration for SEED
+  ENV['BRICR_SEED_HOST'] = 'YOUR_SEED_HOST'
+  ENV['BRICR_SEED_USERNAME'] = 'YOUR_SEED_USERNAME'
+  ENV['BRICR_SEED_API_KEY'] = 'YOUR_SEED_API_KEY'
+  
+  # url for bricr-sim
+  BRICR_SIM_URL = nil
+  #BRICR_SIM_URL = 'http://192.168.99.100:81/api/bricr'
+
 end

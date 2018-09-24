@@ -17,11 +17,11 @@ services:
       - POSTGRES_USER=seed
       - POSTGRES_PASSWORD=password
     volumes:
-      - seed_pgdata:/var/lib/postgresql/data
+      - bricr_seed_pgdata:/var/lib/postgresql/data
   db-redis:
     image: redis
   web:
-    image: seedplatform/seed:bricr
+    image: seedplatform/seed:develop
     environment:
       - POSTGRES_DB=seed
       - POSTGRES_USER=seed
@@ -35,12 +35,12 @@ services:
       - db-redis
       - db-postgres
     volumes:
-      - seed_media:/seed/media
+      - bricr_seed_media:/seed/media
     ports:
       - "80:80"
   web-celery:
     command: /seed/docker/start_celery_docker.sh
-    image: seedplatform/seed:bricr
+    image: seedplatform/seed:develop
     environment:
       - POSTGRES_DB=seed
       - POSTGRES_USER=seed
@@ -52,15 +52,9 @@ services:
       - db-postgres
       - web
     volumes:
-      - seed_media:/seed/media
-  test_container:
-    build:
-      context: ../..
-      dockerfile: spec/docker/Dockerfile
-    links:
-      - web
+      - bricr_seed_media:/seed/media
 volumes:
-  seed_pgdata:
+  bricr_seed_pgdata:
     external: true
-  seed_media:
+  bricr_seed_media:
     external: true

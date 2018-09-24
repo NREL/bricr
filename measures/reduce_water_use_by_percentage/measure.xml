@@ -2,11 +2,11 @@
   <schema_version>3.0</schema_version>
   <name>reduce_water_use_by_percentage</name>
   <uid>3be83df0-8db1-47a8-8b26-aa12f9f17116</uid>
-  <version_id>b44339fa-0fb9-4ffd-93bb-657c41d274c3</version_id>
-  <version_modified>20180226T174852Z</version_modified>
-  <xml_checksum>9C8A26EB</xml_checksum>
+  <version_id>725f3c65-c760-44ad-bccd-919e682bf38a</version_id>
+  <version_modified>20180717T215712Z</version_modified>
+  <xml_checksum>759A1208</xml_checksum>
   <class_name>ReduceWaterUseByPercentage</class_name>
-  <display_name>replace_glazing</display_name>
+  <display_name>reduce_water_use_by_percentage</display_name>
   <description></description>
   <modeler_description></modeler_description>
   <arguments>
@@ -16,7 +16,7 @@
       <type>Double</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
-	  <default_value>20</default_value>
+      <default_value>20</default_value>
     </argument>
   </arguments>
   <outputs/>
@@ -56,7 +56,7 @@
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>F958212D</checksum>
+      <checksum>1642ADCF</checksum>
     </file>
   </files>
 </measure>

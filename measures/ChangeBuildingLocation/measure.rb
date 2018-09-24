@@ -1,65 +1,110 @@
+# *******************************************************************************
+# OpenStudio(R), Copyright (c) 2008-2018, Alliance for Sustainable Energy, LLC.
+# All rights reserved.
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# (1) Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+#
+# (2) Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation
+# and/or other materials provided with the distribution.
+#
+# (3) Neither the name of the copyright holder nor the names of any contributors
+# may be used to endorse or promote products derived from this software without
+# specific prior written permission from the respective party.
+#
+# (4) Other than as required in clauses (1) and (2), distributions in any form
+# of modifications or other derivative works may not use the "OpenStudio"
+# trademark, "OS", "os", or any other confusingly similar designation without
+# specific prior written permission from Alliance for Sustainable Energy, LLC.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER(S) AND ANY CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER(S), ANY CONTRIBUTORS, THE
+# UNITED STATES GOVERNMENT, OR THE UNITED STATES DEPARTMENT OF ENERGY, NOR ANY OF
+# THEIR EMPLOYEES, BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+# OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+# STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# *******************************************************************************
+
 # Authors : Nicholas Long, David Goldwasser
 # Simple measure to load the EPW file and DDY file
-require_relative 'resources/stat_file'
-require_relative 'resources/epw'
 
-class ChangeBuildingLocation < OpenStudio::Ruleset::ModelUserScript
+class ChangeBuildingLocation < OpenStudio::Measure::ModelMeasure
 
-  #define the name that a user will see, this method may be deprecated as
-  #the display name in PAT comes from the name field in measure.xml
+  Dir[File.dirname(__FILE__) + '/resources/*.rb'].each { |file| require file }
+
+  # resource file modules
+  include OsLib_HelperMethods
+
+  # define the name that a user will see, this method may be deprecated as
+  # the display name in PAT comes from the name field in measure.xml
   def name
     'ChangeBuildingLocation'
   end
 
-  #define the arguments that the user will input
+  # define the arguments that the user will input
   def arguments(model)
-    args = OpenStudio::Ruleset::OSArgumentVector.new
+    args = OpenStudio::Measure::OSArgumentVector.new
 
-    weather_file_name = OpenStudio::Ruleset::OSArgument.makeStringArgument('weather_file_name', true)
-    weather_file_name.setDisplayName("Weather File Name")
-    weather_file_name.setDescription("Name of the weather file to change to. This is the filename with the extension (e.g. NewWeather.epw). Optionally this can inclucde the full file path, but for most use cases should just be file name.")
+    weather_file_name = OpenStudio::Measure::OSArgument.makeStringArgument('weather_file_name', true)
+    weather_file_name.setDisplayName('Weather File Name')
+    weather_file_name.setDescription('Name of the weather file to change to. This is the filename with the extension (e.g. NewWeather.epw). Optionally this can inclucde the full file path, but for most use cases should just be file name.')
     args << weather_file_name
 
-    #make choice argument for climate zone
+    # make choice argument for climate zone
     choices = OpenStudio::StringVector.new
-    choices << "1A"
-    choices << "1B"
-    choices << "2A"
-    choices << "2B"
-    choices << "3A"
-    choices << "3B"
-    choices << "3C"
-    choices << "4A"
-    choices << "4B"
-    choices << "4C"
-    choices << "5A"
-    choices << "5B"
-    choices << "5C"
-    choices << "6A"
-    choices << "6B"
-    choices << "7"
-    choices << "8"
-    choices << "CEC1"
-    choices << "CEC2"
-    choices << "CEC3"
-    choices << "CEC4"
-    choices << "CEC5"
-    choices << "CEC6"
-    choices << "CEC7"
-    choices << "CEC8"
-    choices << "CEC9"
-    choices << "CEC10"
-    choices << "CEC11"
-    choices << "CEC12"
-    choices << "CEC13"
-    choices << "CEC14"
-    choices << "CEC15"
-    choices << "CEC16"    
-	choices << "Lookup From Stat File"
-    climate_zone = OpenStudio::Ruleset::OSArgument::makeChoiceArgument("climate_zone", choices,true)
-    climate_zone.setDisplayName("Climate Zone.")
-    climate_zone.setDefaultValue("Lookup From Stat File")
+    choices << '1A'
+    choices << '1B'
+    choices << '2A'
+    choices << '2B'
+    choices << '3A'
+    choices << '3B'
+    choices << '3C'
+    choices << '4A'
+    choices << '4B'
+    choices << '4C'
+    choices << '5A'
+    choices << '5B'
+    choices << '5C'
+    choices << '6A'
+    choices << '6B'
+    choices << '7'
+    choices << '8'
+    choices << 'CEC1'
+    choices << 'CEC2'
+    choices << 'CEC3'
+    choices << 'CEC4'
+    choices << 'CEC5'
+    choices << 'CEC6'
+    choices << 'CEC7'
+    choices << 'CEC8'
+    choices << 'CEC9'
+    choices << 'CEC10'
+    choices << 'CEC11'
+    choices << 'CEC12'
+    choices << 'CEC13'
+    choices << 'CEC14'
+    choices << 'CEC15'
+    choices << 'CEC16'    
+    choices << 'Lookup From Stat File'
+    climate_zone = OpenStudio::Measure::OSArgument.makeChoiceArgument('climate_zone', choices, true)
+    climate_zone.setDisplayName('Climate Zone.')
+    climate_zone.setDefaultValue('Lookup From Stat File')
     args << climate_zone
+
+    # make an argument for use_upstream_args
+    use_upstream_args = OpenStudio::Measure::OSArgument.makeBoolArgument('use_upstream_args', true)
+    use_upstream_args.setDisplayName('Use Upstream Argument Values')
+    use_upstream_args.setDescription('When true this will look for arguments or registerValues in upstream measures that match arguments from this measure, and will use the value from the upstream measure in place of what is entered for this measure.')
+    use_upstream_args.setDefaultValue(true)
+    args << use_upstream_args
 
     args
   end
@@ -68,28 +113,45 @@ class ChangeBuildingLocation < OpenStudio::Ruleset::ModelUserScript
   def run(model, runner, user_arguments)
     super(model, runner, user_arguments)
 
-    #use the built-in error checking 
-    if not runner.validateUserArguments(arguments(model), user_arguments)
-      return false
+    # assign the user inputs to variables
+    args = OsLib_HelperMethods.createRunVariables(runner, model, user_arguments, arguments(model))
+    if !args then return false end
+
+    # lookup and replace argument values from upstream measures
+    if args['use_upstream_args'] == true
+      args.each do |arg,value|
+        next if arg == 'use_upstream_args' # this argument should not be changed
+        value_from_osw = OsLib_HelperMethods.check_upstream_measure_for_arg(runner, arg)
+        if !value_from_osw.empty?
+          runner.registerInfo("Replacing argument named #{arg} from current measure with a value of #{value_from_osw[:value]} from #{value_from_osw[:measure_name]}.")
+          new_val = value_from_osw[:value]
+          # todo - make code to handle non strings more robust. check_upstream_measure_for_arg coudl pass bakc the argument type
+          if arg == 'total_bldg_floor_area'
+            args[arg] = new_val.to_f
+          elsif arg == 'num_stories_above_grade'
+            args[arg] = new_val.to_f
+          elsif arg == 'zipcode'
+            args[arg] = new_val.to_i
+          else
+            args[arg] = new_val
+          end
+        end
+      end
     end
 
     # create initial condition
-    if not model.getWeatherFile.city == ''
+    if model.getWeatherFile.city != ''
       runner.registerInitialCondition("The initial weather file is #{model.getWeatherFile.city} and the model has #{model.getDesignDays.size} design day objects")
     else
       runner.registerInitialCondition("No weather file is set. The model has #{model.getDesignDays.size} design day objects")
     end
 
-    # get variables
-    weather_file_name = runner.getStringArgumentValue("weather_file_name", user_arguments)
-    climate_zone = runner.getStringArgumentValue("climate_zone",user_arguments)
-
     # find weather file
-    osw_file = runner.workflow.findFile(weather_file_name)
+    osw_file = runner.workflow.findFile(args['weather_file_name'])
     if osw_file.is_initialized
       weather_file = osw_file.get.to_s
     else
-      runner.registerError("Did not find #{weather_file_name} in paths described in OSW file.")
+      runner.registerError("Did not find #{args['weather_file_name']} in paths described in OSW file.")
       return false
     end
 
@@ -124,18 +186,17 @@ class ChangeBuildingLocation < OpenStudio::Ruleset::ModelUserScript
 
     runner.registerInfo("city is #{epw_file.city}. State is #{epw_file.state}")
 
-	
     # Add SiteWaterMainsTemperature -- via parsing of STAT file.
     stat_file = "#{File.join(File.dirname(epw_file.filename), File.basename(epw_file.filename, '.*'))}.stat"
     unless File.exist? stat_file
-      runner.registerInfo "Could not find STAT file by filename, looking in the directory"
+      runner.registerInfo 'Could not find STAT file by filename, looking in the directory'
       stat_files = Dir["#{File.dirname(epw_file.filename)}/*.stat"]
       if stat_files.size > 1
-        runner.registerError("More than one stat file in the EPW directory")
+        runner.registerError('More than one stat file in the EPW directory')
         return false
       end
-      if stat_files.size == 0
-        runner.registerError("Cound not find the stat file in the EPW directory")
+      if stat_files.empty?
+        runner.registerError('Cound not find the stat file in the EPW directory')
         return false
       end
 
@@ -143,7 +204,7 @@ class ChangeBuildingLocation < OpenStudio::Ruleset::ModelUserScript
       stat_file = stat_files.first
     end
     unless stat_file
-      runner.registerError "Could not find stat file"
+      runner.registerError 'Could not find stat file'
       return false
     end
 
@@ -154,18 +215,18 @@ class ChangeBuildingLocation < OpenStudio::Ruleset::ModelUserScript
     runner.registerInfo("mean dry bulb is #{stat_model.mean_dry_bulb}")
 
     # Remove all the Design Day objects that are in the file
-    model.getObjectsByType("OS:SizingPeriod:DesignDay".to_IddObjectType).each { |d| d.remove }
+    model.getObjectsByType('OS:SizingPeriod:DesignDay'.to_IddObjectType).each(&:remove)
 
     # find the ddy files
     ddy_file = "#{File.join(File.dirname(epw_file.filename), File.basename(epw_file.filename, '.*'))}.ddy"
     unless File.exist? ddy_file
       ddy_files = Dir["#{File.dirname(epw_file.filename)}/*.ddy"]
       if ddy_files.size > 1
-        runner.registerError("More than one ddy file in the EPW directory")
+        runner.registerError('More than one ddy file in the EPW directory')
         return false
       end
-      if ddy_files.size == 0
-        runner.registerError("could not find the ddy file in the EPW directory")
+      if ddy_files.empty?
+        runner.registerError('could not find the ddy file in the EPW directory')
         return false
       end
 
@@ -178,7 +239,7 @@ class ChangeBuildingLocation < OpenStudio::Ruleset::ModelUserScript
     end
 
     ddy_model = OpenStudio::EnergyPlus.loadAndTranslateIdf(ddy_file).get
-    ddy_model.getObjectsByType("OS:SizingPeriod:DesignDay".to_IddObjectType).each do |d|
+    ddy_model.getObjectsByType('OS:SizingPeriod:DesignDay'.to_IddObjectType).each do |d|
       # grab only the ones that matter
       ddy_list = /(Htg 99.6. Condns DB)|(Clg .4. Condns WB=>MDB)|(Clg .4% Condns DB=>MWB)/
       if d.name.get =~ ddy_list
@@ -191,7 +252,7 @@ class ChangeBuildingLocation < OpenStudio::Ruleset::ModelUserScript
 
     # Set climate zone
     climateZones = model.getClimateZones
-    if climate_zone == "Lookup From Stat File"
+    if args['climate_zone'] == 'Lookup From Stat File'
 
       # get climate zone from stat file
       text = nil
@@ -207,19 +268,22 @@ class ChangeBuildingLocation < OpenStudio::Ruleset::ModelUserScript
       if match_data.nil?
         runner.registerWarning("Can't find ASHRAE climate zone in stat file.")
       else
-        climate_zone = match_data[1].to_s.strip
+        args['climate_zone'] = match_data[1].to_s.strip
       end
 
     end
-	
-	# set climate zone
-	if climate_zone == "1A" || climate_zone == "1B" || climate_zone == "2A" || climate_zone == "2B" || climate_zone == "3A" || climate_zone == "3B" || climate_zone == "3C" || climate_zone == "4A" || climate_zone == "4B" || climate_zone == "4C" || climate_zone == "5A" || climate_zone == "5B" || climate_zone == "5C" || climate_zone == "6A" || climate_zone == "6B" || climate_zone == "7" || climate_zone == "8"
-    	climateZones.setClimateZone("ASHRAE",climate_zone)
-		runner.registerInfo("Setting Climate Zone to #{climateZones.getClimateZones("ASHRAE").first.value}")
-	else 
-		climateZones.setClimateZone("CEC",climate_zone)
-		runner.registerInfo("Setting Climate Zone to #{climate_zone}")
-	end
+    
+    # set climate zone
+    climate_zone = args['climate_zone']
+    climateZones.clear
+    if climate_zone == "1A" || climate_zone == "1B" || climate_zone == "2A" || climate_zone == "2B" || climate_zone == "3A" || climate_zone == "3B" || climate_zone == "3C" || climate_zone == "4A" || climate_zone == "4B" || climate_zone == "4C" || climate_zone == "5A" || climate_zone == "5B" || climate_zone == "5C" || climate_zone == "6A" || climate_zone == "6B" || climate_zone == "7" || climate_zone == "8"
+        climateZones.setClimateZone('ASHRAE',climate_zone)
+      runner.registerInfo("Setting Climate Zone to #{climateZones.getClimateZones('ASHRAE').first.value}")
+    else 
+      climate_zone = climate_zone.gsub('CEC','')
+      climateZones.setClimateZone('CEC',climate_zone)
+      runner.registerInfo("Setting Climate Zone to #{climate_zone}")
+    end
     	
     # add final condition
     runner.registerFinalCondition("The final weather file is #{model.getWeatherFile.city} and the model has #{model.getDesignDays.size} design day objects.")

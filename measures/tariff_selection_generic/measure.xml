@@ -2,8 +2,8 @@
   <schema_version>3.0</schema_version>
   <name>tariff_selection_generic</name>
   <uid>d65ae535-f0ea-4745-9f5b-8d42c7070741</uid>
-  <version_id>649d40ef-417b-4729-a723-b69f8142fe87</version_id>
-  <version_modified>20180213T000813Z</version_modified>
+  <version_id>199bcf28-f905-4812-87f2-084334411329</version_id>
+  <version_modified>20180717T215712Z</version_modified>
   <xml_checksum>43564105</xml_checksum>
   <class_name>TariffSelectionGeneric</class_name>
   <display_name> Tariff Selection-Generic</display_name>
@@ -16,10 +16,10 @@
       <type>Choice</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
-      <default_value>BRICR_SF_Commercial_Electricity</default_value>
+      <default_value>BRICR_SF_Commercial_Electricity_03_2018</default_value>
       <choices>
         <choice>
-          <value>BRICR_SF_Commercial_Electricity</value>
+          <value>BRICR_SF_Commercial_Electricity_03_2018</value>
           <display_name>PGE_Commercial_A1</display_name>
         </choice>
       </choices>
@@ -30,10 +30,10 @@
       <type>Choice</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
-      <default_value>BRICR_SF_Commercial_Gas</default_value>
+      <default_value>BRICR_SF_Commercial_Gas_08_2018</default_value>
       <choices>
         <choice>
-          <value>BRICR_SF_Commercial_Gas</value>
+          <value>BRICR_SF_Commercial_Gas_08_2018</value>
           <display_name>PGE_G-NR1</display_name>
         </choice>
       </choices>
@@ -99,51 +99,39 @@
       <checksum>E11F67BD</checksum>
     </file>
     <file>
-      <filename>tariff_selection_generic_test.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>test</usage_type>
-      <checksum>3977F8EB</checksum>
-    </file>
-    <file>
       <filename>os_lib_helper_methods.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>02263B97</checksum>
+      <checksum>9CFC43FB</checksum>
     </file>
     <file>
       <version>
         <software_program>OpenStudio</software_program>
-        <identifier>1.6.0</identifier>
-        <min_compatible>1.6.0</min_compatible>
+        <identifier>2.0.0</identifier>
+        <min_compatible>2.0.0</min_compatible>
       </version>
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>E36278C2</checksum>
+      <checksum>329A5893</checksum>
     </file>
     <file>
-      <filename>BRICR_SF_Commercial_Electricity.idf</filename>
+      <filename>tariff_selection_generic_test.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>test</usage_type>
+      <checksum>FB49C385</checksum>
+    </file>
+    <file>
+      <filename>BRICR_SF_Commercial_Electricity_03_2018.idf</filename>
       <filetype>idf</filetype>
       <usage_type>resource</usage_type>
       <checksum>7F2DFCBA</checksum>
     </file>
     <file>
-      <filename>BRICR_SF_Commercial_Gas.idf</filename>
+      <filename>BRICR_SF_Commercial_Gas_08_2018.idf</filename>
       <filetype>idf</filetype>
       <usage_type>resource</usage_type>
       <checksum>7D11A76A</checksum>
-    </file>
-    <file>
-      <filename>Comml_170301-171231.xls</filename>
-      <filetype>xls</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>6FC47DB4</checksum>
-    </file>
-    <file>
-      <filename>GAS_SCHEDS_G-NR1.pdf</filename>
-      <filetype>pdf</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>DC295ADC</checksum>
     </file>
   </files>
 </measure>

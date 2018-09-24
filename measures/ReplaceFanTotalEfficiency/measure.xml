@@ -2,8 +2,8 @@
   <schema_version>3.0</schema_version>
   <name>replace_fan_total_efficiency</name>
   <uid>ebeca0aa-a432-4283-a714-17116f7c8f8c</uid>
-  <version_id>df17b1ca-bcf2-4305-8374-d82f210c7be3</version_id>
-  <version_modified>20170510T043335Z</version_modified>
+  <version_id>9d4fc6bb-a6e7-41a2-b77d-35570d8440e9</version_id>
+  <version_modified>20180730T193947Z</version_modified>
   <xml_checksum>F78494F2</xml_checksum>
   <class_name>ReplaceFanTotalEfficiency</class_name>
   <display_name>Replace Fan Total Efficiency</display_name>
@@ -19,18 +19,18 @@
       <default_value>*All Air Loops*</default_value>
       <choices>
         <choice>
-          <value>{de60a60d-0592-4528-9fc6-ee0370cb8082}</value>
+          <value>{3b25ca6e-1b0a-44ba-8cfc-359d4186ce6c}</value>
           <display_name>*All Air Loops*</display_name>
         </choice>
       </choices>
     </argument>
     <argument>
       <name>motor_eff</name>
-      <display_name>Fan Efficiency Replacement</display_name>
+      <display_name>Fan Total Efficiency Replacement in %</display_name>
       <type>Double</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
-      <default_value>3</default_value>
+      <default_value>70</default_value>
     </argument>
     <argument>
       <name>remove_costs</name>
@@ -144,7 +144,7 @@
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>986CD8E0</checksum>
+      <checksum>FCCFD3DA</checksum>
     </file>
   </files>
 </measure>

@@ -39,7 +39,7 @@ class CalibrateBaselineModel < OpenStudio::Ruleset::ModelUserScript
     # Make argument for template
     template = OpenStudio::Ruleset::OSArgument::makeChoiceArgument('template', get_templates, true)
     template.setDisplayName('Target Standard')
-    template.setDefaultValue('CEC T24 2008')
+    template.setDefaultValue('CBES T24 2008')
     args << template
 
     # Make an argument for the bldg_type_a
@@ -138,6 +138,7 @@ class CalibrateBaselineModel < OpenStudio::Ruleset::ModelUserScript
 
     # Update HVAC systems
     air_loops = model.getAirLoopHVACs
+	plant_loops = model.getPlantLoops
 
     initial_cop_value = nil
     after_cop_value = nil
@@ -162,16 +163,12 @@ class CalibrateBaselineModel < OpenStudio::Ruleset::ModelUserScript
           if initial_cop.empty?
             raise "Fail to find the Rated COP for single speed dx unit '#{hvac_component.name}' on air loop '#{air_loop.name}'"
           else
-            if initial_cop_value.nil?
-              initial_cop_value = initial_cop.get
-              after_cop_value = initial_cop_value * (1 + cop_change_rate)
-              double_after_cop = OpenStudio::OptionalDouble.new(after_cop_value)
-            elsif initial_cop_value != initial_cop.get
-              raise "Multiple cop values are found: #{initial_cop_value} and #{initial_cop.get}"
-            end
-
-            hvac_component.setRatedCOP(double_after_cop)
+            initial_cop_value = initial_cop.get
+            after_cop_value = initial_cop_value * (1 + cop_change_rate)
+            double_after_cop = OpenStudio::OptionalDouble.new(after_cop_value)
+			hvac_component.setRatedCOP(after_cop_value)
             find_cooling = true
+			raise "Fail to find the cooling system for air lop '#{air_loop.name}'" unless find_cooling
           end
         end
 
@@ -184,14 +181,10 @@ class CalibrateBaselineModel < OpenStudio::Ruleset::ModelUserScript
           if initial_cop.empty?
             raise "Fail to find the Rated High Speed COP for two speed dx unit '#{hvac_component.name}' on air loop '#{air_loop.name}'"
           else
-            if initial_cop_value.nil?
-              initial_cop_value = initial_cop.get
-              after_cop_value = initial_cop_value * (1 + cop_change_rate)
-              double_after_cop = OpenStudio::OptionalDouble.new(after_cop_value)
-            elsif initial_cop_value != initial_cop.get
-              raise "Multiple cop values are found: #{initial_cop_value} and #{initial_cop.get}"
-            end
-            hvac_component.setRatedHighSpeedCOP(double_after_cop)
+            initial_cop_value = initial_cop.get
+            after_cop_value = initial_cop_value * (1 + cop_change_rate)
+            double_after_cop = OpenStudio::OptionalDouble.new(after_cop_value)
+			hvac_component.setRatedHighSpeedCOP(after_cop_value)
           end
 
           # change and report low speed cop
@@ -199,41 +192,52 @@ class CalibrateBaselineModel < OpenStudio::Ruleset::ModelUserScript
           if initial_cop.empty?
             raise "Fail to find the Rated Low Speed COP for two speed dx unit '#{hvac_component.name}' on air loop '#{air_loop.name}'"
           else
-            if initial_cop_value.nil?
-              initial_cop_value = initial_cop.get
-              after_cop_value = initial_cop_value * (1 + cop_change_rate)
-              double_after_cop = OpenStudio::OptionalDouble.new(after_cop_value)
-            elsif initial_cop_value != initial_cop.get
-              raise "Multiple cop values are found: #{initial_cop_value} and #{initial_cop.get}"
-            end
-            hvac_component.setRatedLowSpeedCOP(double_after_cop)
+            initial_cop_value = initial_cop.get
+            after_cop_value = initial_cop_value * (1 + cop_change_rate)
+            double_after_cop = OpenStudio::OptionalDouble.new(after_cop_value)
+			hvac_component.setRatedLowSpeedCOP(after_cop_value)
+			
           end
-
+	  
           find_cooling = true
+		  raise "Fail to find the cooling system for air lop '#{air_loop.name}'" unless find_cooling
         end
 
         hvac_component = supply_component.to_CoilHeatingGas
         unless hvac_component.empty?
           hvac_component = hvac_component.get
-
-          if initial_eff_value.nil?
-            initial_eff_value = hvac_component.gasBurnerEfficiency
-            after_eff_value = initial_eff_value *  (1 + heating_efficiency_change_rate)
-            # check the user_name for reasonableness
-            if after_eff_value <= 0 or after_eff_value > 0.99
-              raise "Wrong after heating efficiency found: initial (#{initial_eff_value}), change rate (#{heating_efficiency_change_rate}), after (#{after_eff_value})."
-            end
-          elsif initial_eff_value != hvac_component.gasBurnerEfficiency
-            raise "Multiple heating efficiency values are found: #{initial_eff_value} and #{hvac_component.gasBurnerEfficiency}"
+          initial_eff_value = hvac_component.gasBurnerEfficiency
+          after_eff_value = initial_eff_value *  (1 + heating_efficiency_change_rate)
+          # check for reasonableness
+          if after_eff_value <= 0 or after_eff_value > 0.99
+            raise "Wrong after heating efficiency found: initial (#{initial_eff_value}), change rate (#{heating_efficiency_change_rate}), after (#{after_eff_value})."
           end
-
           hvac_component.setGasBurnerEfficiency(after_eff_value)
           find_heating = true
+		  raise "Fail to find the heating system for air lop '#{air_loop.name}'" unless find_heating
         end
       end
-
-      raise "Fail to find the cooling system for air lop '#{air_loop.name}'" unless find_cooling
-      raise "Fail to find the heating system for air lop '#{air_loop.name}'" unless find_heating
+    end
+	
+	# loop through plant loops
+    plant_loops.each do |plant_loop|
+      find_heating = false
+      # find boiler on plat loop
+      plant_loop.supplyComponents.each do |supply_component|
+		hvac_component = supply_component.to_BoilerHotWater
+        unless hvac_component.empty?
+          hvac_component = hvac_component.get
+   		  initial_eff_value = hvac_component.nominalThermalEfficiency
+          after_eff_value = initial_eff_value * (1 + heating_efficiency_change_rate)
+          # check for reasonableness
+          if after_eff_value <= 0 or after_eff_value > 0.99
+            raise "Wrong after heating efficiency found: initial (#{initial_eff_value}), change rate (#{heating_efficiency_change_rate}), after (#{after_eff_value})."
+          end
+          hvac_component.setNominalThermalEfficiency(after_eff_value)
+          find_heating = true
+          raise "Fail to find the heating system for air lop '#{air_loop.name}'" unless find_heating
+    	end
+	  end
     end
 
     runner.registerValue('initial_cop', initial_cop_value.round(3).to_s)

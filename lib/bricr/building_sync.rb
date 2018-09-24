@@ -39,19 +39,34 @@ module BRICR
         raise "File '#{doc}' does not exist" unless File.exist?(doc)
         File.open(doc, 'r') do |file|
           @doc = REXML::Document.new(file)
-        end
+        end   
       end
+      
+      # test for the namespace
+      @ns = 'auc'
+      @doc.root.namespaces.each_pair do |k,v|
+        @ns = k if /bedes-auc/.match(v)
+      end
+      
     end
     
     # custom id is used to identify file in SEED
     def customId
       result = nil
-      @doc.elements.each('/auc:Audits/auc:Audit/auc:Sites/auc:Site/auc:Facilities/auc:Facility/auc:PremisesIdentifiers/auc:PremisesIdentifier') do |identifier|
-        name = identifier.elements['auc:IdentifierCustomName']
-        if name && name.text == "Custom ID"
-          result = identifier.elements['auc:IdentifierValue'].text
-          break
+      alt_result = nil
+      @doc.elements.each("/#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:PremisesIdentifiers/#{@ns}:PremisesIdentifier") do |identifier|
+        name = identifier.elements["#{@ns}:IdentifierCustomName"]
+        if name 
+          if name.text == "Custom ID 1"
+            result = identifier.elements["#{@ns}:IdentifierValue"].text
+            break
+          elsif name.text == "BRICR Custom ID 1"
+            alt_result = identifier.elements["#{@ns}:IdentifierValue"].text
+          end
         end
+      end
+      if result.nil? && !alt_result.nil?
+        result = alt_result
       end
       return result
     end

@@ -11,6 +11,7 @@ bs_output/
 reports/
 rubocop-results.xml
 spec/files/phase0/*
-!spec/files/phase0/*.xml
 seed.json
+seed-docker.json
 seed-configs.json
+gems/

@@ -31,6 +31,11 @@ require 'json'
 require 'fileutils'
 require 'rest-client'
 
+if !File.exists?(ARGV[0])
+  puts 'usage: bundle exec ruby run_seed_buildingsyncs.rb /path/to/config.rb'
+  exit(1)
+end
+
 config_path = ARGV[0]
 require(config_path)
 
@@ -41,11 +46,19 @@ cycle = BRICR.get_seed_cycle(seed)
 
 max_results = 10000 # DLM: temporary workaround to search all results
 #search_results = seed.search('', 'Not Started', max_results) # DLM: Nick I don't think this is working
-search_results = seed.search('', '', max_results)
 
+#puts "#{BRICR.get_seed_host}/api/v2.1/properties/?cycle=#{cycle.id}&organization_id=#{org.id}&identifier=#{identifier_string}&analysis_state=#{analysis_state}&per_page=#{max_results}"
+
+search_results = seed.search('', '', max_results)
 properties = search_results.properties
 
-properties = properties.select{|property| property[:analysis_state] == 0} # DLM: temp work around 
+# DLM: temp code to reset while testing
+#properties.each do |property|
+#  property_id = property[:id]
+#  seed.update_analysis_state(property_id, 'Not Started')
+#end
+
+properties = properties.select{|property| property[:state][:analysis_state] == 'Not Started'} # DLM: temp work around 
 
 if properties.size > BRICR::MAX_DATAPOINTS
   properties = properties.slice(0, BRICR::MAX_DATAPOINTS)
@@ -65,8 +78,8 @@ Parallel.each(properties, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX
 #properties.each do |property|
 
   # get ids
-  property_id = property[:property_view_id]
-  custom_id = property[:custom_id_1]
+  property_id = property[:id]
+  custom_id = property[:state][:custom_id_1]
 
   # find most recent building sync file for this property
   files = seed.list_buildingsync_files(property_id)

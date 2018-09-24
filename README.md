@@ -1,6 +1,6 @@
 # BRICR Gem
 
-[![CircleCI](https://circleci.com/gh/NREL/bricr.svg?style=svg)](https://circleci.com/gh/NREL/bricr)
+[![Build Status](https://travis-ci.org/NREL/bricr.svg?branch=develop)](https://travis-ci.org/NREL/bricr)
 
 ## Installation
 
