@@ -470,7 +470,7 @@ def convert_feature(feature)
                LongDescription: 'Retrofit with light emitting diode technologies',
                ScenarioName: 'LED',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 12,
                MeasureTotalFirstCost: 3.85*floor_area}
                
   measures << {ID: 'Measure2',
@@ -481,7 +481,7 @@ def convert_feature(feature)
                LongDescription: 'Replace with ENERGY STAR rated',
                ScenarioName: 'Electric_Appliance_30%_Reduction',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 9,
                MeasureTotalFirstCost: 0.51*floor_area}
                
   measures << {ID: 'Measure3',
@@ -492,7 +492,7 @@ def convert_feature(feature)
                LongDescription: 'Air seal envelope',
                ScenarioName: 'Air_Seal_Infiltration_30%_More_Airtight',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 11,
                MeasureTotalFirstCost: 2.34*floor_area}
 
   measures << {ID: 'Measure4',
@@ -503,7 +503,7 @@ def convert_feature(feature)
                LongDescription: 'Replace package units',
                ScenarioName: 'Cooling_System_SEER 14',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 15,
                MeasureTotalFirstCost: 4.18*floor_area}
                
   measures << {ID: 'Measure5',
@@ -525,7 +525,7 @@ def convert_feature(feature)
                LongDescription: 'Add daylight controls',
                ScenarioName: 'Add daylight controls',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 8,
                MeasureTotalFirstCost: 0.53*floor_area}
       
   measures << {ID: 'Measure7',
@@ -536,7 +536,7 @@ def convert_feature(feature)
                LongDescription: 'Add occupancy sensors',
                ScenarioName: 'Add occupancy sensors',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 8,
                MeasureTotalFirstCost: 1.55*floor_area}
      
   measures << {ID: 'Measure8',
@@ -547,7 +547,7 @@ def convert_feature(feature)
                LongDescription: 'Install plug load controls',
                ScenarioName: 'Install plug load controls',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 5.6,
                MeasureTotalFirstCost: 0.82*floor_area}
      
   measures << {ID: 'Measure9',
@@ -602,7 +602,7 @@ def convert_feature(feature)
                LongDescription: 'Add window films',
                ScenarioName: 'Add window films',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 10,
                MeasureTotalFirstCost: 1.00*floor_area}
                
   measures << {ID: 'Measure14',
@@ -613,7 +613,7 @@ def convert_feature(feature)
                LongDescription: 'Upgrade operating protocols, calibration, and/or sequencing',
                ScenarioName: 'Upgrade operating protocols calibration and-or sequencing',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 11,
                MeasureTotalFirstCost: 0.005*floor_area}
   
   measures << {ID: 'Measure15',
@@ -624,7 +624,7 @@ def convert_feature(feature)
                LongDescription: 'Replace or upgrade water heater',
                ScenarioName: 'Replace or upgrade water heater',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 10,
                MeasureTotalFirstCost: 0.17*floor_area}
   
   measures << {ID: 'Measure16',
@@ -635,7 +635,7 @@ def convert_feature(feature)
                LongDescription: 'Replace ice/refrigeration equipment with high efficiency units',
                ScenarioName: 'Replace ice-refrigeration equipment with high efficiency units',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 12.5,
                MeasureTotalFirstCost: 1.95*floor_area}
   
   measures << {ID: 'Measure17',
@@ -668,7 +668,7 @@ def convert_feature(feature)
                LongDescription: 'Replace AC and heating units with ground coupled heat pump systems',
                ScenarioName: 'Replace HVAC with GSHP and DOAS',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 15,
                MeasureTotalFirstCost: 14.00*floor_area}
   
   measures << {ID: 'Measure20',
@@ -679,7 +679,7 @@ def convert_feature(feature)
                LongDescription: 'VRF with DOAS',
                ScenarioName: 'VRF with DOAS',
                OpenStudioMeasureName: 'Replace HVAC system type to VRF',
-               UsefulLife: 20,
+               UsefulLife: 10,
                MeasureTotalFirstCost: 16.66*floor_area}
   
   measures << {ID: 'Measure21',
@@ -690,7 +690,7 @@ def convert_feature(feature)
                LongDescription: 'Replace HVAC system type to PZHP',
                ScenarioName: 'Replace HVAC system type to PZHP',
                OpenStudioMeasureName: 'Replace HVAC system type to PZHP',
-               UsefulLife: 20,
+               UsefulLife: 15,
                MeasureTotalFirstCost: 4.26*floor_area}
   
   measures << {ID: 'Measure22',
@@ -701,7 +701,7 @@ def convert_feature(feature)
                LongDescription: 'Replace with higher efficiency',
                ScenarioName: 'Replace with higher efficiency',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 15,
                MeasureTotalFirstCost: 10.75*floor_area}
   
   measures << {ID: 'Measure23',
@@ -712,7 +712,7 @@ def convert_feature(feature)
                LongDescription: 'Improve ventilation fans',
                ScenarioName: 'Improve ventilation fans',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 4.4,
                MeasureTotalFirstCost: 1.00*floor_area}
   
   measures << {ID: 'Measure24',
@@ -723,7 +723,7 @@ def convert_feature(feature)
                LongDescription: 'Install demand control ventilation',
                ScenarioName: 'Install demand control ventilation',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 10,
                MeasureTotalFirstCost: 0.33*floor_area}
 
   measures << {ID: 'Measure25',
@@ -734,7 +734,7 @@ def convert_feature(feature)
                LongDescription: 'Add or repair economizer',
                ScenarioName: 'Add or repair economizer',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 12.5,
                MeasureTotalFirstCost: 0.80*floor_area}
   
   measures << {ID: 'Measure26',
@@ -745,7 +745,7 @@ def convert_feature(feature)
                LongDescription: 'Add energy recovery',
                ScenarioName: 'Add energy recovery',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 14,
                MeasureTotalFirstCost: 4.53*floor_area}
   
   measures << {ID: 'Measure27',
@@ -756,7 +756,7 @@ def convert_feature(feature)
                LongDescription: 'Add pipe insulation',
                ScenarioName: 'Add pipe insulation',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 12,
                 MeasureTotalFirstCost: 0.14*floor_area}
   
   measures << {ID: 'Measure28',
@@ -767,7 +767,7 @@ def convert_feature(feature)
                LongDescription: 'Add recirculating pumps',
                ScenarioName: 'Add recirculating pumps',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 15,
                MeasureTotalFirstCost: 0.18*floor_area}
   
   measures << {ID: 'Measure29',
@@ -778,7 +778,7 @@ def convert_feature(feature)
                LongDescription: 'Install low-flow faucets and showerheads',
                ScenarioName: 'Install low-flow faucets and showerheads',
                OpenStudioMeasureName: 'TBD',
-               UsefulLife: 20,
+               UsefulLife: 10,
                MeasureTotalFirstCost: 1.00*floor_area}
   
   packages = []
@@ -788,8 +788,8 @@ def convert_feature(feature)
   packages << {ScenarioName: 'Office-Tenant Package',
                MeasureIDs: ['Measure1', 'Measure2', 'Measure7', 'Measure8', 'Measure13', 'Measure14', 'Measure24', 'Measure29']}
   
-  packages << {ScenarioName: 'Office-Central Systems Package',
-               MeasureIDs: ['Measure1', 'Measure2', 'Measure7', 'Measure8', 'Measure11', 'Measure13', 'Measure14', 'Measure18', 'Measure23', 'Measure24', 'Measure25', 'Measure27', 'Measure29']}
+  packages << {ScenarioName: 'Retail-Office-Central Systems Package',
+               MeasureIDs: ['Measure1', 'Measure7', 'Measure8', 'Measure11', 'Measure13', 'Measure14', 'Measure18', 'Measure23', 'Measure24', 'Measure25', 'Measure27', 'Measure29']}
 
   packages << {ScenarioName: 'Office-Deep Package',
                MeasureIDs: ['Measure1', 'Measure2', 'Measure3', 'Measure6', 'Measure7', 'Measure8', 'Measure10', 'Measure13', 'Measure14', 'Measure15', 'Measure17', 'Measure18', 'Measure20', 'Measure23', 'Measure24', 'Measure27', 'Measure29']}
@@ -959,7 +959,7 @@ outdir = './bs_output'
 FileUtils.mkdir_p(outdir) unless File.exist?(outdir)
 
 summary_file = File.open(outdir + "/summary.csv", 'w')
-summary_file.puts "building_id,xml_filename,should_run_simulation,OccupancyClassification,FloorArea(ft2),YearBuilt,template,SiteEUI(kBtu/ft2),SourceEUI(kBtu/ft2),ElectricityEUI(kBtu/ft2),GasEUI(kBtu/ft2),YearEUI"
+summary_file.puts "building_id,xml_filename,should_run_simulation,OccupancyClassification,Address,BuildingName,ParcelNumber,FloorArea(ft2),YearBuilt,template,SiteEUI(kBtu/ft2),SourceEUI(kBtu/ft2),ElectricityEUI(kBtu/ft2),GasEUI(kBtu/ft2),YearEUI"
 
 geojson[:features].each do |feature|
   id = feature[:properties][:"Building Identifier"]
@@ -1027,8 +1027,25 @@ geojson[:features].each do |feature|
     ele_eui = (source_eui - site_eui * 1.05)/(3.14-1.05)
     gas_eui = site_eui - ele_eui
   end
+  
+  street_address = nil
+  building_name =nil
+  assessor_parcel_number = nil
+  
+  #Street address
+  street_number = feature[:properties][:"From Street Number"].to_s
+  if street_number != feature[:properties][:"To Street Number"]
+    street_number += " - #{feature[:properties][:"To Street Number"]}"
+  end
+  street_address = "#{street_number} #{feature[:properties][:"Street Name"]} #{feature[:properties][:"Street Name Post Type"]}"
+  
+  #Premise name
+  building_name = "#{feature[:properties][:"Building Name"]} [#{street_address}]"
+  
+  #APN
+  assessor_parcel_number = feature[:properties][:"Assessor parcel number"].to_s
 
-  summary_file.puts "#{id},#{id}.xml,1,#{building_type},#{floor_area},#{year_built},#{template},#{site_eui},#{source_eui},#{ele_eui},#{gas_eui},#{year_eui}"
+  summary_file.puts "#{id},#{id}.xml,1,#{building_type},#{street_address},#{building_name},#{assessor_parcel_number},#{floor_area},#{year_built},#{template},#{site_eui},#{source_eui},#{ele_eui},#{gas_eui},#{year_eui}"
 end
 
 summary_file.close
