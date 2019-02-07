@@ -4,10 +4,8 @@ ruby '~>2.2'
 # Specify your gem's dependencies in bricr.gemspec
 gemspec
 
-gem 'parallel', '1.12.0'
-
 #gem 'seed_ruby_client', path: '../ruby-client'
-#gem 'seed_ruby_client', github: 'SEED-platform/ruby-client', branch: 'develop'
+gem 'seed_ruby_client', github: 'SEED-platform/ruby-client', branch: 'develop'
 
 #gem 'openstudio-standards', path: '../openstudio-standards'
 #gem 'openstudio-standards', github: 'NREL/OpenStudio-standards', branch: 'bricr'

@@ -29,18 +29,9 @@ describe 'BRICR' do
     expect(osw_files.size).to eq 30
 
     if BRICR::DO_SIMULATIONS
-      num_sims = 0
       
-      runner = OpenStudio::Extension::Runner.new(File.absolute_path(File.join(File.dirname(__FILE__), '../..')))
-      
-      Parallel.each(osw_files, in_threads: [BRICR::NUM_PARALLEL, BRICR::MAX_DATAPOINTS].min) do |osw|
-        break if num_sims > BRICR::MAX_DATAPOINTS
-
-        result = runner.run_osw(osw, File.dirname(osw))
-        expect(result).to be true
-        
-        num_sims += 1
-      end
+      failures = BRICR::run_osws(osw_files)
+      expect(failures.empty?).to be(true), "Simulations #{failures.join(', ')} failed to run"
 
       translator.gatherResults(out_path)
       translator.saveXML(File.join(out_path, 'results.xml'))
@@ -71,19 +62,10 @@ describe 'BRICR' do
     expect(osw_files.size).to eq 30
 
     if BRICR::DO_SIMULATIONS
-      num_sims = 0
       
-      runner = OpenStudio::Extension::Runner.new(File.absolute_path(File.join(File.dirname(__FILE__), '../..')))
+      failures = BRICR::run_osws(osw_files)
+      expect(failures.empty?).to be(true), "Simulations #{failures.join(', ')} failed to run"
       
-      Parallel.each(osw_files, in_threads: [BRICR::NUM_PARALLEL, BRICR::MAX_DATAPOINTS].min) do |osw|
-        break if num_sims > BRICR::MAX_DATAPOINTS
-
-        result = runner.run_osw(osw, File.dirname(osw))
-        expect(result).to be true
-        
-        num_sims += 1
-      end
-
       translator.gatherResults(out_path)
       translator.saveXML(File.join(out_path, 'results.xml'))
       

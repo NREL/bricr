@@ -28,7 +28,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'bundler', '~> 1.6'
   s.add_runtime_dependency  'parallel', '~> 1.12'
-  #s.add_runtime_dependency  'seed_ruby_client'
-  s.add_runtime_dependency  'openstudio-standards', '~> 0.2.7'
+  s.add_runtime_dependency  'seed_ruby_client'
   s.add_runtime_dependency  'openstudio-extension'
 end

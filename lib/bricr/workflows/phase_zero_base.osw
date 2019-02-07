@@ -4,9 +4,7 @@
 	"root_directory": null,
 	"run_directory": null,
 	"file_paths": null,
-	"measure_paths": [
-		"../../../NREL working measures/"
-	],
+	"measure_paths": null,
 	"steps": [{
 			"name": "gem_env_report",
 			"measure_dir_name": "gem_env_report",

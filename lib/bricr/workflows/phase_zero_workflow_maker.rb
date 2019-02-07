@@ -49,10 +49,6 @@ module BRICR
       if BRICR::OPENSTUDIO_MEASURES
         @workflow['measure_paths'] = BRICR::OPENSTUDIO_MEASURES
       end
-
-      if BRICR::OPENSTUDIO_FILES
-        @workflow['file_paths'] = BRICR::OPENSTUDIO_FILES
-      end
       
       @facility = {}
       @subsections = []

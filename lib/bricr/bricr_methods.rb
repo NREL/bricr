@@ -64,21 +64,7 @@ module BRICR
 
     failures = []
     if BRICR::DO_SIMULATIONS
-      num_sims = 0
-      
-      runner = OpenStudio::Extension::Runner.new(File.absolute_path(File.join(File.dirname(__FILE__), '../..')))
-      
-      Parallel.each(osw_files, in_threads: BRICR::NUM_PARALLEL) do |osw|
-      #osw_files.each do |osw|
-      
-        result = runner.run_osw(osw, File.dirname(osw))
-
-        if !result
-          failures << "Failed to run the simulation with command: #{command}"
-        end
-
-        num_sims += 1
-      end
+      failures = self.run_osws(osws)
     end
 
     if failures.size > 0
@@ -101,5 +87,13 @@ module BRICR
     
     return out_file
   end
+  
+  # run osws, return any failure messages
+  def self.run_osws(osw_files)
 
+    runner = OpenStudio::Extension::Runner.new(File.absolute_path(File.join(File.dirname(__FILE__), '../../simulation_gemfile')))
+    failures = runner.run_osws(osw_files, BRICR::NUM_PARALLEL, BRICR::MAX_DATAPOINTS)
+
+    return failures
+  end
 end
