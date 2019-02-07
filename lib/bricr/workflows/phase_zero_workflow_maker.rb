@@ -67,7 +67,7 @@ module BRICR
       @facility['gross_floor_area'] = nil
       @facility['heated_and_cooled_floor_area'] = nil
       @facility['footprint_floor_area'] = nil
-      @doc.elements.each("/#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:FloorAreas/#{@ns}:FloorArea") do |floor_area_element|
+      @doc.elements.each("/#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Buildings/#{@ns}:Building/#{@ns}:FloorAreas/#{@ns}:FloorArea") do |floor_area_element|
         floor_area = floor_area_element.elements["#{@ns}:FloorAreaValue"].text.to_f
         next if floor_area.nil?
         
@@ -83,7 +83,7 @@ module BRICR
 
       # SHL- get the template (vintage)
       @facility['template'] = nil
-      @doc.elements.each("/#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Facilities/#{@ns}:Facility") do |facility_element|
+      @doc.elements.each("/#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Buildings/#{@ns}:Building") do |facility_element|
         built_year = facility_element.elements["#{@ns}:YearOfConstruction"].text.to_f
         
         if facility_element.elements["#{@ns}:YearOfLastMajorRemodel"]
@@ -114,7 +114,7 @@ module BRICR
       @facility['floor_height'] = nil # TBD
       @facility['wwr'] = nil # TBD
 
-      @doc.elements.each("/#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Facilities/#{@ns}:Facility") do |facility_element|
+      @doc.elements.each("/#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Buildings/#{@ns}:Building") do |facility_element|
 
         if facility_element.elements["#{@ns}:FloorsAboveGrade"]
           @facility['num_stories_above_grade'] = facility_element.elements["#{@ns}:FloorsAboveGrade"].text.to_f
@@ -641,7 +641,7 @@ module BRICR
       
       #ensure there is a 'Baseline' scenario
       found_baseline = false
-      @doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
+      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
         scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
         if scenario_name == 'Baseline'
           found_baseline = true
@@ -650,7 +650,7 @@ module BRICR
       end
       
       if !found_baseline
-        scenarios_element = @doc.elements["#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios"]
+        scenarios_element = @doc.elements["#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Report/#{@ns}:Scenarios"]
         
         scenario_element = REXML::Element.new("#{@ns}:Scenario")
         scenario_element.attributes['ID'] = 'Baseline'
@@ -671,7 +671,7 @@ module BRICR
       end
       
       found_baseline = false
-      @doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
+      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
         scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
         if scenario_name == 'Baseline'
           found_baseline = true
@@ -685,7 +685,7 @@ module BRICR
       end
       
       # write an osw for each scenario
-      @doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
+      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
         # get information about the scenario
         scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
         next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
@@ -735,7 +735,7 @@ module BRICR
       results = {}
 
       # write an osw for each scenario
-      @doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
+      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
         # get information about the scenario
         scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
         next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
@@ -768,7 +768,7 @@ module BRICR
        
       end
 
-      @doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
+      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
         # get information about the scenario
         scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
         next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'

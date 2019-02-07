@@ -47,7 +47,7 @@ def convert(value, unit_in, unit_out)
   return value
 end
 
-def get_facility_classification(feature)
+def get_building_classification(feature)
   classification = feature[:properties][:"Occupancy Classification"]
 
   # https://data.sfgov.org/Housing-and-Buildings/Land-Use/us3s-fp9q/about
@@ -154,7 +154,7 @@ def calculate_aspect_ratio(feature)
   return aspect
 end
 
-def get_facility_id(feature)
+def get_building_id(feature)
   return "Building#{feature[:properties][:"Building Identifier"]}"
 end
 
@@ -164,9 +164,9 @@ end
 
 def create_site(feature)
   site = REXML::Element.new('auc:Site')
-  feature_id = get_facility_id(feature)
+  feature_id = get_building_id(feature)
   
-  raise "Facility ID is empty" if feature_id.nil?
+  raise "Building ID is empty" if feature_id.nil?
 
   # address
   address = REXML::Element.new('auc:Address')
@@ -247,21 +247,21 @@ def create_site(feature)
   ownership.text = 'Unknown'
   site.add_element(ownership)
   
-  # facilities
-  facilities = REXML::Element.new('auc:Facilities')
-  facility = REXML::Element.new('auc:Facility')
-  facility.attributes['ID'] = feature_id
+  # buildings
+  buildings = REXML::Element.new('auc:Buildings')
+  building = REXML::Element.new('auc:Building')
+  building.attributes['ID'] = feature_id
 
   # default name
   feature[:properties][:"Building Name"] = "Building" if feature[:properties][:"Building Name"].nil?
   raise "Building Name is not set" if feature[:properties][:"Building Name"].nil?
   premises_name = REXML::Element.new('auc:PremisesName')
   premises_name.text = "#{feature[:properties][:"Building Name"]} [#{street_address_text}]"
-  facility.add_element(premises_name)
+  building.add_element(premises_name)
   
   premises_notes = REXML::Element.new('auc:PremisesNotes')
   premises_notes.text = ''
-  facility.add_element(premises_notes)
+  building.add_element(premises_notes)
 
   premises_identifiers = REXML::Element.new('auc:PremisesIdentifiers')
   
@@ -311,23 +311,23 @@ def create_site(feature)
   premises_identifier.add_element(identifier_value)
   premises_identifiers.add_element(premises_identifier)
   
-  facility.add_element(premises_identifiers)
+  building.add_element(premises_identifiers)
 
-  #facility_classification = REXML::Element.new('auc:FacilityClassification')
-  #facility_classification.text = get_facility_classification(feature)
-  #facility.add_element(facility_classification)
+  #building_classification = REXML::Element.new('auc:BuildingClassification')
+  #building_classification.text = get_building_classificationfeature)
+  #building.add_element(building_classification)
 
   #occupancy_classification = REXML::Element.new('auc:OccupancyClassification')
   #occupancy_classification.text = get_occupancy_classification(feature)
-  #facility.add_element(occupancy_classification)
+  #building.add_element(occupancy_classification)
 
   floors_above_grade = REXML::Element.new('auc:FloorsAboveGrade')
   floors_above_grade.text = feature[:properties][:"Number of Floors"] # DLM need to map this?
-  facility.add_element(floors_above_grade)
+  building.add_element(floors_above_grade)
 
   floors_below_grade = REXML::Element.new('auc:FloorsBelowGrade')
   floors_below_grade.text = 0 # DLM need to map this?
-  facility.add_element(floors_below_grade)
+  building.add_element(floors_below_grade)
 
   floor_areas = REXML::Element.new('auc:FloorAreas')
 
@@ -358,28 +358,28 @@ def create_site(feature)
   floor_area.add_element(floor_area_value)
   floor_areas.add_element(floor_area)
 
-  facility.add_element(floor_areas)
+  building.add_element(floor_areas)
 
   # aspect ratio and perimeter
   if ar = calculate_aspect_ratio(feature)
     aspect_ratio = REXML::Element.new('auc:AspectRatio')
     aspect_ratio.text = ar
-    facility.add_element(aspect_ratio)
+    building.add_element(aspect_ratio)
   end
 
   perimeter = REXML::Element.new('auc:Perimeter')
   perimeter.text = convert(feature[:properties][:"Building Perimeter"], 'm', 'ft').to_i # DLM: BS thinks this is an int
-  facility.add_element(perimeter)
+  building.add_element(perimeter)
 
   # year of construction and modified
   year_of_construction = REXML::Element.new('auc:YearOfConstruction')
   year_of_construction.text = feature[:properties][:"Completed Construction Status Date"]
-  facility.add_element(year_of_construction)
+  building.add_element(year_of_construction)
 
   if md = /^(\d\d\d\d).*/.match(feature[:properties][:"Last Modified Date"].to_s)
     year_of_last_major_remodel = REXML::Element.new('auc:YearOfLastMajorRemodel')
     year_of_last_major_remodel.text = md[1]
-    facility.add_element(year_of_last_major_remodel)
+    building.add_element(year_of_last_major_remodel)
   end
   
   # subsections
@@ -445,12 +445,12 @@ def create_site(feature)
   floor_areas.add_element(floor_area)
   
   subsection.add_element(floor_areas)
-  
+
   # put it all together
   subsections.add_element(subsection)
-  facility.add_element(subsections)
-  facilities.add_element(facility)
-  site.add_element(facilities)
+  building.add_element(subsections)
+  buildings.add_element(building)
+  site.add_element(buildings)
 
   return site
 end
@@ -458,7 +458,7 @@ end
 def convert_feature(feature)
   
   # this is where we estimate Phase 0 measure costs
-  facility_id = get_facility_id(feature)
+  building_id = get_building_id(feature)
   floor_area = get_floor_area(feature)
   
   measures = []
@@ -821,8 +821,9 @@ def convert_feature(feature)
   end
         
   source = '
-  <auc:Audits xmlns:auc="http://nrel.gov/schemas/bedes-auc/2014" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nrel.gov/schemas/bedes-auc/2014 https://github.com/BuildingSync/schema/releases/download/v0.3/BuildingSync.xsd">
-	<auc:Audit>
+  <auc:BuildingSync xmlns:auc="http://buildingsync.net/schemas/bedes-auc/2019" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://buildingsync.net/schemas/bedes-auc/2019 https://raw.githubusercontent.com/BuildingSync/schema/v1.0-patch/BuildingSync.xsd">
+	<auc:Facilities>
+  <auc:Facility>
 		<auc:Sites>
 		</auc:Sites>
     <auc:Measures>
@@ -831,9 +832,11 @@ def convert_feature(feature)
   measures.each do |measure|
     source += "      <auc:Measure ID=\"#{measure[:ID]}\">
         <auc:SystemCategoryAffected>#{measure[:SystemCategoryAffected]}</auc:SystemCategoryAffected>
-        <auc:PremisesAffected>
-          <auc:PremiseAffected IDref=\"#{facility_id}\"/>
-        </auc:PremisesAffected>
+			  <auc:LinkedPremises>
+					<auc:Building>
+						<auc:LinkedBuildingID IDref=\"#{building_id}\"/>
+					</auc:Building>
+				</auc:LinkedPremises>
         <auc:TechnologyCategories>
           <auc:TechnologyCategory>
             <auc:#{measure[:TechnologyCategory]}>
@@ -841,7 +844,7 @@ def convert_feature(feature)
             </auc:#{measure[:TechnologyCategory]}>
           </auc:TechnologyCategory>
         </auc:TechnologyCategories>
-        <auc:MeasureScaleOfApplication>Entire facility</auc:MeasureScaleOfApplication>
+        <auc:MeasureScaleOfApplication>Entire building</auc:MeasureScaleOfApplication>
         <auc:LongDescription>#{measure[:LongDescription]}</auc:LongDescription>
         <auc:MVCost>0</auc:MVCost>
         <auc:UsefulLife>#{measure[:UsefulLife]}</auc:UsefulLife>
@@ -889,9 +892,9 @@ def convert_feature(feature)
             </auc:PackageOfMeasures>
           </auc:ScenarioType>
           <auc:LinkedPremises>
-						<auc:Facility>
-							<auc:LinkedFacilityID IDref=\"#{facility_id}\"/>
-						</auc:Facility>
+						<auc:Building>
+							<auc:LinkedBuildingID IDref=\"#{building_id}\"/> 
+						</auc:Building>
 					</auc:LinkedPremises>
 					<auc:UserDefinedFields>
 						<auc:UserDefinedField>
@@ -923,9 +926,9 @@ def convert_feature(feature)
             </auc:PackageOfMeasures>
           </auc:ScenarioType>
           <auc:LinkedPremises>
-						<auc:Facility>
-							<auc:LinkedFacilityID IDref=\"#{facility_id}\"/>
-						</auc:Facility>
+						<auc:Building>
+							<auc:LinkedBuildingID IDref=\"#{building_id}\"/>
+						</auc:Building>
 					</auc:LinkedPremises>
 					<auc:UserDefinedFields>
 						<auc:UserDefinedField>
@@ -938,12 +941,13 @@ def convert_feature(feature)
 
   source += '      </auc:Scenarios>
     </auc:Report>
-  </auc:Audit>
-</auc:Audits>
+  </auc:Facility>
+</auc:Facilities>
+</auc:BuildingSync>
   '
   
   doc = REXML::Document.new(source)
-  sites = doc.elements['*/*/auc:Sites']
+  sites = doc.elements['*/*/*/auc:Sites']
   site = create_site(feature)
   sites.add_element(site)
 

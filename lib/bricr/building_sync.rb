@@ -54,7 +54,7 @@ module BRICR
     def customId
       result = nil
       alt_result = nil
-      @doc.elements.each("/#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:PremisesIdentifiers/#{@ns}:PremisesIdentifier") do |identifier|
+      @doc.elements.each("/#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Buildings/#{@ns}:Building/#{@ns}:PremisesIdentifiers/#{@ns}:PremisesIdentifier") do |identifier|
         name = identifier.elements["#{@ns}:IdentifierCustomName"]
         if name 
           if name.text == "Custom ID 1"

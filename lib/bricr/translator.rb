@@ -48,9 +48,9 @@ module BRICR
       end
 
       # validate the doc
-      audits = []
-      @doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/") { |audit| audits << audit }
-      raise 'BuildingSync file must have exactly 1 audit' if audits.size != 1
+      facilities = []
+      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/") { |facility| facilities << facility }
+      raise 'BuildingSync file must have exactly 1 facility' if facilities.size != 1
 
       # choose the correct workflow maker based on xml
       chooseWorkflowMaker
