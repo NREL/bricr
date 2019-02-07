@@ -26,17 +26,17 @@ describe 'BRICR' do
 
     osw_files = []
     Dir.glob("#{out_path}/**/*.osw") { |osw| osw_files << osw }
-
     expect(osw_files.size).to eq 30
 
     if BRICR::DO_SIMULATIONS
       num_sims = 0
+      
+      runner = OpenStudio::Extension::Runner.new(File.absolute_path(File.join(File.dirname(__FILE__), '../..')))
+      
       Parallel.each(osw_files, in_threads: [BRICR::NUM_PARALLEL, BRICR::MAX_DATAPOINTS].min) do |osw|
         break if num_sims > BRICR::MAX_DATAPOINTS
 
-        cmd = "\"#{BRICR::OPENSTUDIO_EXE}\" run -w \"#{osw}\""
-        puts "Running cmd: #{cmd}"
-        result = system(cmd)
+        result = runner.run_osw(osw, File.dirname(osw))
         expect(result).to be true
         
         num_sims += 1
@@ -72,12 +72,13 @@ describe 'BRICR' do
 
     if BRICR::DO_SIMULATIONS
       num_sims = 0
+      
+      runner = OpenStudio::Extension::Runner.new(File.absolute_path(File.join(File.dirname(__FILE__), '../..')))
+      
       Parallel.each(osw_files, in_threads: [BRICR::NUM_PARALLEL, BRICR::MAX_DATAPOINTS].min) do |osw|
         break if num_sims > BRICR::MAX_DATAPOINTS
 
-        cmd = "\"#{BRICR::OPENSTUDIO_EXE}\" run -w \"#{osw}\""
-        puts "Running cmd: #{cmd}"
-        result = system(cmd)
+        result = runner.run_osw(osw, File.dirname(osw))
         expect(result).to be true
         
         num_sims += 1

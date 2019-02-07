@@ -25,56 +25,9 @@
 ########################################################################################################################
 
 require 'parallel'
-require 'open3'
-
+require 'openstudio/extension'
 
 module BRICR
-
-  # command is an array
-  def self.bricr_run_command(command)
-  
-    # blank out bundler and gem path modifications, will be re-setup by new call
-    new_env = {}
-    new_env["BUNDLER_ORIG_MANPATH"] = nil
-    new_env["GEM_PATH"] = nil
-    new_env["GEM_HOME"] = nil
-    new_env["BUNDLER_ORIG_PATH"] = nil
-    new_env["BUNDLER_VERSION"] = nil
-    new_env["BUNDLE_BIN_PATH"] = nil
-    new_env["BUNDLE_GEMFILE"] = nil
-    new_env["RUBYLIB"] = nil
-    new_env["RUBYOPT"] = nil
-  
-    stdout_str, stderr_str, status = Open3.capture3(new_env, command.join(' '))
-    if status.success?
-      puts "Command completed successfully"
-      #puts "stdout: #{stdout_str}"
-      #puts "stderr: #{stderr_str}"
-      return true
-    else
-      puts "Error running command: '#{command.join(' ')}'"
-      puts "stdout: #{stdout_str}"
-      puts "stderr: #{stderr_str}"
-      return false 
-    end
-    
-    #Open3.popen3(new_env, *command) do |stdin, stdout, stderr, wait_thr|
-    #  # calling wait_thr.value blocks until command is complete
-    #  if wait_thr.value.success?
-    #    puts "Command completed successfully"
-    #    #puts "stdout: #{stdout.read}"
-    #    #puts "stderr: #{stderr.read}"
-    #    return true
-    #  else
-    #    puts "Error running command: '#{command.join(' ')}'"
-    #    puts "stdout: #{stdout.read}"
-    #    puts "stderr: #{stderr.read}"
-    #    return false
-    #  end
-    #end
-    
-    return false
-  end
   
   # xml_path is the path to a BSXML to run
   # path to a modified result BSXML is returned
@@ -112,64 +65,13 @@ module BRICR
     failures = []
     if BRICR::DO_SIMULATIONS
       num_sims = 0
+      
+      runner = OpenStudio::Extension::Runner.new(File.absolute_path(File.join(File.dirname(__FILE__), '../..')))
+      
       Parallel.each(osw_files, in_threads: BRICR::NUM_PARALLEL) do |osw|
       #osw_files.each do |osw|
       
-        gem_path = ENV['GEM_PATH']
-        
-        # use system call or popen3
-        # DLM: using popen3 here seems to result in deadlocks
-        system_call = true
-        
-        result = nil
-        if system_call
-        
-          out_log = osw + '.log'
-          
-          if Gem.win_platform?
-            #out_log = "nul"
-          else
-            #out_log = "/dev/null"
-          end
-        
-          cmd = nil
-          if gem_path.nil?
-            cmd = "\"#{BRICR::OPENSTUDIO_EXE}\" run -w \"#{osw}\" 2>&1 > \"#{out_log}\""
-          else
-            cmd = "\"#{BRICR::OPENSTUDIO_EXE}\" --gem_path \"#{gem_path}\" run -w \"#{osw}\" 2>&1 > \"#{out_log}\""
-          end
-          puts "Running cmd: #{cmd}\n"
-          result = system(cmd)
-            
-        else
-          
-          command = nil
-          if gem_path.nil?
-            command = [BRICR::OPENSTUDIO_EXE, 'run', '-w', osw]
-          else
-            command = [BRICR::OPENSTUDIO_EXE, '--gem_path', gem_path, 'run', '-w', osw]
-          end
-          puts "Running '#{command.join(' ')}'"
-          
-          # bricr_run_command blanks out the environment
-          result = BRICR.bricr_run_command(command)
-          
-          #Open3.popen3(*command) do |stdin, stdout, stderr, wait_thr|
-          #  # calling wait_thr.value blocks until command is complete
-          #  if wait_thr.value.success?
-          #    #puts "Command completed successfully"
-          #    #puts "stdout: #{stdout.read}"
-          #    #puts "stderr: #{stderr.read}"
-          #    result = true
-          #  else
-          #    puts "Error running command: '#{command.join(' ')}'"
-          #    puts "stdout: #{stdout.read}"
-          #    puts "stderr: #{stderr.read}"
-          #    result = false
-          #  end
-          #end
-
-        end
+        result = runner.run_osw(osw, File.dirname(osw))
 
         if !result
           failures << "Failed to run the simulation with command: #{command}"

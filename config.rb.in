@@ -1,15 +1,5 @@
 module BRICR
 
-  #ENV['GEM_HOME'] = 'C:/bricr/gems'
-  #ENV['GEM_PATH'] = 'C:/bricr/gems'
-  
-  # location of openstudio CLI
-  if /mswin/.match(RUBY_PLATFORM) || /mingw/.match(RUBY_PLATFORM)
-    OPENSTUDIO_EXE = 'C:/openstudio-2.6.0/bin/openstudio.exe'
-  else
-    OPENSTUDIO_EXE = '/usr/local/bin/openstudio'
-  end
-
   # one or more measure paths
   OPENSTUDIO_MEASURES = [
       File.realpath("./measures", File.dirname(__FILE__)),
