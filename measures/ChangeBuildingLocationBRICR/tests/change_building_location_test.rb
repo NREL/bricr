@@ -40,7 +40,7 @@ require 'fileutils'
 require_relative '../measure.rb'
 require 'minitest/autorun'
 
-class ChangeBuildingLocation_Test < Minitest::Test
+class ChangeBuildingLocationBRICR_Test < Minitest::Test
   def run_dir(test_name)
     # will make directory if it doesn't exist
     output_dir = File.expand_path('output', File.dirname(__FILE__))
@@ -53,7 +53,7 @@ class ChangeBuildingLocation_Test < Minitest::Test
   # method to apply arguments, run measure, and assert results (only populate args hash with non-default argument values)
   def apply_measure_to_model(test_name, args, model_name = nil, result_value = 'Success', warnings_count = 0, info_count = nil)
     # create an instance of the measure
-    measure = ChangeBuildingLocation.new
+    measure = ChangeBuildingLocationBRICR.new
 
     # create an instance of a runner with OSW
     osw_path = OpenStudio::Path.new(File.dirname(__FILE__) + '/test.osw')

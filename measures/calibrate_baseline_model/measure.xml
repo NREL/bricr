@@ -1,9 +1,10 @@
 <measure>
   <schema_version>3.0</schema_version>
+  <error>Unable to extract OpenStudio::Measure::OSMeasure object from D:/bricr/measures/calibrate_baseline_model/measure.rb. The script should contain a class that derives from OpenStudio::Measure::OSMeasure and should close with a line stating the class name followed by .new.registerWithApplication.</error>
   <name>calibrate_baseline_model</name>
   <uid>2753b04c-ec8c-49d1-ba3a-120bfc9737ef</uid>
-  <version_id>6abf5673-119d-4b65-8087-944da112edc0</version_id>
-  <version_modified>20180730T193946Z</version_modified>
+  <version_id>a406f476-e8ff-48ce-8f52-5f42f9f681c5</version_id>
+  <version_modified>20190211T185209Z</version_modified>
   <xml_checksum>FD815A15</xml_checksum>
   <class_name>CalibrateBaselineModel</class_name>
   <display_name>Calibrate Baseline Model</display_name>
@@ -196,13 +197,13 @@
       <filename>calibrate_factors.json</filename>
       <filetype>json</filetype>
       <usage_type>resource</usage_type>
-      <checksum>ABFA8B8F</checksum>
+      <checksum>8A766346</checksum>
     </file>
     <file>
       <filename>os_lib_helper_methods.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>02263B97</checksum>
+      <checksum>9CFC43FB</checksum>
     </file>
     <file>
       <version>
@@ -213,13 +214,13 @@
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>46132D79</checksum>
+      <checksum>CDF3EA99</checksum>
     </file>
     <file>
       <filename>os_lib_model_generation.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>30E5863B</checksum>
+      <checksum>67AC7BF3</checksum>
     </file>
   </files>
 </measure>

@@ -1,12 +1,12 @@
 <measure>
   <schema_version>3.0</schema_version>
-  <name>change_building_location</name>
-  <uid>d4db4971-f5ba-11e3-a3ac-0800200c9a66</uid>
-  <version_id>8f8202ef-2bef-4fc2-96a1-46fa3a253565</version_id>
-  <version_modified>20180717T215711Z</version_modified>
+  <name>change_building_location_bricr</name>
+  <uid>a9e215b0-872d-429c-b42f-fcd813e713c4</uid>
+  <version_id>0dcf9a55-6f4f-4c9f-bd40-aebfca5e835e</version_id>
+  <version_modified>20190211T185209Z</version_modified>
   <xml_checksum>057E8D9D</xml_checksum>
-  <class_name>ChangeBuildingLocation</class_name>
-  <display_name>ChangeBuildingLocation</display_name>
+  <class_name>ChangeBuildingLocationBRICR</class_name>
+  <display_name>ChangeBuildingLocationBRICR</display_name>
   <description>Change the building location</description>
   <modeler_description>Change the building location</modeler_description>
   <arguments>
@@ -299,10 +299,16 @@
       <checksum>75D1E203</checksum>
     </file>
     <file>
+      <filename>os_lib_helper_methods.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>9CFC43FB</checksum>
+    </file>
+    <file>
       <filename>change_building_location_test.rb</filename>
       <filetype>rb</filetype>
       <usage_type>test</usage_type>
-      <checksum>AE167642</checksum>
+      <checksum>B71D12FD</checksum>
     </file>
     <file>
       <version>
@@ -313,13 +319,7 @@
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>26A54D40</checksum>
-    </file>
-    <file>
-      <filename>os_lib_helper_methods.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>9CFC43FB</checksum>
+      <checksum>99535582</checksum>
     </file>
   </files>
 </measure>

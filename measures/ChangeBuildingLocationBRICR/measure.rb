@@ -36,7 +36,7 @@
 # Authors : Nicholas Long, David Goldwasser
 # Simple measure to load the EPW file and DDY file
 
-class ChangeBuildingLocation < OpenStudio::Measure::ModelMeasure
+class ChangeBuildingLocationBRICR < OpenStudio::Measure::ModelMeasure
 
   Dir[File.dirname(__FILE__) + '/resources/*.rb'].each { |file| require file }
 
@@ -46,7 +46,7 @@ class ChangeBuildingLocation < OpenStudio::Measure::ModelMeasure
   # define the name that a user will see, this method may be deprecated as
   # the display name in PAT comes from the name field in measure.xml
   def name
-    'ChangeBuildingLocation'
+    'ChangeBuildingLocationBRICR'
   end
 
   # define the arguments that the user will input
@@ -293,4 +293,4 @@ class ChangeBuildingLocation < OpenStudio::Measure::ModelMeasure
 end
 
 # This allows the measure to be use by the application
-ChangeBuildingLocation.new.registerWithApplication
+ChangeBuildingLocationBRICR.new.registerWithApplication
