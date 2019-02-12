@@ -2,8 +2,8 @@
   <schema_version>3.0</schema_version>
   <name>replace_fan_total_efficiency</name>
   <uid>ebeca0aa-a432-4283-a714-17116f7c8f8c</uid>
-  <version_id>33188a5e-616c-4bbe-bf82-55fd93a62bb1</version_id>
-  <version_modified>20190211T185210Z</version_modified>
+  <version_id>dc25b891-2df7-4ece-a8ef-32cdfb225787</version_id>
+  <version_modified>20190211T235005Z</version_modified>
   <xml_checksum>F78494F2</xml_checksum>
   <class_name>ReplaceFanTotalEfficiency</class_name>
   <display_name>Replace Fan Total Efficiency</display_name>
@@ -19,7 +19,7 @@
       <default_value>*All Air Loops*</default_value>
       <choices>
         <choice>
-          <value>{cc7f3db6-2308-439f-bd9f-70aed5ce5ef8}</value>
+          <value>{9379d85e-dc0c-41ef-a731-bb75feb1ea6a}</value>
           <display_name>*All Air Loops*</display_name>
         </choice>
       </choices>

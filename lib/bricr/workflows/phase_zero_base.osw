@@ -10,14 +10,14 @@
 			"measure_dir_name": "gem_env_report",
 			"arguments": {}
 		}, {
-			"measure_dir_name": "ChangeBuildingLocation",
+			"measure_dir_name": "ChangeBuildingLocationBRICR",
 			"arguments": {
 				"__SKIP__": false,
 				"weather_file_name": "CZ03RV2.epw",
 				"climate_zone": "CEC3"
 			}
 		}, {
-			"measure_dir_name": "create_bar_from_building_type_ratios",
+			"measure_dir_name": "create_bar_from_building_type_ratios_bricr",
 			"arguments": {
 				"bldg_type_a_num_units": 1,
 				"bldg_type_b_num_units": 0,
@@ -31,7 +31,7 @@
 				"floor_height": 0,
 				"num_stories_above_grade": 1,
 				"building_rotation": 0,
-				"template": "CEC T24 2008",
+				"template": "CBES T24 2008",
 				"ns_to_ew_ratio": 0,
 				"wwr": 0,
 				"party_wall_fraction": 0,
@@ -44,9 +44,9 @@
 				"num_stories_below_grade": 0
 			}
 		}, {
-			"measure_dir_name": "create_typical_building_from_model",
+			"measure_dir_name": "create_typical_building_from_model_bricr",
 			"arguments": {
-				"template": "CEC T24 2008",
+				"template": "CBES T24 2008",
 				"system_type": "Inferred",
 				"hvac_delivery_type": "Forced Air",
 				"htg_src": "NaturalGas",
@@ -67,7 +67,7 @@
 			"measure_dir_name": "calibrate_baseline_model",
 			"arguments": {
 				"bldg_type": "MediumOffice",
-				"template": "CEC T24 2008",
+				"template": "CBES T24 2008",
 				"__SKIP__": true
 			}
 		}, {

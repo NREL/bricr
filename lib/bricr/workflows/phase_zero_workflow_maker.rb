@@ -45,10 +45,6 @@ module BRICR
       File.open(workflow_path, 'r') do |file|
         @workflow = JSON.parse(file.read)
       end
-
-      if BRICR::OPENSTUDIO_MEASURES
-        @workflow['measure_paths'] = BRICR::OPENSTUDIO_MEASURES
-      end
       
       @facility = {}
       @subsections = []
@@ -202,38 +198,38 @@ module BRICR
     
       # set this value in the osw
       # For measure: create_bar_from_building_type_ratios 
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'total_bldg_floor_area', @facility['gross_floor_area'])
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'template', @facility['template'])
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_a', @subsections[0]['bldg_type'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'total_bldg_floor_area', @facility['gross_floor_area'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'template', @facility['template'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_a', @subsections[0]['bldg_type'])
       if @subsections.size > 1
-        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_b', @subsections[1]['bldg_type'])
-        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_b_fract_bldg_area', @subsections[1]['fract_bldg_area'])
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_b', @subsections[1]['bldg_type'])
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_b_fract_bldg_area', @subsections[1]['fract_bldg_area'])
       else
-        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_b', @facility['bldg_type'])
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_b', @facility['bldg_type'])
       end
       if @subsections.size > 2
-        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_c', @subsections[2]['bldg_type'])
-        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_c_fract_bldg_area', @subsections[2]['fract_bldg_area'])      
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_c', @subsections[2]['bldg_type'])
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_c_fract_bldg_area', @subsections[2]['fract_bldg_area'])      
       else
-        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_c', @facility['bldg_type'])
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_c', @facility['bldg_type'])
       end
       if @subsections.size > 3
-         set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_d', @subsections[3]['bldg_type'])
-        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_d_fract_bldg_area', @subsections[3]['fract_bldg_area'])          
+         set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_d', @subsections[3]['bldg_type'])
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_d_fract_bldg_area', @subsections[3]['fract_bldg_area'])          
       else
-        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_d', @facility['bldg_type'])
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_d', @facility['bldg_type'])
       end
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'floor_height', @facility['floor_height'])
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'num_stories_above_grade', @facility['num_stories_above_grade'])
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'num_stories_below_grade', @facility['num_stories_below_grade'])
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'building_rotation', @facility['building_rotation'])
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'ns_to_ew_ratio', @facility['ns_to_ew_ratio'])
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'wwr', @facility['wwr'])
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bar_division_method', @facility['bar_division_method'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'floor_height', @facility['floor_height'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'num_stories_above_grade', @facility['num_stories_above_grade'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'num_stories_below_grade', @facility['num_stories_below_grade'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'building_rotation', @facility['building_rotation'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'ns_to_ew_ratio', @facility['ns_to_ew_ratio'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'wwr', @facility['wwr'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bar_division_method', @facility['bar_division_method'])
       
       # For measure: create_typical_building_from_model
-      set_measure_argument(osw, 'create_typical_building_from_model', 'template', @facility['template'])
-      set_measure_argument(osw, 'create_typical_building_from_model', 'system_type', @facility['system_type'] )
+      set_measure_argument(osw, 'create_typical_building_from_model_bricr', 'template', @facility['template'])
+      set_measure_argument(osw, 'create_typical_building_from_model_bricr', 'system_type', @facility['system_type'] )
       # Calibration
       set_measure_argument(osw, 'calibrate_baseline_model', 'template', @facility['template'])
       set_measure_argument(osw, 'calibrate_baseline_model', 'bldg_type', @facility['bldg_type'])

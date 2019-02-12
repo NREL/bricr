@@ -2,8 +2,8 @@
   <schema_version>3.0</schema_version>
   <name>improve_fan_total_efficiencyby_percentage</name>
   <uid>ebeca0aa-a432-4283-a714-17116f7c8f8c</uid>
-  <version_id>1a0a9a49-40ad-4227-9e9e-8ebb9e817e0d</version_id>
-  <version_modified>20190211T185210Z</version_modified>
+  <version_id>0dfb7b09-2bbe-4ddc-b56c-18226b6c6cdd</version_id>
+  <version_modified>20190211T235005Z</version_modified>
   <xml_checksum>F78494F2</xml_checksum>
   <class_name>ImproveFanTotalEfficiencybyPercentage</class_name>
   <display_name>Improve Fan Total Efficiency by Percentage</display_name>
@@ -19,7 +19,7 @@
       <default_value>*All Air Loops*</default_value>
       <choices>
         <choice>
-          <value>{6eaf36ce-4ce3-491f-99b5-f2b32fc88851}</value>
+          <value>{06f2e50e-1996-4d3c-a950-37ed3b936adf}</value>
           <display_name>*All Air Loops*</display_name>
         </choice>
       </choices>

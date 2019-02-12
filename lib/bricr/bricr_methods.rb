@@ -26,6 +26,8 @@
 
 require 'parallel'
 require 'openstudio/extension'
+require 'openstudio/common-measures'
+require 'openstudio/model-articulation'
 
 module BRICR
   
@@ -91,7 +93,8 @@ module BRICR
   # run osws, return any failure messages
   def self.run_osws(osw_files)
 
-    runner = OpenStudio::Extension::Runner.new(File.absolute_path(File.join(File.dirname(__FILE__), '../../simulation_gemfile')))
+    #runner = OpenStudio::Extension::Runner.new(File.absolute_path(File.join(File.dirname(__FILE__), '../../simulation_gemfile')))
+    runner = OpenStudio::Extension::Runner.new(File.absolute_path(File.join(File.dirname(__FILE__), '../../')))
     failures = runner.run_osws(osw_files, BRICR::NUM_PARALLEL, BRICR::MAX_DATAPOINTS)
 
     return failures
