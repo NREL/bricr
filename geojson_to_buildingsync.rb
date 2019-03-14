@@ -48,33 +48,15 @@ def convert(value, unit_in, unit_out)
 end
 
 def get_facility_classification(feature)
-  classification = feature[:properties][:"Occupancy Classification"]
+  classification = feature[:properties][:"Property Class Code"]
 
   # https://data.sfgov.org/Housing-and-Buildings/Land-Use/us3s-fp9q/about
   result = nil
   case classification
-  when 'CIE'
-    result = 'Commercial'
-  when 'MED'
-    result = 'Commercial'
-  when 'MIPS'
-    result = 'Commercial'
-  when 'MIXED'
-    result = 'Mixed use commercial'
-  when 'MIXRES'
-    result = 'Residential'
-  when 'OPENSPACE', 'OpenSpace'
-    result = 'Other'
-  when 'PDR'
-    result = 'Other'
-  when "RETAIL\/ENT"
-    result = 'Commercial'
-  when 'RESIDENT'
-    result = 'Residential'
-  when 'VISITOR'
-    result = 'Commercial'
-  when 'MISSING DATA'
-    result = 'Other'
+  when 'B', 'BZ', 'O', 'OA', 'OAH', 'OAL', 'OAM', 'OAT', 'OBH', 'OBL', 'OBM', 'OC', 'OCH', 'OCL', 'OCM', 'OMD', 'OZ'
+    result = 'Office'
+  when 'C', 'C1', 'CZ', 'RH1', 'S'
+	result = 'Retail'
   else
     raise "Unknown classification #{classification}"
   end
@@ -318,7 +300,7 @@ def create_site(feature)
   #facility.add_element(facility_classification)
 
   #occupancy_classification = REXML::Element.new('auc:OccupancyClassification')
-  #occupancy_classification.text = get_occupancy_classification(feature)
+  #occupancy_classification.text = get_facility_classification(feature)
   #facility.add_element(occupancy_classification)
 
   floors_above_grade = REXML::Element.new('auc:FloorsAboveGrade')
@@ -390,7 +372,7 @@ def create_site(feature)
   subsection.attributes['ID'] = "Default_Subsection"
 
   occupancy_classification = REXML::Element.new('auc:OccupancyClassification')
-  occupancy_classification.text = get_occupancy_classification(feature)
+  occupancy_classification.text = get_facility_classification(feature)
   subsection.add_element(occupancy_classification)
   
   typical_occupant_usages = REXML::Element.new('auc:TypicalOccupantUsages')
@@ -978,7 +960,7 @@ geojson[:features].each do |feature|
   end
 
   floor_area = get_floor_area(feature)
-  building_type = get_occupancy_classification(feature)
+  building_type = get_facility_classification(feature)
   year_of_construction = feature[:properties][:"Completed Construction Status Date"]
   year_of_last_major_remodel = nil
   if md = /^(\d\d\d\d).*/.match(feature[:properties][:"Last Modified Date"].to_s)
