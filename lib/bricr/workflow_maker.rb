@@ -60,6 +60,10 @@ module BRICR
           result = true
         end
       end
+      
+      if !result
+        raise "Could not set '#{argument_name}' to '#{argument_value}' for measure '#{measure_dir_name}'"
+      end
 
       return result
     end

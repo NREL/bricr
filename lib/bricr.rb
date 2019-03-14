@@ -27,11 +27,58 @@
 require_relative 'bricr/version'
 require_relative 'bricr/bricr_methods'
 require_relative 'bricr/building_sync'
-require_relative 'bricr/seed_methods'
+#require_relative 'bricr/seed_methods'
 require_relative 'bricr/translator'
 require_relative 'bricr/workflow_maker'
 require_relative 'bricr/workflows/phase_zero_workflow_maker'
 
+require 'openstudio/extension'
+
 module BRICR
   DIRECTORY = File.realpath(File.dirname(__FILE__)).freeze
+  
+  class Bricr < OpenStudio::Extension::Extension
+    
+    # Return the version of the OpenStudio Extension Gem
+    def version
+      BRICR::VERSION
+    end
+
+    # Base method
+    # Return the absolute path of the measures or nil if there is none, can be used when configuring OSWs
+    def measures_dir
+      return File.absolute_path(File.join(root_dir, 'measures'))
+    end
+    
+    # Base method
+    # Return the absolute path of the measures resources dir or nil if there is none
+    # Measure resources are library files which are copied into measure resource folders when building standalone measures
+    # Measure resources will be copied into the resources folder for measures which have files of the same name
+    # Measure resources are copied from dependent gems so file names must be unique across all gems
+    def measure_resources_dir
+      return nil
+    end
+    
+    # Base method
+    # Return the absolute path of the measures files dir or nil if there is none
+    # Measure files are common files like copyright files which are used to update measures
+    # Measure files will only be applied to measures in the current repository
+    def measure_files_dir
+      return nil
+    end
+
+    # Base method
+    # Relevant files such as weather data, design days, etc.
+    # return the absolute path of the files or nil if there is none, can be used when configuring OSWs
+    def files_dir
+      return File.absolute_path(File.join(root_dir, 'weather'))
+    end
+    
+    # Base method
+    # return the absolute path of root of this gem
+    def root_dir
+      return File.absolute_path(File.join(File.dirname(__FILE__), '../'))
+    end
+
+  end
 end

@@ -69,7 +69,7 @@ def get_results(result_xml_path)
       ns = k if /bedes-auc/.match(v)
     end
 	
-    doc.elements.each("#{ns}:Audits/#{ns}:Audit/#{ns}:Report/#{ns}:Scenarios/#{ns}:Scenario") do |scenario|
+    doc.elements.each("#{ns}:BuildingSync/#{ns}:Facilities/#{ns}:Facility/#{ns}:Report/#{ns}:Scenarios/#{ns}:Scenario") do |scenario|
       # get information about the scenario
       scenario_name = scenario.elements["#{ns}:ScenarioName"].text
       next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
@@ -213,7 +213,7 @@ Parallel.each_with_index(xml_paths, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, 
 	    ns = k if /bedes-auc/.match(v)
 	  end
 	
-	  doc.elements.each("#{ns}:Audits/#{ns}:Audit/#{ns}:Report/#{ns}:Scenarios/#{ns}:Scenario") do |scenario|
+	  doc.elements.each("#{ns}:BuildingSync/#{ns}:Facilities/#{ns}:Facility/#{ns}:Report/#{ns}:Scenarios/#{ns}:Scenario") do |scenario|
       # get information about the scenario
       scenario_name = scenario.elements["#{ns}:ScenarioName"].text
         

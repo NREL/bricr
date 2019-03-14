@@ -7,7 +7,7 @@
 					<auc:Address>
 						<auc:StreetAddressDetail>
 							<auc:Simplified>
-							<auc:StreetAddress>123 Main St</auc:StreetAddress>
+								<auc:StreetAddress>123 Main St</auc:StreetAddress>
 							</auc:Simplified>
 						</auc:StreetAddressDetail>
 						<auc:City>San Francisco</auc:City>
@@ -29,12 +29,12 @@
 					<auc:Ownership>Unknown</auc:Ownership>
 					<auc:Buildings>
 						<auc:Building ID="Building151">
-						<auc:PremisesName>Building 151</auc:PremisesName>
+							<auc:PremisesName>Building 151</auc:PremisesName>
 							<auc:PremisesNotes/>
 							<auc:PremisesIdentifiers>
 								<auc:PremisesIdentifier>
 									<auc:IdentifierLabel>Assessor parcel number</auc:IdentifierLabel>
-								<auc:IdentifierValue>PN 123</auc:IdentifierValue>
+									<auc:IdentifierValue>PN 123</auc:IdentifierValue>
 								</auc:PremisesIdentifier>
 								<auc:PremisesIdentifier>
 									<auc:IdentifierLabel>Custom</auc:IdentifierLabel>
@@ -979,6 +979,10 @@
 						<auc:ScenarioType>
 							<auc:PackageOfMeasures>
 								<auc:ReferenceCase IDref="Baseline"/>
+								<auc:AnnualSavingsSiteEnergy>0.0</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualElectricity>3339662.0579375825</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>617559.7229113451</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>0.0</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 					</auc:Scenario>
@@ -990,6 +994,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure1"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>970071.8662982737</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>2987149.914550654</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>2055294.0345434125</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>931865.3581784442</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>105043.12000000005</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1012,6 +1021,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure2"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>268033.20345340343</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3689188.5773955244</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3039886.4591248864</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>649311.5964418411</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>24940.26000000004</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1034,6 +1048,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure3"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>-120571.81587505713</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>4077793.596723985</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3312848.311603919</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>764954.763291269</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>907.2000000000698</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1056,6 +1075,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure4"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>0.0</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3957221.780848928</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3339662.0579375825</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>617559.7229113451</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>0.0</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1078,6 +1102,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure5"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>0.0</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3957221.780848928</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3339662.0579375825</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>617559.7229113451</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>0.0</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1100,6 +1129,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure6"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>142191.52438940387</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3815030.256459524</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3170552.527331281</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>644477.7291282432</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>14975.930000000051</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1122,6 +1156,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure7"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>76934.31565583218</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3880287.4651930956</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3244577.0444277506</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>635700.9425941418</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>7829.490000000049</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1144,6 +1183,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure8"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>158238.06823630817</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3798983.7126126196</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3149539.4217739343</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>649444.290838685</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>15674.050000000047</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1166,6 +1210,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure9"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>27448.7838042737</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3929772.997044654</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3330885.2714034817</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>598887.7256411726</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>926.6200000000536</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1188,6 +1237,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure10"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>8141.749063491356</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3949080.0317854364</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3336960.7791446894</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>612119.2526407467</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>281.63000000006286</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1210,6 +1264,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure11"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>0.0</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3957221.780848928</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3339662.0579375825</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>617559.7229113451</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>0.0</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1232,6 +1291,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure12"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>0.0</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3957221.780848928</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3339662.0579375825</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>617559.7229113451</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>0.0</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1254,6 +1318,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure13"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>4549.52217750391</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3952672.258671424</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3326724.354245306</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>625947.9044261179</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>1065.0800000000745</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1276,6 +1345,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure14"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>0.0</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3957221.780848928</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3339662.0579375825</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>617559.7229113451</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>0.0</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1298,6 +1372,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure15"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>16918.535597592592</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3940303.245251335</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3339662.0579375825</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>600641.1873137522</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>164.29000000003725</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1320,6 +1399,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure16"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>0.0</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3957221.780848928</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3339662.0579375825</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>617559.7229113451</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>0.0</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1342,6 +1426,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure17"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>19733.552444922738</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3937488.228404005</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3317028.185104501</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>620450.5651283006</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>1952.0600000000559</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1364,6 +1453,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure18"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>0.0</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3957221.780848928</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3339662.0579375825</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>617559.7229113451</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>0.0</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1386,6 +1480,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure19"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>-734150.7068810863</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>4691372.487730014</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3100651.0147081735</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>1590721.4730218404</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>5059.1900000000605</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1408,6 +1507,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure20"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>-1235659.7015812686</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>5192881.482430196</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3595032.4246636</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>1597849.0577665966</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>-26790.679999999935</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1430,6 +1534,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure21"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>121358.50408491725</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3835863.2767640105</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3369537.2535698586</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>466316.545022949</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>434.29000000003725</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1452,6 +1561,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure22"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>201790.26491470495</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3755431.515934223</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3070936.947986351</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>684494.5679478715</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>21278.26000000001</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1474,6 +1588,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure23"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>105605.78354530968</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3851615.997303618</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3200361.3757651346</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>651254.6215384834</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>11036.460000000021</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1496,6 +1615,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure24"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>0.0</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3957221.780848928</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3339662.0579375825</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>617559.7229113451</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>0.0</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1518,6 +1642,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure25"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>1800.8525285958312</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3955420.928320332</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3336581.6522965645</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>618839.276023768</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>267.28000000008615</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1540,6 +1669,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure26"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>6966.455834303051</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3950255.3250146247</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3327340.4353735093</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>622914.8896411152</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>1573.2600000000675</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1562,6 +1696,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure27"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>10179.555872164667</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3947042.224976763</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3339662.0579375825</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>607370.6888679768</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>98.8300000000163</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1584,6 +1723,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure28"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>10407.031981040724</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3946814.748867887</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3339662.0579375825</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>607152.6909303048</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>101.0</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
@@ -1606,6 +1750,11 @@
 								<auc:MeasureIDs>
 									<auc:MeasureID IDref="Measure29"/>
 								</auc:MeasureIDs>
+								<auc:AnnualSavingsSiteEnergy>0.0</auc:AnnualSavingsSiteEnergy>
+								<auc:AnnualSiteEnergy>3957221.780848928</auc:AnnualSiteEnergy>
+								<auc:AnnualElectricity>3339662.0579375825</auc:AnnualElectricity>
+								<auc:AnnualNaturalGas>617559.7229113451</auc:AnnualNaturalGas>
+								<auc:AnnualSavingsEnergyCost>0.0</auc:AnnualSavingsEnergyCost>
 							</auc:PackageOfMeasures>
 						</auc:ScenarioType>
 						<auc:LinkedPremises>
