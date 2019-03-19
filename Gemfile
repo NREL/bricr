@@ -21,4 +21,5 @@ group :test do
   gem 'ci_reporter_rspec'
   gem 'rubocop'
   gem 'rubocop-checkstyle_formatter'
+  gem 'psych', '~> 3.0.3'
 end
