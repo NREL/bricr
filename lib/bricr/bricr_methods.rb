@@ -36,8 +36,8 @@ module BRICR
     # blank out bundler and gem path modifications, will be re-setup by new call
     new_env = {}
     new_env["BUNDLER_ORIG_MANPATH"] = nil
-    new_env["GEM_PATH"] = nil
-    new_env["GEM_HOME"] = nil
+    #new_env["GEM_PATH"] = nil
+    #new_env["GEM_HOME"] = nil
     new_env["BUNDLER_ORIG_PATH"] = nil
     new_env["BUNDLER_VERSION"] = nil
     new_env["BUNDLE_BIN_PATH"] = nil

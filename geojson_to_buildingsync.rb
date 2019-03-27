@@ -63,10 +63,14 @@ def get_facility_classification(feature)
     result = 'Mixed use commercial'
   when 'MIXRES'
     result = 'Residential'
+  when 'Office'
+    result = 'Commercial'      
   when 'OPENSPACE', 'OpenSpace'
     result = 'Other'
   when 'PDR'
     result = 'Other'
+  when 'Retail'
+    result = 'Commercial'    
   when "RETAIL\/ENT"
     result = 'Commercial'
   when 'RESIDENT'
@@ -102,12 +106,16 @@ def get_occupancy_classification(feature)
   when 'MIXRES'
     result = 'Residential'
     raise "#{result} is not a supported Occupancy Classification"
+  when 'Office'
+    result = 'Office'    
   when 'OPENSPACE', 'OpenSpace'
     result = 'Other'
     raise "#{result} is not a supported Occupancy Classification"
   when 'PDR'
     result = 'Industrial'
     raise "#{result} is not a supported Occupancy Classification"
+  when 'Retail'
+    result = 'Retail'    
   when "RETAIL\/ENT"
     result = 'Retail'
   when 'RESIDENT'

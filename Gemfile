@@ -11,7 +11,8 @@ gem 'json'
 gem 'seed_ruby_client', github: 'SEED-platform/ruby-client', branch: 'develop'
 
 #gem 'openstudio-standards', path: '../openstudio-standards'
-gem 'openstudio-standards', github: 'NREL/OpenStudio-standards', branch: 'bricr'
+#gem 'openstudio-standards', github: 'NREL/OpenStudio-standards', branch: 'bricr'
+gem 'openstudio-standards', '0.2.3'
 
 group :test do
   gem 'rake'
@@ -23,3 +24,6 @@ group :test do
   gem 'rubocop-checkstyle_formatter'
   gem 'psych', '~> 3.0.3'
 end
+
+
+gem 'unicode-display_width', '1.4.0'
