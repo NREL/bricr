@@ -52,37 +52,48 @@ module BRICR
     cycle = seed.create_cycle(cycle_name, cycle_start, cycle_end)
     return cycle
   end
-
-  def self.get_property_id(seed, custom_id)
   
-    max_results = 10000 # DLM: temporary workaround to search all results
-    search_results = seed.search(nil, nil, max_results)
+  def self.get_seed_search_profile(seed)
+    profile_name = 'BRICR-Search'
+
+    profile = nil
+    profiles = seed.profiles()
+    return profile if profiles.nil?
     
-    if search_results.properties.nil?
+    profiles.each do |p|
+      profile = p if p.name == profile_name
+    end
+    return profile
+  end
+
+  def self.get_property_id(seed, org, cycle, custom_id)
+  
+    profile = self.get_seed_search_profile(seed)
+    if profile.nil?
+      raise "Please create a SEED column list settings profile named 'BRICR-Search' with 'Custom 1' selected"
+    end
+    
+    search_results = seed.filter(profile.id, 10000)
+    if search_results.properties.nil? || search_results.properties.empty?
       return 
     end
     
+    key_name = nil
+    search_results.properties[0].each_key do |key|
+      if /custom_id_1/.match(key)
+        key_name = key
+        break
+      end
+    end
+  
     property_ids = []
     search_results.properties.each do |property|
-      #puts property[:state][:custom_id_1]
-      if property[:state][:custom_id_1] == custom_id
+      if property[key_name] == custom_id
         property_ids << property[:id]
       end
     end
     property_ids.uniq!
     
-    # DLM: Nick search doesn't seem to be working with custom_id
-    #search_results = seed.search(custom_id, nil)
-    
-    #property_ids = []
-    #search_results.properties.each do |property|
-    #  if property[:state][:custom_id_1] != custom_id
-    #    raise "property incorrectly associated with custom_id '#{custom_id}', #{property}"
-    #  end
-    #  property_ids << property[:id]
-    #end
-    #property_ids.uniq!
-
     property_id = nil
     if property_ids.size == 1
       property_id = property_ids[0]
