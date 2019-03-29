@@ -80,8 +80,12 @@ end
 
 properties = properties.select{|property| property[analysis_state_key] == 'Not Started'} # DLM: temp work around 
 
+#desired_ids = ['35', '2292', '1416', '5953']
+#properties = properties.select{|property| desired_ids.include?(property[custom_id_key])} # DLM: extra filter to prioritize 
+
 if properties.size > BRICR::MAX_DATAPOINTS
-  properties = properties.slice(0, BRICR::MAX_DATAPOINTS)
+  slice_offset = 0 # set to non-zero if you want to avoid stepping on another process
+  properties = properties.slice(slice_offset, BRICR::MAX_DATAPOINTS)
 end
 
 if !File.exists?('./run')
