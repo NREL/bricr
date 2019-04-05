@@ -26,8 +26,8 @@
 
 require 'parallel'
 require 'openstudio/extension'
-require 'openstudio/common-measures'
-require 'openstudio/model-articulation'
+require 'openstudio/common_measures'
+require 'openstudio/model_articulation'
 
 module BRICR
   

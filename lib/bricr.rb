@@ -39,46 +39,20 @@ module BRICR
   
   class Bricr < OpenStudio::Extension::Extension
     
-    # Return the version of the OpenStudio Extension Gem
-    def version
-      BRICR::VERSION
+    # Override base class method
+    def initialize
+      @root_dir = File.absolute_path(File.join(File.dirname(__FILE__), '..'))
     end
 
-    # Base method
-    # Return the absolute path of the measures or nil if there is none, can be used when configuring OSWs
+    # Override base class method
     def measures_dir
-      return File.absolute_path(File.join(root_dir, 'measures'))
+      return File.absolute_path(File.join(@root_dir, 'measures'))
     end
     
-    # Base method
-    # Return the absolute path of the measures resources dir or nil if there is none
-    # Measure resources are library files which are copied into measure resource folders when building standalone measures
-    # Measure resources will be copied into the resources folder for measures which have files of the same name
-    # Measure resources are copied from dependent gems so file names must be unique across all gems
-    def measure_resources_dir
-      return nil
-    end
-    
-    # Base method
-    # Return the absolute path of the measures files dir or nil if there is none
-    # Measure files are common files like copyright files which are used to update measures
-    # Measure files will only be applied to measures in the current repository
-    def measure_files_dir
-      return nil
-    end
-
-    # Base method
-    # Relevant files such as weather data, design days, etc.
-    # return the absolute path of the files or nil if there is none, can be used when configuring OSWs
+    # Override base class method
     def files_dir
-      return File.absolute_path(File.join(root_dir, 'weather'))
+      return File.absolute_path(File.join(@root_dir, 'weather'))
     end
     
-    # Base method
-    # return the absolute path of root of this gem
-    def root_dir
-      return File.absolute_path(File.join(File.dirname(__FILE__), '../'))
-    end
-
   end
 end

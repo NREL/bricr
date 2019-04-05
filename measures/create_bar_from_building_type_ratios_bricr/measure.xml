@@ -2,8 +2,8 @@
   <schema_version>3.0</schema_version>
   <name>create_bar_from_building_type_ratios_bricr</name>
   <uid>6e3a14f8-c3c7-4e03-bc51-bef8a52e1a05</uid>
-  <version_id>8978cc77-3ea4-4059-934d-3ac1b94868f2</version_id>
-  <version_modified>20190211T234951Z</version_modified>
+  <version_id>a188f382-4f76-4c05-95cb-e4c94d4bc6b7</version_id>
+  <version_modified>20190212T002506Z</version_modified>
   <xml_checksum>2AF3A68E</xml_checksum>
   <class_name>CreateBarFromBuildingTypeRatiosBRICR</class_name>
   <display_name>Create Bar From Building Type Ratios</display_name>
@@ -739,16 +739,16 @@
       <checksum>87F97832</checksum>
     </file>
     <file>
-      <filename>create_bar_from_building_type_ratios_test.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>test</usage_type>
-      <checksum>9B750F98</checksum>
-    </file>
-    <file>
       <filename>os_lib_model_generation_bricr.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
       <checksum>F52ACA59</checksum>
+    </file>
+    <file>
+      <filename>create_bar_from_building_type_ratios_test.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>test</usage_type>
+      <checksum>75193FD1</checksum>
     </file>
   </files>
 </measure>
