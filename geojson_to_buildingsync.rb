@@ -63,10 +63,14 @@ def get_facility_classification(feature)
     result = 'Mixed use commercial'
   when 'MIXRES'
     result = 'Residential'
+  when 'Office'
+    result = 'Commercial'      
   when 'OPENSPACE', 'OpenSpace'
     result = 'Other'
   when 'PDR'
     result = 'Other'
+  when 'Retail'
+    result = 'Commercial'    
   when "RETAIL\/ENT"
     result = 'Commercial'
   when 'RESIDENT'
@@ -102,12 +106,16 @@ def get_occupancy_classification(feature)
   when 'MIXRES'
     result = 'Residential'
     raise "#{result} is not a supported Occupancy Classification"
+  when 'Office'
+    result = 'Office'    
   when 'OPENSPACE', 'OpenSpace'
     result = 'Other'
     raise "#{result} is not a supported Occupancy Classification"
   when 'PDR'
     result = 'Industrial'
     raise "#{result} is not a supported Occupancy Classification"
+  when 'Retail'
+    result = 'Retail'    
   when "RETAIL\/ENT"
     result = 'Retail'
   when 'RESIDENT'
@@ -173,11 +181,23 @@ def create_site(feature)
   street_address_detail = REXML::Element.new('auc:StreetAddressDetail')
   simplified = REXML::Element.new('auc:Simplified')
   street_address = REXML::Element.new('auc:StreetAddress')
-  # DLM: there is also a "To Street Number", check if these are equal
-  street_number = feature[:properties][:"From Street Number"].to_s
-  if street_number != feature[:properties][:"To Street Number"]
-    street_number += " - #{feature[:properties][:"To Street Number"]}"
+  # DLM: there is a "From Street Number" and a "To Street Number", check if these are equal
+  from_street_number = feature[:properties][:"From Street Number"]
+  to_street_number = feature[:properties][:"To Street Number"]
+  
+  street_number = ""
+  if from_street_number && to_street_number
+    if from_street_number == to_street_number
+      street_number = from_street_number
+    else
+      street_number = "#{from_street_number} - #{to_street_number}"
+    end
+  elsif from_street_number
+    street_number = from_street_number.to_s
+  elsif to_street_number
+    street_number = to_street_number.to_s
   end
+
   street_address_text = "#{street_number} #{feature[:properties][:"Street Name"]} #{feature[:properties][:"Street Name Post Type"]}"
   street_address.text = street_address_text
   simplified.add_element(street_address)

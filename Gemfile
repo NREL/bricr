@@ -11,6 +11,7 @@ end
 
 #gem 'openstudio-standards', path: '../openstudio-standards'
 #gem 'openstudio-standards', github: 'NREL/OpenStudio-standards', branch: 'bricr'
+gem 'openstudio-standards', '0.2.9'
 
 gem 'openstudio-workflow'
 
@@ -48,4 +49,8 @@ group :test do
   gem 'ci_reporter_rspec'
   gem 'rubocop'
   gem 'rubocop-checkstyle_formatter'
+  gem 'psych', '~> 3.0.3'
 end
+
+
+gem 'unicode-display_width', '1.4.0'

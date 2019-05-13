@@ -44,24 +44,48 @@ seed = BRICR.get_seed()
 org = BRICR.get_seed_org(seed)
 cycle = BRICR.get_seed_cycle(seed)
 
-max_results = 10000 # DLM: temporary workaround to search all results
-#search_results = seed.search('', 'Not Started', max_results) # DLM: Nick I don't think this is working
+profile = BRICR.get_seed_search_profile(seed)
+if profile.nil?
+  raise "Please create a SEED column list settings profile named 'BRICR-Search' with 'Custom 1' selected"
+end
 
-#puts "#{BRICR.get_seed_host}/api/v2.1/properties/?cycle=#{cycle.id}&organization_id=#{org.id}&identifier=#{identifier_string}&analysis_state=#{analysis_state}&per_page=#{max_results}"
+search_results = seed.filter(profile.id, 10000)
+if search_results.properties.nil? || search_results.properties.empty?
+  return 
+end
 
-search_results = seed.search('', '', max_results)
-properties = search_results.properties
+analysis_state_key = nil
+custom_id_key = nil
+search_results.properties[0].each_key do |key|
+  if /analysis_state/.match(key) && !/analysis_state_message/.match(key)
+    analysis_state_key = key
+  elsif /custom_id_1_/.match(key)
+    custom_id_key = key
+  end
+end
 
-# DLM: temp code to reset while testing
-#properties.each do |property|
-#  property_id = property[:id]
-#  seed.update_analysis_state(property_id, 'Not Started')
-#end
+if analysis_state_key.nil?
+  raise "analysis_state_key is nil"
+elsif custom_id_key.nil?
+  raise "custom_id_key is nil"
+end
 
-properties = properties.select{|property| property[:state][:analysis_state] == 'Not Started'} # DLM: temp work around 
+properties = []
+search_results.properties.each do |property|
+  #puts property
+  if property[analysis_state_key] == 'Not Started'
+    properties << property
+  end
+end
+
+properties = properties.select{|property| property[analysis_state_key] == 'Not Started'} # DLM: temp work around 
+
+#desired_ids = ['35', '2292', '1416', '5953']
+#properties = properties.select{|property| desired_ids.include?(property[custom_id_key])} # DLM: extra filter to prioritize 
 
 if properties.size > BRICR::MAX_DATAPOINTS
-  properties = properties.slice(0, BRICR::MAX_DATAPOINTS)
+  slice_offset = 0 # set to non-zero if you want to avoid stepping on another process
+  properties = properties.slice(slice_offset, BRICR::MAX_DATAPOINTS)
 end
 
 if !File.exists?('./run')
@@ -79,7 +103,7 @@ Parallel.each(properties, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX
 
   # get ids
   property_id = property[:id]
-  custom_id = property[:state][:custom_id_1]
+  custom_id = property[custom_id_key]
 
   # find most recent building sync file for this property
   files = seed.list_buildingsync_files(property_id)

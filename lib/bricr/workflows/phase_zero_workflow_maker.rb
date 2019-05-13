@@ -745,6 +745,10 @@ module BRICR
         path = File.join(osw_dir, 'eplusout.eso')
         FileUtils.rm_f(path) if File.exists?(path)
         
+        Dir.glob(File.join(osw_dir, '*create_typical_building_from_model')).each do |path|
+          FileUtils.rm_rf(path) if File.exists?(path)
+        end
+        
         # find the osw
         path = File.join(osw_dir, 'out.osw')
         if !File.exists?(path)
