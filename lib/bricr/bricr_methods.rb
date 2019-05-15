@@ -66,7 +66,7 @@ module BRICR
 
     failures = []
     if BRICR::DO_SIMULATIONS
-      failures = self.run_osws(osws)
+      failures = self.run_osws(osw_files)
     end
 
     if failures.size > 0
