@@ -24,11 +24,27 @@
 #
 ########################################################################################################################
 
-require_relative 'bricr/version'
-require_relative 'bricr/extension'
-require_relative 'bricr/bricr_methods'
-require_relative 'bricr/building_sync'
-#require_relative 'bricr/seed_methods'
-require_relative 'bricr/translator'
-require_relative 'bricr/workflow_maker'
-require_relative 'bricr/workflows/phase_zero_workflow_maker'
+require 'openstudio/extension'
+
+module BRICR
+  DIRECTORY = File.realpath(File.dirname(__FILE__)).freeze
+  
+  class Extension < OpenStudio::Extension::Extension
+    
+    # Override base class method
+    def initialize
+      @root_dir = File.absolute_path(File.join(File.dirname(__FILE__), '..', '..'))
+    end
+
+    # Override base class method
+    def measures_dir
+      return File.absolute_path(File.join(@root_dir, 'measures'))
+    end
+    
+    # Override base class method
+    def files_dir
+      return File.absolute_path(File.join(@root_dir, 'weather'))
+    end
+    
+  end
+end

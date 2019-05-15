@@ -34,4 +34,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency  'openstudio-workflow'
   s.add_runtime_dependency  'openstudio-common-measures'
   s.add_runtime_dependency  'openstudio-model-articulation'
+  s.add_runtime_dependency 'json_pure'
 end

@@ -5,9 +5,9 @@ RSpec::Core::RakeTask.new(:spec)
 
 # Load in the rake tasks from the base extension gem
 require "openstudio/extension/rake_task"
-require "bricr"
+require "bricr/extension"
 rake_task = OpenStudio::Extension::RakeTask.new
-rake_task.set_extension_class(BRICR::Bricr)
+rake_task.set_extension_class(BRICR::Extension)
 
 task :default => :spec
 
