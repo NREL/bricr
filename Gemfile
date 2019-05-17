@@ -41,8 +41,8 @@ gem 'openstudio-workflow'
 gem 'simplecov', github: 'NREL/simplecov'
 
 group :openstudio_no_cli do
-  #gem 'seed_ruby_client', path: '../ruby-client'
-  gem 'seed_ruby_client', github: 'SEED-platform/ruby-client', branch: 'develop'
+  #gem 'seed_ruby_client', path: '../seed_ruby-client'
+  gem 'seed_ruby_client', github: 'SEED-platform/ruby-client', branch: 'update_spec'
   
   gem 'unicode-display_width', '1.4.0'
 end
