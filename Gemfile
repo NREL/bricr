@@ -4,13 +4,13 @@ ruby '~>2.2'
 # Specify your gem's dependencies in bricr.gemspec
 gemspec
 
-allow_local_gems = true
+allow_local_gems = false
 
 if allow_local_gems && File.exists?('../openstudio-extension-gem')
-  # gem 'openstudio-extension', github: 'NREL/openstudio-extension-gem', branch: 'bricr'
+  # gem 'openstudio-extension', github: 'NREL/openstudio-extension-gem', branch: 'develop'
   gem 'openstudio-extension', path: '../openstudio-extension-gem'
 else
-  gem 'openstudio-extension', github: 'NREL/openstudio-extension-gem', branch: 'bricr'
+  gem 'openstudio-extension', github: 'NREL/openstudio-extension-gem', branch: 'develop'
 end
 
 if allow_local_gems && File.exists?('../openstudio-common-measures-gem')
