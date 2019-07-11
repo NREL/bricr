@@ -40,6 +40,9 @@ gem 'openstudio-workflow'
 # simplecov has an unneccesary dependency on native json gem, use fork that does not require this
 gem 'simplecov', github: 'NREL/simplecov'
 
+# spreadsheet gem to process xls
+gem 'spreadsheet', '1.2.4'
+
 group :openstudio_no_cli do
   #gem 'seed_ruby_client', path: '../seed_ruby-client'
   gem 'seed_ruby_client', github: 'SEED-platform/ruby-client', branch: 'update_spec'
