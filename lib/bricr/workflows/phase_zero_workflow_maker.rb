@@ -438,12 +438,15 @@ module BRICR
             
             # DLM: somme measures don't have a direct BuildingSync equivalent, use UserDefinedField 'OpenStudioMeasureName' for now
             if measure_name == 'Other'
-              measure.elements.each("#{@ns}:UserDefinedFields/#{@ns}:UserDefinedField") do |user_defined_field|
-                field_name = user_defined_field.elements["#{@ns}:FieldName"].text 
-                if field_name == 'OpenStudioMeasureName'
-                  measure_name = user_defined_field.elements["#{@ns}:FieldValue"].text 
-                end
-              end
+              # measure.elements.each("#{@ns}:UserDefinedFields/#{@ns}:UserDefinedField") do |user_defined_field|
+              #   field_name = user_defined_field.elements["#{@ns}:FieldName"].text 
+              #   if field_name == 'OpenStudioMeasureName'
+              #     measure_name = user_defined_field.elements["#{@ns}:FieldValue"].text 
+              #   end
+              # end
+
+              # new v2.0 field: CustomMeasureName
+              measure_name = measure.elements["#{@ns}:CustomMeasureName"].text 
             end
             
             # Other HVAC / OtherHVAC / Replace HVAC system type to VRF 
@@ -633,7 +636,7 @@ module BRICR
       
       #ensure there is a 'Baseline' scenario
       found_baseline = false
-      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
+      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Reports/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
         scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
         if scenario_name == 'Baseline'
           found_baseline = true
@@ -642,7 +645,7 @@ module BRICR
       end
       
       if !found_baseline
-        scenarios_element = @doc.elements["#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Report/#{@ns}:Scenarios"]
+        scenarios_element = @doc.elements["#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Reports/#{@ns}:Report/#{@ns}:Scenarios"]
         
         scenario_element = REXML::Element.new("#{@ns}:Scenario")
         scenario_element.attributes['ID'] = 'Baseline'
@@ -663,7 +666,7 @@ module BRICR
       end
       
       found_baseline = false
-      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
+      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Reports/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
         scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
         if scenario_name == 'Baseline'
           found_baseline = true
@@ -677,7 +680,7 @@ module BRICR
       end
       
       # write an osw for each scenario
-      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
+      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Reports/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
         # get information about the scenario
         scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
         next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
@@ -727,7 +730,7 @@ module BRICR
       results = {}
 
       # write an osw for each scenario
-      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
+      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Reports/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
         # get information about the scenario
         scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
         next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
@@ -764,7 +767,7 @@ module BRICR
        
       end
 
-      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
+      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Reports/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
         # get information about the scenario
         scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
         next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
@@ -774,6 +777,12 @@ module BRICR
         # delete previous results
         package_of_measures.elements.delete("#{@ns}:AnnualSavingsSiteEnergy")
         package_of_measures.elements.delete("#{@ns}:AnnualSavingsCost")
+        package_of_measures.elements.delete("#{@ns}:CalculationMethod")
+        package_of_measures.elements.delete("#{@ns}AnnualSavingsByFuels")
+        scenario.elements.delete("#{@ns}AllResourceTotals")
+        scenario.elements.delete("#{@ns}RsourceUses")
+        scenario.elements.delete("#{@ns}AnnualSavingsByFuels")
+
         
         result = results[scenario_name]
         baseline = results['Baseline']
@@ -795,14 +804,15 @@ module BRICR
         end
         
         # preserve existing user defined fields if they exist
+        # KAF: there should no longer be any UDFs
         user_defined_fields = scenario.elements["#{@ns}:UserDefinedFields"]
         if user_defined_fields.nil?
           user_defined_fields = REXML::Element.new("#{@ns}:UserDefinedFields")
         end
         
-        # delete previous results
+        # delete previous results (if using an old schema)
         to_remove = []
-       user_defined_fields.elements.each("#{@ns}:UserDefinedField") do |user_defined_field|
+        user_defined_fields.elements.each("#{@ns}:UserDefinedField") do |user_defined_field|
           name_element = user_defined_field.elements["#{@ns}:FieldName"]
           if name_element.nil?
             to_remove << user_defined_field
@@ -814,15 +824,31 @@ module BRICR
           user_defined_fields.elements.delete(element)
         end
         
-        user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
-        field_name = REXML::Element.new("#{@ns}:FieldName")
-        field_name.text = 'OpenStudioCompletedStatus'
-        field_value = REXML::Element.new("#{@ns}:FieldValue")
-        field_value.text = result[:completed_status]
-        user_defined_field.add_element(field_name)
-        user_defined_field.add_element(field_value)
-        user_defined_fields.add_element(user_defined_field)
-        
+        # user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
+        # field_name = REXML::Element.new("#{@ns}:FieldName")
+        # field_name.text = 'OpenStudioCompletedStatus'
+        # field_value = REXML::Element.new("#{@ns}:FieldValue")
+        # field_value.text = result[:completed_status]
+        # user_defined_field.add_element(field_name)
+        # user_defined_field.add_element(field_value)
+        # user_defined_fields.add_element(user_defined_field)
+
+        # this is now in PackageOfMeasures.CalculationMethod.Modeled.SimulationCompletionStatus
+        # options are: Not Started, Started, Finished, Failed, Unknown
+        calc_method = REXML::Element.new("#{@ns}:CalculationMethod")
+        modeled = REXML::Element.new("#{@ns}:Modeled")
+        weather_data_type = REXML::Element.new("#{@ns}:WeatherDataType")
+        weather_data_type.text = 'TMY3'
+        modeled.add_element(weather_data_type)
+        sim_completion_status = REXML::Element.new("#{@ns}:SimulationCompletionStatus")
+        sim_completion_status.text = result[:completed_status] === 'Success' ? 'Finished' : 'Failed'  # TODO: double check what these keys can be
+        modeled.add_element(sim_completion_status)
+
+        calc_method.add_element(modeled)
+        package_of_measures.add_element(calc_method)
+
+        # KAF: I don't think we are using this in new schema. you would look at the baseline scenario and check its "SimulationCompletionStatus"  
+        # leaving it here for now      
         user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
         field_name = REXML::Element.new("#{@ns}:FieldName")
         field_name.text = 'OpenStudioBaselineCompletedStatus'
@@ -838,8 +864,10 @@ module BRICR
         baseline_total_site_energy = getMeasureResult(baseline, 'openstudio_results', 'total_site_energy') # in kBtu
         baseline_total_site_energy = baseline_total_site_energy / 1000.0 if baseline_total_site_energy # kBtu/year -> MMBtu/year
         fuel_electricity = getMeasureResult(result, 'openstudio_results', 'fuel_electricity') # in kBtu/year
+        baseline_fuel_electricity = getMeasureResult(baseline, 'openstudio_results', 'fuel_electricity') # in kBtu/year
         #fuel_electricity = fuel_electricity * 0.2930710702 # kBtu/year -> kWh
         fuel_natural_gas = getMeasureResult(result, 'openstudio_results', 'fuel_natural_gas') # in kBtu/year
+        baseline_fuel_natural_gas = getMeasureResult(baseline, 'openstudio_results', 'fuel_natural_gas') # in kBtu/year
         annual_utility_cost = getMeasureResult(result, 'openstudio_results', 'annual_utility_cost') # in $
         baseline_annual_utility_cost = getMeasureResult(baseline, 'openstudio_results', 'annual_utility_cost') # in $
 
@@ -853,52 +881,197 @@ module BRICR
         annual_savings_site_energy = REXML::Element.new("#{@ns}:AnnualSavingsSiteEnergy")
         annual_savings_energy_cost = REXML::Element.new("#{@ns}:AnnualSavingsCost")
         
-        # DLM: these are not valid BuildingSync fields
-        #annual_site_energy = REXML::Element.new("#{@ns}:AnnualSiteEnergy")
-        #annual_electricity = REXML::Element.new("#{@ns}:AnnualElectricity")
-        #annual_natural_gas = REXML::Element.new("#{@ns}:AnnualNaturalGas")
-        
         annual_savings_site_energy.text = total_site_energy_savings
         annual_savings_energy_cost.text = total_energy_cost_savings.to_i # BuildingSync wants an integer, might be a BuildingSync bug
-        #annual_site_energy.text = total_site_energy
-        #annual_electricity.text = fuel_electricity
-        #annual_natural_gas.text = fuel_natural_gas
+
+        # KAF: adding annual savings by fuel
+        electricity_savings = baseline_fuel_electricity - fuel_electricity
+        natural_gas_savings = baseline_fuel_natural_gas - fuel_natural_gas
+        annual_savings = REXML::Element.new("#{@ns}:AnnualSavingsByFuels")
+        annual_saving = REXML::Element.new("#{@ns}:AnnualSavingsByFuel")
+        energy_res = REXML::Element.new("#{@ns}:EnergyResource")
+        energy_res.text = 'Electricity'
+        annual_saving.add_element(energy_res)
+        resource_units = REXML::Element.new("#{@ns}:ResourceUnits")
+        resource_units.text = 'kBtu'
+        annual_saving.add_element(resource_units)
+        savings_native = REXML::Element.new("#{@ns}:AnnualSavingsNativeUnits") # this is in kBtu
+        savings_native.text = electricity_savings.to_s
+        annual_saving.add_element(savings_native)
+        annual_savings.add_element(annual_saving)
+
+        annual_saving = REXML::Element.new("#{@ns}:AnnualSavingsByFuel")
+        energy_res = REXML::Element.new("#{@ns}:EnergyResource")
+        energy_res.text = 'Natural gas'
+        annual_saving.add_element(energy_res)
+        resource_units = REXML::Element.new("#{@ns}:ResourceUnits")
+        resource_units.text = 'kBtu'
+        annual_saving.add_element(resource_units)
+        savings_native = REXML::Element.new("#{@ns}:AnnualSavingsNativeUnits") # this is in kBtu
+        savings_native.text = natural_gas_savings.to_s
+        annual_saving.add_element(savings_native)
+        annual_savings.add_element(annual_saving)
+
+        package_of_measures.add_element(annual_savings)
+
+        # KAF: replacing user defined fields with BuildingSync fields
+               
+        # user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
+        # field_name = REXML::Element.new("#{@ns}:FieldName")
+        # field_name.text = 'OpenStudioAnnualElectricity_kBtu'
+        # field_value = REXML::Element.new("#{@ns}:FieldValue")
+        # field_value.text = fuel_electricity.to_s
+        # user_defined_field.add_element(field_name)
+        # user_defined_field.add_element(field_value)
+        # user_defined_fields.add_element(user_defined_field)
         
-        user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
-        field_name = REXML::Element.new("#{@ns}:FieldName")
-        field_name.text = 'OpenStudioAnnualSiteEnergy_MMBtu'
-        field_value = REXML::Element.new("#{@ns}:FieldValue")
-        field_value.text = total_site_energy.to_s
-        user_defined_field.add_element(field_name)
-        user_defined_field.add_element(field_value)
-        user_defined_fields.add_element(user_defined_field)
-        
-        user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
-        field_name = REXML::Element.new("#{@ns}:FieldName")
-        field_name.text = 'OpenStudioAnnualElectricity_kBtu'
-        field_value = REXML::Element.new("#{@ns}:FieldValue")
-        field_value.text = fuel_electricity.to_s
-        user_defined_field.add_element(field_name)
-        user_defined_field.add_element(field_value)
-        user_defined_fields.add_element(user_defined_field)
-        
-        user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
-        field_name = REXML::Element.new("#{@ns}:FieldName")
-        field_name.text = 'OpenStudioAnnualNaturalGas_kBtu'
-        field_value = REXML::Element.new("#{@ns}:FieldValue")
-        field_value.text = fuel_natural_gas.to_s
-        user_defined_field.add_element(field_name)
-        user_defined_field.add_element(field_value)
-        user_defined_fields.add_element(user_defined_field)
-        
+        # user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
+        # field_name = REXML::Element.new("#{@ns}:FieldName")
+        # field_name.text = 'OpenStudioAnnualNaturalGas_kBtu'
+        # field_value = REXML::Element.new("#{@ns}:FieldValue")
+        # field_value.text = fuel_natural_gas.to_s
+        # user_defined_field.add_element(field_name)
+        # user_defined_field.add_element(field_value)
+        # user_defined_fields.add_element(user_defined_field)
+
+        res_uses = REXML::Element.new("#{@ns}:ResourceUses")
+        # ELECTRICITY
+        res_use = REXML::Element.new("#{@ns}:ResourceUse")
+        res_use.add_attribute('ID', 'Resource1')
+        energy_res = REXML::Element.new("#{@ns}:EnergyResource")
+        energy_res.text = 'Electricity'
+        res_units = REXML::Element.new("#{@ns}:ResourceUnits")
+        res_units.text = 'kBtu'
+        native_units = REXML::Element.new("#{@ns}:AnnualFuelUseNativeUnits")
+        native_units.text = fuel_electricity.to_s
+        consistent_units = REXML::Element.new("#{@ns}:AnnualFuelUseConsistentUnits")
+        consistent_units.text = (fuel_electricity / 1000).to_s  # in MMBtu
+        res_use.add_element(energy_res)
+        res_use.add_element(res_units)
+        res_use.add_element(native_units)
+        res_use.add_element(consistent_units)
+        res_uses.add_element(res_use)
+
+        # NATURAL GAS
+        res_use = REXML::Element.new("#{@ns}:ResourceUse")
+        res_use.add_attribute('ID', 'Resource2')
+        energy_res = REXML::Element.new("#{@ns}:EnergyResource")
+        energy_res.text = 'Natural gas'
+        res_units = REXML::Element.new("#{@ns}:ResourceUnits")
+        res_units.text = 'kBtu'
+        native_units = REXML::Element.new("#{@ns}:AnnualFuelUseNativeUnits")
+        native_units.text = fuel_electricity.to_s
+        consistent_units = REXML::Element.new("#{@ns}:AnnualFuelUseConsistentUnits")
+        consistent_units.text = (fuel_electricity / 1000).to_s  # in MMBtu
+        res_use.add_element(energy_res)
+        res_use.add_element(res_units)
+        res_use.add_element(native_units)
+        res_use.add_element(consistent_units)
+        res_uses.add_element(res_use)
+        scenario.add_element(res_uses)
+
+        # KAF: prototype for adding monthly data (fake it for now)
+        # already added ResourceUses above. Needed as ResourceUseID reference
+        timeseriesdata = REXML::Element.new("#{@ns}:TimeSeriesData")
+
+        # Electricity
+        [1..12].each do |month|
+          timeseries = REXML::Element.new("#{@ns}:TimeSeries")
+          reading_type = REXML::Element.new("#{@ns}:ReadingType")
+          reading_type.text = 'Total'
+          timeseries.add_element(reading_type)
+          ts_quantity = REXML::Element.new("#{@ns}:TimeSeriesReadingQuantity")
+          ts_quantity.text = 'Energy'
+          timeseries.add_element(ts_quantity)
+          start_time = REXML::Element.new("#{@ns}:StartTimeStamp")
+          if month < 10
+            start_time.text = '2017-0' + month.to_s + '-01T00:00:00'
+          else 
+            start_time.text = '2017-' + month.to_s + '-01T00:00:00'
+          end
+          timeseries.add_element(start_time)
+          end_time = REXML::Element.new("#{@ns}:EndTimeStamp")
+          if month < 9
+            end_time.text = '2017-0' + month.to_s + '-01T00:00:00'
+          elsif month < 12
+            end_time.text = '2017-' + (month+1).to_s + '-01T00:00:00'
+          else
+            end_time.text = '2018-01-01T00:00:00'
+          end
+          timeseries.add_element(end_time)
+          interval_frequency = REXML::Element.new("#{@ns}:IntervalFrequency")
+          interval_frequency.text = 'Month'
+          timeseries.add_element(interval_frequency)
+          interval_reading = REXML::Element.new("#{@ns}:IntervalReading")
+          interval_reading.text = '0'
+          timeseries.add_element(interval_reading)
+          resource_id = REXML::Element.new("#{@ns}:ResourceUseID")
+          resource_id.add_attribute('IDref', 'Resource1')
+          timeseries.add_element(resource_id)
+          timeseriesdata.add_element(timeseries)
+        end
+
+        [1..12].each do |month|
+          timeseries = REXML::Element.new("#{@ns}:TimeSeries")
+          reading_type = REXML::Element.new("#{@ns}:ReadingType")
+          reading_type.text = 'Total'
+          timeseries.add_element(reading_type)
+          ts_quantity = REXML::Element.new("#{@ns}:TimeSeriesReadingQuantity")
+          ts_quantity.text = 'Energy'
+          timeseries.add_element(ts_quantity)
+          start_time = REXML::Element.new("#{@ns}:StartTimeStamp")
+          if month < 10
+            start_time.text = '2017-0' + month.to_s + '-01T00:00:00'
+          else 
+            start_time.text = '2017-' + month.to_s + '-01T00:00:00'
+          end
+          timeseries.add_element(start_time)
+          end_time = REXML::Element.new("#{@ns}:EndTimeStamp")
+          if month < 9
+            end_time.text = '2017-0' + month.to_s + '-01T00:00:00'
+          elsif month < 12
+            end_time.text = '2017-' + (month+1).to_s + '-01T00:00:00'
+          else
+            end_time.text = '2018-01-01T00:00:00'
+          end
+          timeseries.add_element(end_time)
+          interval_frequency = REXML::Element.new("#{@ns}:IntervalFrequency")
+          interval_frequency.text = 'Month'
+          timeseries.add_element(interval_frequency)
+          interval_reading = REXML::Element.new("#{@ns}:IntervalReading")
+          interval_reading.text = '0'
+          timeseries.add_element(interval_reading)
+          resource_id = REXML::Element.new("#{@ns}:ResourceUseID")
+          resource_id.add_attribute('IDref', 'Resource2')
+          timeseries.add_element(resource_id)
+          timeseriesdata.add_element(timeseries)
+        end
+        scenario.add_element(timeseriesdata)
+
+        # user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
+        # field_name = REXML::Element.new("#{@ns}:FieldName")
+        # field_name.text = 'OpenStudioAnnualSiteEnergy_MMBtu'
+        # field_value = REXML::Element.new("#{@ns}:FieldValue")
+        # field_value.text = total_site_energy.to_s
+        # user_defined_field.add_element(field_name)
+        # user_defined_field.add_element(field_value)
+        # user_defined_fields.add_element(user_defined_field)
+        all_res_totals = REXML::Element.new("#{@ns}:AllResourceTotals")
+        all_res_total = REXML::Element.new("#{@ns}:AllResourceTotal")
+        end_use = REXML::Element.new("#{@ns}:EndUse")
+        end_use.text = 'All end uses'
+        site_energy_use = REXML::Element.new("#{@ns}:SiteEnergyUse")
+        site_energy_use.text = total_site_energy.to_s
+        all_res_total.add_element(end_use)
+        all_res_total.add_element(site_energy_use)
+        all_res_totals.add_element(all_res_total)
+        scenario.add_element(all_res_totals)
+
         package_of_measures.add_element(annual_savings_site_energy)
         package_of_measures.add_element(annual_savings_energy_cost)
-        #package_of_measures.add_element(annual_site_energy)
-        #package_of_measures.add_element(annual_electricity)
-        #package_of_measures.add_element(annual_natural_gas)
 
         scenario.elements.delete("#{@ns}:UserDefinedFields")
-        scenario.add_element(user_defined_fields)
+
       end
     end
     
