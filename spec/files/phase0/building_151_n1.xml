@@ -116,6 +116,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Retrofit with light emitting diode technologies</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>12</n1:UsefulLife>
@@ -124,12 +125,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure2">
 					<n1:SystemCategoryAffected>Plug Load</n1:SystemCategoryAffected>
@@ -146,6 +141,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Replace with ENERGY STAR rated</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>9</n1:UsefulLife>
@@ -154,12 +150,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure3">
 					<n1:SystemCategoryAffected>Wall</n1:SystemCategoryAffected>
@@ -176,6 +166,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Air seal envelope</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>11</n1:UsefulLife>
@@ -184,12 +175,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure4">
 					<n1:SystemCategoryAffected>Cooling System</n1:SystemCategoryAffected>
@@ -206,6 +191,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Replace package units</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>15</n1:UsefulLife>
@@ -214,12 +200,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure5">
 					<n1:SystemCategoryAffected>Heating System</n1:SystemCategoryAffected>
@@ -236,6 +216,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Replace burner</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>20</n1:UsefulLife>
@@ -244,12 +225,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure6">
 					<n1:SystemCategoryAffected>Lighting</n1:SystemCategoryAffected>
@@ -266,6 +241,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Add daylight controls</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>8</n1:UsefulLife>
@@ -274,12 +250,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure7">
 					<n1:SystemCategoryAffected>Lighting</n1:SystemCategoryAffected>
@@ -296,6 +266,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Add occupancy sensors</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>8</n1:UsefulLife>
@@ -304,12 +275,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure8">
 					<n1:SystemCategoryAffected>Plug Load</n1:SystemCategoryAffected>
@@ -326,6 +291,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Install plug load controls</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>5.6</n1:UsefulLife>
@@ -334,12 +300,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure9">
 					<n1:SystemCategoryAffected>Wall</n1:SystemCategoryAffected>
@@ -356,6 +316,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Increase wall insulation</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>20</n1:UsefulLife>
@@ -364,12 +325,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure10">
 					<n1:SystemCategoryAffected>Wall</n1:SystemCategoryAffected>
@@ -386,6 +341,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Insulate thermal bypasses</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>20</n1:UsefulLife>
@@ -394,12 +350,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure11">
 					<n1:SystemCategoryAffected>Roof</n1:SystemCategoryAffected>
@@ -416,6 +366,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Increase roof insulation</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>20</n1:UsefulLife>
@@ -424,12 +375,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure12">
 					<n1:SystemCategoryAffected>Ceiling</n1:SystemCategoryAffected>
@@ -446,6 +391,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Increase ceiling insulation</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>20</n1:UsefulLife>
@@ -454,12 +400,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure13">
 					<n1:SystemCategoryAffected>Fenestration</n1:SystemCategoryAffected>
@@ -476,6 +416,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Add window films</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>10</n1:UsefulLife>
@@ -484,12 +425,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure14">
 					<n1:SystemCategoryAffected>General Controls and Operations</n1:SystemCategoryAffected>
@@ -506,6 +441,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Upgrade operating protocols, calibration, and/or sequencing</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>11</n1:UsefulLife>
@@ -514,12 +450,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure15">
 					<n1:SystemCategoryAffected>Domestic Hot Water</n1:SystemCategoryAffected>
@@ -536,6 +466,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Replace or upgrade water heater</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>10</n1:UsefulLife>
@@ -544,12 +475,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure16">
 					<n1:SystemCategoryAffected>Refrigeration</n1:SystemCategoryAffected>
@@ -566,6 +491,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Replace ice/refrigeration equipment with high efficiency units</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>12.5</n1:UsefulLife>
@@ -574,12 +500,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure17">
 					<n1:SystemCategoryAffected>Fenestration</n1:SystemCategoryAffected>
@@ -596,6 +516,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Replace windows</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>20</n1:UsefulLife>
@@ -604,12 +525,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure18">
 					<n1:SystemCategoryAffected>Heating System</n1:SystemCategoryAffected>
@@ -626,6 +541,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Replace boiler</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>20</n1:UsefulLife>
@@ -634,12 +550,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure19">
 					<n1:SystemCategoryAffected>Other HVAC</n1:SystemCategoryAffected>
@@ -656,6 +566,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Replace AC and heating units with ground coupled heat pump systems</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>15</n1:UsefulLife>
@@ -664,12 +575,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure20">
 					<n1:SystemCategoryAffected>Other HVAC</n1:SystemCategoryAffected>
@@ -686,6 +591,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>Replace HVAC system type to VRF</n1:CustomMeasureName>
 					<n1:LongDescription>VRF with DOAS</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>10</n1:UsefulLife>
@@ -694,12 +600,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>Replace HVAC system type to VRF</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure21">
 					<n1:SystemCategoryAffected>Other HVAC</n1:SystemCategoryAffected>
@@ -716,6 +616,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>Replace HVAC system type to PZHP</n1:CustomMeasureName>
 					<n1:LongDescription>Replace HVAC system type to PZHP</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>15</n1:UsefulLife>
@@ -724,12 +625,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>Replace HVAC system type to PZHP</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure22">
 					<n1:SystemCategoryAffected>Fan</n1:SystemCategoryAffected>
@@ -746,6 +641,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Replace with higher efficiency</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>15</n1:UsefulLife>
@@ -754,12 +650,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure23">
 					<n1:SystemCategoryAffected>Air Distribution</n1:SystemCategoryAffected>
@@ -776,6 +666,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Improve ventilation fans</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>4.4</n1:UsefulLife>
@@ -784,12 +675,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure24">
 					<n1:SystemCategoryAffected>Air Distribution</n1:SystemCategoryAffected>
@@ -806,6 +691,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Install demand control ventilation</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>10</n1:UsefulLife>
@@ -814,12 +700,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure25">
 					<n1:SystemCategoryAffected>Air Distribution</n1:SystemCategoryAffected>
@@ -836,6 +716,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Add or repair economizer</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>12.5</n1:UsefulLife>
@@ -844,12 +725,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure26">
 					<n1:SystemCategoryAffected>Heat Recovery</n1:SystemCategoryAffected>
@@ -866,6 +741,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Add energy recovery</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>14</n1:UsefulLife>
@@ -874,12 +750,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure27">
 					<n1:SystemCategoryAffected>Domestic Hot Water</n1:SystemCategoryAffected>
@@ -896,6 +766,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Add pipe insulation</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>12</n1:UsefulLife>
@@ -904,12 +775,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure28">
 					<n1:SystemCategoryAffected>Domestic Hot Water</n1:SystemCategoryAffected>
@@ -926,6 +791,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Add recirculating pumps</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>15</n1:UsefulLife>
@@ -934,12 +800,6 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 				<n1:Measure ID="Measure29">
 					<n1:SystemCategoryAffected>Water Use</n1:SystemCategoryAffected>
@@ -956,6 +816,7 @@
 						</n1:TechnologyCategory>
 					</n1:TechnologyCategories>
 					<n1:MeasureScaleOfApplication>Entire building</n1:MeasureScaleOfApplication>
+					<n1:CustomMeasureName>TBD</n1:CustomMeasureName>
 					<n1:LongDescription>Install low-flow fn1ets and showerheads</n1:LongDescription>
 					<n1:MVCost>0</n1:MVCost>
 					<n1:UsefulLife>10</n1:UsefulLife>
@@ -964,664 +825,660 @@
 					<n1:MeasureMaterialCost>0</n1:MeasureMaterialCost>
 					<n1:Recommended>true</n1:Recommended>
 					<n1:ImplementationStatus>Proposed</n1:ImplementationStatus>
-					<n1:UserDefinedFields>
-						<n1:UserDefinedField>
-							<n1:FieldName>OpenStudioMeasureName</n1:FieldName>
-							<n1:FieldValue>TBD</n1:FieldValue>
-						</n1:UserDefinedField>
-					</n1:UserDefinedFields>
 				</n1:Measure>
 			</n1:Measures>
-			<n1:Report>
-				<n1:Scenarios>
-					<n1:Scenario ID="Baseline">
-						<n1:ScenarioName>Baseline</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>LED Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure1"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Electric_Appliance_30%_Reduction Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure2"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Air_Seal_Infiltration_30%_More_Airtight Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure3"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Cooling_System_SEER 14 Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure4"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Heating_System_Efficiency_0.93 Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure5"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Add daylight controls Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure6"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Add occupancy sensors Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure7"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Install plug load controls Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure8"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Increase wall insulation Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure9"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Insulate thermal bypasses Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure10"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Increase roof insulation Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure11"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Increase ceiling insulation Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure12"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Add window films Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure13"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Upgrade operating protocols calibration and-or sequencing Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure14"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Replace or upgrade water heater Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure15"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Replace ice-refrigeration equipment with high efficiency units Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure16"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Replace windows Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure17"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Replace boiler Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure18"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Replace HVAC with GSHP and DOAS Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure19"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>VRF with DOAS Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure20"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Replace HVAC system type to PZHP Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure21"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Replace with higher efficiency Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure22"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Improve ventilation fans Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure23"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Install demand control ventilation Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure24"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Add or repair economizer Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure25"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Add energy recovery Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure26"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Add pipe insulation Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure27"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Add recirculating pumps Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure28"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-					<n1:Scenario>
-						<n1:ScenarioName>Install low-flow faucets and showerheads Only</n1:ScenarioName>
-						<n1:ScenarioType>
-							<n1:PackageOfMeasures>
-								<n1:ReferenceCase IDref="Baseline"/>
-								<n1:MeasureIDs>
-									<n1:MeasureID IDref="Measure29"/>
-								</n1:MeasureIDs>
-							</n1:PackageOfMeasures>
-						</n1:ScenarioType>
-						<n1:LinkedPremises>
-							<n1:Building>
-								<n1:LinkedBuildingID IDref="Building151"/>
-							</n1:Building>
-						</n1:LinkedPremises>
-						<n1:UserDefinedFields>
-							<n1:UserDefinedField>
-								<n1:FieldName>Recommendation Category</n1:FieldName>
-								<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
-							</n1:UserDefinedField>
-						</n1:UserDefinedFields>
-					</n1:Scenario>
-				</n1:Scenarios>
-			</n1:Report>
+			<n1:Reports>
+				<n1:Report>
+					<n1:Scenarios>
+						<n1:Scenario ID="Baseline">
+							<n1:ScenarioName>Baseline</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>LED Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure1"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Electric_Appliance_30%_Reduction Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure2"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Air_Seal_Infiltration_30%_More_Airtight Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure3"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Cooling_System_SEER 14 Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure4"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Heating_System_Efficiency_0.93 Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure5"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Add daylight controls Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure6"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Add occupancy sensors Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure7"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Install plug load controls Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure8"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Increase wall insulation Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure9"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Insulate thermal bypasses Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure10"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Increase roof insulation Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure11"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Increase ceiling insulation Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure12"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Add window films Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure13"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Upgrade operating protocols calibration and-or sequencing Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure14"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Replace or upgrade water heater Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure15"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Replace ice-refrigeration equipment with high efficiency units Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure16"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Replace windows Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure17"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Replace boiler Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure18"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Replace HVAC with GSHP and DOAS Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure19"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>VRF with DOAS Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure20"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Replace HVAC system type to PZHP Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure21"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Replace with higher efficiency Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure22"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Improve ventilation fans Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure23"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Install demand control ventilation Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure24"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Add or repair economizer Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure25"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Add energy recovery Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure26"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Add pipe insulation Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure27"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Add recirculating pumps Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure28"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+						<n1:Scenario>
+							<n1:ScenarioName>Install low-flow faucets and showerheads Only</n1:ScenarioName>
+							<n1:ScenarioType>
+								<n1:PackageOfMeasures>
+									<n1:ReferenceCase IDref="Baseline"/>
+									<n1:MeasureIDs>
+										<n1:MeasureID IDref="Measure29"/>
+									</n1:MeasureIDs>
+								</n1:PackageOfMeasures>
+							</n1:ScenarioType>
+							<n1:LinkedPremises>
+								<n1:Building>
+									<n1:LinkedBuildingID IDref="Building151"/>
+								</n1:Building>
+							</n1:LinkedPremises>
+							<n1:UserDefinedFields>
+								<n1:UserDefinedField>
+									<n1:FieldName>Recommendation Category</n1:FieldName>
+									<n1:FieldValue>Potential Capital Recommendations</n1:FieldValue>
+								</n1:UserDefinedField>
+							</n1:UserDefinedFields>
+						</n1:Scenario>
+					</n1:Scenarios>
+				</n1:Report>
+			</n1:Reports>
 		</n1:Facility>
 	</n1:Facilities>
 </n1:BuildingSync>
