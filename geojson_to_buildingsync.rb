@@ -865,6 +865,7 @@ def convert_feature(feature)
           </auc:TechnologyCategory>
         </auc:TechnologyCategories>
         <auc:MeasureScaleOfApplication>Entire building</auc:MeasureScaleOfApplication>
+        <auc:CustomMeasureName>#{measure[:OpenStudioMeasureName]}</auc:CustomMeasureName>
         <auc:LongDescription>#{measure[:LongDescription]}</auc:LongDescription>
         <auc:MVCost>0</auc:MVCost>
         <auc:UsefulLife>#{measure[:UsefulLife]}</auc:UsefulLife>
@@ -873,27 +874,22 @@ def convert_feature(feature)
         <auc:MeasureMaterialCost>0</auc:MeasureMaterialCost>
         <auc:Recommended>true</auc:Recommended>
         <auc:ImplementationStatus>Proposed</auc:ImplementationStatus>
-        <auc:UserDefinedFields>
-          <auc:UserDefinedField>
-            <auc:FieldName>OpenStudioMeasureName</auc:FieldName>
-            <auc:FieldValue>#{measure[:OpenStudioMeasureName]}</auc:FieldValue>
-          </auc:UserDefinedField>  
-        </auc:UserDefinedFields>
       </auc:Measure>
 "    
   end
 
   source += '   </auc:Measures>
-    <auc:Report>
-      <auc:Scenarios>
-        <auc:Scenario ID="Baseline">
-          <auc:ScenarioName>Baseline</auc:ScenarioName>
-          <auc:ScenarioType>
-            <auc:PackageOfMeasures>
-              <auc:ReferenceCase IDref="Baseline"/>
-            </auc:PackageOfMeasures>
-          </auc:ScenarioType>
-        </auc:Scenario>
+    <auc:Reports>
+      <auc:Report>
+        <auc:Scenarios>
+          <auc:Scenario ID="Baseline">
+            <auc:ScenarioName>Baseline</auc:ScenarioName>
+            <auc:ScenarioType>
+              <auc:PackageOfMeasures>
+                <auc:ReferenceCase IDref="Baseline"/>
+              </auc:PackageOfMeasures>
+            </auc:ScenarioType>
+          </auc:Scenario>
   '
   # add single measures
   measures.each do |measure|
@@ -960,10 +956,11 @@ def convert_feature(feature)
    end
 
   source += '      </auc:Scenarios>
-    </auc:Report>
-  </auc:Facility>
-</auc:Facilities>
-</auc:BuildingSync>
+        </auc:Report>
+      </auc:Reports>
+    </auc:Facility>
+  </auc:Facilities>
+  </auc:BuildingSync>
   '
   
   doc = REXML::Document.new(source)
