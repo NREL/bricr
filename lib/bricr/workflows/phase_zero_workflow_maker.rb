@@ -134,7 +134,7 @@ module BRICR
         @facility['wwr'] = 0.0 # setDefaultValue in fraction
       
         subsections = []
-        facility_element.elements.each("#{@ns}:Subsections/#{@ns}:Subsection") do |subsection_element|
+        facility_element.elements.each("#{@ns}:Sections/#{@ns}:Section") do |subsection_element|
           subsection = {'gross_floor_area' => nil, 'heated_and_cooled_floor_area' => nil, 'footprint_floor_area' => nil, 'occupancy_type' => nil, 'bldg_type' => nil, 'bar_division_method' => nil, 'system_type' => nil}
           
           subsection_element.elements.each("#{@ns}:FloorAreas/#{@ns}:FloorArea") do |floor_area_element|
@@ -622,6 +622,9 @@ module BRICR
               set_measure_argument(osw, 'reduce_water_use_by_percentage', 'water_use_reduction_percent', 50)
             end
           end
+
+          # OpenStudio Results (get monthly results in the JSON)
+          set_measure_argument(osw, 'openstudio_results', 'reg_monthly_details', true)
         end
       end
       
@@ -884,6 +887,9 @@ module BRICR
         annual_savings_site_energy.text = total_site_energy_savings
         annual_savings_energy_cost.text = total_energy_cost_savings.to_i # BuildingSync wants an integer, might be a BuildingSync bug
 
+        package_of_measures.add_element(annual_savings_site_energy)
+        package_of_measures.add_element(annual_savings_energy_cost)
+
         # KAF: adding annual savings by fuel
         electricity_savings = baseline_fuel_electricity - fuel_electricity
         natural_gas_savings = baseline_fuel_natural_gas - fuel_natural_gas
@@ -935,9 +941,10 @@ module BRICR
         # user_defined_fields.add_element(user_defined_field)
 
         res_uses = REXML::Element.new("#{@ns}:ResourceUses")
+        scenario_name_ns = scenario_name.gsub(" ", "_").gsub(/[^0-9a-z_]/i, '')
         # ELECTRICITY
         res_use = REXML::Element.new("#{@ns}:ResourceUse")
-        res_use.add_attribute('ID', 'Resource1')
+        res_use.add_attribute('ID', scenario_name_ns + "_Electricity")
         energy_res = REXML::Element.new("#{@ns}:EnergyResource")
         energy_res.text = 'Electricity'
         res_units = REXML::Element.new("#{@ns}:ResourceUnits")
@@ -954,7 +961,7 @@ module BRICR
 
         # NATURAL GAS
         res_use = REXML::Element.new("#{@ns}:ResourceUse")
-        res_use.add_attribute('ID', 'Resource2')
+        res_use.add_attribute('ID', scenario_name_ns + "_NaturalGas")
         energy_res = REXML::Element.new("#{@ns}:EnergyResource")
         energy_res.text = 'Natural gas'
         res_units = REXML::Element.new("#{@ns}:ResourceUnits")
@@ -968,14 +975,15 @@ module BRICR
         res_use.add_element(native_units)
         res_use.add_element(consistent_units)
         res_uses.add_element(res_use)
-        scenario.add_element(res_uses)
+        scenario_type = scenario.elements["#{@ns}:ScenarioType"]
+        scenario.insert_after(scenario_type, res_uses)
 
         # KAF: prototype for adding monthly data (fake it for now)
         # already added ResourceUses above. Needed as ResourceUseID reference
         timeseriesdata = REXML::Element.new("#{@ns}:TimeSeriesData")
 
         # Electricity
-        [1..12].each do |month|
+        (1..12).each do |month|
           timeseries = REXML::Element.new("#{@ns}:TimeSeries")
           reading_type = REXML::Element.new("#{@ns}:ReadingType")
           reading_type.text = 'Total'
@@ -1006,12 +1014,12 @@ module BRICR
           interval_reading.text = '0'
           timeseries.add_element(interval_reading)
           resource_id = REXML::Element.new("#{@ns}:ResourceUseID")
-          resource_id.add_attribute('IDref', 'Resource1')
+          resource_id.add_attribute('IDref', scenario_name_ns + "_Electricity")
           timeseries.add_element(resource_id)
           timeseriesdata.add_element(timeseries)
         end
 
-        [1..12].each do |month|
+        (1..12).each do |month|
           timeseries = REXML::Element.new("#{@ns}:TimeSeries")
           reading_type = REXML::Element.new("#{@ns}:ReadingType")
           reading_type.text = 'Total'
@@ -1042,11 +1050,11 @@ module BRICR
           interval_reading.text = '0'
           timeseries.add_element(interval_reading)
           resource_id = REXML::Element.new("#{@ns}:ResourceUseID")
-          resource_id.add_attribute('IDref', 'Resource2')
+          resource_id.add_attribute('IDref', scenario_name_ns + "_NaturalGas")
           timeseries.add_element(resource_id)
           timeseriesdata.add_element(timeseries)
         end
-        scenario.add_element(timeseriesdata)
+        scenario.insert_after(res_uses, timeseriesdata)
 
         # user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
         # field_name = REXML::Element.new("#{@ns}:FieldName")
@@ -1065,11 +1073,7 @@ module BRICR
         all_res_total.add_element(end_use)
         all_res_total.add_element(site_energy_use)
         all_res_totals.add_element(all_res_total)
-        scenario.add_element(all_res_totals)
-
-        package_of_measures.add_element(annual_savings_site_energy)
-        package_of_measures.add_element(annual_savings_energy_cost)
-
+        scenario.insert_after(timeseriesdata, all_res_totals)
         scenario.elements.delete("#{@ns}:UserDefinedFields")
 
       end

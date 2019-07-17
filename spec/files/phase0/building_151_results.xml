@@ -1,5 +1,5 @@
 <!-- edited with XMLSpy v2016 rel. 2 sp1 (x64) (http://www.altova.com) by Dan Macumber (NREL) -->
-<auc:BuildingSync xmlns:auc="http://buildingsync.net/schemas/bedes-auc/2019" xsi:schemaLocation="http://buildingsync.net/schemas/bedes-auc/2019 https://raw.githubusercontent.com/BuildingSync/schema/v1.0-patch/BuildingSync.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<auc:BuildingSync xmlns:auc="http://buildingsync.net/schemas/bedes-auc/2019" xsi:schemaLocation="http://buildingsync.net/schemas/bedes-auc/2019 https://raw.githubusercontent.com/BuildingSync/schema/develop/BuildingSync.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<auc:Facilities>
 		<auc:Facility>
 			<auc:Sites>
@@ -67,8 +67,8 @@
 							<auc:Perimeter>1325</auc:Perimeter>
 							<auc:YearOfConstruction>1954</auc:YearOfConstruction>
 							<auc:YearOfLastMajorRemodel>2003</auc:YearOfLastMajorRemodel>
-							<auc:Subsections>
-								<auc:Subsection ID="Default_Subsection">
+							<auc:Sections>
+								<auc:Section ID="Default_Subsection">
 									<auc:OccupancyClassification>Retail</auc:OccupancyClassification>
 									<auc:TypicalOccupantUsages>
 										<auc:TypicalOccupantUsage>
@@ -95,7 +95,7 @@
 										</auc:FloorArea>
 									</auc:FloorAreas>
 								</auc:Subsection>
-							</auc:Subsections>
+							</auc:Sections>
 						</auc:Building>
 					</auc:Buildings>
 				</auc:Site>

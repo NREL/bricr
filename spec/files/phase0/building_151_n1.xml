@@ -67,8 +67,8 @@
 							<n1:Perimeter>1325</n1:Perimeter>
 							<n1:YearOfConstruction>1954</n1:YearOfConstruction>
 							<n1:YearOfLastMajorRemodel>2003</n1:YearOfLastMajorRemodel>
-							<n1:Subsections>
-								<n1:Subsection ID="Default_Subsection">
+							<n1:Sections>
+								<n1:Section ID="Default_Subsection">
 									<n1:OccupancyClassification>Retail</n1:OccupancyClassification>
 									<n1:TypicalOccupantUsages>
 										<n1:TypicalOccupantUsage>
@@ -95,7 +95,7 @@
 										</n1:FloorArea>
 									</n1:FloorAreas>
 								</n1:Subsection>
-							</n1:Subsections>
+							</n1:Sections>
 						</n1:Building>
 					</n1:Buildings>
 				</n1:Site>
