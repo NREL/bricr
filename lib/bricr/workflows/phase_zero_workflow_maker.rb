@@ -236,6 +236,9 @@ module BRICR
       if defined?(BRICR::DO_MODEL_CALIBRATION) and BRICR::DO_MODEL_CALIBRATION
         set_measure_argument(osw, 'calibrate_baseline_model', '__SKIP__', false)
       end
+
+      # OpenStudio Results (get monthly results in the JSON)
+      set_measure_argument(osw, 'openstudio_results', 'reg_monthly_details', true)
     end
 
     def configureForScenario(osw, scenario)
@@ -622,9 +625,6 @@ module BRICR
               set_measure_argument(osw, 'reduce_water_use_by_percentage', 'water_use_reduction_percent', 50)
             end
           end
-
-          # OpenStudio Results (get monthly results in the JSON)
-          set_measure_argument(osw, 'openstudio_results', 'reg_monthly_details', true)
         end
       end
       
@@ -731,6 +731,9 @@ module BRICR
       super
 
       results = {}
+      monthly_results = {}
+
+      month_lookup = {1 => 'jan', 2 => 'feb', 3 => 'mar', 4 => 'apr', 5 => 'may', 6 => 'jun', 7 => 'jul', 8 => 'aug', 9 => 'sep', 10 => 'oct', 11 => 'nov', 12 => 'dec'}
 
       # write an osw for each scenario
       @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Reports/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
@@ -766,8 +769,15 @@ module BRICR
         File.open(path, 'r') do |file|
           results[scenario_name] = JSON.parse(file.read, symbolize_names: true)
         end
+
+        # open results.json to get monthly timeseries
+        # just grabbed openstudio_results
+        path2 = File.join(osw_dir, 'results.json')
+        File.open(path2, 'r') do |file|
+          temp_res = JSON.parse(file.read, symbolize_names: true)
+          monthly_results[scenario_name] = temp_res[:OpenStudioResults]
+        end
         
-       
       end
 
       @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Reports/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
@@ -983,6 +993,8 @@ module BRICR
         timeseriesdata = REXML::Element.new("#{@ns}:TimeSeriesData")
 
         # Electricity
+        # looking for: "electricity_ip_jan" through "electricity_ip_dec"
+        # convert from kWh to kBtu
         (1..12).each do |month|
           timeseries = REXML::Element.new("#{@ns}:TimeSeries")
           reading_type = REXML::Element.new("#{@ns}:ReadingType")
@@ -1000,7 +1012,7 @@ module BRICR
           timeseries.add_element(start_time)
           end_time = REXML::Element.new("#{@ns}:EndTimeStamp")
           if month < 9
-            end_time.text = '2017-0' + month.to_s + '-01T00:00:00'
+            end_time.text = '2017-0' + (month+1).to_s + '-01T00:00:00'
           elsif month < 12
             end_time.text = '2017-' + (month+1).to_s + '-01T00:00:00'
           else
@@ -1011,7 +1023,9 @@ module BRICR
           interval_frequency.text = 'Month'
           timeseries.add_element(interval_frequency)
           interval_reading = REXML::Element.new("#{@ns}:IntervalReading")
-          interval_reading.text = '0'
+          the_key = "electricity_ip_#{month_lookup[month]}"
+          #puts "saving value: #{monthly_results[scenario_name][the_key.to_sym]}"
+          interval_reading.text = monthly_results[scenario_name][the_key.to_sym]* 3.412
           timeseries.add_element(interval_reading)
           resource_id = REXML::Element.new("#{@ns}:ResourceUseID")
           resource_id.add_attribute('IDref', scenario_name_ns + "_Electricity")
@@ -1019,6 +1033,9 @@ module BRICR
           timeseriesdata.add_element(timeseries)
         end
 
+        # Natural Gas
+        # looking for: "natural_gas_ip_jan" through "natural_gas_ip_dec"
+        # convert from MBtu to kBtu
         (1..12).each do |month|
           timeseries = REXML::Element.new("#{@ns}:TimeSeries")
           reading_type = REXML::Element.new("#{@ns}:ReadingType")
@@ -1036,7 +1053,7 @@ module BRICR
           timeseries.add_element(start_time)
           end_time = REXML::Element.new("#{@ns}:EndTimeStamp")
           if month < 9
-            end_time.text = '2017-0' + month.to_s + '-01T00:00:00'
+            end_time.text = '2017-0' + (month+1).to_s + '-01T00:00:00'
           elsif month < 12
             end_time.text = '2017-' + (month+1).to_s + '-01T00:00:00'
           else
@@ -1047,7 +1064,9 @@ module BRICR
           interval_frequency.text = 'Month'
           timeseries.add_element(interval_frequency)
           interval_reading = REXML::Element.new("#{@ns}:IntervalReading")
-          interval_reading.text = '0'
+          the_key = "natural_gas_ip_#{month_lookup[month]}"
+          #puts "saving value: #{monthly_results[scenario_name][the_key.to_sym]}"
+          interval_reading.text = monthly_results[scenario_name][the_key.to_sym]
           timeseries.add_element(interval_reading)
           resource_id = REXML::Element.new("#{@ns}:ResourceUseID")
           resource_id.add_attribute('IDref', scenario_name_ns + "_NaturalGas")
