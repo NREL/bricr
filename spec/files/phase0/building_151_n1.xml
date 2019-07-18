@@ -94,7 +94,7 @@
 											<n1:FloorAreaValue>0.0</n1:FloorAreaValue>
 										</n1:FloorArea>
 									</n1:FloorAreas>
-								</n1:Subsection>
+								</n1:Section>
 							</n1:Sections>
 						</n1:Building>
 					</n1:Buildings>
