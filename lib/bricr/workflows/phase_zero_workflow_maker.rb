@@ -754,7 +754,7 @@ module BRICR
         path = File.join(osw_dir, 'eplusout.eso')
         FileUtils.rm_f(path) if File.exists?(path)
         
-        Dir.glob(File.join(osw_dir, '*create_typical_building_from_model')).each do |path|
+        Dir.glob(File.join(osw_dir, '*create_typical_building_from_model*')).each do |path|
           FileUtils.rm_rf(path) if File.exists?(path)
         end
         
@@ -846,63 +846,80 @@ module BRICR
         # user_defined_field.add_element(field_value)
         # user_defined_fields.add_element(user_defined_field)
 
+        # KAF: I don't think we are using this in new schema. you would look at the baseline scenario and check its "SimulationCompletionStatus"  
+        #user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
+        #field_name = REXML::Element.new("#{@ns}:FieldName")
+        #field_name.text = 'OpenStudioBaselineCompletedStatus'
+        #field_value = REXML::Element.new("#{@ns}:FieldValue")
+        #field_value.text = baseline[:completed_status]
+        #user_defined_field.add_element(field_name)
+        #user_defined_field.add_element(field_value)
+        #user_defined_fields.add_element(user_defined_field)      
+        
         # this is now in PackageOfMeasures.CalculationMethod.Modeled.SimulationCompletionStatus
         # options are: Not Started, Started, Finished, Failed, Unknown
         calc_method = REXML::Element.new("#{@ns}:CalculationMethod")
         modeled = REXML::Element.new("#{@ns}:Modeled")
+        software_program_used = REXML::Element.new("#{@ns}:SoftwareProgramUsed")
+        software_program_used.text = 'OpenStudio'
+        modeled.add_element(software_program_used)
+        software_program_version = REXML::Element.new("#{@ns}:SoftwareProgramVersion")
+        software_program_version.text = OpenStudio::openStudioLongVersion.to_s
+        modeled.add_element(software_program_version)
         weather_data_type = REXML::Element.new("#{@ns}:WeatherDataType")
         weather_data_type.text = 'TMY3'
         modeled.add_element(weather_data_type)
         sim_completion_status = REXML::Element.new("#{@ns}:SimulationCompletionStatus")
         sim_completion_status.text = result[:completed_status] === 'Success' ? 'Finished' : 'Failed'  # TODO: double check what these keys can be
         modeled.add_element(sim_completion_status)
-
         calc_method.add_element(modeled)
-        package_of_measures.add_element(calc_method)
-
-        # KAF: I don't think we are using this in new schema. you would look at the baseline scenario and check its "SimulationCompletionStatus"  
-        # leaving it here for now      
-        user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
-        field_name = REXML::Element.new("#{@ns}:FieldName")
-        field_name.text = 'OpenStudioBaselineCompletedStatus'
-        field_value = REXML::Element.new("#{@ns}:FieldValue")
-        field_value.text = baseline[:completed_status]
-        user_defined_field.add_element(field_name)
-        user_defined_field.add_element(field_value)
-        user_defined_fields.add_element(user_defined_field)        
+        package_of_measures.add_element(calc_method)  
         
         # Check out.osw "openstudio_results" for output variables
-        total_site_energy = getMeasureResult(result, 'openstudio_results', 'total_site_energy') # in kBtu/year
-        total_site_energy = total_site_energy / 1000.0 if total_site_energy # kBtu/year -> MMBtu/year
-        baseline_total_site_energy = getMeasureResult(baseline, 'openstudio_results', 'total_site_energy') # in kBtu
-        baseline_total_site_energy = baseline_total_site_energy / 1000.0 if baseline_total_site_energy # kBtu/year -> MMBtu/year
-        fuel_electricity = getMeasureResult(result, 'openstudio_results', 'fuel_electricity') # in kBtu/year
-        baseline_fuel_electricity = getMeasureResult(baseline, 'openstudio_results', 'fuel_electricity') # in kBtu/year
-        #fuel_electricity = fuel_electricity * 0.2930710702 # kBtu/year -> kWh
-        fuel_natural_gas = getMeasureResult(result, 'openstudio_results', 'fuel_natural_gas') # in kBtu/year
-        baseline_fuel_natural_gas = getMeasureResult(baseline, 'openstudio_results', 'fuel_natural_gas') # in kBtu/year
+        total_site_energy_kbtu = getMeasureResult(result, 'openstudio_results', 'total_site_energy') # in kBtu
+        baseline_total_site_energy_kbtu = getMeasureResult(baseline, 'openstudio_results', 'total_site_energy') # in kBtu
+        
+        total_site_eui_kbtu_ft2 = getMeasureResult(result, 'openstudio_results', 'total_site_eui') # in kBtu/ft2
+        baseline_total_site_eui_kbtu_ft2 = getMeasureResult(baseline, 'openstudio_results', 'total_site_eui') # in kBtu/ft2
+        
+        # DLM: this is not being populated, https://github.com/NREL/OpenStudio-measures/issues/254
+        #total_source_energy_kbtu = getMeasureResult(result, 'openstudio_results', 'total_source_energy') # in kBtu
+        #baseline_total_source_energy_kbtu = getMeasureResult(baseline, 'openstudio_results', 'total_source_energy') # in kBtu
+        
+        fuel_electricity_kbtu = getMeasureResult(result, 'openstudio_results', 'fuel_electricity') # in kBtu
+        baseline_fuel_electricity_kbtu = getMeasureResult(baseline, 'openstudio_results', 'fuel_electricity') # in kBtu
+
+        fuel_natural_gas_kbtu = getMeasureResult(result, 'openstudio_results', 'fuel_natural_gas') # in kBtu
+        baseline_fuel_natural_gas_kbtu = getMeasureResult(baseline, 'openstudio_results', 'fuel_natural_gas') # in kBtu
+        
+        annual_peak_electric_demand_kw = getMeasureResult(result, 'openstudio_results', 'annual_peak_electric_demand') # in kW
+        baseline_annual_peak_electric_demand_kw = getMeasureResult(baseline, 'openstudio_results', 'annual_peak_electric_demand') # in kW
+        
         annual_utility_cost = getMeasureResult(result, 'openstudio_results', 'annual_utility_cost') # in $
         baseline_annual_utility_cost = getMeasureResult(baseline, 'openstudio_results', 'annual_utility_cost') # in $
 
-        total_site_energy_savings = 0
+        total_site_energy_savings_mmbtu = 0
+        if baseline_total_site_energy_kbtu && total_site_energy_kbtu
+          total_site_energy_savings_mmbtu = (baseline_total_site_energy_kbtu - total_site_energy_kbtu) / 1000.0 # in MMBtu
+        end
+        
         total_energy_cost_savings = 0
-        if baseline_total_site_energy && total_site_energy
-          total_site_energy_savings = baseline_total_site_energy - total_site_energy
+        if baseline_annual_utility_cost && annual_utility_cost
           total_energy_cost_savings = baseline_annual_utility_cost - annual_utility_cost
         end
         
         annual_savings_site_energy = REXML::Element.new("#{@ns}:AnnualSavingsSiteEnergy")
         annual_savings_energy_cost = REXML::Element.new("#{@ns}:AnnualSavingsCost")
         
-        annual_savings_site_energy.text = total_site_energy_savings
+        annual_savings_site_energy.text = total_site_energy_savings_mmbtu
         annual_savings_energy_cost.text = total_energy_cost_savings.to_i # BuildingSync wants an integer, might be a BuildingSync bug
 
         package_of_measures.add_element(annual_savings_site_energy)
         package_of_measures.add_element(annual_savings_energy_cost)
 
         # KAF: adding annual savings by fuel
-        electricity_savings = baseline_fuel_electricity - fuel_electricity
-        natural_gas_savings = baseline_fuel_natural_gas - fuel_natural_gas
+        electricity_savings = baseline_fuel_electricity_kbtu - fuel_electricity_kbtu
+        natural_gas_savings = baseline_fuel_natural_gas_kbtu - fuel_natural_gas_kbtu
         annual_savings = REXML::Element.new("#{@ns}:AnnualSavingsByFuels")
         annual_saving = REXML::Element.new("#{@ns}:AnnualSavingsByFuel")
         energy_res = REXML::Element.new("#{@ns}:EnergyResource")
@@ -960,13 +977,22 @@ module BRICR
         res_units = REXML::Element.new("#{@ns}:ResourceUnits")
         res_units.text = 'kBtu'
         native_units = REXML::Element.new("#{@ns}:AnnualFuelUseNativeUnits")
-        native_units.text = fuel_electricity.to_s
+        native_units.text = fuel_electricity_kbtu.to_s
         consistent_units = REXML::Element.new("#{@ns}:AnnualFuelUseConsistentUnits")
-        consistent_units.text = (fuel_electricity / 1000).to_s  # in MMBtu
+        consistent_units.text = (fuel_electricity_kbtu / 1000.0).to_s  # convert to MMBtu
         res_use.add_element(energy_res)
         res_use.add_element(res_units)
         res_use.add_element(native_units)
         res_use.add_element(consistent_units)
+        peak_units = REXML::Element.new("#{@ns}:PeakResourceUnits")
+        peak_units.text = 'kW'
+        peak_native_units = REXML::Element.new("#{@ns}:AnnualPeakNativeUnits")
+        peak_native_units.text = annual_peak_electric_demand_kw.to_s
+        peak_consistent_units = REXML::Element.new("#{@ns}:AnnualPeakConsistentUnits")
+        peak_consistent_units.text = annual_peak_electric_demand_kw.to_s  
+        res_use.add_element(peak_units)
+        res_use.add_element(peak_native_units)
+        res_use.add_element(peak_consistent_units)
         res_uses.add_element(res_use)
 
         # NATURAL GAS
@@ -977,9 +1003,9 @@ module BRICR
         res_units = REXML::Element.new("#{@ns}:ResourceUnits")
         res_units.text = 'kBtu'
         native_units = REXML::Element.new("#{@ns}:AnnualFuelUseNativeUnits")
-        native_units.text = fuel_electricity.to_s
+        native_units.text = fuel_natural_gas_kbtu.to_s
         consistent_units = REXML::Element.new("#{@ns}:AnnualFuelUseConsistentUnits")
-        consistent_units.text = (fuel_electricity / 1000).to_s  # in MMBtu
+        consistent_units.text = (fuel_natural_gas_kbtu / 1000.0).to_s  # in MMBtu
         res_use.add_element(energy_res)
         res_use.add_element(res_units)
         res_use.add_element(native_units)
@@ -988,7 +1014,6 @@ module BRICR
         scenario_type = scenario.elements["#{@ns}:ScenarioType"]
         scenario.insert_after(scenario_type, res_uses)
 
-        # KAF: prototype for adding monthly data (fake it for now)
         # already added ResourceUses above. Needed as ResourceUseID reference
         timeseriesdata = REXML::Element.new("#{@ns}:TimeSeriesData")
 
@@ -1025,7 +1050,7 @@ module BRICR
           interval_reading = REXML::Element.new("#{@ns}:IntervalReading")
           the_key = "electricity_ip_#{month_lookup[month]}"
           #puts "saving value: #{monthly_results[scenario_name][the_key.to_sym]}"
-          interval_reading.text = monthly_results[scenario_name][the_key.to_sym]* 3.412
+          interval_reading.text = monthly_results[scenario_name][the_key.to_sym] * 3.4121416331 # kWh to kBtu
           timeseries.add_element(interval_reading)
           resource_id = REXML::Element.new("#{@ns}:ResourceUseID")
           resource_id.add_attribute('IDref', scenario_name_ns + "_Electricity")
@@ -1035,7 +1060,7 @@ module BRICR
 
         # Natural Gas
         # looking for: "natural_gas_ip_jan" through "natural_gas_ip_dec"
-        # convert from MBtu to kBtu
+        # convert from MMBtu to kBtu
         (1..12).each do |month|
           timeseries = REXML::Element.new("#{@ns}:TimeSeries")
           reading_type = REXML::Element.new("#{@ns}:ReadingType")
@@ -1066,7 +1091,7 @@ module BRICR
           interval_reading = REXML::Element.new("#{@ns}:IntervalReading")
           the_key = "natural_gas_ip_#{month_lookup[month]}"
           #puts "saving value: #{monthly_results[scenario_name][the_key.to_sym]}"
-          interval_reading.text = monthly_results[scenario_name][the_key.to_sym]
+          interval_reading.text = monthly_results[scenario_name][the_key.to_sym] * 1000.0 # MMBtu to kBtu
           timeseries.add_element(interval_reading)
           resource_id = REXML::Element.new("#{@ns}:ResourceUseID")
           resource_id.add_attribute('IDref', scenario_name_ns + "_NaturalGas")
@@ -1075,24 +1100,22 @@ module BRICR
         end
         scenario.insert_after(res_uses, timeseriesdata)
 
-        # user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
-        # field_name = REXML::Element.new("#{@ns}:FieldName")
-        # field_name.text = 'OpenStudioAnnualSiteEnergy_MMBtu'
-        # field_value = REXML::Element.new("#{@ns}:FieldValue")
-        # field_value.text = total_site_energy.to_s
-        # user_defined_field.add_element(field_name)
-        # user_defined_field.add_element(field_value)
-        # user_defined_fields.add_element(user_defined_field)
+        # all the totals
         all_res_totals = REXML::Element.new("#{@ns}:AllResourceTotals")
         all_res_total = REXML::Element.new("#{@ns}:AllResourceTotal")
         end_use = REXML::Element.new("#{@ns}:EndUse")
         end_use.text = 'All end uses'
         site_energy_use = REXML::Element.new("#{@ns}:SiteEnergyUse")
-        site_energy_use.text = total_site_energy.to_s
+        site_energy_use.text = total_site_energy_kbtu.to_s
+        site_energy_use_intensity = REXML::Element.new("#{@ns}:SiteEnergyUseIntensity")
+        site_energy_use_intensity.text = total_site_eui_kbtu_ft2.to_s
         all_res_total.add_element(end_use)
         all_res_total.add_element(site_energy_use)
+        all_res_total.add_element(site_energy_use_intensity)
         all_res_totals.add_element(all_res_total)
         scenario.insert_after(timeseriesdata, all_res_totals)
+       
+        # no longer using user defined fields
         scenario.elements.delete("#{@ns}:UserDefinedFields")
 
       end
