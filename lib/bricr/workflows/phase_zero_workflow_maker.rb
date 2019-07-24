@@ -726,6 +726,26 @@ module BRICR
 
       return nil
     end
+    
+    # DLM: total hack because these are not reported in the out.osw
+    # output is array of [source_energy, source_eui] in kBtu and kBtu/ft2
+    def getSourceEnergyArray(eplustbl_path)
+      result = []
+      File.open(eplustbl_path, 'r') do |f|
+        while line = f.gets
+          if /\<td align=\"right\"\>Total Source Energy\<\/td\>/.match(line)
+            result << /\<td align=\"right\"\>(.*?)<\/td\>/.match(f.gets)[1].to_f
+            result << /\<td align=\"right\"\>(.*?)<\/td\>/.match(f.gets)[1].to_f
+            break
+          end
+        end
+      end
+      
+      result[0] = result[0]*947.8171203133 # GJ to kBtu
+      result[1] = result[1]*0.947817120313*0.092903 # MJ/m2 to kBtu/ft2
+      
+      return result
+    end
 
     def gatherResults(dir)
       super
@@ -886,6 +906,18 @@ module BRICR
         #total_source_energy_kbtu = getMeasureResult(result, 'openstudio_results', 'total_source_energy') # in kBtu
         #baseline_total_source_energy_kbtu = getMeasureResult(baseline, 'openstudio_results', 'total_source_energy') # in kBtu
         
+        # temporary hack to get source energy
+        eplustbl_path = File.join(dir, scenario_name, 'eplustbl.htm')
+        source_energy = getSourceEnergyArray(eplustbl_path)
+        total_source_energy_kbtu = source_energy[0]
+        total_source_eui_kbtu_ft2 = source_energy[1]
+        
+        baseline_eplustbl_path = File.join(dir, 'Baseline', 'eplustbl.htm')
+        baseline_source_energy = getSourceEnergyArray(baseline_eplustbl_path)
+        baseline_total_source_energy_kbtu = baseline_source_energy[0]
+        baseline_total_source_eui_kbtu_ft2 = baseline_source_energy[1]
+        # end hack
+        
         fuel_electricity_kbtu = getMeasureResult(result, 'openstudio_results', 'fuel_electricity') # in kBtu
         baseline_fuel_electricity_kbtu = getMeasureResult(baseline, 'openstudio_results', 'fuel_electricity') # in kBtu
 
@@ -903,18 +935,26 @@ module BRICR
           total_site_energy_savings_mmbtu = (baseline_total_site_energy_kbtu - total_site_energy_kbtu) / 1000.0 # in MMBtu
         end
         
+        total_source_energy_savings_mmbtu = 0
+        if baseline_total_source_energy_kbtu && total_source_energy_kbtu
+          total_source_energy_savings_mmbtu = (baseline_total_source_energy_kbtu - total_source_energy_kbtu) / 1000.0 # in MMBtu
+        end
+        
         total_energy_cost_savings = 0
         if baseline_annual_utility_cost && annual_utility_cost
           total_energy_cost_savings = baseline_annual_utility_cost - annual_utility_cost
         end
         
         annual_savings_site_energy = REXML::Element.new("#{@ns}:AnnualSavingsSiteEnergy")
+        annual_savings_source_energy = REXML::Element.new("#{@ns}:AnnualSavingsSourceEnergy")
         annual_savings_energy_cost = REXML::Element.new("#{@ns}:AnnualSavingsCost")
         
         annual_savings_site_energy.text = total_site_energy_savings_mmbtu
+        annual_savings_source_energy.text = total_source_energy_savings_mmbtu
         annual_savings_energy_cost.text = total_energy_cost_savings.to_i # BuildingSync wants an integer, might be a BuildingSync bug
 
         package_of_measures.add_element(annual_savings_site_energy)
+        package_of_measures.add_element(annual_savings_source_energy)
         package_of_measures.add_element(annual_savings_energy_cost)
 
         # KAF: adding annual savings by fuel
@@ -1109,9 +1149,15 @@ module BRICR
         site_energy_use.text = total_site_energy_kbtu.to_s
         site_energy_use_intensity = REXML::Element.new("#{@ns}:SiteEnergyUseIntensity")
         site_energy_use_intensity.text = total_site_eui_kbtu_ft2.to_s
+        source_energy_use = REXML::Element.new("#{@ns}:SourceEnergyUse")
+        source_energy_use.text = total_source_energy_kbtu.to_s
+        source_energy_use_intensity = REXML::Element.new("#{@ns}:SourceEnergyUseIntensity")
+        source_energy_use_intensity.text = total_source_eui_kbtu_ft2.to_s
         all_res_total.add_element(end_use)
         all_res_total.add_element(site_energy_use)
         all_res_total.add_element(site_energy_use_intensity)
+        all_res_total.add_element(source_energy_use)
+        all_res_total.add_element(source_energy_use_intensity)
         all_res_totals.add_element(all_res_total)
         scenario.insert_after(timeseriesdata, all_res_totals)
        
