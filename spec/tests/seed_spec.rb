@@ -7,6 +7,8 @@ require 'pp'
 
 describe 'BRICR' do
   it 'should upload and download building sync for one cycle' do
+    pending("Test depends on bricr-dev branch of SEED")
+    
     # Get the unique building ID. For now this is taken from the Premises Identifier custom id field.
     UBID = 'e6a5de56-8234-4b4f-ba10-6af0ae612fd1'.freeze
 

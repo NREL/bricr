@@ -39,12 +39,13 @@ module BRICR
   end
     
   def self.get_seed_org(seed)
-    org = seed.get_or_create_organization('BRICR Test Organization')
+    org_name = ENV["BRICR_SEED_ORGANIZATION"] || 'BRICR Test Organization'
+    org = seed.get_or_create_organization(org_name)
     return org
   end
 
   def self.get_seed_cycle(seed)
-    cycle_name = 'BRICR Test Cycle - 2011'
+    cycle_name = ENV["BRICR_SEED_CYCLE"] || 'BRICR Test Cycle - 2011'
 
     # TODO: look into the time zone of these requests. The times are getting converted and don't look right in the SEED UI
     cycle_start = DateTime.parse('2010-01-01 00:00:00Z')
@@ -54,7 +55,7 @@ module BRICR
   end
   
   def self.get_seed_search_profile(seed)
-    profile_name = 'BRICR-Search'
+    profile_name = ENV['BRICR_SEED_SEARCH_PROFILE'] || 'BRICR-Search'
 
     profile = nil
     profiles = seed.profiles()

@@ -526,7 +526,7 @@ module BRICR
               if @facility['bldg_type'] == "SmallOffice"
                 set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Office WholeBuilding - Sm Office - #{@facility['template']}")
               elsif @facility['bldg_type'] == "MediumOffice"
-                set_measure_argument(osw, 'create_typical_building_from_model', 'system_type', "PSZ-AC with gas coil heat")
+                set_measure_argument(osw, 'create_typical_building_from_model_bricr', 'system_type', "PSZ-AC with gas coil heat")
                 set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Office WholeBuilding - Md Office - #{@facility['template']}")
               elsif @facility['bldg_type'] == "RetailStandalone"
                 set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Retail - #{@facility['template']}")

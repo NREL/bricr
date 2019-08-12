@@ -16,3 +16,4 @@ seed.json
 seed-docker.json
 seed-configs.json
 gems/
+data/
