@@ -107,6 +107,7 @@ module BRICR
       @facility['wwr'] = nil # TBD
 
       @doc.elements.each("/#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Buildings/#{@ns}:Building") do |facility_element|
+		built_year = facility_element.elements["#{@ns}:YearOfConstruction"].text.to_f
 
         if facility_element.elements["#{@ns}:FloorsAboveGrade"]
           @facility['num_stories_above_grade'] = facility_element.elements["#{@ns}:FloorsAboveGrade"].text.to_f
@@ -169,7 +170,28 @@ module BRICR
             else
               raise "Office building size is beyond BRICR scope"
             end
-          else
+		  elsif subsection['occupancy_type'] == 'Hotel'
+			
+            subsection['bldg_type'] = 'SmallHotel'
+            subsection['bar_division_method'] = 'Multiple Space Types - Simple Sliced'
+            subsection['system_type'] = 'Inferred'
+			
+			puts subsection['bldg_type']
+			
+			# For hotels, use DOE templates. CBES does not have hotel templates.
+			if built_year < 2007
+			  @facility['template'] = "90.1-2004"
+			elsif built_year >= 2007 && built_year < 2010
+			  @facility['template'] = "90.1-2007"
+			elsif built_year >= 2010 && built_year < 2013
+			  @facility['template'] = "90.1-2010"
+			else
+			  @facility['template'] = "90.1-2013"
+			end
+			# Use climate zone 3C for the SmallHotel template. 
+			set_measure_argument(osw, 'ChangeBuildingLocationBRICR', 'climate_zone', "3C")
+          
+		  else
             raise "Building type '#{subsection['occupancy_type']}' is beyond BRICR scope"
           end
           
@@ -271,6 +293,8 @@ module BRICR
                 set_measure_argument(osw, 'AddDaylightSensors', 'space_type', "Office WholeBuilding - Md Office - #{@facility['template']}")
               elsif @facility['bldg_type'] == "RetailStandalone"
                 set_measure_argument(osw, 'AddDaylightSensors', 'space_type', "Retail Retail - #{@facility['template']}")
+			  elsif @facility['bldg_type'] == "SmallHotel"
+				set_measure_argument(osw, 'AddDaylightSensors', 'space_type', "SmallHotel GuestRoom123Occ - #{@facility['template']}")
               end
             end
             # Lighting / LightingImprovements / Add occupancy sensors
@@ -506,9 +530,8 @@ module BRICR
                 set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Office WholeBuilding - Md Office - #{@facility['template']}")
               elsif @facility['bldg_type'] == "RetailStandalone"
                 set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Retail - #{@facility['template']}")
-                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Point_of_Sale - #{@facility['template']}")
-                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Entry - #{@facility['template']}")
-                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Back_Space - #{@facility['template']}")
+			  elsif @facility['bldg_type'] == "SmallHotel"
+                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "SmallHotel GuestRoom123Occ - #{@facility['template']}")
               end
             end
           end

@@ -95,6 +95,8 @@ def get_occupancy_classification(feature)
   when 'CIE'
     result = 'Assembly-Cultural entertainment'
     raise "#{result} is not a supported Occupancy Classification"
+  when 'Hotel'
+    result = 'Hotel'   
   when 'MED'
     result = 'Health care'
     raise "#{result} is not a supported Occupancy Classification"
