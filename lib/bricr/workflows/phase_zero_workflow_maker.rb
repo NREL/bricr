@@ -173,7 +173,7 @@ module BRICR
 		  elsif subsection['occupancy_type'] == 'Hotel'
 			
             subsection['bldg_type'] = 'SmallHotel'
-            subsection['bar_division_method'] = 'Multiple Space Types - Simple Sliced'
+            subsection['bar_division_method'] = 'Multiple Space Types - Individual Stories Sliced'
             subsection['system_type'] = 'Inferred'
 			
 			puts subsection['bldg_type']
@@ -448,7 +448,11 @@ module BRICR
                 num_measures += 1
                 set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', '__SKIP__', false)
                 set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', 'cop', 4.1)
-              elsif @facility['system_type'] == "PVAV with reheat"
+              elsif @facility['system_type'] == "Inferred"
+                num_measures += 1
+                set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', '__SKIP__', false)
+                set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', 'cop', 4.1)
+			  elsif @facility['system_type'] == "PVAV with reheat"
                 num_measures += 1
                 set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', '__SKIP__', false)
                 set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', 'cop_high', 4.1)
@@ -597,16 +601,18 @@ module BRICR
             measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:OtherHVAC/#{@ns}:MeasureName"].text 
             # Heat Recovery / OtherHVAC / Add energy recovery
             if measure_name == "Add energy recovery"
-              num_measures += 1
-              set_measure_argument(osw, 'add_energy_recovery_ventilator', '__SKIP__', false)
-              set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_100_heating', 0)
-              set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_100_heating', 0)
-              set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_75_heating', 0)
-              set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_75_heating', 0)
-              set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_100_cooling', 1)
-              set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_100_cooling', 1)
-              set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_75_cooling', 1)
-              set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_75_cooling', 1)
+			    num_measures += 1
+				if @facility['bldg_type'] != "SmallHotel" # No energy recovery for small hotel PTAC system
+			      set_measure_argument(osw, 'add_energy_recovery_ventilator', '__SKIP__', false)
+			      set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_100_heating', 0)
+			      set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_100_heating', 0)
+			      set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_75_heating', 0)
+			      set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_75_heating', 0)
+			      set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_100_cooling', 1)
+			      set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_100_cooling', 1)
+			      set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_75_cooling', 1)
+				  set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_75_cooling', 1)
+				end
             end
           end
       
