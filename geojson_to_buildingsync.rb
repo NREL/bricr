@@ -410,7 +410,11 @@ def create_site(feature)
   # create single subsection
   subsection = REXML::Element.new('auc:Section')
   subsection.attributes['ID'] = "Default_Section"
-
+  
+  section_type = REXML::Element.new('auc:SectionType')
+  section_type.text = "Whole building"
+  subsection.add_element(section_type)
+  
   occupancy_classification = REXML::Element.new('auc:OccupancyClassification')
   occupancy_classification.text = get_occupancy_classification(feature)
   subsection.add_element(occupancy_classification)
