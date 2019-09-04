@@ -131,8 +131,8 @@ module BRICR
         end
         
         @facility['building_rotation'] = 0.0 # setDefaultValue
-        @facility['floor_height'] = 0.0 # setDefaultValue in ft
-        @facility['wwr'] = 0.0 # setDefaultValue in fraction
+        @facility['floor_height'] = 15 # setDefaultValue in ft
+        @facility['wwr'] = 0.15 # setDefaultValue in fraction
       
         subsections = []
         facility_element.elements.each("#{@ns}:Sections/#{@ns}:Section") do |subsection_element|
