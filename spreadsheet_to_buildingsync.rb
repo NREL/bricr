@@ -24,16 +24,21 @@
 #
 ########################################################################################################################
 
-require 'json'
+require 'spreadsheet'
 require 'rexml/document'
 require 'FileUtils'
 
 if ARGV[0].nil? || !File.exist?(ARGV[0])
-  puts 'usage: bundle exec ruby geojson_to_buildingsync.rb /path/to/geojson.json'
+  puts 'usage: bundle exec ruby spreadsheet_to_buildingsync.rb /path/to/spreadsheet.xls worksheet_name'
+  puts ".XLS files only"
   exit(1)
 end
 
 def convert(value, unit_in, unit_out)
+  if value.nil?
+    raise 'No value to convert'
+  end
+
   if unit_in == unit_out
   elsif unit_in == 'm'
     if unit_out == 'ft'
@@ -48,7 +53,7 @@ def convert(value, unit_in, unit_out)
 end
 
 def get_building_classification(feature)
-  classification = feature[:properties][:"Occupancy Classification"]
+  classification = feature[:properties][:"OccupancyClassification"]
 
   # https://data.sfgov.org/Housing-and-Buildings/Land-Use/us3s-fp9q/about
   result = nil
@@ -80,14 +85,14 @@ def get_building_classification(feature)
   when 'MISSING DATA'
     result = 'Other'
   else
-    raise "Unknown building classification #{classification}"
+    raise "Unknown classification #{classification}"
   end
 
   return result
 end
 
 def get_occupancy_classification(feature)
-  classification = feature[:properties][:"Occupancy Classification"]
+  classification = feature[:properties][:"OccupancyClassification"]
 
   # https://data.sfgov.org/Housing-and-Buildings/Land-Use/us3s-fp9q/about
   result = nil
@@ -95,107 +100,40 @@ def get_occupancy_classification(feature)
   when 'CIE'
     result = 'Assembly-Cultural entertainment'
     raise "#{result} is not a supported Occupancy Classification"
-  when 'Hotel'
-    result = 'Hotel'   
   when 'MED'
     result = 'Health care'
-    #raise "#{result} is not a supported Occupancy Classification"
+    raise "#{result} is not a supported Occupancy Classification"
   when 'MIPS'
     result = 'Office'
   when 'MIXED'
     result = 'Mixed-use commercial'
-    #raise "#{result} is not a supported Occupancy Classification"
+    raise "#{result} is not a supported Occupancy Classification"
   when 'MIXRES'
     result = 'Residential'
-    #raise "#{result} is not a supported Occupancy Classification"
+    raise "#{result} is not a supported Occupancy Classification"
   when 'Office'
     result = 'Office'    
   when 'OPENSPACE', 'OpenSpace'
     result = 'Other'
-    #raise "#{result} is not a supported Occupancy Classification"
+    raise "#{result} is not a supported Occupancy Classification"
   when 'PDR'
     result = 'Industrial'
-    #raise "#{result} is not a supported Occupancy Classification"
+    raise "#{result} is not a supported Occupancy Classification"
   when 'Retail'
     result = 'Retail'    
   when "RETAIL\/ENT"
     result = 'Retail'
   when 'RESIDENT'
     result = 'Residential'
-    #raise "#{result} is not a supported Occupancy Classification"
+    raise "#{result} is not a supported Occupancy Classification"
   when 'VISITOR'
     result = 'Lodging'
-    #raise "#{result} is not a supported Occupancy Classification"
+    raise "#{result} is not a supported Occupancy Classification"
   when 'MISSING DATA'
     result = 'Unknown'
-    #raise "#{result} is not a supported Occupancy Classification"
-    
-  when 'Arts & Culture'
-    result = 'Assembly-Cultural entertainment'
-  when 'Automobile Dealership'
-    result = 'Retail'   
-  when 'Bar/Nightclub'
-    result = 'Bar'    
-  when 'Churches,Convents,Rectories'
-    result = 'Assembly-Religious'
-  when 'Clubs,Lodges,Fraternal Organizations'
-    result = 'Assembly-Cultural entertainment'
-  when 'Convalescent/Nursing Homes'
-    result = 'Health care-Skilled nursing facility'    
-  when 'Data Center'
-    result = 'Data center'
-  when 'Distribution Center'
-    result = 'Service-Postal'
-  when 'Education'
-    result = 'Education'    
-  when 'Fitness Center/Health Club/Gym'
-    result = 'Recreation-Fitness center'
-  when 'Food Service'
-    result = 'Food service'
-  when 'Healthcare'
-    result = 'Health care'
-  when 'Industrial'
-    result = 'Industrial'
-  when 'Laboratory'
-    result = 'Laboratory'    
-  when 'Misc'
-    result = 'Other' 
-  when 'Mixed Use'
-    result = 'Mixed-use commercial'
-  when 'Multifamily'
-    result = 'Multifamily'
-  when 'Other'
-    result = 'Other' 
-  when 'Office/RES'
-    result = 'Office'
-  when 'Parking Garage'
-    result = 'Parking' 
-  when 'Retail/Hotel'
-    result = 'Lodging with extended amenities' 
-  when 'Retail/RES'
-    result = 'Retail'     
-  when 'Self-Storage Facility'
-    result = 'Warehouse-Self-storage'
-  when 'Senior Care Community'
-    result = 'Health care-Skilled nursing facility'
-  when 'Services'
-    result = 'Service'
-  when 'Social/Meeting Hall'
-    result = 'Assembly-Cultural entertainment'    
-  when 'Theater'
-    result = 'Assembly-Cultural entertainment'
-  when 'Unknown'
-    result = 'Unknown'    
-  when 'Warehouse'
-    result = 'Warehouse-Unrefrigerated'
-  when 'Worship Facility'    
-    result = 'Assembly-Religious'
-  when '0'    
-    result = 'Other'  
-  when 0    
-    result = 'Other'        
+    raise "#{result} is not a supported Occupancy Classification"
   else
-    raise "Unknown occupancy classification #{classification}"
+    raise "Unknown classification #{classification}"
   end
 
   return result
@@ -234,7 +172,11 @@ def get_building_id(feature)
 end
 
 def get_floor_area(feature)
-  return convert(feature[:properties][:"Gross Floor Area"], 'ft2', 'ft2')
+  if feature[:properties][:"SQFT (Assessor/ECBO)"].nil?
+    raise 'Floor Area (SQFT) is empty'
+  end
+  # return convert(feature[:properties][:"Gross Floor Area"], 'ft2', 'ft2')
+  return convert(feature[:properties][:"SQFT (Assessor/ECBO)"], 'ft2', 'ft2')
 end
 
 def create_site(feature)
@@ -248,25 +190,27 @@ def create_site(feature)
   street_address_detail = REXML::Element.new('auc:StreetAddressDetail')
   simplified = REXML::Element.new('auc:Simplified')
   street_address = REXML::Element.new('auc:StreetAddress')
-  # DLM: there is a "From Street Number" and a "To Street Number", check if these are equal
-  from_street_number = feature[:properties][:"From Street Number"]
-  to_street_number = feature[:properties][:"To Street Number"]
+  # # DLM: there is a "From Street Number" and a "To Street Number", check if these are equal
+  # from_street_number = feature[:properties][:"From Street Number"]
+  # to_street_number = feature[:properties][:"To Street Number"]
   
-  street_number = ""
-  if from_street_number && to_street_number
-    if from_street_number == to_street_number
-      street_number = from_street_number
-    else
-      street_number = "#{from_street_number} - #{to_street_number}"
-    end
-  elsif from_street_number
-    street_number = from_street_number.to_s
-  elsif to_street_number
-    street_number = to_street_number.to_s
-  end
+  # street_number = ""
+  # if from_street_number && to_street_number
+  #   if from_street_number == to_street_number
+  #     street_number = from_street_number
+  #   else
+  #     street_number = "#{from_street_number} - #{to_street_number}"
+  #   end
+  # elsif from_street_number
+  #   street_number = from_street_number.to_s
+  # elsif to_street_number
+  #   street_number = to_street_number.to_s
+  # end
 
-  street_address_text = "#{street_number} #{feature[:properties][:"Street Name"]} #{feature[:properties][:"Street Name Post Type"]}"
+  # street_address_text = "#{street_number} #{feature[:properties][:"Street Name"]} #{feature[:properties][:"Street Name Post Type"]}"
+  street_address_text = feature[:properties][:Address]
   street_address.text = street_address_text
+
   simplified.add_element(street_address)
   street_address_detail.add_element(simplified)
   address.add_element(street_address_detail)
@@ -280,10 +224,10 @@ def create_site(feature)
   address.add_element(state)
 
   # if zip code is nil, default for now
-  feature[:properties][:"ZIP Code"] = 94104 if feature[:properties][:"ZIP Code"].nil?
-  raise "ZIP Code is not set" if feature[:properties][:"ZIP Code"].nil?
+  feature[:properties][:"Zipcode"] = 94104 if feature[:properties][:"Zipcode"].nil?
+  raise "ZIP Code is not set" if feature[:properties][:"Zipcode"].nil?
   postal_code = REXML::Element.new('auc:PostalCode')
-  postal_code.text = feature[:properties][:"ZIP Code"]
+  postal_code.text = feature[:properties][:"Zipcode"]
   address.add_element(postal_code)
 
   site.add_element(address)
@@ -318,16 +262,20 @@ def create_site(feature)
   site.add_element(weather_station_name)
 
   # longitude
-  raise "Longitude is not set" if feature[:geometry].nil? || feature[:geometry][:coordinates].nil?
-  longitude = REXML::Element.new('auc:Longitude')
-  longitude.text = feature[:geometry][:coordinates][0][0][0][0]
-  site.add_element(longitude)
+  #raise "Longitude is not set" if feature[:geometry].nil? || feature[:geometry][:coordinates].nil?
+  if !feature[:geometry].nil? && !feature[:geometry][:coordinates].nil?
+    longitude = REXML::Element.new('auc:Longitude')
+    longitude.text = feature[:geometry][:coordinates][0][0][0][0]
+    site.add_element(longitude)
+  end
 
   # latitude
-  raise "Latitude is not set" if feature[:geometry].nil? || feature[:geometry][:coordinates].nil?
-  latitude = REXML::Element.new('auc:Latitude')
-  latitude.text = feature[:geometry][:coordinates][0][0][0][1]
-  site.add_element(latitude)
+  #raise "Latitude is not set" if feature[:geometry].nil? || feature[:geometry][:coordinates].nil?
+  if !feature[:geometry].nil? && !feature[:geometry][:coordinates].nil?
+    latitude = REXML::Element.new('auc:Latitude')
+    latitude.text = feature[:geometry][:coordinates][0][0][0][1]
+    site.add_element(latitude)
+  end
 
   # ownership
   ownership = REXML::Element.new('auc:Ownership')
@@ -357,10 +305,13 @@ def create_site(feature)
   identifier_label.text = 'Assessor parcel number'
   premises_identifier.add_element(identifier_label)
   identifier_value = REXML::Element.new('auc:IdentifierValue')
-  identifier_value.text = feature[:properties][:"Assessor parcel number"]
+  # KAF changing to MBLR ?
+  # identifier_value.text = feature[:properties][:"Assessor parcel number"]
+  identifier_value.text = feature[:properties][:"MBLR"]
   premises_identifier.add_element(identifier_value)
   premises_identifiers.add_element(premises_identifier)
   
+
   # DLM: Custom ID is deprecated, just keeping here for testing with old seed instance
   premises_identifier = REXML::Element.new('auc:PremisesIdentifier')
   identifier_label = REXML::Element.new('auc:IdentifierLabel')
@@ -409,7 +360,7 @@ def create_site(feature)
   #building.add_element(occupancy_classification)
 
   floors_above_grade = REXML::Element.new('auc:FloorsAboveGrade')
-  floors_above_grade.text = feature[:properties][:"Number of Floors"] # DLM need to map this?
+  floors_above_grade.text = feature[:properties][:"Number of Floors"].to_i # DLM need to map this?
   building.add_element(floors_above_grade)
 
   floors_below_grade = REXML::Element.new('auc:FloorsBelowGrade')
@@ -423,7 +374,7 @@ def create_site(feature)
   floor_area_type.text = 'Gross'
   floor_area.add_element(floor_area_type)
   floor_area_value = REXML::Element.new('auc:FloorAreaValue')
-  floor_area_value.text = convert(feature[:properties][:"Gross Floor Area"], 'ft2', 'ft2')
+  floor_area_value.text = convert(feature[:properties][:"SQFT (Assessor/ECBO)"], 'ft2', 'ft2')
   floor_area.add_element(floor_area_value)
   floor_areas.add_element(floor_area)
   
@@ -432,7 +383,7 @@ def create_site(feature)
   floor_area_type.text = 'Heated and Cooled'
   floor_area.add_element(floor_area_type)
   floor_area_value = REXML::Element.new('auc:FloorAreaValue')
-  floor_area_value.text = convert(feature[:properties][:"Gross Floor Area"], 'ft2', 'ft2')
+  floor_area_value.text = convert(feature[:properties][:"SQFT (Assessor/ECBO)"], 'ft2', 'ft2')
   floor_area.add_element(floor_area_value)
   floor_areas.add_element(floor_area)
   
@@ -441,31 +392,33 @@ def create_site(feature)
   floor_area_type.text = 'Footprint'
   floor_area.add_element(floor_area_type)
   floor_area_value = REXML::Element.new('auc:FloorAreaValue')
-  floor_area_value.text = convert(feature[:properties][:"Building Footprint Floor Area"], 'm2', 'ft2')
+  floor_area_value.text = convert(feature[:properties][:"SQFT (Assessor/ECBO)"], 'ft2', 'ft2')
   floor_area.add_element(floor_area_value)
   floor_areas.add_element(floor_area)
 
   building.add_element(floor_areas)
 
   # aspect ratio and perimeter
-  if ar = calculate_aspect_ratio(feature)
-    aspect_ratio = REXML::Element.new('auc:AspectRatio')
-    aspect_ratio.text = ar
-    building.add_element(aspect_ratio)
-  end
+  # KAF: we don't have this
+  # if ar = calculate_aspect_ratio(feature)
+  #   aspect_ratio = REXML::Element.new('auc:AspectRatio')
+  #   aspect_ratio.text = ar
+  #   building.add_element(aspect_ratio)
+  # end
 
-  perimeter = REXML::Element.new('auc:Perimeter')
-  perimeter.text = convert(feature[:properties][:"Building Perimeter"], 'm', 'ft').to_i # DLM: BS thinks this is an int
-  building.add_element(perimeter)
+  # KAF: we don't have Perimeter
+  # perimeter = REXML::Element.new('auc:Perimeter')
+  # perimeter.text = convert(feature[:properties][:"Building Perimeter"], 'm', 'ft').to_i # DLM: BS thinks this is an int
+  # building.add_element(perimeter)
 
   # year of construction and modified
   year_of_construction = REXML::Element.new('auc:YearOfConstruction')
-  year_of_construction.text = feature[:properties][:"Completed Construction Status Date"]
+  year_of_construction.text = feature[:properties][:"YRBLT (Assessor/ECBO)"].to_i
   building.add_element(year_of_construction)
 
   if md = /^(\d\d\d\d).*/.match(feature[:properties][:"Last Modified Date"].to_s)
     year_of_last_major_remodel = REXML::Element.new('auc:YearOfLastMajorRemodel')
-    year_of_last_major_remodel.text = md[1]
+    year_of_last_major_remodel.text = md[1].to_i
     building.add_element(year_of_last_major_remodel)
   end
   
@@ -475,11 +428,7 @@ def create_site(feature)
   # create single subsection
   subsection = REXML::Element.new('auc:Section')
   subsection.attributes['ID'] = "Default_Section"
-  
-  section_type = REXML::Element.new('auc:SectionType')
-  section_type.text = "Whole building"
-  subsection.add_element(section_type)
-  
+
   occupancy_classification = REXML::Element.new('auc:OccupancyClassification')
   occupancy_classification.text = get_occupancy_classification(feature)
   subsection.add_element(occupancy_classification)
@@ -513,7 +462,7 @@ def create_site(feature)
   floor_area_type.text = 'Gross'
   floor_area.add_element(floor_area_type)
   floor_area_value = REXML::Element.new('auc:FloorAreaValue')
-  floor_area_value.text = convert(feature[:properties][:"Gross Floor Area"], 'ft2', 'ft2')
+  floor_area_value.text = convert(feature[:properties][:"SQFT (Assessor/ECBO)"], 'ft2', 'ft2')
   floor_area.add_element(floor_area_value)
   floor_areas.add_element(floor_area)
   
@@ -522,7 +471,7 @@ def create_site(feature)
   floor_area_type.text = 'Tenant'
   floor_area.add_element(floor_area_type)
   floor_area_value = REXML::Element.new('auc:FloorAreaValue')
-  floor_area_value.text = convert(feature[:properties][:"Gross Floor Area"], 'ft2', 'ft2')
+  floor_area_value.text = convert(feature[:properties][:"SQFT (Assessor/ECBO)"], 'ft2', 'ft2')
   floor_area.add_element(floor_area_value)
   floor_areas.add_element(floor_area)
   
@@ -913,21 +862,21 @@ def convert_feature(feature)
         
   source = '
   <auc:BuildingSync xmlns:auc="http://buildingsync.net/schemas/bedes-auc/2019" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://buildingsync.net/schemas/bedes-auc/2019 https://raw.githubusercontent.com/BuildingSync/schema/1c73127d389b779c6b74029be72c6e9ff3187113/BuildingSync.xsd">
-	<auc:Facilities>
+  <auc:Facilities>
   <auc:Facility>
-		<auc:Sites>
-		</auc:Sites>
+    <auc:Sites>
+    </auc:Sites>
     <auc:Measures>
 '
   # add measures
   measures.each do |measure|
     source += "      <auc:Measure ID=\"#{measure[:ID]}\">
         <auc:SystemCategoryAffected>#{measure[:SystemCategoryAffected]}</auc:SystemCategoryAffected>
-			  <auc:LinkedPremises>
-					<auc:Building>
-						<auc:LinkedBuildingID IDref=\"#{building_id}\"/>
-					</auc:Building>
-				</auc:LinkedPremises>
+        <auc:LinkedPremises>
+          <auc:Building>
+            <auc:LinkedBuildingID IDref=\"#{building_id}\"/>
+          </auc:Building>
+        </auc:LinkedPremises>
         <auc:TechnologyCategories>
           <auc:TechnologyCategory>
             <auc:#{measure[:TechnologyCategory]}>
@@ -979,16 +928,16 @@ def convert_feature(feature)
             </auc:PackageOfMeasures>
           </auc:ScenarioType>
           <auc:LinkedPremises>
-						<auc:Building>
-							<auc:LinkedBuildingID IDref=\"#{building_id}\"/> 
-						</auc:Building>
-					</auc:LinkedPremises>
-					<auc:UserDefinedFields>
-						<auc:UserDefinedField>
-							<auc:FieldName>Recommendation Category</auc:FieldName>
-							<auc:FieldValue>Potential Capital Recommendations</auc:FieldValue>
-						</auc:UserDefinedField>
-					</auc:UserDefinedFields>
+            <auc:Building>
+              <auc:LinkedBuildingID IDref=\"#{building_id}\"/> 
+            </auc:Building>
+          </auc:LinkedPremises>
+          <auc:UserDefinedFields>
+            <auc:UserDefinedField>
+              <auc:FieldName>Recommendation Category</auc:FieldName>
+              <auc:FieldValue>Potential Capital Recommendations</auc:FieldValue>
+            </auc:UserDefinedField>
+          </auc:UserDefinedFields>
         </auc:Scenario>
 "    
   end
@@ -1013,25 +962,25 @@ def convert_feature(feature)
             </auc:PackageOfMeasures>
           </auc:ScenarioType>
           <auc:LinkedPremises>
-						<auc:Building>
-							<auc:LinkedBuildingID IDref=\"#{building_id}\"/>
-						</auc:Building>
-					</auc:LinkedPremises>
-					<auc:UserDefinedFields>
-						<auc:UserDefinedField>
-							<auc:FieldName>Recommendation Category</auc:FieldName>
-							<auc:FieldValue>Potential Capital Recommendations</auc:FieldValue>
-						</auc:UserDefinedField>
-					</auc:UserDefinedFields>
+            <auc:Building>
+              <auc:LinkedBuildingID IDref=\"#{building_id}\"/>
+            </auc:Building>
+          </auc:LinkedPremises>
+          <auc:UserDefinedFields>
+            <auc:UserDefinedField>
+              <auc:FieldName>Recommendation Category</auc:FieldName>
+              <auc:FieldValue>Potential Capital Recommendations</auc:FieldValue>
+            </auc:UserDefinedField>
+          </auc:UserDefinedFields>
         </auc:Scenario>"
    end
 
   source += '      </auc:Scenarios>
-        </auc:Report>
-      </auc:Reports>
-    </auc:Facility>
-  </auc:Facilities>
-  </auc:BuildingSync>
+      </auc:Report>
+    </auc:Reports>
+  </auc:Facility>
+</auc:Facilities>
+</auc:BuildingSync>
   '
   
   doc = REXML::Document.new(source)
@@ -1042,102 +991,130 @@ def convert_feature(feature)
   return doc
 end
 
-geojson = nil
-File.open(ARGV[0], 'r') do |file|
-  geojson = JSON.parse(file.read, symbolize_names: true)
+# Open Spreadsheet
+# double check encoding
+Spreadsheet.client_encoding = 'UTF-8'
+book = Spreadsheet.open ARGV[0]
+
+# Open sheet by name. if no name arg, use the first one
+if ARGV[1].nil? 
+  sheet1 = book.worksheet 0
+else
+  sheet1 = book.worksheet ARGV[1]
 end
 
-outdir = './bs_output'
+outdir = './bs_spreadsheet_output'
 FileUtils.mkdir_p(outdir) unless File.exist?(outdir)
 
-summary_file = File.open(outdir + "/summary.csv", 'w')
+summary_file = File.open(outdir + "/spreadsheet_summary.csv", 'w')
 summary_file.puts "building_id,xml_filename,should_run_simulation,OccupancyClassification,Address,BuildingName,ParcelNumber,FloorArea(ft2),YearBuilt,template,SiteEUI(kBtu/ft2),SourceEUI(kBtu/ft2),ElectricityEUI(kBtu/ft2),GasEUI(kBtu/ft2),YearEUI"
 
-geojson[:features].each do |feature|
-  id = feature[:properties][:"Building Identifier"]
-
-  puts "id = #{id}"
-  
-  begin
-    doc = convert_feature(feature)
-    filename = File.join(outdir, "#{id}.xml")
-    File.open(filename, 'w') do |file|
-      doc.write(file)
-    end
-  rescue => e
-    puts "Building #{id} not converted, #{e.message}"
-    next
-  end
-
-  floor_area = get_floor_area(feature)
-  building_type = get_occupancy_classification(feature)
-  year_of_construction = feature[:properties][:"Completed Construction Status Date"]
-  year_of_last_major_remodel = nil
-  if md = /^(\d\d\d\d).*/.match(feature[:properties][:"Last Modified Date"].to_s)
-    year_of_last_major_remodel = md[1]
-  end
-
-  site_eui = nil
-  source_eui =nil
-  ele_eui = nil
-  gas_eui = nil
-  year_eui = nil
-  for year in 2011..2015
-    if feature[:properties][:"#{year} Annual Site Energy Resource Intensity"] != nil
-      site_eui = feature[:properties][:"#{year} Annual Site Energy Resource Intensity"].to_f
-      year_eui = year
-    end
-
-    if feature[:properties][:"#{year} Annual Source Energy Resource Intensity"] != nil
-      source_eui = feature[:properties][:"#{year} Annual Source Energy Resource Intensity"].to_f
-      year_eui = year
-    end
-  end
-
-  if year_of_last_major_remodel != nil and year_of_last_major_remodel.to_i > 1000
-    year_built = year_of_last_major_remodel.to_i
+header_row = true
+headers = []
+cnt = 1
+puts "Number of rows to process: #{sheet1.last_row_index}"
+sheet1.each do |row|
+  if header_row
+    headers = row
+    header_row = false
+    puts "HEADER ROW: #{headers}"
   else
-    year_built = year_of_construction.to_i
-  end
+    # KAF: use MBLR as ID
+    id = row[headers.index("MBLR")]
+    puts "id = #{id}"
+    cnt += 1
 
-  if year_built < 1978
-    template = "CBES Pre-1978"
-  elsif year_built >= 1978 && year_built < 1992
-    template = "CBES T24 1978"
-  elsif year_built >= 1992 && year_built < 2001
-    template = "CBES T24 1992"
-  elsif year_built >= 2001 && year_built < 2005
-    template = "CBES T24 2001"
-  elsif year_built >= 2005 && year_built < 2008
-    template = "CBES T24 2005"
-  else
-    template = "CBES T24 2008"
-  end
+    # create feature structure that the code is expecting
+    feature = {}
+    feature[:properties] = {}
+    headers.each do |h|
+      feature[:properties][h.to_sym] = row[headers.index(h)]
+    end
 
-  # source factor: 1.05 for gas, 3.14 for electricity
-  if site_eui != nil and source_eui != nil
-    ele_eui = (source_eui - site_eui * 1.05)/(3.14-1.05)
-    gas_eui = site_eui - ele_eui
-  end
-  
-  street_address = nil
-  building_name =nil
-  assessor_parcel_number = nil
-  
-  #Street address
-  street_number = feature[:properties][:"From Street Number"].to_s
-  if street_number != feature[:properties][:"To Street Number"]
-    street_number += " - #{feature[:properties][:"To Street Number"]}"
-  end
-  street_address = "#{street_number} #{feature[:properties][:"Street Name"]} #{feature[:properties][:"Street Name Post Type"]}"
-  
-  #Premise name
-  building_name = "#{feature[:properties][:"Building Name"]} [#{street_address}]"
-  
-  #APN
-  assessor_parcel_number = feature[:properties][:"Assessor parcel number"].to_s
+    feature[:properties][:"Building Identifier"] = id
+    # puts feature
 
-  summary_file.puts "#{id},#{id}.xml,1,#{building_type},#{street_address},#{building_name},#{assessor_parcel_number},#{floor_area},#{year_built},#{template},#{site_eui},#{source_eui},#{ele_eui},#{gas_eui},#{year_eui}"
+    begin
+      doc = convert_feature(feature)
+      filename = File.join(outdir, "#{id}.xml")
+      File.open(filename, 'w') do |file|
+        doc.write(file)
+      end
+    rescue => e
+      puts "Building #{id} not converted, #{e.message}"
+      next
+    end
+
+    floor_area = get_floor_area(feature)
+    building_type = get_occupancy_classification(feature)
+    year_of_construction = feature[:properties][:"YRBLT (Assessor/ECBO)"]
+    year_of_last_major_remodel = nil
+    # KAF: pretty sure there is no Last Modified Date in spreadsheet
+    if feature[:properties][:"Last Modified Date"] and md = /^(\d\d\d\d).*/.match(feature[:properties][:"Last Modified Date"].to_s)
+      year_of_last_major_remodel = md[1]
+    end
+
+    site_eui = nil
+    source_eui =nil
+    ele_eui = nil
+    gas_eui = nil
+    year_eui = nil
+    for year in 2011..2015
+      if feature[:properties][:"#{year} Annual Site Energy Resource Intensity"] != nil
+        site_eui = feature[:properties][:"#{year} Annual Site Energy Resource Intensity"].to_f
+        year_eui = year
+      end
+
+      if feature[:properties][:"#{year} Annual Source Energy Resource Intensity"] != nil
+        source_eui = feature[:properties][:"#{year} Annual Source Energy Resource Intensity"].to_f
+        year_eui = year
+      end
+    end
+
+    if year_of_last_major_remodel != nil and year_of_last_major_remodel.to_i > 1000
+      year_built = year_of_last_major_remodel.to_i
+    else
+      year_built = year_of_construction.to_i
+    end
+
+    if year_built < 1978
+      template = "CBES Pre-1978"
+    elsif year_built >= 1978 && year_built < 1992
+      template = "CBES T24 1978"
+    elsif year_built >= 1992 && year_built < 2001
+      template = "CBES T24 1992"
+    elsif year_built >= 2001 && year_built < 2005
+      template = "CBES T24 2001"
+    elsif year_built >= 2005 && year_built < 2008
+      template = "CBES T24 2005"
+    else
+      template = "CBES T24 2008"
+    end
+
+    # source factor: 1.05 for gas, 3.14 for electricity
+    if site_eui != nil and source_eui != nil
+      ele_eui = (source_eui - site_eui * 1.05)/(3.14-1.05)
+      gas_eui = site_eui - ele_eui
+    end
+      
+    street_address = nil
+    building_name =nil
+    assessor_parcel_number = nil
+    
+    #Street address
+    street_address = feature[:properties][:"Address"].to_s
+    #Premise name
+    building_name = "#{feature[:properties][:"Building Name"]} [#{street_address}]"
+    
+    #APN
+    assessor_parcel_number = feature[:properties][:"MBLR"].to_s
+
+    summary_file.puts "#{id},#{id}.xml,1,#{building_type},#{street_address},#{building_name},#{assessor_parcel_number},#{floor_area},#{year_built},#{template},#{site_eui},#{source_eui},#{ele_eui},#{gas_eui},#{year_eui}"
+
+  end
 end
+
+
+
 
 summary_file.close

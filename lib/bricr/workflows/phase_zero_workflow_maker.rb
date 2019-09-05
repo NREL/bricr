@@ -45,14 +45,6 @@ module BRICR
       File.open(workflow_path, 'r') do |file|
         @workflow = JSON.parse(file.read)
       end
-
-      if BRICR::OPENSTUDIO_MEASURES
-        @workflow['measure_paths'] = BRICR::OPENSTUDIO_MEASURES
-      end
-
-      if BRICR::OPENSTUDIO_FILES
-        @workflow['file_paths'] = BRICR::OPENSTUDIO_FILES
-      end
       
       @facility = {}
       @subsections = []
@@ -67,7 +59,7 @@ module BRICR
       @facility['gross_floor_area'] = nil
       @facility['heated_and_cooled_floor_area'] = nil
       @facility['footprint_floor_area'] = nil
-      @doc.elements.each("/#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:FloorAreas/#{@ns}:FloorArea") do |floor_area_element|
+      @doc.elements.each("/#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Buildings/#{@ns}:Building/#{@ns}:FloorAreas/#{@ns}:FloorArea") do |floor_area_element|
         floor_area = floor_area_element.elements["#{@ns}:FloorAreaValue"].text.to_f
         next if floor_area.nil?
         
@@ -83,7 +75,7 @@ module BRICR
 
       # SHL- get the template (vintage)
       @facility['template'] = nil
-      @doc.elements.each("/#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Facilities/#{@ns}:Facility") do |facility_element|
+      @doc.elements.each("/#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Buildings/#{@ns}:Building") do |facility_element|
         built_year = facility_element.elements["#{@ns}:YearOfConstruction"].text.to_f
         
         if facility_element.elements["#{@ns}:YearOfLastMajorRemodel"]
@@ -114,7 +106,8 @@ module BRICR
       @facility['floor_height'] = nil # TBD
       @facility['wwr'] = nil # TBD
 
-      @doc.elements.each("/#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Facilities/#{@ns}:Facility") do |facility_element|
+      @doc.elements.each("/#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Sites/#{@ns}:Site/#{@ns}:Buildings/#{@ns}:Building") do |facility_element|
+		built_year = facility_element.elements["#{@ns}:YearOfConstruction"].text.to_f
 
         if facility_element.elements["#{@ns}:FloorsAboveGrade"]
           @facility['num_stories_above_grade'] = facility_element.elements["#{@ns}:FloorsAboveGrade"].text.to_f
@@ -138,11 +131,11 @@ module BRICR
         end
         
         @facility['building_rotation'] = 0.0 # setDefaultValue
-        @facility['floor_height'] = 0.0 # setDefaultValue in ft
+        @facility['floor_height'] = 0 # setDefaultValue in ft
         @facility['wwr'] = 0.0 # setDefaultValue in fraction
       
         subsections = []
-        facility_element.elements.each("#{@ns}:Subsections/#{@ns}:Subsection") do |subsection_element|
+        facility_element.elements.each("#{@ns}:Sections/#{@ns}:Section") do |subsection_element|
           subsection = {'gross_floor_area' => nil, 'heated_and_cooled_floor_area' => nil, 'footprint_floor_area' => nil, 'occupancy_type' => nil, 'bldg_type' => nil, 'bar_division_method' => nil, 'system_type' => nil}
           
           subsection_element.elements.each("#{@ns}:FloorAreas/#{@ns}:FloorArea") do |floor_area_element|
@@ -166,6 +159,8 @@ module BRICR
             subsection['bldg_type'] = 'RetailStandalone'
             subsection['bar_division_method'] = 'Multiple Space Types - Individual Stories Sliced'
             subsection['system_type'] = 'PSZ-AC with gas coil heat'
+			@facility['floor_height'] = 15 # setDefaultValue in ft
+			@facility['wwr'] = 0.15 # setDefaultValue in fraction
           elsif subsection['occupancy_type']  == 'Office'
             subsection['bar_division_method'] = 'Single Space Type - Core and Perimeter'
             if subsection['gross_floor_area'] > 0 && subsection['gross_floor_area'] < 20000
@@ -177,7 +172,28 @@ module BRICR
             else
               raise "Office building size is beyond BRICR scope"
             end
-          else
+		  elsif subsection['occupancy_type'] == 'Hotel'
+			
+            subsection['bldg_type'] = 'SmallHotel'
+            subsection['bar_division_method'] = 'Multiple Space Types - Individual Stories Sliced'
+            subsection['system_type'] = 'Inferred'
+			
+			puts subsection['bldg_type']
+			
+			# For hotels, use DOE templates. CBES does not have hotel templates.
+			if built_year < 2007
+			  @facility['template'] = "90.1-2004"
+			elsif built_year >= 2007 && built_year < 2010
+			  @facility['template'] = "90.1-2007"
+			elsif built_year >= 2010 && built_year < 2013
+			  @facility['template'] = "90.1-2010"
+			else
+			  @facility['template'] = "90.1-2013"
+			end
+			# Use climate zone 3C for the SmallHotel template. 
+			set_measure_argument(osw, 'ChangeBuildingLocationBRICR', 'climate_zone', "3C")
+          
+		  else
             raise "Building type '#{subsection['occupancy_type']}' is beyond BRICR scope"
           end
           
@@ -206,44 +222,47 @@ module BRICR
     
       # set this value in the osw
       # For measure: create_bar_from_building_type_ratios 
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'total_bldg_floor_area', @facility['gross_floor_area'])
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'template', @facility['template'])
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_a', @subsections[0]['bldg_type'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'total_bldg_floor_area', @facility['gross_floor_area'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'template', @facility['template'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_a', @subsections[0]['bldg_type'])
       if @subsections.size > 1
-        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_b', @subsections[1]['bldg_type'])
-        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_b_fract_bldg_area', @subsections[1]['fract_bldg_area'])
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_b', @subsections[1]['bldg_type'])
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_b_fract_bldg_area', @subsections[1]['fract_bldg_area'])
       else
-        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_b', @facility['bldg_type'])
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_b', @facility['bldg_type'])
       end
       if @subsections.size > 2
-        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_c', @subsections[2]['bldg_type'])
-        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_c_fract_bldg_area', @subsections[2]['fract_bldg_area'])      
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_c', @subsections[2]['bldg_type'])
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_c_fract_bldg_area', @subsections[2]['fract_bldg_area'])      
       else
-        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_c', @facility['bldg_type'])
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_c', @facility['bldg_type'])
       end
       if @subsections.size > 3
-         set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_d', @subsections[3]['bldg_type'])
-        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_d_fract_bldg_area', @subsections[3]['fract_bldg_area'])          
+         set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_d', @subsections[3]['bldg_type'])
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_d_fract_bldg_area', @subsections[3]['fract_bldg_area'])          
       else
-        set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bldg_type_d', @facility['bldg_type'])
+        set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bldg_type_d', @facility['bldg_type'])
       end
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'floor_height', @facility['floor_height'])
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'num_stories_above_grade', @facility['num_stories_above_grade'])
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'num_stories_below_grade', @facility['num_stories_below_grade'])
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'building_rotation', @facility['building_rotation'])
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'ns_to_ew_ratio', @facility['ns_to_ew_ratio'])
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'wwr', @facility['wwr'])
-      set_measure_argument(osw, 'create_bar_from_building_type_ratios', 'bar_division_method', @facility['bar_division_method'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'floor_height', @facility['floor_height'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'num_stories_above_grade', @facility['num_stories_above_grade'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'num_stories_below_grade', @facility['num_stories_below_grade'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'building_rotation', @facility['building_rotation'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'ns_to_ew_ratio', @facility['ns_to_ew_ratio'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'wwr', @facility['wwr'])
+      set_measure_argument(osw, 'create_bar_from_building_type_ratios_bricr', 'bar_division_method', @facility['bar_division_method'])
       
       # For measure: create_typical_building_from_model
-      set_measure_argument(osw, 'create_typical_building_from_model', 'template', @facility['template'])
-      set_measure_argument(osw, 'create_typical_building_from_model', 'system_type', @facility['system_type'] )
+      set_measure_argument(osw, 'create_typical_building_from_model_bricr', 'template', @facility['template'])
+      set_measure_argument(osw, 'create_typical_building_from_model_bricr', 'system_type', @facility['system_type'] )
       # Calibration
       set_measure_argument(osw, 'calibrate_baseline_model', 'template', @facility['template'])
       set_measure_argument(osw, 'calibrate_baseline_model', 'bldg_type', @facility['bldg_type'])
       if defined?(BRICR::DO_MODEL_CALIBRATION) and BRICR::DO_MODEL_CALIBRATION
         set_measure_argument(osw, 'calibrate_baseline_model', '__SKIP__', false)
       end
+
+      # OpenStudio Results (get monthly results in the JSON)
+      set_measure_argument(osw, 'openstudio_results', 'reg_monthly_details', true)
     end
 
     def configureForScenario(osw, scenario)
@@ -276,6 +295,8 @@ module BRICR
                 set_measure_argument(osw, 'AddDaylightSensors', 'space_type', "Office WholeBuilding - Md Office - #{@facility['template']}")
               elsif @facility['bldg_type'] == "RetailStandalone"
                 set_measure_argument(osw, 'AddDaylightSensors', 'space_type', "Retail Retail - #{@facility['template']}")
+			  elsif @facility['bldg_type'] == "SmallHotel"
+				set_measure_argument(osw, 'AddDaylightSensors', 'space_type', "SmallHotel GuestRoom123Occ - #{@facility['template']}")
               end
             end
             # Lighting / LightingImprovements / Add occupancy sensors
@@ -429,7 +450,11 @@ module BRICR
                 num_measures += 1
                 set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', '__SKIP__', false)
                 set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', 'cop', 4.1)
-              elsif @facility['system_type'] == "PVAV with reheat"
+              elsif @facility['system_type'] == "Inferred"
+                num_measures += 1
+                set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', '__SKIP__', false)
+                set_measure_argument(osw, 'SetCOPforSingleSpeedDXCoolingUnits', 'cop', 4.1)
+			  elsif @facility['system_type'] == "PVAV with reheat"
                 num_measures += 1
                 set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', '__SKIP__', false)
                 set_measure_argument(osw, 'SetCOPforTwoSpeedDXCoolingUnits', 'cop_high', 4.1)
@@ -446,12 +471,15 @@ module BRICR
             
             # DLM: somme measures don't have a direct BuildingSync equivalent, use UserDefinedField 'OpenStudioMeasureName' for now
             if measure_name == 'Other'
-              measure.elements.each("#{@ns}:UserDefinedFields/#{@ns}:UserDefinedField") do |user_defined_field|
-                field_name = user_defined_field.elements["#{@ns}:FieldName"].text 
-                if field_name == 'OpenStudioMeasureName'
-                  measure_name = user_defined_field.elements["#{@ns}:FieldValue"].text 
-                end
-              end
+              # measure.elements.each("#{@ns}:UserDefinedFields/#{@ns}:UserDefinedField") do |user_defined_field|
+              #   field_name = user_defined_field.elements["#{@ns}:FieldName"].text 
+              #   if field_name == 'OpenStudioMeasureName'
+              #     measure_name = user_defined_field.elements["#{@ns}:FieldValue"].text 
+              #   end
+              # end
+
+              # new v2.0 field: CustomMeasureName
+              measure_name = measure.elements["#{@ns}:CustomMeasureName"].text 
             end
             
             # Other HVAC / OtherHVAC / Replace HVAC system type to VRF 
@@ -504,13 +532,12 @@ module BRICR
               if @facility['bldg_type'] == "SmallOffice"
                 set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Office WholeBuilding - Sm Office - #{@facility['template']}")
               elsif @facility['bldg_type'] == "MediumOffice"
-                set_measure_argument(osw, 'create_typical_building_from_model', 'system_type', "PSZ-AC with gas coil heat")
+                set_measure_argument(osw, 'create_typical_building_from_model_bricr', 'system_type', "PSZ-AC with gas coil heat")
                 set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Office WholeBuilding - Md Office - #{@facility['template']}")
               elsif @facility['bldg_type'] == "RetailStandalone"
                 set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Retail - #{@facility['template']}")
-                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Point_of_Sale - #{@facility['template']}")
-                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Entry - #{@facility['template']}")
-                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "Retail Back_Space - #{@facility['template']}")
+			  elsif @facility['bldg_type'] == "SmallHotel"
+                set_measure_argument(osw, 'add_apszhp_to_each_zone', 'space_type', "SmallHotel GuestRoom123Occ - #{@facility['template']}")
               end
             end
           end
@@ -576,16 +603,18 @@ module BRICR
             measure_name = measure.elements["#{@ns}:TechnologyCategories/#{@ns}:TechnologyCategory/#{@ns}:OtherHVAC/#{@ns}:MeasureName"].text 
             # Heat Recovery / OtherHVAC / Add energy recovery
             if measure_name == "Add energy recovery"
-              num_measures += 1
-              set_measure_argument(osw, 'add_energy_recovery_ventilator', '__SKIP__', false)
-              set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_100_heating', 0)
-              set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_100_heating', 0)
-              set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_75_heating', 0)
-              set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_75_heating', 0)
-              set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_100_cooling', 1)
-              set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_100_cooling', 1)
-              set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_75_cooling', 1)
-              set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_75_cooling', 1)
+			    num_measures += 1
+				if @facility['bldg_type'] != "SmallHotel" # No energy recovery for small hotel PTAC system
+			      set_measure_argument(osw, 'add_energy_recovery_ventilator', '__SKIP__', false)
+			      set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_100_heating', 0)
+			      set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_100_heating', 0)
+			      set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_75_heating', 0)
+			      set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_75_heating', 0)
+			      set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_100_cooling', 1)
+			      set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_100_cooling', 1)
+			      set_measure_argument(osw, 'add_energy_recovery_ventilator', 'sensible_eff_at_75_cooling', 1)
+				  set_measure_argument(osw, 'add_energy_recovery_ventilator', 'latent_eff_at_75_cooling', 1)
+				end
             end
           end
       
@@ -641,7 +670,7 @@ module BRICR
       
       #ensure there is a 'Baseline' scenario
       found_baseline = false
-      @doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
+      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Reports/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
         scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
         if scenario_name == 'Baseline'
           found_baseline = true
@@ -650,7 +679,7 @@ module BRICR
       end
       
       if !found_baseline
-        scenarios_element = @doc.elements["#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios"]
+        scenarios_element = @doc.elements["#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Reports/#{@ns}:Report/#{@ns}:Scenarios"]
         
         scenario_element = REXML::Element.new("#{@ns}:Scenario")
         scenario_element.attributes['ID'] = 'Baseline'
@@ -671,7 +700,7 @@ module BRICR
       end
       
       found_baseline = false
-      @doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
+      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Reports/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
         scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
         if scenario_name == 'Baseline'
           found_baseline = true
@@ -685,7 +714,7 @@ module BRICR
       end
       
       # write an osw for each scenario
-      @doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
+      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Reports/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
         # get information about the scenario
         scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
         next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
@@ -728,14 +757,37 @@ module BRICR
 
       return nil
     end
+    
+    # DLM: total hack because these are not reported in the out.osw
+    # output is array of [source_energy, source_eui] in kBtu and kBtu/ft2
+    def getSourceEnergyArray(eplustbl_path)
+      result = []
+      File.open(eplustbl_path, 'r') do |f|
+        while line = f.gets
+          if /\<td align=\"right\"\>Total Source Energy\<\/td\>/.match(line)
+            result << /\<td align=\"right\"\>(.*?)<\/td\>/.match(f.gets)[1].to_f
+            result << /\<td align=\"right\"\>(.*?)<\/td\>/.match(f.gets)[1].to_f
+            break
+          end
+        end
+      end
+      
+      result[0] = result[0]*947.8171203133 # GJ to kBtu
+      result[1] = result[1]*0.947817120313*0.092903 # MJ/m2 to kBtu/ft2
+      
+      return result
+    end
 
     def gatherResults(dir)
       super
 
       results = {}
+      monthly_results = {}
+
+      month_lookup = {1 => 'jan', 2 => 'feb', 3 => 'mar', 4 => 'apr', 5 => 'may', 6 => 'jun', 7 => 'jul', 8 => 'aug', 9 => 'sep', 10 => 'oct', 11 => 'nov', 12 => 'dec'}
 
       # write an osw for each scenario
-      @doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
+      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Reports/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
         # get information about the scenario
         scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
         next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
@@ -753,7 +805,7 @@ module BRICR
         path = File.join(osw_dir, 'eplusout.eso')
         FileUtils.rm_f(path) if File.exists?(path)
         
-        Dir.glob(File.join(osw_dir, '*create_typical_building_from_model')).each do |path|
+        Dir.glob(File.join(osw_dir, '*create_typical_building_from_model*')).each do |path|
           FileUtils.rm_rf(path) if File.exists?(path)
         end
         
@@ -768,11 +820,18 @@ module BRICR
         File.open(path, 'r') do |file|
           results[scenario_name] = JSON.parse(file.read, symbolize_names: true)
         end
+
+        # open results.json to get monthly timeseries
+        # just grabbed openstudio_results
+        path2 = File.join(osw_dir, 'results.json')
+        File.open(path2, 'r') do |file|
+          temp_res = JSON.parse(file.read, symbolize_names: true)
+          monthly_results[scenario_name] = temp_res[:OpenStudioResults]
+        end
         
-       
       end
 
-      @doc.elements.each("#{@ns}:Audits/#{@ns}:Audit/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
+      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/#{@ns}:Reports/#{@ns}:Report/#{@ns}:Scenarios/#{@ns}:Scenario") do |scenario|
         # get information about the scenario
         scenario_name = scenario.elements["#{@ns}:ScenarioName"].text
         next if defined?(BRICR::SIMULATE_BASELINE_ONLY) and BRICR::SIMULATE_BASELINE_ONLY and scenario_name != 'Baseline'
@@ -782,6 +841,12 @@ module BRICR
         # delete previous results
         package_of_measures.elements.delete("#{@ns}:AnnualSavingsSiteEnergy")
         package_of_measures.elements.delete("#{@ns}:AnnualSavingsCost")
+        package_of_measures.elements.delete("#{@ns}:CalculationMethod")
+        package_of_measures.elements.delete("#{@ns}AnnualSavingsByFuels")
+        scenario.elements.delete("#{@ns}AllResourceTotals")
+        scenario.elements.delete("#{@ns}RsourceUses")
+        scenario.elements.delete("#{@ns}AnnualSavingsByFuels")
+
         
         result = results[scenario_name]
         baseline = results['Baseline']
@@ -803,14 +868,15 @@ module BRICR
         end
         
         # preserve existing user defined fields if they exist
+        # KAF: there should no longer be any UDFs
         user_defined_fields = scenario.elements["#{@ns}:UserDefinedFields"]
         if user_defined_fields.nil?
           user_defined_fields = REXML::Element.new("#{@ns}:UserDefinedFields")
         end
         
-        # delete previous results
+        # delete previous results (if using an old schema)
         to_remove = []
-       user_defined_fields.elements.each("#{@ns}:UserDefinedField") do |user_defined_field|
+        user_defined_fields.elements.each("#{@ns}:UserDefinedField") do |user_defined_field|
           name_element = user_defined_field.elements["#{@ns}:FieldName"]
           if name_element.nil?
             to_remove << user_defined_field
@@ -822,91 +888,313 @@ module BRICR
           user_defined_fields.elements.delete(element)
         end
         
-        user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
-        field_name = REXML::Element.new("#{@ns}:FieldName")
-        field_name.text = 'OpenStudioCompletedStatus'
-        field_value = REXML::Element.new("#{@ns}:FieldValue")
-        field_value.text = result[:completed_status]
-        user_defined_field.add_element(field_name)
-        user_defined_field.add_element(field_value)
-        user_defined_fields.add_element(user_defined_field)
+        # user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
+        # field_name = REXML::Element.new("#{@ns}:FieldName")
+        # field_name.text = 'OpenStudioCompletedStatus'
+        # field_value = REXML::Element.new("#{@ns}:FieldValue")
+        # field_value.text = result[:completed_status]
+        # user_defined_field.add_element(field_name)
+        # user_defined_field.add_element(field_value)
+        # user_defined_fields.add_element(user_defined_field)
+
+        # KAF: I don't think we are using this in new schema. you would look at the baseline scenario and check its "SimulationCompletionStatus"  
+        #user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
+        #field_name = REXML::Element.new("#{@ns}:FieldName")
+        #field_name.text = 'OpenStudioBaselineCompletedStatus'
+        #field_value = REXML::Element.new("#{@ns}:FieldValue")
+        #field_value.text = baseline[:completed_status]
+        #user_defined_field.add_element(field_name)
+        #user_defined_field.add_element(field_value)
+        #user_defined_fields.add_element(user_defined_field)      
         
-        user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
-        field_name = REXML::Element.new("#{@ns}:FieldName")
-        field_name.text = 'OpenStudioBaselineCompletedStatus'
-        field_value = REXML::Element.new("#{@ns}:FieldValue")
-        field_value.text = baseline[:completed_status]
-        user_defined_field.add_element(field_name)
-        user_defined_field.add_element(field_value)
-        user_defined_fields.add_element(user_defined_field)        
+        # this is now in PackageOfMeasures.CalculationMethod.Modeled.SimulationCompletionStatus
+        # options are: Not Started, Started, Finished, Failed, Unknown
+        calc_method = REXML::Element.new("#{@ns}:CalculationMethod")
+        modeled = REXML::Element.new("#{@ns}:Modeled")
+        software_program_used = REXML::Element.new("#{@ns}:SoftwareProgramUsed")
+        software_program_used.text = 'OpenStudio'
+        modeled.add_element(software_program_used)
+        software_program_version = REXML::Element.new("#{@ns}:SoftwareProgramVersion")
+        software_program_version.text = OpenStudio::openStudioLongVersion.to_s
+        modeled.add_element(software_program_version)
+        weather_data_type = REXML::Element.new("#{@ns}:WeatherDataType")
+        weather_data_type.text = 'TMY3'
+        modeled.add_element(weather_data_type)
+        sim_completion_status = REXML::Element.new("#{@ns}:SimulationCompletionStatus")
+        sim_completion_status.text = result[:completed_status] === 'Success' ? 'Finished' : 'Failed'  # TODO: double check what these keys can be
+        modeled.add_element(sim_completion_status)
+        calc_method.add_element(modeled)
+        package_of_measures.add_element(calc_method)  
         
         # Check out.osw "openstudio_results" for output variables
-        total_site_energy = getMeasureResult(result, 'openstudio_results', 'total_site_energy') # in kBtu/year
-        total_site_energy = total_site_energy / 1000.0 if total_site_energy # kBtu/year -> MMBtu/year
-        baseline_total_site_energy = getMeasureResult(baseline, 'openstudio_results', 'total_site_energy') # in kBtu
-        baseline_total_site_energy = baseline_total_site_energy / 1000.0 if baseline_total_site_energy # kBtu/year -> MMBtu/year
-        fuel_electricity = getMeasureResult(result, 'openstudio_results', 'fuel_electricity') # in kBtu/year
-        #fuel_electricity = fuel_electricity * 0.2930710702 # kBtu/year -> kWh
-        fuel_natural_gas = getMeasureResult(result, 'openstudio_results', 'fuel_natural_gas') # in kBtu/year
+        total_site_energy_kbtu = getMeasureResult(result, 'openstudio_results', 'total_site_energy') # in kBtu
+        baseline_total_site_energy_kbtu = getMeasureResult(baseline, 'openstudio_results', 'total_site_energy') # in kBtu
+        
+        total_site_eui_kbtu_ft2 = getMeasureResult(result, 'openstudio_results', 'total_site_eui') # in kBtu/ft2
+        baseline_total_site_eui_kbtu_ft2 = getMeasureResult(baseline, 'openstudio_results', 'total_site_eui') # in kBtu/ft2
+        
+        # DLM: this is not being populated, https://github.com/NREL/OpenStudio-measures/issues/254
+        #total_source_energy_kbtu = getMeasureResult(result, 'openstudio_results', 'total_source_energy') # in kBtu
+        #baseline_total_source_energy_kbtu = getMeasureResult(baseline, 'openstudio_results', 'total_source_energy') # in kBtu
+        
+        # temporary hack to get source energy
+        eplustbl_path = File.join(dir, scenario_name, 'eplustbl.htm')
+        source_energy = getSourceEnergyArray(eplustbl_path)
+        total_source_energy_kbtu = source_energy[0]
+        total_source_eui_kbtu_ft2 = source_energy[1]
+        
+        baseline_eplustbl_path = File.join(dir, 'Baseline', 'eplustbl.htm')
+        baseline_source_energy = getSourceEnergyArray(baseline_eplustbl_path)
+        baseline_total_source_energy_kbtu = baseline_source_energy[0]
+        baseline_total_source_eui_kbtu_ft2 = baseline_source_energy[1]
+        # end hack
+        
+        fuel_electricity_kbtu = getMeasureResult(result, 'openstudio_results', 'fuel_electricity') # in kBtu
+        baseline_fuel_electricity_kbtu = getMeasureResult(baseline, 'openstudio_results', 'fuel_electricity') # in kBtu
+
+        fuel_natural_gas_kbtu = getMeasureResult(result, 'openstudio_results', 'fuel_natural_gas') # in kBtu
+        baseline_fuel_natural_gas_kbtu = getMeasureResult(baseline, 'openstudio_results', 'fuel_natural_gas') # in kBtu
+        
+        annual_peak_electric_demand_kw = getMeasureResult(result, 'openstudio_results', 'annual_peak_electric_demand') # in kW
+        baseline_annual_peak_electric_demand_kw = getMeasureResult(baseline, 'openstudio_results', 'annual_peak_electric_demand') # in kW
+        
         annual_utility_cost = getMeasureResult(result, 'openstudio_results', 'annual_utility_cost') # in $
         baseline_annual_utility_cost = getMeasureResult(baseline, 'openstudio_results', 'annual_utility_cost') # in $
 
-        total_site_energy_savings = 0
+        total_site_energy_savings_mmbtu = 0
+        if baseline_total_site_energy_kbtu && total_site_energy_kbtu
+          total_site_energy_savings_mmbtu = (baseline_total_site_energy_kbtu - total_site_energy_kbtu) / 1000.0 # in MMBtu
+        end
+        
+        total_source_energy_savings_mmbtu = 0
+        if baseline_total_source_energy_kbtu && total_source_energy_kbtu
+          total_source_energy_savings_mmbtu = (baseline_total_source_energy_kbtu - total_source_energy_kbtu) / 1000.0 # in MMBtu
+        end
+        
         total_energy_cost_savings = 0
-        if baseline_total_site_energy && total_site_energy
-          total_site_energy_savings = baseline_total_site_energy - total_site_energy
+        if baseline_annual_utility_cost && annual_utility_cost
           total_energy_cost_savings = baseline_annual_utility_cost - annual_utility_cost
         end
         
         annual_savings_site_energy = REXML::Element.new("#{@ns}:AnnualSavingsSiteEnergy")
+        annual_savings_source_energy = REXML::Element.new("#{@ns}:AnnualSavingsSourceEnergy")
         annual_savings_energy_cost = REXML::Element.new("#{@ns}:AnnualSavingsCost")
         
-        # DLM: these are not valid BuildingSync fields
-        #annual_site_energy = REXML::Element.new("#{@ns}:AnnualSiteEnergy")
-        #annual_electricity = REXML::Element.new("#{@ns}:AnnualElectricity")
-        #annual_natural_gas = REXML::Element.new("#{@ns}:AnnualNaturalGas")
-        
-        annual_savings_site_energy.text = total_site_energy_savings
+        annual_savings_site_energy.text = total_site_energy_savings_mmbtu
+        annual_savings_source_energy.text = total_source_energy_savings_mmbtu
         annual_savings_energy_cost.text = total_energy_cost_savings.to_i # BuildingSync wants an integer, might be a BuildingSync bug
-        #annual_site_energy.text = total_site_energy
-        #annual_electricity.text = fuel_electricity
-        #annual_natural_gas.text = fuel_natural_gas
-        
-        user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
-        field_name = REXML::Element.new("#{@ns}:FieldName")
-        field_name.text = 'OpenStudioAnnualSiteEnergy_MMBtu'
-        field_value = REXML::Element.new("#{@ns}:FieldValue")
-        field_value.text = total_site_energy.to_s
-        user_defined_field.add_element(field_name)
-        user_defined_field.add_element(field_value)
-        user_defined_fields.add_element(user_defined_field)
-        
-        user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
-        field_name = REXML::Element.new("#{@ns}:FieldName")
-        field_name.text = 'OpenStudioAnnualElectricity_kBtu'
-        field_value = REXML::Element.new("#{@ns}:FieldValue")
-        field_value.text = fuel_electricity.to_s
-        user_defined_field.add_element(field_name)
-        user_defined_field.add_element(field_value)
-        user_defined_fields.add_element(user_defined_field)
-        
-        user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
-        field_name = REXML::Element.new("#{@ns}:FieldName")
-        field_name.text = 'OpenStudioAnnualNaturalGas_kBtu'
-        field_value = REXML::Element.new("#{@ns}:FieldValue")
-        field_value.text = fuel_natural_gas.to_s
-        user_defined_field.add_element(field_name)
-        user_defined_field.add_element(field_value)
-        user_defined_fields.add_element(user_defined_field)
-        
-        package_of_measures.add_element(annual_savings_site_energy)
-        package_of_measures.add_element(annual_savings_energy_cost)
-        #package_of_measures.add_element(annual_site_energy)
-        #package_of_measures.add_element(annual_electricity)
-        #package_of_measures.add_element(annual_natural_gas)
 
+        package_of_measures.add_element(annual_savings_site_energy)
+        package_of_measures.add_element(annual_savings_source_energy)
+        package_of_measures.add_element(annual_savings_energy_cost)
+
+        # KAF: adding annual savings by fuel
+        electricity_savings = baseline_fuel_electricity_kbtu - fuel_electricity_kbtu
+        natural_gas_savings = baseline_fuel_natural_gas_kbtu - fuel_natural_gas_kbtu
+        annual_savings = REXML::Element.new("#{@ns}:AnnualSavingsByFuels")
+        annual_saving = REXML::Element.new("#{@ns}:AnnualSavingsByFuel")
+        energy_res = REXML::Element.new("#{@ns}:EnergyResource")
+        energy_res.text = 'Electricity'
+        annual_saving.add_element(energy_res)
+        resource_units = REXML::Element.new("#{@ns}:ResourceUnits")
+        resource_units.text = 'kBtu'
+        annual_saving.add_element(resource_units)
+        savings_native = REXML::Element.new("#{@ns}:AnnualSavingsNativeUnits") # this is in kBtu
+        savings_native.text = electricity_savings.to_s
+        annual_saving.add_element(savings_native)
+        annual_savings.add_element(annual_saving)
+
+        annual_saving = REXML::Element.new("#{@ns}:AnnualSavingsByFuel")
+        energy_res = REXML::Element.new("#{@ns}:EnergyResource")
+        energy_res.text = 'Natural gas'
+        annual_saving.add_element(energy_res)
+        resource_units = REXML::Element.new("#{@ns}:ResourceUnits")
+        resource_units.text = 'kBtu'
+        annual_saving.add_element(resource_units)
+        savings_native = REXML::Element.new("#{@ns}:AnnualSavingsNativeUnits") # this is in kBtu
+        savings_native.text = natural_gas_savings.to_s
+        annual_saving.add_element(savings_native)
+        annual_savings.add_element(annual_saving)
+
+        package_of_measures.add_element(annual_savings)
+
+        # KAF: replacing user defined fields with BuildingSync fields
+               
+        # user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
+        # field_name = REXML::Element.new("#{@ns}:FieldName")
+        # field_name.text = 'OpenStudioAnnualElectricity_kBtu'
+        # field_value = REXML::Element.new("#{@ns}:FieldValue")
+        # field_value.text = fuel_electricity.to_s
+        # user_defined_field.add_element(field_name)
+        # user_defined_field.add_element(field_value)
+        # user_defined_fields.add_element(user_defined_field)
+        
+        # user_defined_field = REXML::Element.new("#{@ns}:UserDefinedField")
+        # field_name = REXML::Element.new("#{@ns}:FieldName")
+        # field_name.text = 'OpenStudioAnnualNaturalGas_kBtu'
+        # field_value = REXML::Element.new("#{@ns}:FieldValue")
+        # field_value.text = fuel_natural_gas.to_s
+        # user_defined_field.add_element(field_name)
+        # user_defined_field.add_element(field_value)
+        # user_defined_fields.add_element(user_defined_field)
+
+        res_uses = REXML::Element.new("#{@ns}:ResourceUses")
+        scenario_name_ns = scenario_name.gsub(" ", "_").gsub(/[^0-9a-z_]/i, '')
+        # ELECTRICITY
+        res_use = REXML::Element.new("#{@ns}:ResourceUse")
+        res_use.add_attribute('ID', scenario_name_ns + "_Electricity")
+        energy_res = REXML::Element.new("#{@ns}:EnergyResource")
+        energy_res.text = 'Electricity'
+        res_units = REXML::Element.new("#{@ns}:ResourceUnits")
+        res_units.text = 'kBtu'
+        native_units = REXML::Element.new("#{@ns}:AnnualFuelUseNativeUnits")
+        native_units.text = fuel_electricity_kbtu.to_s
+        consistent_units = REXML::Element.new("#{@ns}:AnnualFuelUseConsistentUnits")
+        consistent_units.text = (fuel_electricity_kbtu / 1000.0).to_s  # convert to MMBtu
+        res_use.add_element(energy_res)
+        res_use.add_element(res_units)
+        res_use.add_element(native_units)
+        res_use.add_element(consistent_units)
+        peak_units = REXML::Element.new("#{@ns}:PeakResourceUnits")
+        peak_units.text = 'kW'
+        peak_native_units = REXML::Element.new("#{@ns}:AnnualPeakNativeUnits")
+        peak_native_units.text = annual_peak_electric_demand_kw.to_s
+        peak_consistent_units = REXML::Element.new("#{@ns}:AnnualPeakConsistentUnits")
+        peak_consistent_units.text = annual_peak_electric_demand_kw.to_s  
+        res_use.add_element(peak_units)
+        res_use.add_element(peak_native_units)
+        res_use.add_element(peak_consistent_units)
+        res_uses.add_element(res_use)
+
+        # NATURAL GAS
+        res_use = REXML::Element.new("#{@ns}:ResourceUse")
+        res_use.add_attribute('ID', scenario_name_ns + "_NaturalGas")
+        energy_res = REXML::Element.new("#{@ns}:EnergyResource")
+        energy_res.text = 'Natural gas'
+        res_units = REXML::Element.new("#{@ns}:ResourceUnits")
+        res_units.text = 'kBtu'
+        native_units = REXML::Element.new("#{@ns}:AnnualFuelUseNativeUnits")
+        native_units.text = fuel_natural_gas_kbtu.to_s
+        consistent_units = REXML::Element.new("#{@ns}:AnnualFuelUseConsistentUnits")
+        consistent_units.text = (fuel_natural_gas_kbtu / 1000.0).to_s  # in MMBtu
+        res_use.add_element(energy_res)
+        res_use.add_element(res_units)
+        res_use.add_element(native_units)
+        res_use.add_element(consistent_units)
+        res_uses.add_element(res_use)
+        scenario_type = scenario.elements["#{@ns}:ScenarioType"]
+        scenario.insert_after(scenario_type, res_uses)
+
+        # already added ResourceUses above. Needed as ResourceUseID reference
+        timeseriesdata = REXML::Element.new("#{@ns}:TimeSeriesData")
+
+        # Electricity
+        # looking for: "electricity_ip_jan" through "electricity_ip_dec"
+        # convert from kWh to kBtu
+        (1..12).each do |month|
+          timeseries = REXML::Element.new("#{@ns}:TimeSeries")
+          reading_type = REXML::Element.new("#{@ns}:ReadingType")
+          reading_type.text = 'Total'
+          timeseries.add_element(reading_type)
+          ts_quantity = REXML::Element.new("#{@ns}:TimeSeriesReadingQuantity")
+          ts_quantity.text = 'Energy'
+          timeseries.add_element(ts_quantity)
+          start_time = REXML::Element.new("#{@ns}:StartTimeStamp")
+          if month < 10
+            start_time.text = '2017-0' + month.to_s + '-01T00:00:00'
+          else 
+            start_time.text = '2017-' + month.to_s + '-01T00:00:00'
+          end
+          timeseries.add_element(start_time)
+          end_time = REXML::Element.new("#{@ns}:EndTimeStamp")
+          if month < 9
+            end_time.text = '2017-0' + (month+1).to_s + '-01T00:00:00'
+          elsif month < 12
+            end_time.text = '2017-' + (month+1).to_s + '-01T00:00:00'
+          else
+            end_time.text = '2018-01-01T00:00:00'
+          end
+          timeseries.add_element(end_time)
+          interval_frequency = REXML::Element.new("#{@ns}:IntervalFrequency")
+          interval_frequency.text = 'Month'
+          timeseries.add_element(interval_frequency)
+          interval_reading = REXML::Element.new("#{@ns}:IntervalReading")
+          the_key = "electricity_ip_#{month_lookup[month]}"
+          #puts "saving value: #{monthly_results[scenario_name][the_key.to_sym]}"
+          interval_reading.text = monthly_results[scenario_name][the_key.to_sym] * 3.4121416331 # kWh to kBtu
+          timeseries.add_element(interval_reading)
+          resource_id = REXML::Element.new("#{@ns}:ResourceUseID")
+          resource_id.add_attribute('IDref', scenario_name_ns + "_Electricity")
+          timeseries.add_element(resource_id)
+          timeseriesdata.add_element(timeseries)
+        end
+
+        # Natural Gas
+        # looking for: "natural_gas_ip_jan" through "natural_gas_ip_dec"
+        # convert from MMBtu to kBtu
+        (1..12).each do |month|
+          timeseries = REXML::Element.new("#{@ns}:TimeSeries")
+          reading_type = REXML::Element.new("#{@ns}:ReadingType")
+          reading_type.text = 'Total'
+          timeseries.add_element(reading_type)
+          ts_quantity = REXML::Element.new("#{@ns}:TimeSeriesReadingQuantity")
+          ts_quantity.text = 'Energy'
+          timeseries.add_element(ts_quantity)
+          start_time = REXML::Element.new("#{@ns}:StartTimeStamp")
+          if month < 10
+            start_time.text = '2017-0' + month.to_s + '-01T00:00:00'
+          else 
+            start_time.text = '2017-' + month.to_s + '-01T00:00:00'
+          end
+          timeseries.add_element(start_time)
+          end_time = REXML::Element.new("#{@ns}:EndTimeStamp")
+          if month < 9
+            end_time.text = '2017-0' + (month+1).to_s + '-01T00:00:00'
+          elsif month < 12
+            end_time.text = '2017-' + (month+1).to_s + '-01T00:00:00'
+          else
+            end_time.text = '2018-01-01T00:00:00'
+          end
+          timeseries.add_element(end_time)
+          interval_frequency = REXML::Element.new("#{@ns}:IntervalFrequency")
+          interval_frequency.text = 'Month'
+          timeseries.add_element(interval_frequency)
+          interval_reading = REXML::Element.new("#{@ns}:IntervalReading")
+          the_key = "natural_gas_ip_#{month_lookup[month]}"
+          #puts "saving value: #{monthly_results[scenario_name][the_key.to_sym]}"
+          interval_reading.text = monthly_results[scenario_name][the_key.to_sym] * 1000.0 # MMBtu to kBtu
+          timeseries.add_element(interval_reading)
+          resource_id = REXML::Element.new("#{@ns}:ResourceUseID")
+          resource_id.add_attribute('IDref', scenario_name_ns + "_NaturalGas")
+          timeseries.add_element(resource_id)
+          timeseriesdata.add_element(timeseries)
+        end
+        scenario.insert_after(res_uses, timeseriesdata)
+
+        # all the totals
+        all_res_totals = REXML::Element.new("#{@ns}:AllResourceTotals")
+        all_res_total = REXML::Element.new("#{@ns}:AllResourceTotal")
+        end_use = REXML::Element.new("#{@ns}:EndUse")
+        end_use.text = 'All end uses'
+        site_energy_use = REXML::Element.new("#{@ns}:SiteEnergyUse")
+        site_energy_use.text = total_site_energy_kbtu.to_s
+        site_energy_use_intensity = REXML::Element.new("#{@ns}:SiteEnergyUseIntensity")
+        site_energy_use_intensity.text = total_site_eui_kbtu_ft2.to_s
+        source_energy_use = REXML::Element.new("#{@ns}:SourceEnergyUse")
+        source_energy_use.text = total_source_energy_kbtu.to_s
+        source_energy_use_intensity = REXML::Element.new("#{@ns}:SourceEnergyUseIntensity")
+        source_energy_use_intensity.text = total_source_eui_kbtu_ft2.to_s
+        all_res_total.add_element(end_use)
+        all_res_total.add_element(site_energy_use)
+        all_res_total.add_element(site_energy_use_intensity)
+        all_res_total.add_element(source_energy_use)
+        all_res_total.add_element(source_energy_use_intensity)
+        all_res_totals.add_element(all_res_total)
+        scenario.insert_after(timeseriesdata, all_res_totals)
+       
+        # no longer using user defined fields
         scenario.elements.delete("#{@ns}:UserDefinedFields")
-        scenario.add_element(user_defined_fields)
+
       end
     end
     

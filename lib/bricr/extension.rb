@@ -24,59 +24,27 @@
 #
 ########################################################################################################################
 
-require 'rexml/document'
-
-require_relative 'workflow_maker'
+require 'openstudio/extension'
 
 module BRICR
-  class Translator
-    # load the building sync file and chooses the correct workflow
-    def initialize(path)
-      @doc = nil
-      @workflow_maker = nil
-
-      # parse the xml
-      raise "File '#{path}' does not exist" unless File.exist?(path)
-      File.open(path, 'r') do |file|
-        @doc = REXML::Document.new(file)
-      end
-
-      # test for the namespace
-      @ns = 'auc'
-      @doc.root.namespaces.each_pair do |k,v|
-        @ns = k if /bedes-auc/.match(v)
-      end
-
-      # validate the doc
-      facilities = []
-      @doc.elements.each("#{@ns}:BuildingSync/#{@ns}:Facilities/#{@ns}:Facility/") { |facility| facilities << facility }
-      raise 'BuildingSync file must have exactly 1 facility' if facilities.size != 1
-
-      # choose the correct workflow maker based on xml
-      chooseWorkflowMaker
+  DIRECTORY = File.realpath(File.dirname(__FILE__)).freeze
+  
+  class Extension < OpenStudio::Extension::Extension
+    
+    # Override base class method
+    def initialize
+      @root_dir = File.absolute_path(File.join(File.dirname(__FILE__), '..', '..'))
     end
 
-    def writeOSWs(dir)
-      @workflow_maker.writeOSWs(dir)
-    end
-
-    def gatherResults(dir)
-      @workflow_maker.gatherResults(dir)
+    # Override base class method
+    def measures_dir
+      return File.absolute_path(File.join(@root_dir, 'measures'))
     end
     
-    def failed_scenarios()
-      @workflow_maker.failed_scenarios
+    # Override base class method
+    def files_dir
+      return File.absolute_path(File.join(@root_dir, 'weather'))
     end
-
-    def saveXML(filename)
-      @workflow_maker.saveXML(filename)
-    end
-
-  private
-
-    def chooseWorkflowMaker
-      # for now there is only one workflow maker
-      @workflow_maker = PhaseZeroWorkflowMaker.new(@doc, @ns)
-    end
+    
   end
 end

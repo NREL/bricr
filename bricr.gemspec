@@ -26,8 +26,13 @@ Gem::Specification.new do |s|
   s.executables << 'upload_seed_buildingsync.rb'
   s.executables << 'upload_seed_buildingsyncs.rb'
 
-  s.add_development_dependency 'bundler', '~> 1.6'
+  s.add_development_dependency 'bundler', '~> 1.17.1'
   s.add_runtime_dependency  'parallel', '~> 1.12'
   s.add_runtime_dependency  'seed_ruby_client'
+  s.add_runtime_dependency  'openstudio-extension'
   s.add_runtime_dependency  'openstudio-standards'
+  s.add_runtime_dependency  'openstudio-workflow'
+  s.add_runtime_dependency  'openstudio-common-measures'
+  s.add_runtime_dependency  'openstudio-model-articulation'
+  s.add_runtime_dependency 'json_pure'
 end

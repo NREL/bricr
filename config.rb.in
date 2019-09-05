@@ -1,29 +1,5 @@
 module BRICR
 
-  #ENV['GEM_HOME'] = 'C:/bricr/gems'
-  #ENV['GEM_PATH'] = 'C:/bricr/gems'
-  
-  # location of openstudio CLI
-  if /mswin/.match(RUBY_PLATFORM) || /mingw/.match(RUBY_PLATFORM)
-    OPENSTUDIO_EXE = 'C:/openstudio-2.6.0/bin/openstudio.exe'
-  else
-    OPENSTUDIO_EXE = '/usr/local/bin/openstudio'
-  end
-
-  # one or more measure paths
-  OPENSTUDIO_MEASURES = [
-      File.realpath("./measures", File.dirname(__FILE__)),
-      File.realpath("./../openstudio-measures/nrel_published",
-      File.dirname(__FILE__)),
-      File.realpath("./../openstudio-measures/nrel_dev", File.dirname(__FILE__))
-  ]
-
-  # one or more file paths
-  OPENSTUDIO_FILES = [
-      File.realpath("./weather",
-      File.dirname(__FILE__))
-  ]
-
   # max number of datapoints to run
   MAX_DATAPOINTS = Float::INFINITY
   #MAX_DATAPOINTS = 2
@@ -53,6 +29,10 @@ module BRICR
   ENV['BRICR_SEED_HOST'] = 'YOUR_SEED_HOST'
   ENV['BRICR_SEED_USERNAME'] = 'YOUR_SEED_USERNAME'
   ENV['BRICR_SEED_API_KEY'] = 'YOUR_SEED_API_KEY'
+    
+  #ENV['BRICR_SEED_ORGANIZATION'] = 'YOUR_SEED_ORG'
+  #ENV['BRICR_SEED_CYCLE'] = 'YOUR_SEED_CYCLE'
+  #ENV['BRICR_SEED_SEARCH_PROFILE'] = 'YOUR_SEED_SEARCH_PROFILE'
   
   # url for bricr-sim
   BRICR_SIM_URL = nil
