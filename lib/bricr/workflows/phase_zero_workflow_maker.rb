@@ -131,7 +131,7 @@ module BRICR
         end
         
         @facility['building_rotation'] = 0.0 # setDefaultValue
-        @facility['floor_height'] = 0.0 # setDefaultValue in ft
+        @facility['floor_height'] = 0 # setDefaultValue in ft
         @facility['wwr'] = 0.0 # setDefaultValue in fraction
       
         subsections = []
@@ -159,6 +159,8 @@ module BRICR
             subsection['bldg_type'] = 'RetailStandalone'
             subsection['bar_division_method'] = 'Multiple Space Types - Individual Stories Sliced'
             subsection['system_type'] = 'PSZ-AC with gas coil heat'
+			@facility['floor_height'] = 15 # setDefaultValue in ft
+			@facility['wwr'] = 0.15 # setDefaultValue in fraction
           elsif subsection['occupancy_type']  == 'Office'
             subsection['bar_division_method'] = 'Single Space Type - Core and Perimeter'
             if subsection['gross_floor_area'] > 0 && subsection['gross_floor_area'] < 20000

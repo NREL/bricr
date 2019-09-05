@@ -80,7 +80,7 @@ def get_building_classification(feature)
   when 'MISSING DATA'
     result = 'Other'
   else
-    raise "Unknown classification #{classification}"
+    raise "Unknown building classification #{classification}"
   end
 
   return result
@@ -99,38 +99,103 @@ def get_occupancy_classification(feature)
     result = 'Hotel'   
   when 'MED'
     result = 'Health care'
-    raise "#{result} is not a supported Occupancy Classification"
+    #raise "#{result} is not a supported Occupancy Classification"
   when 'MIPS'
     result = 'Office'
   when 'MIXED'
     result = 'Mixed-use commercial'
-    raise "#{result} is not a supported Occupancy Classification"
+    #raise "#{result} is not a supported Occupancy Classification"
   when 'MIXRES'
     result = 'Residential'
-    raise "#{result} is not a supported Occupancy Classification"
+    #raise "#{result} is not a supported Occupancy Classification"
   when 'Office'
     result = 'Office'    
   when 'OPENSPACE', 'OpenSpace'
     result = 'Other'
-    raise "#{result} is not a supported Occupancy Classification"
+    #raise "#{result} is not a supported Occupancy Classification"
   when 'PDR'
     result = 'Industrial'
-    raise "#{result} is not a supported Occupancy Classification"
+    #raise "#{result} is not a supported Occupancy Classification"
   when 'Retail'
     result = 'Retail'    
   when "RETAIL\/ENT"
     result = 'Retail'
   when 'RESIDENT'
     result = 'Residential'
-    raise "#{result} is not a supported Occupancy Classification"
+    #raise "#{result} is not a supported Occupancy Classification"
   when 'VISITOR'
     result = 'Lodging'
-    raise "#{result} is not a supported Occupancy Classification"
+    #raise "#{result} is not a supported Occupancy Classification"
   when 'MISSING DATA'
     result = 'Unknown'
-    raise "#{result} is not a supported Occupancy Classification"
+    #raise "#{result} is not a supported Occupancy Classification"
+    
+  when 'Arts & Culture'
+    result = 'Assembly-Cultural entertainment'
+  when 'Automobile Dealership'
+    result = 'Retail'   
+  when 'Bar/Nightclub'
+    result = 'Bar'    
+  when 'Churches,Convents,Rectories'
+    result = 'Assembly-Religious'
+  when 'Clubs,Lodges,Fraternal Organizations'
+    result = 'Assembly-Cultural entertainment'
+  when 'Convalescent/Nursing Homes'
+    result = 'Health care-Skilled nursing facility'    
+  when 'Data Center'
+    result = 'Data center'
+  when 'Distribution Center'
+    result = 'Service-Postal'
+  when 'Education'
+    result = 'Education'    
+  when 'Fitness Center/Health Club/Gym'
+    result = 'Recreation-Fitness center'
+  when 'Food Service'
+    result = 'Food service'
+  when 'Healthcare'
+    result = 'Health care'
+  when 'Industrial'
+    result = 'Industrial'
+  when 'Laboratory'
+    result = 'Laboratory'    
+  when 'Misc'
+    result = 'Other' 
+  when 'Mixed Use'
+    result = 'Mixed-use commercial'
+  when 'Multifamily'
+    result = 'Multifamily'
+  when 'Other'
+    result = 'Other' 
+  when 'Office/RES'
+    result = 'Office'
+  when 'Parking Garage'
+    result = 'Parking' 
+  when 'Retail/Hotel'
+    result = 'Lodging with extended amenities' 
+  when 'Retail/RES'
+    result = 'Retail'     
+  when 'Self-Storage Facility'
+    result = 'Warehouse-Self-storage'
+  when 'Senior Care Community'
+    result = 'Health care-Skilled nursing facility'
+  when 'Services'
+    result = 'Service'
+  when 'Social/Meeting Hall'
+    result = 'Assembly-Cultural entertainment'    
+  when 'Theater'
+    result = 'Assembly-Cultural entertainment'
+  when 'Unknown'
+    result = 'Unknown'    
+  when 'Warehouse'
+    result = 'Warehouse-Unrefrigerated'
+  when 'Worship Facility'    
+    result = 'Assembly-Religious'
+  when '0'    
+    result = 'Other'  
+  when 0    
+    result = 'Other'        
   else
-    raise "Unknown classification #{classification}"
+    raise "Unknown occupancy classification #{classification}"
   end
 
   return result
