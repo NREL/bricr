@@ -9,10 +9,8 @@
 # try to load configuration, use defaults if doesn't exist
 begin
   require_relative '../config'
-rescue LoadError
+rescue LoadError, StandardError
   module BRICR
-    # location of openstudio CLI
-    OPENSTUDIO_EXE = 'openstudio'.freeze
 
     # one or more measure paths
     OPENSTUDIO_MEASURES = [].freeze

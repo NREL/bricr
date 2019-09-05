@@ -1,0 +1,38 @@
+sudo: required
+dist: trusty
+language: ruby
+rvm: 2.2.4
+services:
+  - docker
+cache:
+  - bundler
+env:
+  global:
+    - DOCKER_COMPOSE_VERSION=1.22.0
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - gem install bundler -v '1.17'
+  - gem install bundler -v '~> 1.17'
+jobs:
+  include:
+    - stage: test
+      before_script:
+        - docker images --all
+        - docker --version
+        - docker-compose --version
+        - bundle --version
+        - docker volume create --name=bricr_seed_pgdata
+        - docker volume create --name=bricr_seed_media
+        - docker-compose -f ./spec/docker/seed-docker-compose.yml build --pull
+      script:
+        - docker-compose -f ./spec/docker/seed-docker-compose.yml up -d
+        # Wait until seed is up and running by running curl command below
+        - until $(curl --output /dev/null --silent --head --fail http://127.0.0.1); do printf '.'; sleep 5; done
+        # Get the user information (API Key) and save to file
+        - docker-compose -f ./spec/docker/seed-docker-compose.yml run web ./manage.py create_test_user_json --username user@seed-platform.org --host http://127.0.0.1 > seed.json
+        - bundle exec rake
+      after_script:
+        - docker-compose -f ./spec/docker/seed-docker-compose.yml stop

@@ -24,14 +24,11 @@
 #
 ########################################################################################################################
 
-require 'bricr/version'
-require 'bricr/bricr_methods'
-require 'bricr/building_sync'
-require 'bricr/seed_methods'
-require 'bricr/translator'
-require 'bricr/workflow_maker'
-require 'bricr/workflows/phase_zero_workflow_maker'
-
-module BRICR
-  DIRECTORY = File.realpath(File.dirname(__FILE__)).freeze
-end
+require_relative 'bricr/version'
+require_relative 'bricr/extension'
+require_relative 'bricr/bricr_methods'
+require_relative 'bricr/building_sync'
+require_relative 'bricr/seed_methods'
+require_relative 'bricr/translator'
+require_relative 'bricr/workflow_maker'
+require_relative 'bricr/workflows/phase_zero_workflow_maker'

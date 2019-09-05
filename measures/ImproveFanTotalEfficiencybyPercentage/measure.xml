@@ -1,12 +1,12 @@
 <measure>
   <schema_version>3.0</schema_version>
-  <name>improve_fan_total_efficiency_by_percentage</name>
+  <name>improve_fan_total_efficiencyby_percentage</name>
   <uid>ebeca0aa-a432-4283-a714-17116f7c8f8c</uid>
-  <version_id>df17b1ca-bcf2-4305-8374-d82f210c7be3</version_id>
-  <version_modified>20170510T043335Z</version_modified>
+  <version_id>2988238d-43fd-4d62-883b-130aecd70a90</version_id>
+  <version_modified>20190212T002510Z</version_modified>
   <xml_checksum>F78494F2</xml_checksum>
   <class_name>ImproveFanTotalEfficiencybyPercentage</class_name>
-  <display_name></display_name>
+  <display_name>Improve Fan Total Efficiency by Percentage</display_name>
   <description></description>
   <modeler_description></modeler_description>
   <arguments>
@@ -19,14 +19,14 @@
       <default_value>*All Air Loops*</default_value>
       <choices>
         <choice>
-          <value>{de60a60d-0592-4528-9fc6-ee0370cb8082}</value>
+          <value>{be2619d7-0a6a-4a6f-87eb-90118a121a42}</value>
           <display_name>*All Air Loops*</display_name>
         </choice>
       </choices>
     </argument>
     <argument>
       <name>motor_eff</name>
-      <display_name>Fan Efficiency Improvement(%).</display_name>
+      <display_name>Fan Total Efficiency Improvement(%).</display_name>
       <type>Double</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
@@ -144,7 +144,7 @@
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>986CD8E0</checksum>
+      <checksum>7ED92CF1</checksum>
     </file>
   </files>
 </measure>

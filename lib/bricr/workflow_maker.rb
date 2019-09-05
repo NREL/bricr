@@ -30,15 +30,21 @@ require 'json'
 module BRICR
   # base class for objects that will configure workflows based on building sync files
   class WorkflowMaker
-    def initialize(doc)
+    def initialize(doc, ns)
       @doc = doc
+      @ns = ns
     end
 
     def writeOSWs(dir)
       FileUtils.mkdir_p(dir)
     end
 
-    def gatherResults(dir); end
+    def gatherResults(dir)
+    end
+    
+    def failed_scenarios
+      return []
+    end
 
     def saveXML(filename)
       File.open(filename, 'w') do |file|
@@ -53,6 +59,10 @@ module BRICR
           step['arguments'][argument_name] = argument_value
           result = true
         end
+      end
+      
+      if !result
+        raise "Could not set '#{argument_name}' to '#{argument_value}' for measure '#{measure_dir_name}'"
       end
 
       return result

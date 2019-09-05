@@ -1,5 +1,5 @@
 {
-  "CEC Pre-1978": {
+  "CBES Pre-1978": {
     "SmallOffice":{
       "lpd_change_rate": -0.4,
       "epd_change_rate": -0.2,
@@ -22,7 +22,7 @@
       "heating_efficiency_change_rate":-0.1
     }
   },
-  "CEC T24 1978": {
+  "CBES T24 1978": {
     "SmallOffice":{
       "lpd_change_rate": -0.4,
       "epd_change_rate": -0.2,
@@ -45,7 +45,7 @@
       "heating_efficiency_change_rate":0
     }
   },
-  "CEC T24 1992": {
+  "CBES T24 1992": {
     "SmallOffice":{
       "lpd_change_rate": -0.3,
       "epd_change_rate": -0.2,
@@ -68,7 +68,7 @@
       "heating_efficiency_change_rate":0
     }
   },
-  "CEC T24 2001": {
+  "CBES T24 2001": {
     "SmallOffice":{
       "lpd_change_rate": -0.4,
       "epd_change_rate": -0.2,
@@ -91,7 +91,7 @@
       "heating_efficiency_change_rate":0.05
     }
   },
-  "CEC T24 2005": {
+  "CBES T24 2005": {
     "SmallOffice":{
       "lpd_change_rate": -0.4,
       "epd_change_rate": -0.2,
@@ -114,7 +114,7 @@
       "heating_efficiency_change_rate":0.05
     }
   },
-  "CEC T24 2008": {
+  "CBES T24 2008": {
     "SmallOffice":{
       "lpd_change_rate": -0.4,
       "epd_change_rate": -0.2,

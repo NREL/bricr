@@ -26,6 +26,11 @@
 
 require 'bricr'
 
+if !File.exists?(ARGV[0]) || !File.exists?(ARGV[1]) || ARGV[2].nil?
+  puts 'usage: bundle exec ruby upload_seed_buildingsync.rb /path/to/config.rb /path/to/buildingsync.xml status'
+  exit(1)
+end
+
 config_path = ARGV[0]
 require(config_path)
 
@@ -50,12 +55,12 @@ if !custom_id
   raise "BuildingSync file at '#{xml_path}' does not have a Custom ID defined"
 end
 
-property_id = BRICR.get_property_id(seed, custom_id)
+property_id = BRICR.get_property_id(seed, org, cycle, custom_id)
 
 if property_id
 
   # force upload of BSXML's already in SEED
-  if true
+  if false
     
     # property already exists in seed, do an update
     success, messages = seed.update_property_by_buildingfile(property_id, xml_path)
@@ -68,7 +73,7 @@ if property_id
     if !success
       raise "Error updating analysis state to '#{analysis_state}' for property id '#{property_id}' with messages '#{messages}'"
     end
-    
+   
   end
 
 else

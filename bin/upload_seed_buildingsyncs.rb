@@ -27,6 +27,12 @@
 require 'bricr'
 require 'rbconfig'
 require 'parallel'
+require 'open3'
+
+if !File.exists?(ARGV[0]) || !File.exists?(ARGV[1])
+  puts 'usage: bundle exec ruby upload_seed_buildingsyncs.rb /path/to/config.rb /path/to/buildingsync/dir/'
+  exit(1)
+end
 
 config_path = ARGV[0]
 require(config_path)
@@ -47,13 +53,13 @@ Parallel.each(xml_files, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX_
 
   uploaded += 1
 
-  command = ['bundle', 'exec', ruby_exe, upload_seed_buildingsync_rb, ARGV[0], xml_file, 'Not Started']
+  command = ['bundle', 'exec', ruby_exe, upload_seed_buildingsync_rb, ARGV[0], xml_file, "'Not Started'"]
 
   puts "Running '#{command.join(' ')}'"
   
-  result = BRICR.bricr_run_command(command)
+  stdout_str, stderr_str, status = Open3.capture3(command.join(' '))
 
-  if result
+  if status.success?
     puts "'#{xml_file}' completed successfully"     
   else
     puts "'#{xml_file}' failed"

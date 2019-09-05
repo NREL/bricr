@@ -67,7 +67,7 @@ class TenantStarInternalLoads < OpenStudio::Ruleset::ModelUserScript
     if !args then return false end
 
     #non_neg_args = ["lpd","epd","people_per_floor_area"]
-	non_neg_args = ["epd"]
+    non_neg_args = ["epd"]
     non_neg = OsLib_HelperMethods.checkDoubleAndIntegerArguments(runner, user_arguments,{"min"=>0.0,"max"=>nil,"min_eq_bool"=>true,"max_eq_bool"=>false,"arg_array" =>non_neg_args})
     if !non_neg then return false end
 
@@ -110,10 +110,10 @@ class TenantStarInternalLoads < OpenStudio::Ruleset::ModelUserScript
 
       # replace electric equipment
       model.getSpaceTypes.each do |space_type|
-		epd_si = OpenStudio::convert(args['epd'],"W/ft^2","W/m^2").get
-		space_type.setElectricEquipmentPowerPerFloorArea(epd_si)
-		runner.registerInfo("Changing EPD for plug loads for #{space_type.name} to #{args['epd']} (W/ft^2)")
-	  end
+	epd_si = OpenStudio::convert(args['epd'],"W/ft^2","W/m^2").get
+	space_type.setElectricEquipmentPowerPerFloorArea(epd_si)
+	runner.registerInfo("Changing EPD for plug loads for #{space_type.name} to #{args['epd']} (W/ft^2)")
+      end
 
       # replace people
       #people_per_floor_area_si = OpenStudio::convert(args['people_per_floor_area'],"1/ft^2","1/m^2").get

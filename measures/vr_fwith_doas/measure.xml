@@ -2,8 +2,8 @@
   <schema_version>3.0</schema_version>
   <name>vr_fwith_doas</name>
   <uid>61816fc9-82f0-4787-a1bf-0ffb0ce66037</uid>
-  <version_id>7b7c3429-5d73-465d-a893-627534c78f34</version_id>
-  <version_modified>20180125T235304Z</version_modified>
+  <version_id>0463a4b1-34a2-4ba2-8339-a119b7900e4e</version_id>
+  <version_modified>20180717T215712Z</version_modified>
   <xml_checksum>87BA8B1E</xml_checksum>
   <class_name>VRFwithDOAS</class_name>
   <display_name>VRFwithDOAS</display_name>
@@ -286,13 +286,13 @@
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type></usage_type>
-      <checksum>E0326129</checksum>
+      <checksum>E173D503</checksum>
     </file>
     <file>
       <filename>OsLib_HVAC.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>2F73F22C</checksum>
+      <checksum>CD9C05F6</checksum>
     </file>
   </files>
 </measure>

@@ -8,9 +8,12 @@ openstudio-measures/
 gitignore/
 output/
 bs_output/
+bs_spreadsheet_output/
 reports/
 rubocop-results.xml
 spec/files/phase0/*
-!spec/files/phase0/*.xml
 seed.json
+seed-docker.json
 seed-configs.json
+gems/
+data/
