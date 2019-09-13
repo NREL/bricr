@@ -55,6 +55,12 @@ Configure locations to instance of SEED by copying `config.rb.in` to `config.rb`
 
 Changing these will allow you to run the scripts by pointing at different instances of SEED.
 
+## Usage Specific to break-apart-gemfiles Repository
+
+```
+BUNDLE_GEMFILE=Gemfile-bricr bundle exec ruby ./bin/monitor_seed.rb ./config.rb
+```
+
 ## Usage
 
 To convert all geojson to buildingsync files.  Outputs will be added to ‘bs_output’ in root bricr dir
