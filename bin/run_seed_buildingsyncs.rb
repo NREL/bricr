@@ -54,6 +54,8 @@ if search_results.properties.nil? || search_results.properties.empty?
   return 
 end
 
+
+
 analysis_state_key = nil
 custom_id_key = nil
 search_results.properties[0].each_key do |key|
@@ -76,12 +78,15 @@ search_results.properties.each do |property|
   if property[analysis_state_key] == 'Not Started'
     properties << property
   end
+  if properties.size >= BRICR::PROPERTY_COUNT
+    break
+  end
 end
 
-properties = properties.select{|property| property[analysis_state_key] == 'Not Started'} # DLM: temp work around 
+properties = properties.select{|property| property[analysis_state_key] == 'Not Started'} # DLM: temp work around
 
 #desired_ids = ['35', '2292', '1416', '5953']
-#properties = properties.select{|property| desired_ids.include?(property[custom_id_key])} # DLM: extra filter to prioritize 
+#properties = properties.select{|property| desired_ids.include?(property[custom_id_key])} # DLM: extra filter to prioritize
 
 if properties.size > BRICR::MAX_DATAPOINTS
   slice_offset = 0 # set to non-zero if you want to avoid stepping on another process
@@ -117,7 +122,7 @@ Parallel.each(properties, in_threads: [BRICR::NUM_BUILDINGS_PARALLEL, BRICR::MAX
   file = files[-1][:file]
   url = File.join(BRICR.get_seed_host, file)
 
-  # post back analysis state Queued 
+  # post back analysis state Queued
   seed.update_analysis_state(property_id, 'Queued')
 
   # if url is specified, send this URL to the BRICR job queue
