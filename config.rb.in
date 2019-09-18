@@ -4,6 +4,9 @@ module BRICR
   MAX_DATAPOINTS = Float::INFINITY
   #MAX_DATAPOINTS = 2
 
+  # used in run_seed_buildingsyncs to limit the number of properties to keep after each pull from SEED
+  PROPERTY_COUNT = 2
+
   # number of parallel jobs per BuildingSync file
   NUM_PARALLEL = 4
 
