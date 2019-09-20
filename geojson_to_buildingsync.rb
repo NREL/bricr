@@ -261,7 +261,6 @@ def create_site(feature)
   end
 
   street_address_text = "#{street_number} #{feature[:properties][:"Street Name"]} #{feature[:properties][:"Street Name Post Type"]}"
-#  street_address.text = street_address_text
 
   # buildings
   buildings = REXML::Element.new('auc:Buildings')
@@ -334,6 +333,7 @@ def create_site(feature)
   street_address_detail = REXML::Element.new('auc:StreetAddressDetail')
   simplified = REXML::Element.new('auc:Simplified')
   street_address = REXML::Element.new('auc:StreetAddress')
+  street_address.text = street_address_text
   simplified.add_element(street_address)
   street_address_detail.add_element(simplified)
   address.add_element(street_address_detail)
