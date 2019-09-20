@@ -36,7 +36,6 @@ def modify_existing_bs_file()
         exit()
       end
 
-      filename = file
       remove = ownership_index - addr_index + 1
       (addr_index..ownership_index).each {|line| content += File.readlines(file)[line - 1]
       }
