@@ -68,10 +68,17 @@ def modify_existing_bs_file()
       FileUtils.copy(tmp.path, file)
       tmp.unlink
 
+      building_id = ""
+      File.foreach(file) do |line|
+        if line.include?"<auc:LinkedBuildingID IDref="
+          building_id = line
+        end
+      end
+
       # insert new properties before </auc:Report>
       fields = "          <auc:LinkedPremisesOrSystem>
           <auc:Building>
-            <auc:LinkedBuildingID IDref='Building#{id}'/>
+            #{building_id}
           </auc:Building>
         </auc:LinkedPremisesOrSystem>
         <auc:UserDefinedFields>
@@ -85,6 +92,17 @@ def modify_existing_bs_file()
       tmp = Tempfile.open(filename, outdir) do |fp|
         File.readlines(file).insert(l_index, fields).each do |line|
           fp.puts line
+        end
+        fp
+      end
+      FileUtils.copy(tmp.path, file)
+      tmp.unlink
+
+      tmp = Tempfile.open(filename, outdir) do |fp|
+        File.foreach(file) do |line|
+          if ((!line.include?"<auc:StartTimeStamp>") && (!line.include?"<auc:EndTimeStamp>"))
+            fp.puts line
+          end
         end
         fp
       end
