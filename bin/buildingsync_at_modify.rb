@@ -68,17 +68,12 @@ def modify_existing_bs_file()
       FileUtils.copy(tmp.path, file)
       tmp.unlink
 
-      building_id = ""
-      File.foreach(file) do |line|
-        if line.include?"<auc:LinkedBuildingID IDref="
-          building_id = line
-        end
-      end
-
       # insert new properties before </auc:Report>
+      xml = REXML::Document.new File.read(file)
+      building_id = REXML::XPath.first(xml, "//auc:LinkedBuildingID").attributes["IDref"]
       fields = "          <auc:LinkedPremisesOrSystem>
           <auc:Building>
-            #{building_id}
+          <auc:LinkedBuildingID IDref='#{building_id}'/>
           </auc:Building>
         </auc:LinkedPremisesOrSystem>
         <auc:UserDefinedFields>
