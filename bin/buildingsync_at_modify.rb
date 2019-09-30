@@ -96,11 +96,11 @@ def modify_existing_bs_file()
       end
 
       # Remove all start and end timestamp. Standard xml for JSON
-      $doc = REXML::Document.new File.new(file)
-      $doc.elements.delete_all("//auc:StartTimeStamp")
-      $doc.elements.delete_all("//auc:EndTimeStamp")
-      $doc.context[:attribute_quote] = :quote
-      $doc.write(File.open(file, "w"))
+      doc = REXML::Document.new File.new(file)
+      doc.elements.delete_all("//auc:StartTimeStamp")
+      doc.elements.delete_all("//auc:EndTimeStamp")
+      doc.context[:attribute_quote] = :quote
+      doc.write(File.open(file, "w"))
     end
   end
 end
