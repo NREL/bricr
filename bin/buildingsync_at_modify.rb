@@ -32,7 +32,7 @@ def modify_existing_bs_file()
       addr_index = index_list["<auc:Address>"]
       ownership_index = index_list["</auc:Ownership>"]
       if(ownership_index == addr_index) 
-        puts "WARNING: unformatted BuildingSync file!"  
+        puts "WARNING: BuildingSync file missing important elements!"  
         exit()
       end
 
