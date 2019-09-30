@@ -69,43 +69,36 @@ def modify_existing_bs_file()
       tmp.unlink
 
       # insert new properties before </auc:Report>
-      xml = REXML::Document.new File.read(file)
-      building_id = REXML::XPath.first(xml, "//auc:LinkedBuildingID").attributes["IDref"]
-      fields = "          <auc:LinkedPremisesOrSystem>
-          <auc:Building>
-          <auc:LinkedBuildingID IDref='#{building_id}'/>
-          </auc:Building>
-        </auc:LinkedPremisesOrSystem>
-        <auc:UserDefinedFields>
-          <auc:UserDefinedField>
-            <auc:FieldName>Audit Template Report Type</auc:FieldName>
-            <auc:FieldValue>San Francisco Report</auc:FieldValue>
-          </auc:UserDefinedField>
-        </auc:UserDefinedFields>"
+      xml = REXML::Document.new File.new(file)
+      if (REXML::XPath.first(xml, "//auc:LinkedPremisesOrSystem")).nil?
+        building_id = REXML::XPath.first(xml, "//auc:LinkedBuildingID").attributes["IDref"]
+        fields = "          <auc:LinkedPremisesOrSystem>
+            <auc:Building>
+            <auc:LinkedBuildingID IDref='#{building_id}'/>
+            </auc:Building>
+          </auc:LinkedPremisesOrSystem>
+          <auc:UserDefinedFields>
+            <auc:UserDefinedField>
+              <auc:FieldName>Audit Template Report Type</auc:FieldName>
+              <auc:FieldValue>San Francisco Report</auc:FieldValue>
+            </auc:UserDefinedField>
+          </auc:UserDefinedFields>"
 
-      l_index = line_index(file, ["</auc:Report>"])["</auc:Report>"] - 1 
-      tmp = Tempfile.open(filename, outdir) do |fp|
-        File.readlines(file).insert(l_index, fields).each do |line|
-          fp.puts line
-        end
-        fp
-      end
-      FileUtils.copy(tmp.path, file)
-      tmp.unlink
-
-      tmp = Tempfile.open(filename, outdir) do |fp|
-        File.foreach(file) do |line|
-          if ((!line.include?"<auc:StartTimeStamp>") && (!line.include?"<auc:EndTimeStamp>"))
+        l_index = line_index(file, ["</auc:Report>"])["</auc:Report>"] - 1 
+        tmp = Tempfile.open(filename, outdir) do |fp|
+          File.readlines(file).insert(l_index, fields).each do |line|
             fp.puts line
           end
+          fp
         end
-        fp
+        FileUtils.copy(tmp.path, file)
+        tmp.unlink
       end
-      FileUtils.copy(tmp.path, file)
-      tmp.unlink
 
-      # standard xml for JSON
+      # Remove all start and end timestamp. Standard xml for JSON
       $doc = REXML::Document.new File.new(file)
+      $doc.elements.delete_all("//auc:StartTimeStamp")
+      $doc.elements.delete_all("//auc:EndTimeStamp")
       $doc.context[:attribute_quote] = :quote
       $doc.write(File.open(file, "w"))
     end
