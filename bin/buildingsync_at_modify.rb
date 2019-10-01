@@ -4,8 +4,7 @@ require 'parallel'
 # modify a generated bs file:
 def modify_existing_bs_file()
 
-#  outdir = './bs_output/backup/media/buildingsync_files/'
-  outdir = './bs_output/'
+  outdir = './bs_output/backup/media/buildingsync_files/'
   if(File.exist?(outdir))
     Parallel.each(Dir.glob(File.join(outdir, "*.xml")), in_threads: 3) do |file|
       puts file
