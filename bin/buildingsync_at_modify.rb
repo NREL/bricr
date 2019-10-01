@@ -16,8 +16,7 @@ def modify_existing_bs_file()
   outdir = './bs_output/backup/media/buildingsync_files/'
   if(File.exist?(outdir))
     Parallel.each(Dir.glob(File.join(outdir, "*.xml")), in_threads: 3) do |file|
-      puts file
-      content = ""
+      puts File.basename(file)
 
       xml = REXML::Document.new File.new(file)
       if(xml.root.attributes["schemaLocation"] == 'http://buildingsync.net/schemas/bedes-auc/2019 https://raw.githubusercontent.com/BuildingSync/schema/1c73127d389b779c6b74029be72c6e9ff3187113/BuildingSync.xsd')
