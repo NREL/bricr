@@ -1,6 +1,15 @@
 require 'rexml/document'
 require 'parallel'
 
+def add_sibling(xml, elements)
+  root_element = REXML::XPath.first(xml, elements.first)
+  elements.drop(1).each do |e|
+    sibling_element = REXML::XPath.first(xml, e)
+    root_element.next_sibling = sibling_element
+    root_element = root_element.next_sibling
+  end
+end
+
 # modify a generated bs file:
 def modify_existing_bs_file()
 
@@ -13,28 +22,15 @@ def modify_existing_bs_file()
       xml = REXML::Document.new File.new(file)
       if(xml.root.attributes["schemaLocation"] == 'http://buildingsync.net/schemas/bedes-auc/2019 https://raw.githubusercontent.com/BuildingSync/schema/1c73127d389b779c6b74029be72c6e9ff3187113/BuildingSync.xsd')
 
-        xml_addr = REXML::XPath.first(xml, "//auc:Address")
-        xml_czt = REXML::XPath.first(xml, "//auc:ClimateZoneType")
-        xml_wdsId = REXML::XPath.first(xml, "//auc:WeatherDataStationID")
-        xml_wsn = REXML::XPath.first(xml, "//auc:WeatherStationName")
-        xml_long = REXML::XPath.first(xml, "//auc:Longitude")
-        xml_lat = REXML::XPath.first(xml, "//auc:Latitude")
-        xml_owner = REXML::XPath.first(xml, "//auc:Ownership")
-        xml_pid = REXML::XPath.first(xml, "//auc:PremisesIdentifiers")
-
-        xml_pid.next_sibling = xml_addr
-        xml_addr = REXML::XPath.first(xml, "//auc:Address")
-        xml_addr.next_sibling = xml_czt
-        xml_czt = REXML::XPath.first(xml, "//auc:ClimateZoneType")
-        xml_czt.next_sibling = xml_wdsId
-        xml_wdsId = REXML::XPath.first(xml, "//auc:WeatherDataStationID")
-        xml_wdsId.next_sibling = xml_wsn
-        xml_wsn = REXML::XPath.first(xml, "//auc:WeatherStationName")
-        xml_wsn.next_sibling = xml_long
-        xml_long = REXML::XPath.first(xml, "//auc:Longitude")
-        xml_long.next_sibling = xml_lat
-        xml_lat = REXML::XPath.first(xml, "//auc:Latitude")
-        xml_lat.next_sibling = xml_owner
+        xml_elements = ["//auc:PremisesIdentifiers",
+                        "//auc:Address",
+                        "//auc:ClimateZoneType",
+                        "//auc:WeatherDataStationID",
+                        "//auc:WeatherStationName",
+                        "//auc:Longitude",
+                        "//auc:Latitude",
+                        "//auc:Ownership"]
+        add_sibling(xml, xml_elements)
 
         # Remove all start and end timestamp. Standard xml for JSON
         REXML::XPath.each(xml, "//auc:StartTimeStamp") do |e|
