@@ -1,30 +1,15 @@
 require 'rexml/document'
 require 'tempfile'
 
-# return line index of element
-def line_index(file, list)
-  tag = Hash.new
-
-  # find line number of <auc:Address> and </auc:Ownership>
-  File.foreach(file).with_index(1) do |line, index|
-    (0...list.size).each do |i|
-      if line.include?list[i]
-        tag[list[i]] = index
-      end
-    end
-  end
-  return tag
-end
-
 # modify a generated bs file:
 def modify_existing_bs_file()
 
-  outdir = './bs_output/'
+  outdir = './bs_output/backup/media/buildingsync_files/'
   if(File.exist?(outdir))
     Dir.glob(File.join(outdir, "*.xml")).each do |file|
       puts file
       content = ""
-      
+
       xml = REXML::Document.new File.new(file)
       xml_addr = REXML::XPath.first(xml, "//auc:Address")
       xml_czt = REXML::XPath.first(xml, "//auc:ClimateZoneType")
