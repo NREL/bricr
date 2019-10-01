@@ -42,13 +42,19 @@ def modify_existing_bs_file()
       REXML::XPath.each(xml, "//auc:EndTimeStamp") do |e|
         e.name = "auc:EndTimestamp"
       end
-      xml.context[:attribute_quote] = :quote
       xml.write(File.open(file, "w"))
 
       # insert new properties before </auc:Report>
       xml_fields = ""
+      building_id = nil
       if (REXML::XPath.first(xml, "//auc:LinkedPremisesOrSystem")).nil?
-        building_id = REXML::XPath.first(xml, "//auc:LinkedBuildingID").attributes["IDref"]
+          REXML::XPath.match(xml, "//*[@IDref]").each do |e|
+            if(!e.attributes["IDref"].match(/^Building*/).nil?)
+              building_id = e.attributes["IDref"]
+              break
+            end
+          end
+
         xml_fields = REXML::CData.new("<auc:LinkedPremisesOrSystem>
             <auc:Building>
             <auc:LinkedBuildingID IDref='#{building_id}'/>
@@ -60,10 +66,15 @@ def modify_existing_bs_file()
               <auc:FieldValue>San Francisco Report</auc:FieldValue>
             </auc:UserDefinedField>
           </auc:UserDefinedFields>", raw = "true")
-      end
+        end
+
       xml.write(File.open(file, 'w'))
       REXML::XPath.first(xml, "//auc:Report").add_text(xml_fields.value)
       xml.write(File.open(file, 'w'))
+
+      xml.context[:attribute_quote] = :quote
+      xml.write(File.open(file, 'w'))
+
     end
   end
 
