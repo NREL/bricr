@@ -13,9 +13,12 @@ end
 # modify a generated bs file:
 def modify_existing_bs_file()
 
-  outdir = './bs_output/backup/media/buildingsync_files/'
-  if(File.exist?(outdir))
-    Parallel.each(Dir.glob(File.join(outdir, "*.xml")), in_threads: 3) do |file|
+  num_total = 0
+  num_bsync = 0
+  num_skip = 0
+
+  if(File.exist?(ARGV[0]))
+    Parallel.each(Dir.glob(File.join(ARGV[0], "*.xml")), in_threads: 3) do |file|
       puts File.basename(file)
 
       xml = REXML::Document.new File.new(file)
@@ -67,12 +70,16 @@ def modify_existing_bs_file()
 
         xml.context[:attribute_quote] = :quote
         xml.write(File.open(file, 'w'))
+
+        num_bsync += 1
       else
-        FileUtils.mkdir_p(File.join(outdir, 'old_schema')) unless File.exists?(File.join(outdir, 'old_schema'))
-        FileUtils.mv(file, File.join(outdir, 'old_schema')) unless !File.exists?(file)
+        num_skip += 1
       end
+      num_total += 1
     end
   end
+  puts "Total #{num_total} files, processed #{num_bsync}, skipped #{num_skip} due to outdated schema."
+  puts "Seed BSync files modification for Audit Template tool completed."
   return
 end
 

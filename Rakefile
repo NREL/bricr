@@ -42,3 +42,13 @@ task :init_config do
   end
 
 end
+
+desc 'Convert seed generated BuildingSync files to audit template compatible format'
+task :buildingsync_to_at do
+  if !ARGV[1]
+    puts "Error - Missing path to BuildingSync files"
+    puts "Usage: bundle exec rake buildingsync_to_at path/to/buildingsync_dir"
+  else
+    ruby "./bin/buildingsync_at_modify.rb #{ARGV[1]}"
+  end
+end
