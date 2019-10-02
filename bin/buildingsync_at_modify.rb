@@ -1,5 +1,5 @@
 ########################################################################################################################
-#  BRICR, Copyright (c) 2017, Alliance for Sustainable Energy, LLC and The Regents of the University of California, through Lawrence 
+#  BRICR, Copyright (c) 2019, Alliance for Sustainable Energy, LLC and The Regents of the University of California, through Lawrence 
 #  Berkeley National Laboratory (subject to receipt of any required approvals from the U.S. Dept. of Energy). All rights reserved.
 #
 #  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions 
@@ -105,5 +105,3 @@ end
 
 puts "Total #{num_total} files, processed #{num_bsync}, skipped #{num_skip} due to outdated schema."
 puts "Seed BSync files modification for Audit Template tool completed."
-
-return
