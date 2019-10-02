@@ -243,11 +243,6 @@ def create_site(feature)
   
   raise "Building ID is empty" if feature_id.nil?
 
-  # address
-  address = REXML::Element.new('auc:Address')
-  street_address_detail = REXML::Element.new('auc:StreetAddressDetail')
-  simplified = REXML::Element.new('auc:Simplified')
-  street_address = REXML::Element.new('auc:StreetAddress')
   # DLM: there is a "From Street Number" and a "To Street Number", check if these are equal
   from_street_number = feature[:properties][:"From Street Number"]
   to_street_number = feature[:properties][:"To Street Number"]
@@ -266,79 +261,12 @@ def create_site(feature)
   end
 
   street_address_text = "#{street_number} #{feature[:properties][:"Street Name"]} #{feature[:properties][:"Street Name Post Type"]}"
-  street_address.text = street_address_text
-  simplified.add_element(street_address)
-  street_address_detail.add_element(simplified)
-  address.add_element(street_address_detail)
 
-  city = REXML::Element.new('auc:City')
-  city.text = 'San Francisco'
-  address.add_element(city)
-
-  state = REXML::Element.new('auc:State')
-  state.text = 'CA'
-  address.add_element(state)
-
-  # if zip code is nil, default for now
-  feature[:properties][:"ZIP Code"] = 94104 if feature[:properties][:"ZIP Code"].nil?
-  raise "ZIP Code is not set" if feature[:properties][:"ZIP Code"].nil?
-  postal_code = REXML::Element.new('auc:PostalCode')
-  postal_code.text = feature[:properties][:"ZIP Code"]
-  address.add_element(postal_code)
-
-  site.add_element(address)
-
-  # climate zone
-  # DLM: hard code for now
-  climate_zone = REXML::Element.new('auc:ClimateZoneType')
-
-  ashrae = REXML::Element.new('auc:ASHRAE')
-  ashrae_climate = REXML::Element.new('auc:ClimateZone')
-  ashrae_climate.text = '3C'
-  ashrae.add_element(ashrae_climate)
-  climate_zone.add_element(ashrae)
-
-  title24 = REXML::Element.new('auc:CaliforniaTitle24')
-  title24_climate = REXML::Element.new('auc:ClimateZone')
-  title24_climate.text = 'Climate Zone 3'
-  title24.add_element(title24_climate)
-  climate_zone.add_element(title24)
-
-  site.add_element(climate_zone)
-
-  # weather file
-  # DLM: hard code for now
-
-  weather_data_station_id = REXML::Element.new('auc:WeatherDataStationID')
-  weather_data_station_id.text = '724940'
-  site.add_element(weather_data_station_id)
-
-  weather_station_name = REXML::Element.new('auc:WeatherStationName')
-  weather_station_name.text = 'USA_CA_San.Francisco.Intl.AP'
-  site.add_element(weather_station_name)
-
-  # longitude
-  raise "Longitude is not set" if feature[:geometry].nil? || feature[:geometry][:coordinates].nil?
-  longitude = REXML::Element.new('auc:Longitude')
-  longitude.text = feature[:geometry][:coordinates][0][0][0][0]
-  site.add_element(longitude)
-
-  # latitude
-  raise "Latitude is not set" if feature[:geometry].nil? || feature[:geometry][:coordinates].nil?
-  latitude = REXML::Element.new('auc:Latitude')
-  latitude.text = feature[:geometry][:coordinates][0][0][0][1]
-  site.add_element(latitude)
-
-  # ownership
-  ownership = REXML::Element.new('auc:Ownership')
-  ownership.text = 'Unknown'
-  site.add_element(ownership)
-  
   # buildings
   buildings = REXML::Element.new('auc:Buildings')
   building = REXML::Element.new('auc:Building')
   building.attributes['ID'] = feature_id
-
+  
   # default name
   feature[:properties][:"Building Name"] = "Building" if feature[:properties][:"Building Name"].nil?
   raise "Building Name is not set" if feature[:properties][:"Building Name"].nil?
@@ -400,6 +328,79 @@ def create_site(feature)
   
   building.add_element(premises_identifiers)
 
+  # address is added to building level
+  address = REXML::Element.new('auc:Address')
+  street_address_detail = REXML::Element.new('auc:StreetAddressDetail')
+  simplified = REXML::Element.new('auc:Simplified')
+  street_address = REXML::Element.new('auc:StreetAddress')
+  street_address.text = street_address_text
+  simplified.add_element(street_address)
+  street_address_detail.add_element(simplified)
+  address.add_element(street_address_detail)
+
+  city = REXML::Element.new('auc:City')
+  city.text = 'San Francisco'
+  address.add_element(city)
+
+  state = REXML::Element.new('auc:State')
+  state.text = 'CA'
+  address.add_element(state)
+
+  # if zip code is nil, default for now
+  feature[:properties][:"ZIP Code"] = 94104 if feature[:properties][:"ZIP Code"].nil?
+  raise "ZIP Code is not set" if feature[:properties][:"ZIP Code"].nil?
+  postal_code = REXML::Element.new('auc:PostalCode')
+  postal_code.text = feature[:properties][:"ZIP Code"]
+  address.add_element(postal_code)
+
+  building.add_element(address)
+
+  # climate zone
+  # DLM: hard code for now
+  climate_zone = REXML::Element.new('auc:ClimateZoneType')
+
+  ashrae = REXML::Element.new('auc:ASHRAE')
+  ashrae_climate = REXML::Element.new('auc:ClimateZone')
+  ashrae_climate.text = '3C'
+  ashrae.add_element(ashrae_climate)
+  climate_zone.add_element(ashrae)
+
+  title24 = REXML::Element.new('auc:CaliforniaTitle24')
+  title24_climate = REXML::Element.new('auc:ClimateZone')
+  title24_climate.text = 'Climate Zone 3'
+  title24.add_element(title24_climate)
+  climate_zone.add_element(title24)
+
+  building.add_element(climate_zone)
+
+  # weather file
+  # DLM: hard code for now
+
+  weather_data_station_id = REXML::Element.new('auc:WeatherDataStationID')
+  weather_data_station_id.text = '724940'
+  building.add_element(weather_data_station_id)
+
+  weather_station_name = REXML::Element.new('auc:WeatherStationName')
+  weather_station_name.text = 'USA_CA_San.Francisco.Intl.AP'
+  building.add_element(weather_station_name)
+
+  # longitude
+  raise "Longitude is not set" if feature[:geometry].nil? || feature[:geometry][:coordinates].nil?
+  longitude = REXML::Element.new('auc:Longitude')
+  longitude.text = feature[:geometry][:coordinates][0][0][0][0]
+  building.add_element(longitude)
+
+  # latitude
+  raise "Latitude is not set" if feature[:geometry].nil? || feature[:geometry][:coordinates].nil?
+  latitude = REXML::Element.new('auc:Latitude')
+  latitude.text = feature[:geometry][:coordinates][0][0][0][1]
+  building.add_element(latitude)
+
+  # ownership
+  ownership = REXML::Element.new('auc:Ownership')
+  ownership.text = 'Unknown'
+  building.add_element(ownership)
+  
   #building_classification = REXML::Element.new('auc:BuildingClassification')
   #building_classification.text = get_building_classificationfeature)
   #building.add_element(building_classification)
@@ -1026,8 +1027,21 @@ def convert_feature(feature)
         </auc:Scenario>"
    end
 
-  source += '      </auc:Scenarios>
-        </auc:Report>
+  source += "      </auc:Scenarios>
+                   <auc:LinkedPremisesOrSystem>
+                     <auc:Building>
+                       <auc:LinkedBuildingID IDref=\"#{building_id}\"/>
+                     </auc:Building>
+                   </auc:LinkedPremisesOrSystem>
+                   <auc:UserDefinedFields>
+                     <auc:UserDefinedField>
+                       <auc:FieldName>Audit Template Report Type</auc:FieldName>
+                       <auc:FieldValue>San Francisco Report</auc:FieldValue>
+                     </auc:UserDefinedField>
+                   </auc:UserDefinedFields>
+            "
+
+  source += '        </auc:Report>
       </auc:Reports>
     </auc:Facility>
   </auc:Facilities>
@@ -1035,6 +1049,8 @@ def convert_feature(feature)
   '
   
   doc = REXML::Document.new(source)
+  doc.context[:attribute_quote] = :quote
+  
   sites = doc.elements['*/*/*/auc:Sites']
   site = create_site(feature)
   sites.add_element(site)
