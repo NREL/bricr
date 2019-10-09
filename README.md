@@ -33,14 +33,26 @@ In order to run the BRICR gem, OpenStudio and Ruby are required.  Follow the gui
 
 If all the above steps completed successfully, you should be able to move onto Installation.
 
-## Installation
+## Deployment & Installation
 
-Clone this repo locally.  Install dependencies:
+Follow this [dockerfile](https://github.com/NREL/docker-openstudio/blob/develop/Dockerfile), lines 36 - 80.  Additionally, add the following to the '.bashrc':
+```
+export RUBY_VERSION=2.2.4
+export RUBY_SHA=6914d4f590
+export RUBY_SHA=31203696adbfdda6f2874a2de31f7c5a1f3bcb6628f4d1a241de21b158cd5c76
+export OS_BUNDLER_VERSION=1.17.1
+export OPENSTUDIO_VERSION=2.8.1
+export OPENSTUDIO_SHA=6914d4f590
+export RUBY_SHA=b6eff568b48e0fda76e5a36333175df049b204e91217aa32a65153cc0cdcb761
+```
 
+Check to make sure correct Bundler version is installed:
 ```
-bundle install
-bundle update
+sudo gem uninstall bundler
+sudo gem install bundler -v 1.17.1
 ```
+
+Clone this repo.
 
 Configure locations to instance of SEED by copying `config.rb.in` to `config.rb` and updating.  The following fields need to be specified:
 ```ruby
@@ -52,10 +64,26 @@ Configure locations to instance of SEED by copying `config.rb.in` to `config.rb`
   ENV['BRICR_SEED_CYCLE']
   ENV['BRICR_SEED_SEARCH_PROFILE']
 ```
-
 Changing these will allow you to run the scripts by pointing at different instances of SEED.
 
+### Bundling
+Due to the fact that there is a Ruby version included as part of the OpenStudio SDK, as well as a Ruby version used for the BRICR Gem, two Gemfiles are required to run the main analysis script (`monitor_seed.rb`).  The requirements from the two different Gemfiles must be installed separately as follows:
+```ruby
+bundle install --gemfile Gemfile --path .bundle/install # Gemfileused for OpenStudio
+bundle install --gemfile Gemfile-bricr --path .bundle/install # Gemfile used for BRICR
+```
+
 ## Usage
+Service to monitor SEED, and basically perform the exact same thing as `run_seed_buildingsyncs.rb`.  Only difference is that this is an 'active server' type application, which pings seed every once in a while to see if new buildings have been uploaded.
+
+- `nohup` tells the terminal not to hang up, even when the parent terminal is closed
+- `&` tells the terminal to send the process to the background
+```
+$ BUNDLE_GEMFILE=Gemfile-bricr nohup bundle exec ruby ./bin/monitor_seed.rb ./config.rb &
+```
+___
+___
+### **CAUTION** - everything in this section has not been tested with two Gemfiles
 
 To convert all geojson to buildingsync files.  Outputs will be added to ‘bs_output’ in root bricr dir
 ```
@@ -71,11 +99,8 @@ Pulls from SEED all properties with 'Analysis State' == 'Not Started'.  Converts
 ```
 $ bundle exec ruby ./bin/run_seed_buildingsyncs.rb ./config.rb
 ```
-
-Service to monitor SEED, and basically perform the exact same thing as `run_seed_buildingsyncs.rb`.  Only difference is that this is an 'active server' type application, which pings seed every once in a while to see if new buildings have been uploaded.
-```
-$ bundle exec ruby ./bin/monitor_seed.rb ./config.rb
-```
+___
+___
 
 ### Locally
 
