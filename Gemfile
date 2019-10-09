@@ -2,7 +2,6 @@ source 'http://rubygems.org'
 ruby '~>2.2'
 
 # Specify your gem's dependencies in bricr.gemspec
-gemspec
 
 allow_local_gems = false
 
@@ -39,25 +38,4 @@ gem 'openstudio-workflow'
 
 # simplecov has an unneccesary dependency on native json gem, use fork that does not require this
 gem 'simplecov', github: 'NREL/simplecov'
-
-# spreadsheet gem to process xls
-gem 'spreadsheet', '1.2.4'
-
-group :openstudio_no_cli do
-  #gem 'seed_ruby_client', path: '../seed_ruby-client'
-  gem 'seed_ruby_client', github: 'SEED-platform/ruby-client', branch: 'update_spec'
-  
-  gem 'unicode-display_width', '1.4.0'
-end
-
-group :test do
-  gem 'rake'
-  # gem 'coveralls', require: false # requires json gem
-  # gem 'ruby-prof', '0.15.8'
-  gem 'rspec', '~> 3.3'
-  gem 'ci_reporter_rspec'
-  gem 'rubocop', '0.54.0'
-  gem 'rubocop-checkstyle_formatter'
-  gem 'psych', '~> 3.0.3'
-end
 

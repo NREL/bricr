@@ -76,6 +76,9 @@ search_results.properties.each do |property|
   if property[analysis_state_key] == 'Not Started'
     properties << property
   end
+  if properties.size >= BRICR::PROPERTY_COUNT
+    break
+  end
 end
 
 properties = properties.select{|property| property[analysis_state_key] == 'Not Started'} # DLM: temp work around 

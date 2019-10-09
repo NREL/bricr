@@ -4,11 +4,13 @@ run/
 .bundle/
 config.rb
 Gemfile.lock
+Gemfile-bricr.lock
 openstudio-measures/
 gitignore/
 output/
 bs_output/
 bs_spreadsheet_output/
+bricr_dev_files/
 reports/
 rubocop-results.xml
 spec/files/phase0/*
